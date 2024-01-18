@@ -36,6 +36,12 @@ namespace UomoMacchina.Areas.Example.Users
         }
 
         [HttpGet]
+        public virtual async Task<IActionResult> Sidebar()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public virtual IActionResult New()
         {
             return RedirectToAction(Actions.Edit());

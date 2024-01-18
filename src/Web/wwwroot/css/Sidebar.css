@@ -1,0 +1,74 @@
+﻿@import "site.variables.scss";
+
+namespace Web.wwwroot.css
+{
+    public class Sidebar
+    {
+    }
+}
+
+
+
+.mese > h3 {
+    align-self:center;
+    margin: 0% 5% 0% 5%;
+    
+}
+
+/* Style del Mese*/
+
+.mese {
+    display: flex;
+    padding: 0 0 0 5%;
+}
+
+
+.calendario {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+
+/* Style Settimana */
+
+.settimana {
+    display: flex;
+    min-width: fit-content;
+/*    padding: 0 0 0 5%;
+*/}
+
+.settimana > h3 {
+    margin: 0% 0% 0% 0%;
+}
+/* Style per i blocchi su cui segnare la rendicontazione */
+.container1 {
+    display: flex;
+    width: 50%;
+}
+
+.container2 {
+    align-self: flex-end;
+}
+
+.prova1 {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    /*justify-content: space-between;
+    width: 50%;
+    align-items: center;*/
+}
+
+.prova2 {
+    display: flex;
+    flex-direction: column; 
+    margin: 5px;
+    
+}
+
+.fa-regular {
+    position: absolute;
+
+}
+
