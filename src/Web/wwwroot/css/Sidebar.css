@@ -1,4 +1,4 @@
-﻿@import "site.variables.scss";
+﻿
 
 namespace Web.wwwroot.css
 {
@@ -55,9 +55,7 @@ namespace Web.wwwroot.css
     display: flex;
     flex-direction: row;
     margin: 5px;
-    /*justify-content: space-between;
-    width: 50%;
-    align-items: center;*/
+    
 }
 
 .prova2 {
@@ -71,4 +69,16 @@ namespace Web.wwwroot.css
     position: absolute;
 
 }
+/*
+colore verde = Rendicontazione - success
+colore rosso = ERRORE - danger
+colore arancio = Permesso - warning
+colore viola = Trasferta - purple (fatto da noi)
+colore blu Straordinario - default (senza nulla)
+colore grigio = ferie, giorno feriale - secondary
 
+*/
+
+.bg-purple {
+    background: #b200ff
+}
