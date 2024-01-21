@@ -15,12 +15,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Routing;
 using R4Mvc;
 
-namespace UomoMacchina.Areas
+namespace UomoMacchina.Areas.Main
 {
-    public partial class AuthenticatedBaseController
+    public partial class MainController
     {
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
-        protected AuthenticatedBaseController(Dummy d)
+        protected MainController(Dummy d)
         {
         }
 
@@ -76,14 +76,21 @@ namespace UomoMacchina.Areas
             return RedirectToPagePermanent(taskResult.Result);
         }
 
+        [NonAction]
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
-        public AuthenticatedBaseController Actions => MVC.AuthenticatedBase;
+        public virtual IActionResult Main()
+        {
+            return new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Main);
+        }
+
+        [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+        public MainController Actions => MVC.Main.Main;
         [GeneratedCode("R4Mvc", "1.0")]
-        public readonly string Area = "";
+        public readonly string Area = "Main";
         [GeneratedCode("R4Mvc", "1.0")]
-        public readonly string Name = "AuthenticatedBase";
+        public readonly string Name = "Main";
         [GeneratedCode("R4Mvc", "1.0")]
-        public const string NameConst = "AuthenticatedBase";
+        public const string NameConst = "Main";
         [GeneratedCode("R4Mvc", "1.0")]
         static readonly ActionNamesClass s_ActionNames = new ActionNamesClass();
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
@@ -91,11 +98,13 @@ namespace UomoMacchina.Areas
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
+            public readonly string Main = "Main";
         }
 
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
+            public const string Main = "Main";
         }
 
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
@@ -105,7 +114,10 @@ namespace UomoMacchina.Areas
             public _ViewNamesClass ViewNames => s_ViewNames;
             public class _ViewNamesClass
             {
+                public readonly string Main = "Main";
             }
+
+            public readonly string Main = "~/Areas/Main/Views/Main/Main.cshtml";
         }
 
         [GeneratedCode("R4Mvc", "1.0")]
@@ -115,10 +127,21 @@ namespace UomoMacchina.Areas
     }
 
     [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
-    public partial class R4MVC_AuthenticatedBaseController : UomoMacchina.Areas.AuthenticatedBaseController
+    public partial class R4MVC_MainController : UomoMacchina.Areas.Main.MainController
     {
-        public R4MVC_AuthenticatedBaseController(): base(Dummy.Instance)
+        public R4MVC_MainController(): base(Dummy.Instance)
         {
+        }
+
+        [NonAction]
+        partial void MainOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, UomoMacchina.Areas.Main.Data.MainViewModel model);
+        [NonAction]
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> Main(UomoMacchina.Areas.Main.Data.MainViewModel model)
+        {
+            var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Main);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            MainOverride(callInfo, model);
+            return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
         }
     }
 }

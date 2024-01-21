@@ -1,0 +1,39 @@
+﻿@* @page
+@using Web.Areas.Home.Home *@
+@inject IHtmlLocalizer<UomoMacchina.Areas.Main.Data.MainViewModel> ModelLocalizer
+@model UomoMacchina.Areas.Main.Data.MainViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+@section pageTitle {
+    <nav class="navbar navbar-expand navbar-light flex-wrap onit-page-title">
+        <a class="navbar-brand">
+            @ViewData["Title"]
+        </a>
+
+    </nav>
+}
+@section pageSubtitle {
+
+}
+<div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 p-0">
+                <vue-cal xsmall active-view="week" :disable-views="['years', 'year', 'month']" :events="event" />
+            </div>
+        </div>
+    </div>
+    @* <div id="prova"></div> *@
+</div>
+@section styles {
+    <link href="~/css/bundle-vue-cal.css" asp-append-version="true" rel="stylesheet" />
+}
+
+@section scripts {
+    <script src="~/js/main.js" type="module" asp-append-version="true"></script>
+
+    <script type="text/javascript">
+        
+    </script>
+}
