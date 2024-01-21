@@ -1,4 +1,5 @@
-﻿using Core.Services;
+﻿using Core.Models;
+using Core.Services;
 using Core.Services.Shared;
 using System;
 using System.Linq;
@@ -42,6 +43,25 @@ namespace Core.Infrastructure
                     LastName = "Cognome3",
                     NickName = "Nickname3"
                 });
+
+            context.SaveChanges();
+        }
+
+        public static void InitializeVueCalEvent(TemplateDbContext context)
+        {
+            if (context.VueCalEvent.Any())
+            {
+                return;   // Data was already seeded
+            }
+            context.VueCalEvent.AddRange(
+                new VueCalEvent
+                {
+                    Id = Guid.Parse("69f71222-8ac7-4578-a32c-293d6eca2ed0"), //la stringa presa online
+                    Start = new DateTime(2024, 1, 21, 12, 0, 0),
+                    End = new DateTime(2024, 1, 21, 14, 0, 0)
+
+                }
+            );
 
             context.SaveChanges();
         }
