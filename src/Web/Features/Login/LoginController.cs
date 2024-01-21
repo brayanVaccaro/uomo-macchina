@@ -46,7 +46,7 @@ namespace UomoMacchina.Features.Login
             if (string.IsNullOrWhiteSpace(returnUrl) == false)
                 return Redirect(returnUrl);
 
-            return RedirectToAction(MVC.Example.Users.Index());
+            return RedirectToAction(MVC.Main.Main.Main());
         }
 
         [HttpGet]
@@ -57,7 +57,7 @@ namespace UomoMacchina.Features.Login
                 if (string.IsNullOrWhiteSpace(returnUrl) == false)
                     return Redirect(returnUrl);
 
-                return RedirectToAction(MVC.Example.Users.Index());
+                return RedirectToAction(MVC.Main.Main.Main());
             }
 
             var model = new LoginViewModel
