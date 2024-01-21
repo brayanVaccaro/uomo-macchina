@@ -6,20 +6,22 @@
 // Make sure the compiler doesn't complain about missing Xml comments and CLS compliance
 // 0108: suppress "Foo hides inherited member Foo.Use the new keyword if hiding was intended." when a controller and its abstract parent are both processed
 #pragma warning disable 1591, 3008, 3009, 0108
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Routing;
-using R4Mvc;
 using System;
 using System.CodeDom.Compiler;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Routing;
+using R4Mvc;
 
 [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
 public static partial class MVC
 {
     static readonly R4Mvc.ExampleAreaClass s_Example = new R4Mvc.ExampleAreaClass();
     public static R4Mvc.ExampleAreaClass Example => s_Example;
+    static readonly R4Mvc.MainAreaClass s_Main = new R4Mvc.MainAreaClass();
+    public static R4Mvc.MainAreaClass Main => s_Main;
     public static readonly UomoMacchina.Areas.AuthenticatedBaseController AuthenticatedBase = new UomoMacchina.Areas.R4MVC_AuthenticatedBaseController();
     public static readonly UomoMacchina.Features.Home.HomeController Home = new UomoMacchina.Features.Home.R4MVC_HomeController();
     public static readonly UomoMacchina.Features.Login.LoginController Login = new UomoMacchina.Features.Login.R4MVC_LoginController();
@@ -74,6 +76,13 @@ namespace R4Mvc
         public readonly string Name = "Example";
         public readonly UomoMacchina.Areas.Example.Users.UsersController Users = new UomoMacchina.Areas.Example.Users.R4MVC_UsersController();
     }
+
+    [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+    public partial class MainAreaClass
+    {
+        public readonly string Name = "Main";
+        public readonly UomoMacchina.Areas.Main.MainController Main = new UomoMacchina.Areas.Main.R4MVC_MainController();
+    }
 }
 
 [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
@@ -89,6 +98,8 @@ public static partial class Links
         public static string Url(string fileName) => R4MvcHelpers.ProcessVirtualPath(UrlPath + "/" + fileName);
         public static readonly string bundle_global_css = Url("bundle-global.css");
         public static readonly string bundle_global_min_css = Url("bundle-global.min.css");
+        public static readonly string bundle_vue_cal_css = Url("bundle-vue-cal.css");
+        public static readonly string bundle_vue_cal_min_css = Url("bundle-vue-cal.min.css");
         public static readonly string bundle_vue_multiselect_css = Url("bundle-vue-multiselect.css");
         public static readonly string bundle_vue_multiselect_min_css = Url("bundle-vue-multiselect.min.css");
         public static readonly string site_css = Url("site.css");
@@ -116,12 +127,17 @@ public static partial class Links
         public static readonly string bundle_global_min_js = Url("bundle-global.min.js");
         public static readonly string bundle_global_min_js_map = Url("bundle-global.min.js.map");
         public static readonly string bundle_signalr_js = Url("bundle-signalr.js");
+        public static readonly string bundle_vue_cal_js = Url("bundle-vue-cal.js");
+        public static readonly string bundle_vue_cal_min_js = Url("bundle-vue-cal.min.js");
         public static readonly string bundle_vue_multiselect_js = Url("bundle-vue-multiselect.js");
         public static readonly string bundle_vue_multiselect_min_js = Url("bundle-vue-multiselect.min.js");
         public static readonly string bundle_vue_multiselect_min_js_map = Url("bundle-vue-multiselect.min.js.map");
         public static readonly string bundle_vue_js = Url("bundle-vue.js");
         public static readonly string bundle_vue_min_js = Url("bundle-vue.min.js");
         public static readonly string bundle_vue_min_js_map = Url("bundle-vue.min.js.map");
+        public static readonly string main_js = Url("main.js");
+        public static readonly string main_js_map = Url("main.js.map");
+        public static readonly string main_ts = Url("main.ts");
         public static readonly string signalRConnectionManager_d_ts = Url("signalRConnectionManager.d.ts");
         public static readonly string signalRConnectionManager_js = Url("signalRConnectionManager.js");
         public static readonly string signalRConnectionManager_js_map = Url("signalRConnectionManager.js.map");
@@ -162,7 +178,7 @@ internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult : ActionResul
 [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
 internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_JsonResult : JsonResult, IR4MvcActionResult
 {
-    public R4Mvc_Microsoft_AspNetCore_Mvc_JsonResult(string area, string controller, string action, string protocol = null) : base(null)
+    public R4Mvc_Microsoft_AspNetCore_Mvc_JsonResult(string area, string controller, string action, string protocol = null): base(null)
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }
@@ -196,7 +212,7 @@ internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_ContentResult : ContentRes
 [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
 internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_FileResult : FileResult, IR4MvcActionResult
 {
-    public R4Mvc_Microsoft_AspNetCore_Mvc_FileResult(string area, string controller, string action, string protocol = null) : base(null)
+    public R4Mvc_Microsoft_AspNetCore_Mvc_FileResult(string area, string controller, string action, string protocol = null): base(null)
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }
@@ -213,7 +229,7 @@ internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_FileResult : FileResult, I
 [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
 internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_RedirectResult : RedirectResult, IR4MvcActionResult
 {
-    public R4Mvc_Microsoft_AspNetCore_Mvc_RedirectResult(string area, string controller, string action, string protocol = null) : base(" ")
+    public R4Mvc_Microsoft_AspNetCore_Mvc_RedirectResult(string area, string controller, string action, string protocol = null): base(" ")
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }
@@ -230,7 +246,7 @@ internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_RedirectResult : RedirectR
 [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
 internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_RedirectToActionResult : RedirectToActionResult, IR4MvcActionResult
 {
-    public R4Mvc_Microsoft_AspNetCore_Mvc_RedirectToActionResult(string area, string controller, string action, string protocol = null) : base(" ", " ", " ")
+    public R4Mvc_Microsoft_AspNetCore_Mvc_RedirectToActionResult(string area, string controller, string action, string protocol = null): base(" ", " ", " ")
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }
@@ -247,7 +263,7 @@ internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_RedirectToActionResult : R
 [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
 internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_RedirectToRouteResult : RedirectToRouteResult, IR4MvcActionResult
 {
-    public R4Mvc_Microsoft_AspNetCore_Mvc_RedirectToRouteResult(string area, string controller, string action, string protocol = null) : base(null)
+    public R4Mvc_Microsoft_AspNetCore_Mvc_RedirectToRouteResult(string area, string controller, string action, string protocol = null): base(null)
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }
@@ -281,7 +297,7 @@ internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_ActionResult : 
 [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
 internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_JsonResult : JsonResult, IR4PageActionResult
 {
-    public R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_JsonResult(string pageName, string pageHandler, string protocol = null) : base(null)
+    public R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_JsonResult(string pageName, string pageHandler, string protocol = null): base(null)
     {
         this.InitMVCT4Result(pageName, pageHandler, protocol);
     }
@@ -315,7 +331,7 @@ internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_ContentResult :
 [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
 internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_FileResult : FileResult, IR4PageActionResult
 {
-    public R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_FileResult(string pageName, string pageHandler, string protocol = null) : base(null)
+    public R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_FileResult(string pageName, string pageHandler, string protocol = null): base(null)
     {
         this.InitMVCT4Result(pageName, pageHandler, protocol);
     }
@@ -332,7 +348,7 @@ internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_FileResult : Fi
 [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
 internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_RedirectResult : RedirectResult, IR4PageActionResult
 {
-    public R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_RedirectResult(string pageName, string pageHandler, string protocol = null) : base(" ")
+    public R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_RedirectResult(string pageName, string pageHandler, string protocol = null): base(" ")
     {
         this.InitMVCT4Result(pageName, pageHandler, protocol);
     }
@@ -349,7 +365,7 @@ internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_RedirectResult 
 [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
 internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_RedirectToActionResult : RedirectToActionResult, IR4PageActionResult
 {
-    public R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_RedirectToActionResult(string pageName, string pageHandler, string protocol = null) : base(" ", " ", " ")
+    public R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_RedirectToActionResult(string pageName, string pageHandler, string protocol = null): base(" ", " ", " ")
     {
         this.InitMVCT4Result(pageName, pageHandler, protocol);
     }
@@ -366,7 +382,7 @@ internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_RedirectToActio
 [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
 internal partial class R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_RedirectToRouteResult : RedirectToRouteResult, IR4PageActionResult
 {
-    public R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_RedirectToRouteResult(string pageName, string pageHandler, string protocol = null) : base(null)
+    public R4Mvc_Microsoft_AspNetCore_Mvc_RazorPages_RedirectToRouteResult(string pageName, string pageHandler, string protocol = null): base(null)
     {
         this.InitMVCT4Result(pageName, pageHandler, protocol);
     }

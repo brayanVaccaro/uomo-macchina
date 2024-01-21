@@ -107,13 +107,15 @@ namespace UomoMacchina
             var compositeFp = new CustomCompositeFileProvider(env.WebRootFileProvider, node_modules, areas);
             env.WebRootFileProvider = compositeFp;
             app.UseStaticFiles();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 // ROUTING PER HUB
                 endpoints.MapHub<TemplateHub>("/templateHub");
 
                 endpoints.MapAreaControllerRoute("Example", "Example", "Example/{controller=Users}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute("prova", "Main", "Main/{controller=Main}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute("getData", "Main", "Main/{controller=Main}/{action=GetData}");
                 endpoints.MapControllerRoute("default", "{controller=Login}/{action=Login}");
             });
         }
