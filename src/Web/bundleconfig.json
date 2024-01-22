@@ -48,20 +48,20 @@
     "sourceMap": true
   },
   {
-    "outputFileName": "wwwroot/js/bundle-vue-cal.js",
+    "outputFileName": "wwwroot/css/bundle-vue-multiselect.css",
     "inputFiles": [
-      "node_modules/vue-cal/dist/vuecal.umd.js"
+      "node_modules/vue-multiselect/dist/vue-multiselect.min.css"
     ],
     "minify": {
       "enabled": true
     },
     "includeInProject": true,
-    "sourceMap": false
+    "sourceMap": true
   },
   {
-    "outputFileName": "wwwroot/css/bundle-vue-multiselect.css",
+    "outputFileName": "wwwroot/js/bundle-vue-cal.js",
     "inputFiles": [
-      "node_modules/vue-multiselect/dist/vue-multiselect.min.css"
+      "node_modules/vue-cal/dist/vuecal.umd.js"
     ],
     "minify": {
       "enabled": true
