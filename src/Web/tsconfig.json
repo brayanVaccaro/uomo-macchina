@@ -6,7 +6,8 @@
     "removeComments": false,
     "sourceMap": true,
     "target": "es2019",
-    "module": "none",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
 
     "skipLibCheck": true
   },
