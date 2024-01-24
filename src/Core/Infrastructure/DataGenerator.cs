@@ -66,25 +66,59 @@ namespace Core.Infrastructure
             context.SaveChanges();
         }
 
-        public static void InitializeRichiesta(TemplateDbContext context)
+        public static void InitializePermesso(TemplateDbContext context)
         {
-            if (context.Richiesta.Any()) { return; }
+            if (context.Permesso.Any()) { return; }
 
-            context.Richiesta.AddRange(
-                new Richiesta
+            context.Permesso.AddRange(
+                new Permesso
                 {
                     Id = Guid.NewGuid(),
-                    DataInizio = DateTime.Now,
-                    DataFine = DateTime.Now.AddDays(1),
+                    Data = DateTime.Now,
                     OraInizio = DateTime.Now,
-                    OraFine = DateTime.Now, // Aggiunge 2 ore all'ora di inizio
-                    Durata = 120, // Durata in minuti
-                    Dettagli = "Dettagli di esempio",
-                    Tipologia = true
-
+                    OraFine = DateTime.Now,
+                    Durata = 120,
+                    Dettagli = "Dettagli di permesso",
                 }
                 );
             context.SaveChanges();
         }
+
+        public static void InitializeFeria(TemplateDbContext context)
+        {
+            if (context.Feria.Any()) { return; }
+
+            context.Feria.AddRange(
+                new Feria
+                {
+                    Id = Guid.NewGuid(),                    
+                    DataInizio = DateTime.Now,
+                    DataFine = DateTime.Now,
+                    Durata = 60,
+                    Dettagli = "Dettagli di Ferie",
+                }
+                );
+            context.SaveChanges();
+        }
+
     }
 }
+
+
+/*
+Permesso:
+Id
+Data --> la giornata in cui si richiede il permesso
+OraInizio
+OraFine
+Durata -> quante ore dura, calcolato in base a: OraInizio + OraFine
+Dettagli? --> eventuali motivazione, righe di testo a spiegare il motivo della richiesta di un permesso
+
+
+Feria:
+Id
+DataInizio
+DataFine
+Durata -> per quanti giorni di ferie effettuo una richiesta di ferie
+Dettagli? ->  eventuali motivazione, righe di testo a spiegare il motivo della richiesta di ferie
+*/
