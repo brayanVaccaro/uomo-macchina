@@ -113,8 +113,11 @@ namespace UomoMacchina
                 // ROUTING PER HUB
                 endpoints.MapHub<TemplateHub>("/templateHub");
 
-                // Route per le Richiestas
-                endpoints.MapAreaControllerRoute("Test", "Richieste", "Richieste/{controller=Richieste}/{action=Index}");
+                // Route per le Permessi
+                endpoints.MapAreaControllerRoute("TestP", "Permessi", "Permessi/{controller=Permessi}/{action=Index}");
+
+                // Route per le Ferie
+                endpoints.MapAreaControllerRoute("TestF", "Ferie", "Ferie/{controller=Ferie}/{action=Index}");
 
                 endpoints.MapAreaControllerRoute("Example", "Example", "Example/{controller=Users}/{action=Index}/{id?}");
                 endpoints.MapAreaControllerRoute("prova", "Main", "Main/{controller=Main}/{action=Index}/{id?}");
