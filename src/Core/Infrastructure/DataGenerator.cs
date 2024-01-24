@@ -65,5 +65,26 @@ namespace Core.Infrastructure
 
             context.SaveChanges();
         }
+
+        public static void InitializeRichiesta(TemplateDbContext context)
+        {
+            if (context.Richiesta.Any()) { return; }
+
+            context.Richiesta.AddRange(
+                new Richiesta
+                {
+                    Id = Guid.NewGuid(),
+                    DataInizio = DateTime.Now,
+                    DataFine = DateTime.Now.AddDays(1),
+                    OraInizio = DateTime.Now,
+                    OraFine = DateTime.Now, // Aggiunge 2 ore all'ora di inizio
+                    Durata = 120, // Durata in minuti
+                    Dettagli = "Dettagli di esempio",
+                    Tipologia = true
+
+                }
+                );
+            context.SaveChanges();
+        }
     }
 }

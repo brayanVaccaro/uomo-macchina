@@ -28,10 +28,10 @@
   {
     "outputFileName": "wwwroot/js/bundle-vue.js",
     "inputFiles": [
-      "node_modules/vue/dist/vue.js"
+      "node_modules/vue/dist/vue.global.js"
     ],
     "minify": {
-      "enabled": true
+      "enabled": false
     },
     "includeInProject": true,
     "sourceMap": true
@@ -48,17 +48,6 @@
     "sourceMap": true
   },
   {
-    "outputFileName": "wwwroot/js/bundle-vue-cal.js",
-    "inputFiles": [
-      "node_modules/vue-cal/dist/vuecal.umd.js"
-    ],
-    "minify": {
-      "enabled": true
-    },
-    "includeInProject": true,
-    "sourceMap": false
-  },
-  {
     "outputFileName": "wwwroot/css/bundle-vue-multiselect.css",
     "inputFiles": [
       "node_modules/vue-multiselect/dist/vue-multiselect.min.css"
@@ -69,6 +58,19 @@
     "includeInProject": true,
     "sourceMap": true
   },
+  //{
+  //  "outputFileName": "wwwroot/js/bundle-vue-cal.js",
+  //  "inputFiles": [
+  //    "node_modules/vue-cal/dist/vue-cal.cjs.js",
+  //    //"node_modules/vue-cal/dist/vue-cal.es.js"
+  //    //"node_modules/vue-cal/dist/i18n/it.es.js"
+  //  ],
+  //  "minify": {
+  //    "enabled": true
+  //  },
+  //  "includeInProject": true,
+  //  "sourceMap": true
+  //},
   {
     "outputFileName": "wwwroot/css/bundle-vue-cal.css",
     "inputFiles": [

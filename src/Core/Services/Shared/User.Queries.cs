@@ -127,7 +127,7 @@ namespace Core.Services.Shared
                 Count = await queryable.CountAsync()
             };
         }
-
+        // p5 parametri registrati da input
         /// <summary>
         /// Returns the detail of the user who matches the Id passed in the qry parameter
         /// </summary>
@@ -135,7 +135,8 @@ namespace Core.Services.Shared
         /// <returns></returns>
         public async Task<UserDetailDTO> Query(UserDetailQuery qry)
         {
-            return await _dbContext.Users
+            
+                var prova = await _dbContext.Users
                 .Where(x => x.Id == qry.Id)
                 .Select(x => new UserDetailDTO
                 {
@@ -146,6 +147,8 @@ namespace Core.Services.Shared
                     NickName = x.NickName
                 })
                 .FirstOrDefaultAsync();
+            // p2  //s9
+            return prova;
         }
 
         /// <summary>

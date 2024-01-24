@@ -28,26 +28,26 @@ namespace UomoMacchina.Areas.Example.Users
 
         [HttpGet]
         public virtual async Task<IActionResult> Index(IndexViewModel model)
-        {
+        {   //schermata index s1
             var users = await _sharedService.Query(model.ToUsersIndexQuery());
             model.SetUsers(users);
-
+            // s2
             return View(model);
         }
-
+        // p1 crea utente 
         [HttpGet]
         public virtual IActionResult New()
-        {
+        {  // s3
             return RedirectToAction(Actions.Edit());
         }
-
+        // p3 inserimento
         [HttpGet]
         public virtual async Task<IActionResult> Edit(Guid? id)
         {
             var model = new EditViewModel();
 
             if (id.HasValue)
-            {
+            { //p2  // s8
                 model.SetUser(await _sharedService.Query(new UserDetailQuery
                 {
                     Id = id.Value,
@@ -55,10 +55,10 @@ namespace UomoMacchina.Areas.Example.Users
             }
 
 
-
+            // p1 - p2  // s4 s11
             return View(model);
         }
-
+        // p2 salva dati inseriti utente
         [HttpPost]
         public virtual async Task<IActionResult> Edit(EditViewModel model)
         {
@@ -67,9 +67,9 @@ namespace UomoMacchina.Areas.Example.Users
                 try
                 {
                     model.Id = await _sharedService.Handle(model.ToAddOrUpdateUserCommand());
-
+                    // s5
                     Alerts.AddSuccess(this, "Informazioni aggiornate");
-
+                    // s6
                     // Esempio lancio di un evento SignalR
                     await _publisher.Publish(new NewMessageEvent
                     {
@@ -88,7 +88,7 @@ namespace UomoMacchina.Areas.Example.Users
             {
                 Alerts.AddError(this, "Errore in aggiornamento");
             }
-
+            // p2  // s7
             return RedirectToAction(Actions.Edit(model.Id));
         }
 

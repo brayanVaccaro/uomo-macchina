@@ -22,6 +22,8 @@ public static partial class MVC
     public static R4Mvc.ExampleAreaClass Example => s_Example;
     static readonly R4Mvc.MainAreaClass s_Main = new R4Mvc.MainAreaClass();
     public static R4Mvc.MainAreaClass Main => s_Main;
+    static readonly R4Mvc.RichiesteAreaClass s_Richieste = new R4Mvc.RichiesteAreaClass();
+    public static R4Mvc.RichiesteAreaClass Richieste => s_Richieste;
     public static readonly UomoMacchina.Areas.AuthenticatedBaseController AuthenticatedBase = new UomoMacchina.Areas.R4MVC_AuthenticatedBaseController();
     public static readonly UomoMacchina.Features.Home.HomeController Home = new UomoMacchina.Features.Home.R4MVC_HomeController();
     public static readonly UomoMacchina.Features.Login.LoginController Login = new UomoMacchina.Features.Login.R4MVC_LoginController();
@@ -83,6 +85,13 @@ namespace R4Mvc
         public readonly string Name = "Main";
         public readonly UomoMacchina.Areas.Main.MainController Main = new UomoMacchina.Areas.Main.R4MVC_MainController();
     }
+
+    [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+    public partial class RichiesteAreaClass
+    {
+        public readonly string Name = "Richieste";
+        public readonly UomoMacchina.Areas.Richieste.RichiesteController Richieste = new UomoMacchina.Areas.Richieste.R4MVC_RichiesteController();
+    }
 }
 
 [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
@@ -102,6 +111,7 @@ public static partial class Links
         public static readonly string bundle_vue_cal_min_css = Url("bundle-vue-cal.min.css");
         public static readonly string bundle_vue_multiselect_css = Url("bundle-vue-multiselect.css");
         public static readonly string bundle_vue_multiselect_min_css = Url("bundle-vue-multiselect.min.css");
+        public static readonly string richieste_scss = Url("richieste.scss");
         public static readonly string site_css = Url("site.css");
         public static readonly string site_layout_scss = Url("site.layout.scss");
         public static readonly string site_min_css = Url("site.min.css");
@@ -138,6 +148,9 @@ public static partial class Links
         public static readonly string main_js = Url("main.js");
         public static readonly string main_js_map = Url("main.js.map");
         public static readonly string main_ts = Url("main.ts");
+        public static readonly string Richiesta_js = Url("Richiesta.js");
+        public static readonly string Richiesta_js_map = Url("Richiesta.js.map");
+        public static readonly string Richiesta_ts = Url("Richiesta.ts");
         public static readonly string signalRConnectionManager_d_ts = Url("signalRConnectionManager.d.ts");
         public static readonly string signalRConnectionManager_js = Url("signalRConnectionManager.js");
         public static readonly string signalRConnectionManager_js_map = Url("signalRConnectionManager.js.map");

@@ -1,14 +1,10 @@
 using Core.Services.Shared;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
-using System;
 using UomoMacchina.SignalR;
-using UomoMacchina;
 using Core.Infrastructure.AspNetCore;
 using System.Threading.Tasks;
 using UomoMacchina.Areas.Main.Data;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace UomoMacchina.Areas.Main

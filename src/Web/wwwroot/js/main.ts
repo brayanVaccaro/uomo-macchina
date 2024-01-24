@@ -29,8 +29,8 @@ let app = new Vue({
                 })
                 .then(data => {
                     this.event = data
-                    //console.log("data", data)
-                    //console.log("this.event",this.event)
+                    console.log("data", data)
+                    console.log("this.event",this.event)
                 })
                 .catch(
                     error => {
@@ -45,3 +45,5 @@ let app = new Vue({
 
     }
 })
+
+export default app;

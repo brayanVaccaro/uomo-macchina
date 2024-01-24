@@ -1,11 +1,7 @@
-﻿using Core.Infrastructure;
-using Core.Models;
-using Core.Services.Shared;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.Services.Shared

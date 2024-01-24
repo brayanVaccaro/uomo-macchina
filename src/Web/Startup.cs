@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -10,7 +11,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using Core.Services;
-using Core.Services.Shared;
 //using UomoMacchina.Hubs;
 using UomoMacchina.Infrastructure;
 using UomoMacchina.SignalR.Hubs;
@@ -112,6 +112,9 @@ namespace UomoMacchina
             {
                 // ROUTING PER HUB
                 endpoints.MapHub<TemplateHub>("/templateHub");
+
+                // Route per le Richiestas
+                endpoints.MapAreaControllerRoute("Test", "Richieste", "Richieste/{controller=Richieste}/{action=Index}");
 
                 endpoints.MapAreaControllerRoute("Example", "Example", "Example/{controller=Users}/{action=Index}/{id?}");
                 endpoints.MapAreaControllerRoute("prova", "Main", "Main/{controller=Main}/{action=Index}/{id?}");

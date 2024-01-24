@@ -1,129 +1,63 @@
-﻿namespace Web.Areas.Main.Views.Main
-@* {
-    public class Main
-    {
-    }
+﻿@model UomoMacchina.Areas.Richieste.Data.RichiesteViewModel
+@{
 }
- *@
-@*
-namespace Web.Areas.Example.Users
-{
-    public class RichiesteFerie
+<ul class="navbar-nav flex-wrap ms-auto">
+    <li>
+        <a class="btn btn-light ms-2" href="@Url.Action(MVC.Richieste.Richieste.New())" title="Inserisci un nuovo elemento">
+            <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
+        </a>
+    </li>
+</ul>
+
+
+
+
+
+
+<div class="container-lg text-primary">
+    @if (Model.Richiestas.Any() == false)
     {
+        <tr>
+            <td colspan="3">Nessun elemento trovato con i filtri correnti</td>
+        </tr>
     }
-}
-*@
+    else
+    {
+        @foreach (var richiesta in Model.Richiestas)
+        {
+            <h1></h1>
+            <h1>@richiesta.DataFine</h1>
+            <h1>@richiesta.OraInizio</h1>
+            <h1>@richiesta.OraFine</h1>
+            <h1>@richiesta.Durata</h1>
+            <h1>@richiesta.Dettagli</h1>
+            <div class="container-lg text-primary">
+                <div class="container-sm text-primary">
+                    <form class="was-validated">
+                        <!-- Data inizio -->
+                        <div class="row">
+                            <label asp-for="@richiesta.DataInizio" class="col">Data inizio:</label>
+                            <input type="date" class="col" asp-for="@richiesta.DataInizio" value="@richiesta.DataInizio.ToString("dd/mm/aaa")" required>
+                            @* <span asp-validation-for="DataInizio" class="text-danger"></span>
+                    <span asp-validation-for="DataInizio" class="invalid-feedback">Non hai ancora inserito la data di inizio</span>
+                    <span asp-validation-for="DataInizio" class="valid-feedback">Data di inizio inserita</span> *@
+                        </div>
 
-<div class="Testo d-flex flex-column bg-body-tertiary">
-
-
-    <!-- Tipo di richiesta -->
-    <div class="container text-primary col-sm-8">
-
-        <!-- Compilazione e validazione della richiesta -->
-        <form class="was-validated">
-
-            <!-- Scelezione il tipo di richiesta -->
-            <h3>Tipo:</h3>
-
-            <div class="mb-3">
-                <select class="form-select" required aria-label="select example">
-                    <option value="">Selezionare il tipo di richiesta</option>
-                    <option value="1">Richiesta</option>
-                    <option value="2">Ferie</option>
-                </select>
-                <div class="invalid-feedback">Non hai ancora selezionato il tipo di richiesta</div>
-            </div>
-
-            <!-- Data inizio -->
-            <div class="col-md-4 position-relative">
-                <label for="validationTooltip01" class="form-label">Data inizio:</label>
-                <input type="date" class="form-control" id="validationTooltip01" value="" required>
-                <div class="valid-tooltip">
-                    Looks good!
-                </div>
-                <div class="invalid-feedback">Non hai ancora scritto la data inizio</div>
-            </div>
-
-            <!-- Data fine -->
-            <div class="col-md-4 position-relative">
-                <label for="validationTooltip02" class="form-label">Data fine:</label>
-                <input type="date" class="form-control" id="validationTooltip02" value="" required>
-                <div class="valid-tooltip">
-                    Looks good!
-                </div>
-                <div class="invalid-feedback">Non hai ancora scritto la data fine</div>
-            </div>
-
-            <!-- Ora inizio -->
-            <div class="col-md-4 position-relative">
-                <label for="validationTooltip01" class="form-label">Ora inizio:</label>
-                <input type="time" class="form-control" id="validationTooltip01" value="" required>
-                <div class="valid-tooltip">
-                    Looks good!
-                </div>
-                <div class="invalid-feedback">Non hai ancora scritto l'ora d'inizio</div>
-            </div>
-
-            <!-- Ora fine -->
-            <div class="col-md-4 position-relative">
-                <label for="validationTooltip02" class="form-label">Ora fine:</label>
-                <input type="time" class="form-control" id="validationTooltip02" value="" required disabled>
-                <div class="valid-tooltip">
-                    Looks good!
-                </div>
-                <div class="invalid-feedback">Non hai ancora scritto l'ora fine</div>
-            </div>
-
-            <!-- Durata -->
-            <div class="col-md-4 position-relative">
-                <label for="validationTooltip01" class="form-label">Durata:</label>
-                <input type="text" class="form-control" id="validationTooltip01" value="" required>
-                <div class="valid-tooltip">
-                    Looks good!
-                </div>
-                <div class="invalid-feedback">Non hai ancora scritto la durata</div>
-            </div>
-
-            <!-- Dettagli -->
-            <div class="mb-3">
-                <label for="validationTextarea" class="form-label">Dettagli:</label>
-                <textarea class="form-control" id="validationTextarea" placeholder="Scrivere i dettagli" required></textarea>
-                <div class="invalid-feedback">Non hai ancora scritto i dettagli della richiesta</div>
-            </div>
-
-            <div class="mb-3">
-                <button class="btn btn-primary" type="submit">Invia</button>
-            </div>
-        </form>
-
-
-        <!-- Tasto Anulla-->
-        <div class="mb-3">
-            <button class="btn btn-primary" type="submit">Anulla</button>
-        </div>
-
-        <!-- Esempio di pop up dopo aver cliccato l'invio -->
-        <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
-
-        <div class="toast-container position-fixed bottom-0 end-0 p-3">
-            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <img src="..." class="rounded me-2" alt="...">
-                    <strong class="me-auto">Bootstrap</strong>
-                    <small>11 mins ago</small>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body">
-                    Hello, world! This is a toast message.
+                        <!-- Dettagli -->
+                        <div class="mb-3">
+                            <label asp-for="@richiesta.Dettagli" class="form-label">Dettagli:</label>
+                            <textarea class="form-control" asp-for="@richiesta.Dettagli" required>@richiesta.Dettagli</textarea>
+                            @* <span asp-validation-for="Dettagli" class="invalid-feedback">Non hai ancora scritto i dettagli</span>
+                    <span asp-validation-for="Dettagli" class="valid-feedback">Dettagli inserita</span> *@
+                        </div>
+                    </form>
                 </div>
             </div>
-        </div>
-
-    </div>
+            
+        }
+    }
 </div>
 
-
 @section styles {
-    <link href="~/css/RichiesteFerie.css" rel="stylesheet" />
+    <link href="~/css/richieste.scss" rel="stylesheet" />
 }

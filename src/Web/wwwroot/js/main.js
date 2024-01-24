@@ -1,7 +1,9 @@
+"use strict";
 //import Vue = require("../../node_modules/vue/types/umd");
 //import vuecal = require("../../node_modules/vue-cal/dist/vuecal.umd.js")
 //import Vue from 'vue';
 //import vuecal from 'vue-cal';
+Object.defineProperty(exports, "__esModule", { value: true });
 let app = new Vue({
     el: '#pageId',
     data: {
@@ -23,8 +25,8 @@ let app = new Vue({
             })
                 .then(data => {
                 this.event = data;
-                //console.log("data", data)
-                //console.log("this.event",this.event)
+                console.log("data", data);
+                console.log("this.event", this.event);
             })
                 .catch(error => {
                 console.error('Unable to get events');
@@ -36,4 +38,5 @@ let app = new Vue({
         "vue-cal": vuecal,
     }
 });
+exports.default = app;
 //# sourceMappingURL=main.js.map

@@ -26,10 +26,10 @@ namespace UomoMacchina.Areas.Example.Users
         {
             return Infrastructure.JsonSerializer.ToJsonCamelCase(this);
         }
-
+        // p6 Parametri salvati
         public void SetUser(UserDetailDTO userDetailDTO)
         {
-            if (userDetailDTO != null)
+            if (userDetailDTO != null)// p2  //s10
             {
                 Id = userDetailDTO.Id;
                 Email = userDetailDTO.Email;
@@ -37,7 +37,7 @@ namespace UomoMacchina.Areas.Example.Users
                 LastName = userDetailDTO.LastName;
                 NickName = userDetailDTO.NickName;
             }
-        }
+        } 
 
         public AddOrUpdateUserCommand ToAddOrUpdateUserCommand()
         {
