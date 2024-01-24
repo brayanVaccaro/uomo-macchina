@@ -20,10 +20,12 @@ public static partial class MVC
 {
     static readonly R4Mvc.ExampleAreaClass s_Example = new R4Mvc.ExampleAreaClass();
     public static R4Mvc.ExampleAreaClass Example => s_Example;
+    static readonly R4Mvc.FerieAreaClass s_Ferie = new R4Mvc.FerieAreaClass();
+    public static R4Mvc.FerieAreaClass Ferie => s_Ferie;
     static readonly R4Mvc.MainAreaClass s_Main = new R4Mvc.MainAreaClass();
     public static R4Mvc.MainAreaClass Main => s_Main;
-    static readonly R4Mvc.RichiesteAreaClass s_Richieste = new R4Mvc.RichiesteAreaClass();
-    public static R4Mvc.RichiesteAreaClass Richieste => s_Richieste;
+    static readonly R4Mvc.PermessiAreaClass s_Permessi = new R4Mvc.PermessiAreaClass();
+    public static R4Mvc.PermessiAreaClass Permessi => s_Permessi;
     public static readonly UomoMacchina.Areas.AuthenticatedBaseController AuthenticatedBase = new UomoMacchina.Areas.R4MVC_AuthenticatedBaseController();
     public static readonly UomoMacchina.Features.Home.HomeController Home = new UomoMacchina.Features.Home.R4MVC_HomeController();
     public static readonly UomoMacchina.Features.Login.LoginController Login = new UomoMacchina.Features.Login.R4MVC_LoginController();
@@ -80,6 +82,13 @@ namespace R4Mvc
     }
 
     [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+    public partial class FerieAreaClass
+    {
+        public readonly string Name = "Ferie";
+        public readonly UomoMacchina.Areas.Ferie.FerieController Ferie = new UomoMacchina.Areas.Ferie.R4MVC_FerieController();
+    }
+
+    [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
     public partial class MainAreaClass
     {
         public readonly string Name = "Main";
@@ -87,10 +96,10 @@ namespace R4Mvc
     }
 
     [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
-    public partial class RichiesteAreaClass
+    public partial class PermessiAreaClass
     {
-        public readonly string Name = "Richieste";
-        public readonly UomoMacchina.Areas.Richieste.RichiesteController Richieste = new UomoMacchina.Areas.Richieste.R4MVC_RichiesteController();
+        public readonly string Name = "Permessi";
+        public readonly UomoMacchina.Areas.Permessi.PermessiController Permessi = new UomoMacchina.Areas.Permessi.R4MVC_PermessiController();
     }
 }
 
@@ -111,6 +120,8 @@ public static partial class Links
         public static readonly string bundle_vue_cal_min_css = Url("bundle-vue-cal.min.css");
         public static readonly string bundle_vue_multiselect_css = Url("bundle-vue-multiselect.css");
         public static readonly string bundle_vue_multiselect_min_css = Url("bundle-vue-multiselect.min.css");
+        public static readonly string richieste_css = Url("richieste.css");
+        public static readonly string richieste_min_css = Url("richieste.min.css");
         public static readonly string richieste_scss = Url("richieste.scss");
         public static readonly string site_css = Url("site.css");
         public static readonly string site_layout_scss = Url("site.layout.scss");
@@ -137,14 +148,10 @@ public static partial class Links
         public static readonly string bundle_global_min_js = Url("bundle-global.min.js");
         public static readonly string bundle_global_min_js_map = Url("bundle-global.min.js.map");
         public static readonly string bundle_signalr_js = Url("bundle-signalr.js");
-        public static readonly string bundle_vue_cal_js = Url("bundle-vue-cal.js");
-        public static readonly string bundle_vue_cal_min_js = Url("bundle-vue-cal.min.js");
         public static readonly string bundle_vue_multiselect_js = Url("bundle-vue-multiselect.js");
         public static readonly string bundle_vue_multiselect_min_js = Url("bundle-vue-multiselect.min.js");
         public static readonly string bundle_vue_multiselect_min_js_map = Url("bundle-vue-multiselect.min.js.map");
         public static readonly string bundle_vue_js = Url("bundle-vue.js");
-        public static readonly string bundle_vue_min_js = Url("bundle-vue.min.js");
-        public static readonly string bundle_vue_min_js_map = Url("bundle-vue.min.js.map");
         public static readonly string main_js = Url("main.js");
         public static readonly string main_js_map = Url("main.js.map");
         public static readonly string main_ts = Url("main.ts");
