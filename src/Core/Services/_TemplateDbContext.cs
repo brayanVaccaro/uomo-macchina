@@ -15,7 +15,6 @@ namespace Core.Services
         {
             DataGenerator.InitializeUsers(this);
             DataGenerator.InitializeVueCalEvent(this);
-            DataGenerator.InitializeRichiesta(this);
             DataGenerator.InitializeFeria(this);
         }
 
@@ -23,6 +22,5 @@ namespace Core.Services
         public DbSet<VueCalEvent> VueCalEvent { get; set; }
         public DbSet<Feria> Feria { get; set; }
 
-        public DbSet<Richiesta> Richiesta { get; set; }
     }
 }
