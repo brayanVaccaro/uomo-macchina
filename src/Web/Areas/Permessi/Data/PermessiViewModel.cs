@@ -39,6 +39,7 @@ namespace UomoMacchina.Areas.Permessi.Data
             public PermessoViewModel(PermessoDTO permessoDTO)
             {
                 Id = permessoDTO.Id;
+                Data = permessoDTO.Data;
                 OraInizio = permessoDTO.OraInizio;
                 OraFine = permessoDTO.OraFine;
                 Durata = permessoDTO.Durata;
@@ -60,6 +61,7 @@ namespace UomoMacchina.Areas.Permessi.Data
                 {
                     
                     Id = permessoDTO.Id;
+                    Data = permessoDTO.Data;
                     OraInizio = permessoDTO.OraInizio;
                     OraFine = permessoDTO.OraFine;
                     Durata = permessoDTO.Durata;
@@ -73,6 +75,7 @@ namespace UomoMacchina.Areas.Permessi.Data
                 return new AddOrUpdatePermessoCommand
                 {
                     Id = Id,
+                    Data = Data,
                     OraInizio = OraInizio,
                     OraFine = OraFine,
                     Durata = Durata,

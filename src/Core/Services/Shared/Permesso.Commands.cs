@@ -39,7 +39,7 @@ namespace Core.Services.Shared
                 _dbContext.Permesso.Add(permesso);
             }
 
-            
+            permesso.Data = cmd.Data; 
             permesso.OraInizio = cmd.OraInizio;
             permesso.OraFine = cmd.OraFine;
             permesso.Durata = cmd.Durata;

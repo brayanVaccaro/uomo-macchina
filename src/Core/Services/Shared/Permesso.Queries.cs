@@ -91,6 +91,7 @@ namespace Core.Services.Shared
                 .Select(x => new PermessoDTO
                 {
                     Id = x.Id,
+                    Data = x.Data,
                     OraInizio = x.OraInizio,
                     OraFine = x.OraFine,
                     Durata = x.Durata,

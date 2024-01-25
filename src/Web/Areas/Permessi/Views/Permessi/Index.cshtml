@@ -1,7 +1,9 @@
 ﻿@model UomoMacchina.Areas.Permessi.Data.PermessiViewModel
 @{
 }
+
 @* Index Permessi *@
+
 <ul class="navbar-nav flex-wrap ms-auto">
     <li>
         <a class="btn btn-light ms-2" href="@Url.Action(MVC.Permessi.Permessi.New())" title="Inserisci un nuovo elemento">
@@ -10,7 +12,7 @@
     </li>
 </ul>
 
-<div class="container-lg text-primary">
+<div class="TabellaGenerale container-lg  text-center">
     @if (Model.Permessi.Any() == false)
     {
         <tr>
@@ -19,85 +21,50 @@
     }
     else
     {
+        <div class="TabellaPrincipale row text-center">   
+            <div class="colonne col-2">
+                Data
+            </div>
+            <div class="colonne col-2">
+                Ora inizio
+            </div>
+            <div class="colonne col-2">
+                Ora fine
+            </div>
+            <div class="colonne col-2">
+                Durata
+            </div>
+            <div class="colonneUltima col-4">
+                Dettagli
+            </div>
+        </div>
+
         @foreach (var permesso in Model.Permessi)
         {
-
-
-            <p>@permesso.Data</p>
-            <p>@permesso.OraInizio</p>
-            <p>@permesso.OraFine</p>
-            <p>@permesso.Durata</p>
-            <p>@permesso.Dettagli</p>
-
-
-            <div class="Prototipo container-lg text-primary">
-                <div class="container-sm text-primary">
-                    <PROVA></PROVA>
-                    <h1 v-if="prova">ciao</h1>
-
-                    <!-- Data inizio -->
-                    @* <div class="col-md-4 position-relative">
-            <label asp-for="@permesso.DataInizio" class="form-label">Data inizio:</label>
-            <input type="date" class="form-control" asp-for="@permesso.DataInizio" value="@permesso.DataInizio.ToString("yyyy-MM-dd")" required :disabled="Tipologia === '1'">
+            @* <div class="TabellaDati container-lg text-center border-5">
+                
             </div> *@
-
-                    <!-- Dettagli -->
-                    <div class="mb-3">
-                        <label asp-for="@permesso.Dettagli" class="form-label">Dettagli:</label>
-                        <textarea class="form-control" asp-for="@permesso.Dettagli" required>@permesso.Dettagli</textarea>
-                    </div>
-
-
+            <div class="TabellaDati row text-center">
+                <div class="colonne col-2 ">
+                    @permesso.Data.ToString("d")
+                </div>
+                <div class="colonne col-2">
+                    @permesso.OraInizio.ToString("HH:mm")
+                </div>
+                <div class="colonne col-2">
+                    @permesso.OraFine.ToString("HH:mm")
+                </div>
+                <div class="colonne col-2">
+                    @permesso.Durata
+                </div>
+                <div class="colonneUltima col-4">
+                    @permesso.Dettagli
                 </div>
             </div>
-
         }
     }
 </div>
-@section scripts {
-    <script type="module">
-        // var Vue
-        // var vuecal
-        var prova = false
-        // export default Vue.defineComponent({
-        //     name: "PROVA",
-        //     data() {
-        //         return {
-        //             message: 'siamo in main.ts!'
-        //         }
-        //     },
-        //     computed: {
-        //         greeting() {
-        //             return this.message
-        //         }
-        //     },
-        //     components: {
-        //         VueCal: vuecal
-        //     },
 
-        //     mounted() {
-        //         console.log("sono in mounted")
-        //         this.greeting // type: string
-        //     }
-        // })
-        // export default Vue.defineComponent({
-        //     // type inference enabled
-        //     props: {
-        //         name: String,
-        //         msg: { type: String, required: true }
-        //     },
-        //     data() {
-        //         return {
-        //             count: 1
-        //         }
-        //     },
-        //     mounted() {
-        //         this.name // type: string | undefined
-        //         this.msg // type: string
-        //         this.count // type: number
-        //     }
-        // })
-    </script>
 
 }
 @section styles {
