@@ -6,5 +6,14 @@
   {
     "outputFile": "wwwroot/css/sidebar.css",
     "inputFile": "wwwroot/css/sidebar.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/main.css",
+    "inputFile": "wwwroot/css/main.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/richieste.css",
+    "inputFile": "wwwroot/css/richieste.scss"
+
   }
 ]
