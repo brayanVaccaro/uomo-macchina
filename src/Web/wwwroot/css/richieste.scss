@@ -1,0 +1,63 @@
+﻿namespace Web.wwwroot.css
+{
+    public class RichiesteFerie
+    {
+    }
+}
+
+// Questo file è collegato all'Edit.cshtml 
+
+.Testo {
+    //display: none !important
+}
+
+.Prototipo {
+    display: none !important
+}
+
+.TabellaGenerale {
+    border-top-style: groove;
+    border-right-style: groove;
+    border-left-style: groove;
+}
+
+.TabellaPrincipale {
+    border-bottom-style: groove;
+    background-color: lightgray;
+}
+
+
+.TabellaDati {
+    border-bottom-style: groove;
+}
+
+.colonne {
+    border-right-style: groove;
+    
+}
+    
+.Rosso {
+    display: flex;
+    background-color: red;
+    height: 50px;
+    display: block;
+    display: none !important
+}
+
+.Giallo {
+    background-color: yellow;
+    height: 50px;
+    display: block;
+}
+
+.Blu {
+    background-color: blue;
+    height: 50px;
+    display: block;
+}
+
+.Verde {
+    background-color: green;
+    height: 50px;
+    display: block;
+}
