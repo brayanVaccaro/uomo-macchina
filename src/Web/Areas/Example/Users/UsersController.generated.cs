@@ -113,6 +113,7 @@ namespace UomoMacchina.Areas.Example.Users
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string Sidebar = "Sidebar";
             public readonly string New = "New";
             public readonly string Edit = "Edit";
             public readonly string Delete = "Delete";
@@ -122,6 +123,7 @@ namespace UomoMacchina.Areas.Example.Users
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string Sidebar = "Sidebar";
             public const string New = "New";
             public const string Edit = "Edit";
             public const string Delete = "Delete";
@@ -158,6 +160,16 @@ namespace UomoMacchina.Areas.Example.Users
             var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             IndexOverride(callInfo, model);
+            return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
+        }
+
+        [NonAction]
+        partial void SidebarOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo);
+        [NonAction]
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> Sidebar()
+        {
+            var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Sidebar);
+            SidebarOverride(callInfo);
             return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
         }
 

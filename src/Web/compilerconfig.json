@@ -4,7 +4,7 @@
     "inputFile": "wwwroot/css/site.scss"
   },
   {
-    "outputFile": "wwwroot/css/main.css",
-    "inputFile": "wwwroot/css/main.scss"
+    "outputFile": "wwwroot/css/sidebar.css",
+    "inputFile": "wwwroot/css/sidebar.scss"
   }
 ]
