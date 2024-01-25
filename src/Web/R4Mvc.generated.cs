@@ -62,12 +62,14 @@ namespace R4Mvc
                 public readonly string _LayoutHtml = "_LayoutHtml";
                 public readonly string _PagingPartial = "_PagingPartial";
                 public readonly string _PagingPartialFilter = "_PagingPartialFilter";
+                public readonly string _SideBar = "_SideBar";
             }
 
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
             public readonly string _LayoutHtml = "~/Views/Shared/_LayoutHtml.cshtml";
             public readonly string _PagingPartial = "~/Views/Shared/_PagingPartial.cshtml";
             public readonly string _PagingPartialFilter = "~/Views/Shared/_PagingPartialFilter.cshtml";
+            public readonly string _SideBar = "~/Views/Shared/_SideBar.cshtml";
         }
 
         static readonly ViewsClass s_Views = new ViewsClass();
@@ -120,9 +122,9 @@ public static partial class Links
         public static readonly string bundle_vue_cal_min_css = Url("bundle-vue-cal.min.css");
         public static readonly string bundle_vue_multiselect_css = Url("bundle-vue-multiselect.css");
         public static readonly string bundle_vue_multiselect_min_css = Url("bundle-vue-multiselect.min.css");
-        public static readonly string richieste_css = Url("richieste.css");
-        public static readonly string richieste_min_css = Url("richieste.min.css");
-        public static readonly string richieste_scss = Url("richieste.scss");
+        public static readonly string sidebar_css = Url("sidebar.css");
+        public static readonly string sidebar_min_css = Url("sidebar.min.css");
+        public static readonly string sidebar_scss = Url("sidebar.scss");
         public static readonly string site_css = Url("site.css");
         public static readonly string site_layout_scss = Url("site.layout.scss");
         public static readonly string site_min_css = Url("site.min.css");
@@ -155,9 +157,6 @@ public static partial class Links
         public static readonly string main_js = Url("main.js");
         public static readonly string main_js_map = Url("main.js.map");
         public static readonly string main_ts = Url("main.ts");
-        public static readonly string Richiesta_js = Url("Richiesta.js");
-        public static readonly string Richiesta_js_map = Url("Richiesta.js.map");
-        public static readonly string Richiesta_ts = Url("Richiesta.ts");
         public static readonly string signalRConnectionManager_d_ts = Url("signalRConnectionManager.d.ts");
         public static readonly string signalRConnectionManager_js = Url("signalRConnectionManager.js");
         public static readonly string signalRConnectionManager_js_map = Url("signalRConnectionManager.js.map");

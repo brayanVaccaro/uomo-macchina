@@ -1,9 +1,7 @@
-"use strict";
 //import Vue = require("../../node_modules/vue/types/umd");
 //import vuecal = require("../../node_modules/vue-cal/dist/vuecal.umd.js")
 //import Vue from 'vue';
 //import vuecal from 'vue-cal';
-Object.defineProperty(exports, "__esModule", { value: true });
 let app = new Vue({
     el: '#pageId',
     data: {
@@ -38,5 +36,5 @@ let app = new Vue({
         "vue-cal": vuecal,
     }
 });
-exports.default = app;
+export default app;
 //# sourceMappingURL=main.js.map
