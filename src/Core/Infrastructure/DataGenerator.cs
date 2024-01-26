@@ -56,12 +56,12 @@ namespace Core.Infrastructure
             context.VueCalEvent.AddRange(
                 new VueCalEvent
                 {
-                    Id = Guid.Parse("69f71222-8ac7-4578-a32c-293d6eca2ed0"), //la stringa presa online
-                    Start = new DateTime(2024, 1, 21, 12, 0, 0),
-                    End = new DateTime(2024, 1, 21, 14, 0, 0)
+                    Id = Guid.NewGuid(), //la stringa presa online
+                    Start = new DateTime(2024, 1, 20, 9, 0, 0),
+                    End = new DateTime(2024, 1, 20, 12, 0, 0),
+                    CssClass = "rendicontazione"
 
-                }
-            );
+                });
 
             context.SaveChanges();
         }

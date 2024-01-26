@@ -22,8 +22,10 @@ namespace Core.Services.Shared
     public class VueCalEventDTO
     {
         public Guid Id { get; set; }
-        public String Start { get; set; }
-        public String End { get; set; }
+        public String StartDate { get; set; }  //da usare in locale
+        public String EndDate { get; set; } //da usare in locale
+        public String StartTime { get; set; } //da usare in locale
+        public String EndTime { get; set;} //da usare in locale
         public string Title { get; set; }
         public string Content { get; set; }
         public string CssClass { get; set; }
@@ -51,8 +53,19 @@ namespace Core.Services.Shared
                 risultato.Events = await _dbContext.VueCalEvent.Select(x => new VueCalEventDTO
                 {
                     Id = x.Id,
-                    Start = x.Start.ToString("yyyy-MM-dd HH:mm"),
-                    End = x.End.ToString("yyyy-MM-dd HH:mm"),
+
+                    StartDate = x.Start.ToString("yyyy-MM-dd"), //da usare in locale
+                    StartTime = x.Start.ToString("HH:mm"), //da usare in locale
+                    EndDate = x.End.ToString("yyyy-MM-dd"), //da usare in locale
+                    EndTime = x.End.ToString("HH:mm"), //da usare in locale
+                    Title = x.Title,
+                    Content = x.Content,
+                    CssClass = x.CssClass,
+                    Background = x.Background,
+                    Split = x.Split,
+                    AllDay = x.AllDay,
+                    Deletable = x.Deletable,
+                    Resizable = x.Resizable,
                 }).ToArrayAsync();
                 risultato.Count = await _dbContext.VueCalEvent.CountAsync();
             }
