@@ -26,6 +26,8 @@ public static partial class MVC
     public static R4Mvc.MainAreaClass Main => s_Main;
     static readonly R4Mvc.PermessiAreaClass s_Permessi = new R4Mvc.PermessiAreaClass();
     public static R4Mvc.PermessiAreaClass Permessi => s_Permessi;
+    static readonly R4Mvc.RendicontazioniAreaClass s_Rendicontazioni = new R4Mvc.RendicontazioniAreaClass();
+    public static R4Mvc.RendicontazioniAreaClass Rendicontazioni => s_Rendicontazioni;
     public static readonly UomoMacchina.Areas.AuthenticatedBaseController AuthenticatedBase = new UomoMacchina.Areas.R4MVC_AuthenticatedBaseController();
     public static readonly UomoMacchina.Features.Home.HomeController Home = new UomoMacchina.Features.Home.R4MVC_HomeController();
     public static readonly UomoMacchina.Features.Login.LoginController Login = new UomoMacchina.Features.Login.R4MVC_LoginController();
@@ -103,6 +105,13 @@ namespace R4Mvc
         public readonly string Name = "Permessi";
         public readonly UomoMacchina.Areas.Permessi.PermessiController Permessi = new UomoMacchina.Areas.Permessi.R4MVC_PermessiController();
     }
+
+    [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+    public partial class RendicontazioniAreaClass
+    {
+        public readonly string Name = "Rendicontazioni";
+        public readonly UomoMacchina.Areas.Rendicontazioni.Controllers.RendicontazioniController Rendicontazioni = new UomoMacchina.Areas.Rendicontazioni.Controllers.R4MVC_RendicontazioniController();
+    }
 }
 
 [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
@@ -122,6 +131,12 @@ public static partial class Links
         public static readonly string bundle_vue_cal_min_css = Url("bundle-vue-cal.min.css");
         public static readonly string bundle_vue_multiselect_css = Url("bundle-vue-multiselect.css");
         public static readonly string bundle_vue_multiselect_min_css = Url("bundle-vue-multiselect.min.css");
+        public static readonly string main_css = Url("main.css");
+        public static readonly string main_min_css = Url("main.min.css");
+        public static readonly string main_scss = Url("main.scss");
+        public static readonly string richieste_css = Url("richieste.css");
+        public static readonly string richieste_min_css = Url("richieste.min.css");
+        public static readonly string richieste_scss = Url("richieste.scss");
         public static readonly string sidebar_css = Url("sidebar.css");
         public static readonly string sidebar_min_css = Url("sidebar.min.css");
         public static readonly string sidebar_scss = Url("sidebar.scss");

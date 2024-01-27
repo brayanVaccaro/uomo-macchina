@@ -66,6 +66,30 @@ namespace Core.Infrastructure
             context.SaveChanges();
         }
 
+        public static void InitializeRendicontazione(TemplateDbContext context)
+        {
+            if (context.Rendicontazione.Any()) { return; }
+
+            context.Rendicontazione.AddRange(
+                new Rendicontazione
+                {
+                    Id = Guid.NewGuid(),
+                    Ore = 7,
+                    Data = DateTime.Now,
+                    Commessa = " Matteo Verdi",
+                    Dettagli = "Dettagli di Rendicontazione 1",
+                },
+                new Rendicontazione
+                {
+                    Id = Guid.NewGuid(),
+                    Ore = 7,
+                    Data = DateTime.Now,
+                    Commessa = " DA ELIMINARE",
+                    Dettagli = "Dettagli di Rendicontazione 2",
+                }
+                );
+            context.SaveChanges();
+        }
         public static void InitializePermesso(TemplateDbContext context)
         {
             if (context.Permesso.Any()) { return; }

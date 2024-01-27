@@ -21,6 +21,7 @@ namespace Core.Services
 
         public DbSet<User> Users { get; set; }
         public DbSet<VueCalEvent> VueCalEvent { get; set; }
+        public DbSet<Rendicontazione> Rendicontazione { get; set; }
         public DbSet<Permesso> Permesso { get; set; }
         public DbSet<Feria> Feria { get; set; }
 

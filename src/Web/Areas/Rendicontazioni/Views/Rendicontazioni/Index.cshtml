@@ -1,0 +1,96 @@
+﻿@model UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel
+@inject IHtmlLocalizer<UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel> ModelLocalizer
+
+@* Index di Rendicontazione *@
+@{
+    // var id =
+}
+<ul class="navbar-nav flex-wrap ms-auto">
+    <li>
+        <a class="Nuovo btn btn-light ms-2" href="@Url.Action(MVC.Rendicontazioni.Rendicontazioni.New())" title="Inserisci un nuovo elemento">
+            <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
+        </a>
+        <a class="modifica btn btn-light ms-2" title="Modifica un elemento">
+            <i class="fa-solid fa-plus"></i>&nbsp;Modifica
+        </a>
+        <a class="elimina btn btn-light ms-2" title="Elimina un elemento" href="@Url.Action(MVC.Rendicontazioni.Rendicontazioni.Delete())">
+            <i class="fa-solid fa-plus"></i>&nbsp;Elimina
+        </a>
+    </li>
+</ul>
+@* <div class="col-sm-auto onit-form-search-col-auto-2x">
+    <label asp-for="Filter"></label>
+    <div class="input-group onit-input-group-union">
+        <span class="input-group-text"><i class="fa-solid fa-fw fa-magnifying-glass"></i></span>
+        <input asp-for="Filter" class="form-control" />
+    </div>
+</div> *@
+
+<div class="TabellaGenerale container-lg  text-center">
+    @if (Model.Rendicontazioni.Any() == false)
+    {
+        <tr>
+            <td colspan="3">Nessun elemento trovato con i filtri correnti</td>
+        </tr>
+    }
+    else
+    {
+        <div class="TabellaPrincipale row text-center">
+            <div class="colonne col-2">
+                Ore
+            </div>
+            <div class="colonne col-2">
+                Data
+            </div>
+            <div class="colonne col-4">
+                Commessa
+            </div>
+            <div class="colonneUltima col-4">
+                Dettagli
+            </div>
+        </div>
+
+        
+            @foreach (var rendicontazione in Model.Rendicontazioni)
+            {
+                <div class="TabellaDati row text-center">                 
+                    <div class="colonne col-2">
+                        @rendicontazione.Ore
+                    </div>
+                    <div class="colonne col-2 ">
+                        @rendicontazione.Data.ToString("d")
+                    </div>
+                    <div class="colonne col-4">
+                        @rendicontazione.Commessa
+                    </div>
+                    <div class="colonneUltima col-4">
+                        @rendicontazione.Dettagli
+                    </div>             
+                </div>
+            }
+        
+         
+    }
+</div>
+
+
+
+
+@section styles {
+    <link href="~/css/richieste.css" rel="stylesheet" />
+}
+
+@section scripts{
+    @* <script src="https://unpkg.com/vue@3"></script> *@
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    message: 'Vue Funziona!',
+                }
+            },
+        });
+    </script>
+
+}

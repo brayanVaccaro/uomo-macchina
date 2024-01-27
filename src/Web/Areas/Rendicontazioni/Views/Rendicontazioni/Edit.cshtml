@@ -1,0 +1,104 @@
+﻿
+@model UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel.RendicontazioneViewModel
+
+@* Edit di Rendicontazione *@
+
+
+<div class="Testo d-flex flex-column bg-body-tertiary">
+    
+
+    <div class="container text-primary col-sm-8">
+        
+        <!-- Compilazione e validazione della richiesta di permesso tramite pulsante -->
+        <form class="was-validated" method="post" action="@Url.Action(MVC.Rendicontazioni.Rendicontazioni.Edit())">
+            <input id="edit-form-submitter" class="d-none" type="submit" />
+            @* Qui ci sono i vari campi del form*@
+            <div>
+                <!-- Ore -->
+                <div class="col-md-4 position-relative">
+                    <label asp-for="Ore" class="form-label">Ore:</label>
+                    <input type="text" class="form-control" asp-for="Ore" value="" required>  
+                    <span asp-validation-for="Ore" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
+                    <span asp-validation-for="Ore" class="valid-feedback">Ora di inizio inserita</span>
+                </div>
+
+                <!-- Data  -->
+                <div class="col-md-4 position-relative">
+                    <label asp-for="Data" class="form-label">Data inizio:</label>
+                    <input type="date" class="form-control" asp-for="Data" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                    <span asp-validation-for="Data" class="text-danger"></span>
+                    <span asp-validation-for="Data" class="invalid-feedback">Non hai ancora inserito la data di inizio</span>
+                    <span asp-validation-for="Data" class="valid-feedback">Data di inizio inserita</span>
+                </div>
+
+                <!-- Commessa -->
+                <div class="col-md-4 position-relative">
+                    <label asp-for="Commessa" class="form-label">Commessa:</label>
+                    <input type="text" class="form-control" asp-for="Commessa" value="" required>                
+                    <span asp-validation-for="Commessa" class="text-danger"></span>
+                    <span asp-validation-for="Commessa" class="invalid-feedback">Non hai ancora inserito la commessa</span>
+                    <span asp-validation-for="Commessa" class="valid-feedback">Commessa inserita</span>
+                </div>
+                
+
+                <!-- Dettagli -->
+                <div class="mb-3">
+                    <label asp-for="Dettagli" class="form-label">Dettagli:</label>
+                    <textarea class="form-control" asp-for="Dettagli" placeholder="Scrivere i dettagli" required></textarea>
+                    <span asp-validation-for="Dettagli" class="invalid-feedback">Non hai ancora scritto i dettagli</span>
+                    <span asp-validation-for="Dettagli" class="valid-feedback">Dettagli inserita</span>
+                </div>
+
+            </div>
+
+        </form>
+        @* Sezione dei tasti*@
+        <div class="mb-3"> 
+            <!-- Tasto Invia -->
+            <button class="Invia btn btn-primary" type="button" onclick="document.getElementById('edit-form-submitter').click()">Invia</button>
+            <!-- Tasto Anulla-->
+            <a class="Annulla btn btn-primary" href="@Url.Action(MVC.Rendicontazioni.Rendicontazioni.Index())">Annulla</a>
+
+            @if (Model.Id != null){
+                <button class=" btn btn-light ms-2" title="Elimina Rendicontazione" type="button" onclick="document.getElementById('delete-form').submit();">
+                    <i class="fa-solid fa-plus"></i>&nbsp;Elimina
+                </button>
+                @* form per eliminare *@
+                <form hidden autocomplete="off" id="delete-form" method="post" action="@Url.Action(MVC.Rendicontazioni.Rendicontazioni.Delete())">
+                    <input type="hidden" asp-for="Id" />
+                </form>
+            }
+        </div>
+
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="module">
+
+        Vue.createApp({
+            data() {
+                return {
+                    message: 'Vue Funziona!',
+                    permesso: false,
+                    feria: false
+                }
+            },
+             methods: {
+            //     updateTipoRichiesta() {
+
+            //     }
+                updateTipoRichiesta() {
+                    // Codice per disabilitare la validazione dei campi
+                    $("form :input[required]").prop("required", false);
+            }
+        }).mount('#pageId')
+    </script>
+}
+
+
+
+@section styles {
+    <link href="~/css/richieste.css" rel="stylesheet" />
+}

@@ -113,6 +113,9 @@ namespace UomoMacchina
                 // ROUTING PER HUB
                 endpoints.MapHub<TemplateHub>("/templateHub");
 
+                // Route per le Rendicontazione
+                endpoints.MapAreaControllerRoute("TestR", "Rendicontazioni", "Rendicontazioni/{controller=Rendicontazioni}/{action=Index}");
+                //endpoints.MapAreaControllerRoute("Elimina Rendicontazioni","Rendicontazioni", "Rendicontazioni/Delete/{controller=Rendicontazioni}/{action=Delete}/{id?}");
                 // Route per le Permessi
                 endpoints.MapAreaControllerRoute("TestP", "Permessi", "Permessi/{controller=Permessi}/{action=Index}");
 
