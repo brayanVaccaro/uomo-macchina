@@ -1,0 +1,113 @@
+﻿@model UomoMacchina.Areas.NottiFuori.Data.NottiFuoriViewModel
+@inject IHtmlLocalizer<UomoMacchina.Areas.NottiFuori.Data.NottiFuoriViewModel> ModelLocalizer
+
+@* Index di NotteFuori *@
+
+@* Pulsante creazione data*@
+<ul class="navbar-nav flex-wrap ms-auto">
+    <li>
+        <a class="Nuovo btn btn-light ms-2" href="@Url.Action(MVC.NottiFuori.NottiFuori.New())" title="Inserisci un nuovo elemento">
+            <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
+        </a>
+    </li>
+</ul>
+
+
+<h5> Per la modifica ed eliminazione cliccare una riga scelta</h5>
+
+@* Tabella Dati *@
+<div class="TabellaGenerale container-lg  text-center">
+    <table class="table table-hover table-sm table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    TipoViaggio
+                </th>
+                <th>
+                    Data
+                </th>
+                <th>
+                    Commessa
+                </th>
+                <th>
+                    Dettagli
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @if (Model.NottiFuori.Any() == false)
+            {
+                <tr>
+                    <td colspan="3">Nessun elemento trovato con i filtri correnti</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var notteFuori in Model.NottiFuori)
+                {
+                    <tr class="onit-table-row-link" onclick="javascript:utilities.navigateUrlExcludeOnitNotNavigate('@Url.Action(MVC.NottiFuori.NottiFuori.Edit(notteFuori.Id))')" title="@ModelLocalizer["Modifica utente"] @notteFuori.Id">
+                        <td scope="row" class="text-nowrap">
+                            @notteFuori.Id
+                        </td>
+                        <td scope="row" class="text-nowrap">
+                            @notteFuori.TipoViaggio
+                        </td>
+                        <td class="text-nowrap">
+                            @notteFuori.Data.ToString("d")
+                        </td>
+                        <td class="text-nowrap">
+                            @notteFuori.Commessa
+                        </td>
+                        <td class="text-nowrap">
+                            @notteFuori.Dettagli
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">
+                    <nav class="navbar navbar-expand justify-content-md-center">
+                        <ul class="navbar-nav flex-wrap"><partial name="@MVC.Shared.Views._PagingPartial" model="Model" /></ul>
+                    </nav>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+
+
+@section styles {
+    <link href="~/css/richieste.css" rel="stylesheet" />
+}
+
+@section scripts{
+
+
+    <script>
+        var Vue
+        Vue.createApp({
+            data() {
+                return {
+                    message: 'Vue Funziona!',
+                }
+            },
+            methods: {
+                async eliminaNotteFuori(notteFuoriId) {
+                    console.log("notteFuoriId", notteFuoriId)
+                    await fetch('/NottiFuori/NottiFuori/Edit?' + notteFuoriId, {
+                        method: "POST",
+                    });
+
+                }
+            }
+        }).mount("#pageId");
+    </script>
+    }

@@ -18,6 +18,7 @@ namespace Core.Services
             DataGenerator.InitializePermesso(this);
             DataGenerator.InitializeRendicontazione(this);
             DataGenerator.InitializeFeria(this);
+            DataGenerator.InitializeNotteFuori(this);
         }
 
         public DbSet<User> Users { get; set; }
@@ -25,6 +26,7 @@ namespace Core.Services
         public DbSet<Rendicontazione> Rendicontazione { get; set; }
         public DbSet<Permesso> Permesso { get; set; }
         public DbSet<Feria> Feria { get; set; }
+        public DbSet<NotteFuori> NotteFuori { get; set; }
 
     }
 }

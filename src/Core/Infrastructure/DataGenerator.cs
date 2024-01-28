@@ -125,6 +125,27 @@ namespace Core.Infrastructure
             context.SaveChanges();
         }
 
+        public static void InitializeNotteFuori(TemplateDbContext context)
+        {
+            if (context.NotteFuori.Any())
+            {
+                return;   // Data was already seeded
+            }
+            context.NotteFuori.AddRange(
+                new NotteFuori
+                {
+                    Id = Guid.NewGuid(), //la stringa presa online
+                    TipoViaggio = "Trasferta",
+                    Data = DateTime.Now,
+                    Commessa = "Lavoro",
+                    Dettagli = "Dettagli di Notti fuori",
+                }
+            );
+
+            context.SaveChanges();
+        }
+
+        
     }
 }
 

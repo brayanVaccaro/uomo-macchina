@@ -24,6 +24,8 @@ public static partial class MVC
     public static R4Mvc.FerieAreaClass Ferie => s_Ferie;
     static readonly R4Mvc.MainAreaClass s_Main = new R4Mvc.MainAreaClass();
     public static R4Mvc.MainAreaClass Main => s_Main;
+    static readonly R4Mvc.NottiFuoriAreaClass s_NottiFuori = new R4Mvc.NottiFuoriAreaClass();
+    public static R4Mvc.NottiFuoriAreaClass NottiFuori => s_NottiFuori;
     static readonly R4Mvc.PermessiAreaClass s_Permessi = new R4Mvc.PermessiAreaClass();
     public static R4Mvc.PermessiAreaClass Permessi => s_Permessi;
     static readonly R4Mvc.RendicontazioniAreaClass s_Rendicontazioni = new R4Mvc.RendicontazioniAreaClass();
@@ -97,6 +99,13 @@ namespace R4Mvc
     {
         public readonly string Name = "Main";
         public readonly UomoMacchina.Areas.Main.MainController Main = new UomoMacchina.Areas.Main.R4MVC_MainController();
+    }
+
+    [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+    public partial class NottiFuoriAreaClass
+    {
+        public readonly string Name = "NottiFuori";
+        public readonly UomoMacchina.Areas.NottiFuori.Controllers.NottiFuoriController NottiFuori = new UomoMacchina.Areas.NottiFuori.Controllers.R4MVC_NottiFuoriController();
     }
 
     [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]

@@ -1,0 +1,173 @@
+﻿@model UomoMacchina.Areas.NottiFuori.Data.NottiFuoriViewModel.NotteFuoriViewModel
+
+
+@* Edit di NotteFuori *@
+
+
+<div class="Testo d-flex flex-column bg-body-tertiary">
+
+    @* Campi da completare *@
+    <div class="container text-primary col-sm-8">
+        @if (Model.Id != null)
+        {
+
+            <form class="was-validated" method="post" action="@Url.Action(MVC.NottiFuori.NottiFuori.SaveEdit())">
+                <input id="Save-Edit" class="d-none" type="submit" />
+                <input id="Id" type="hidden" asp-for="Id" />
+
+                @* Qui ci sono i vari campi del form*@
+                <div>
+                    <!-- Tipo di viaggio -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="TipoViaggio" class="form-label">Tipo di viaggio:</label>
+                        <input type="text" class="form-control" asp-for="TipoViaggio" value="" required>
+                        <span asp-validation-for="TipoViaggio" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
+                        <span asp-validation-for="TipoViaggio" class="valid-feedback">Ora di inizio inserita</span>
+                    </div>
+
+                    <!-- Data  -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="Data" class="form-label">Data inizio:</label>
+                        <input type="date" class="form-control" asp-for="Data" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                        <span asp-validation-for="Data" class="text-danger"></span>
+                        <span asp-validation-for="Data" class="invalid-feedback">Non hai ancora inserito la data di inizio</span>
+                        <span asp-validation-for="Data" class="valid-feedback">Data di inizio inserita</span>
+                    </div>
+
+                    <!-- Commessa -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="Commessa" class="form-label">Commessa:</label>
+                        <input type="text" class="form-control" asp-for="Commessa" value="" required>
+                        <span asp-validation-for="Commessa" class="text-danger"></span>
+                        <span asp-validation-for="Commessa" class="invalid-feedback">Non hai ancora inserito la commessa</span>
+                        <span asp-validation-for="Commessa" class="valid-feedback">Commessa inserita</span>
+                    </div>
+
+
+                    <!-- Dettagli -->
+                    <div class="mb-3">
+                        <label asp-for="Dettagli" class="form-label">Dettagli:</label>
+                        <textarea class="form-control" asp-for="Dettagli" placeholder="Scrivere i dettagli" required></textarea>
+                        <span asp-validation-for="Dettagli" class="invalid-feedback">Non hai ancora scritto i dettagli</span>
+                        <span asp-validation-for="Dettagli" class="valid-feedback">Dettagli inserita</span>
+                    </div>
+
+                </div>
+
+            </form>
+        }
+        else
+        {
+            <!-- Compilazione e validazione della richiesta di permesso tramite pulsante -->
+            <form class="was-validated" method="post" action="@Url.Action(MVC.NottiFuori.NottiFuori.Edit())">
+                <input id="edit-form-submitter" class="d-none" type="submit" />
+
+                @* Qui ci sono i vari campi del form*@
+                <div>
+                    <!-- Tipo di viaggio -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="TipoViaggio" class="form-label">Tipo di viaggio:</label>
+                        <input type="text" class="form-control" asp-for="TipoViaggio" value="" required>
+                        <span asp-validation-for="TipoViaggio" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
+                        <span asp-validation-for="TipoViaggio" class="valid-feedback">Ora di inizio inserita</span>
+                    </div>
+
+                    <!-- Data  -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="Data" class="form-label">Data inizio:</label>
+                        <input type="date" class="form-control" asp-for="Data" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                        <span asp-validation-for="Data" class="text-danger"></span>
+                        <span asp-validation-for="Data" class="invalid-feedback">Non hai ancora inserito la data di inizio</span>
+                        <span asp-validation-for="Data" class="valid-feedback">Data di inizio inserita</span>
+                    </div>
+
+                    <!-- Commessa -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="Commessa" class="form-label">Commessa:</label>
+                        <input type="text" class="form-control" asp-for="Commessa" value="" required>
+                        <span asp-validation-for="Commessa" class="text-danger"></span>
+                        <span asp-validation-for="Commessa" class="invalid-feedback">Non hai ancora inserito la commessa</span>
+                        <span asp-validation-for="Commessa" class="valid-feedback">Commessa inserita</span>
+                    </div>
+
+
+                    <!-- Dettagli -->
+                    <div class="mb-3">
+                        <label asp-for="Dettagli" class="form-label">Dettagli:</label>
+                        <textarea class="form-control" asp-for="Dettagli" placeholder="Scrivere i dettagli" required></textarea>
+                        <span asp-validation-for="Dettagli" class="invalid-feedback">Non hai ancora scritto i dettagli</span>
+                        <span asp-validation-for="Dettagli" class="valid-feedback">Dettagli inserita</span>
+                    </div>
+
+                </div>
+
+            </form>
+
+        }
+
+        @* Sezione dei tasti*@
+        <div class="mb-3">
+
+            <!-- Tasto Anulla-->
+            <a class="Annulla btn btn-warning" href="@Url.Action(MVC.NottiFuori.NottiFuori.Index())">Annulla</a>
+
+            @if (Model.Id != null)
+            {
+
+                @* MODIFICA ELEMENTO *@
+                <form method="post" id="" action="@Url.Action(MVC.NottiFuori.NottiFuori.SaveEdit())">
+                    <input id="Id" type="hidden" asp-for="Id" />
+                    <input id="TipoViaggio" type="hidden" asp-for="TipoViaggio" />
+                    <input id="Data" type="hidden" asp-for="Data" />
+                    <input id="Commessa" type="hidden" asp-for="Commessa" />
+                    <input id="Dettagli" type="hidden" asp-for="Dettagli" />
+                </form>
+                <button class="Salva btn btn-primary" type="button" onclick="document.getElementById('Save-Edit').click()">Salva Modifiche</button>
+
+
+                @* ELIMINA ELEMENTO *@
+                <form hidden autocomplete="off" id="delete-form" method="post" action="@Url.Action(MVC.NottiFuori.NottiFuori.Delete())">
+                    <input type="hidden" asp-for="Id" />
+                </form>
+                <button class="Elimina btn btn-danger ms-2" title="Elimina NotteFuori" type="button" onclick="document.getElementById('delete-form').submit();">
+                    <i class="fa-solid "></i>&nbsp;Elimina
+                </button>
+            }
+            else
+            {
+                <!-- Tasto Invia -->
+                <button class="Invia btn btn-primary" type="button" onclick="document.getElementById('edit-form-submitter').click()">Invia</button>
+
+            }
+        </div>
+
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="module">
+
+        Vue.createApp({
+            data() {
+                return {
+                    message: 'Vue Funziona!',
+                    permesso: false,
+                    feria: false
+                }
+            },
+            methods: {
+                updateTipoRichiesta() {
+                    // Codice per disabilitare la validazione dei campi
+                    $("form :input[required]").prop("required", false);
+                }
+            }
+        }).mount('#pageId')
+    </script>
+}
+
+
+
+@section styles {
+    <link href="~/css/richieste.css" rel="stylesheet" />
+}
