@@ -129,20 +129,3 @@ namespace Core.Infrastructure
 }
 
 
-/*
-Permesso:
-Id
-Data --> la giornata in cui si richiede il permesso
-OraInizio
-OraFine
-Durata -> quante ore dura, calcolato in base a: OraInizio + OraFine
-Dettagli? --> eventuali motivazione, righe di testo a spiegare il motivo della richiesta di un permesso
-
-
-Feria:
-Id
-DataInizio
-DataFine
-Durata -> per quanti giorni di ferie effettuo una richiesta di ferie
-Dettagli? ->  eventuali motivazione, righe di testo a spiegare il motivo della richiesta di ferie
-*/

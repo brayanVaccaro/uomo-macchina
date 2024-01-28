@@ -16,6 +16,7 @@ namespace Core.Services
             DataGenerator.InitializeUsers(this);
             DataGenerator.InitializeVueCalEvent(this);
             DataGenerator.InitializePermesso(this);
+            DataGenerator.InitializeRendicontazione(this);
             DataGenerator.InitializeFeria(this);
         }
 

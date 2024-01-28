@@ -53,9 +53,9 @@ namespace Core.Services.Shared
         /// <returns></returns>
         ///
 
-        // La async Task<RendicontazioniDTO> fa una query sulla classe richiestaQuery (nella riga 10) 
+        // La async Task<RendicontazioniDTO> fa una query sulla classe richiestaQuery 
         // serve ad far ridare il valore della query
-        public async Task<RendicontazioniDTO> Query(RendicontazioneQuery qry)
+        public async Task<RendicontazioniDTO> GetAllRendicontazioni(RendicontazioneQuery qry)
         {
             var risultato = new RendicontazioniDTO();
             var prova = _dbContext.Rendicontazione.Select(x => x);
@@ -80,7 +80,7 @@ namespace Core.Services.Shared
             return risultato;
         }
 
-        public async Task<RendicontazioneDTO> QueryById(RendicontazioneQuery id)
+        public async Task<RendicontazioneDTO> GetRendicontazioneById(RendicontazioneQuery id)
         {
             var prova = await _dbContext.Rendicontazione
                 .Where(x => x.Id == id.Id)

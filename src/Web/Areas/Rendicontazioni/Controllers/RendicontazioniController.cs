@@ -10,6 +10,7 @@ using UomoMacchina.SignalR;
 using UomoMacchina.SignalR.Hubs.Events;
 using UomoMacchina.Areas.Rendicontazioni.Data;
 using static UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel;
+using Microsoft.Extensions.Options;
 
 namespace UomoMacchina.Areas.Rendicontazioni.Controllers
 {
@@ -17,7 +18,8 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
     public partial class RendicontazioniController : AuthenticatedBaseController
     {
         private readonly SharedService _sharedService;
-        //private readonly IPublishDomainEvents _publisher;
+        private static bool returnToIndex = false;
+        private readonly IPublishDomainEvents _publisher;
 
 
         public RendicontazioniController(SharedService sharedService)
@@ -31,7 +33,7 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
         [HttpGet]
         public async virtual Task<IActionResult> Index(RendicontazioniViewModel model)
         {   // schermata index  
-            var rendicontazioni = await _sharedService.Query(model.ToRendicontazioneQuery());
+            var rendicontazioni = await _sharedService.GetAllRendicontazioni(model.ToRendicontazioneQuery());
 
             model.SetRendicontazioni(rendicontazioni);
 
@@ -47,24 +49,36 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
             return RedirectToAction(Actions.Edit());
         }
 
-        // Costrutto della Query
+        // Costrutto della GetAllRendicontazioni
 
         //secondo metodo che viene chiamato, dopo New
         [HttpGet]
         public virtual async Task<IActionResult> Edit(Guid? id)
         {
+            var model = new RendicontazioneViewModel();
             if (id.HasValue)
             {
-                var model = new RendicontazioniViewModel();
-                return RedirectToAction(Actions.Index(model));
+                model.SetRendicontazione(await _sharedService.GetRendicontazioneById(new RendicontazioneQuery
+                {
+                    Id = id.Value,
+                }));
+                //qua il controllo
+                if(returnToIndex)
+                {
+                    var indexModel = new RendicontazioniViewModel();
+                    returnToIndex = false;
+                    return RedirectToAction(Actions.Index(indexModel));
+                }
+                return View(model);
+
             }
             else
             {
-                var model = new RendicontazioneViewModel();
                 return View(model);
             }
 
         }
+        
 
         // Metodo che mi mostra il pop-up di conferma della compilazione richiesta
         [HttpPost]
@@ -77,6 +91,8 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
                     model.Id = await _sharedService.Handle(model.ToAddOrUpdateRendicontazioneCommand());
 
                     Alerts.AddSuccess(this, "Rendicontazione effetuata con successo");
+
+                    returnToIndex = true;
 
                 }
                 catch (Exception ex)
@@ -93,29 +109,57 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
 
             return RedirectToAction(Actions.Edit(model.Id));
         }
+
+
+        [HttpPost]
+        public virtual async Task<IActionResult> SaveEdit(RendicontazioneViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Esegui l'effettivo salvataggio delle modifiche nel database
+                    await _sharedService.Handle(model.ToAddOrUpdateRendicontazioneCommand());
+
+                    Alerts.AddSuccess(this, "Modifiche salvate con successo");
+
+                    return RedirectToAction(Actions.Index());
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                }
+            }
+
+            // Se la validazione del modello fallisce, ritorna alla vista di modifica con gli errori
+            return View(model);
+        }
+
+
+
         [HttpPost]
         public virtual async Task<IActionResult> Delete(Guid id)
         {
-            //try
-            //{
-            //    var rendicontazione = await _sharedService.QueryById(new RendicontazioneQuery { Id = id });
+            try
+            {
+                var rendicontazione = await _sharedService.GetRendicontazioneById(new RendicontazioneQuery { Id = id });
 
-            //    if (rendicontazione != null)
-            //    {
-            //        // Effettua l'eliminazione della Rendicontazione
-            //        await _sharedService.Delete(id);
+                if (rendicontazione != null)
+                {
+                    // Effettua l'eliminazione della Rendicontazione
+                    await _sharedService.Delete(id);
 
-            //        Alerts.AddSuccess(this, "Rendicontazione cancellata con successo");
-            //    }
-            //    else
-            //    {
-            //        Alerts.AddError(this, "Rendicontazione non trovata");
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Alerts.AddError(this, $"Errore durante l'eliminazione della Rendicontazione: {ex.Message}");
-            //}
+                    Alerts.AddSuccess(this, "Rendicontazione cancellata con successo");
+                }
+                else
+                {
+                    Alerts.AddError(this, "Rendicontazione non trovata");
+                }
+            }
+            catch (Exception ex)
+            {
+                Alerts.AddError(this, $"Errore durante l'eliminazione della Rendicontazione: {ex.Message}");
+            }
 
             return RedirectToAction(Actions.Index());
         }

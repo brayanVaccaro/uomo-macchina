@@ -92,6 +92,13 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
 
         [NonAction]
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+        public virtual IActionResult SaveEdit()
+        {
+            return new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.SaveEdit);
+        }
+
+        [NonAction]
+        [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
         public virtual IActionResult Delete()
         {
             return new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Delete);
@@ -115,6 +122,7 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
             public readonly string Index = "Index";
             public readonly string New = "New";
             public readonly string Edit = "Edit";
+            public readonly string SaveEdit = "SaveEdit";
             public readonly string Delete = "Delete";
         }
 
@@ -124,6 +132,7 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
             public const string Index = "Index";
             public const string New = "New";
             public const string Edit = "Edit";
+            public const string SaveEdit = "SaveEdit";
             public const string Delete = "Delete";
         }
 
@@ -195,6 +204,17 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
             var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             EditOverride(callInfo, model);
+            return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
+        }
+
+        [NonAction]
+        partial void SaveEditOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel.RendicontazioneViewModel model);
+        [NonAction]
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> SaveEdit(UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel.RendicontazioneViewModel model)
+        {
+            var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.SaveEdit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            SaveEditOverride(callInfo, model);
             return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
         }
 

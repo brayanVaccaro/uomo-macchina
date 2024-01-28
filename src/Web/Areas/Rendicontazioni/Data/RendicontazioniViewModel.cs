@@ -34,7 +34,7 @@ namespace UomoMacchina.Areas.Rendicontazioni.Data
             public RendicontazioneViewModel() { }
 
             // La RendicontazioneViewModel prende i paramtri di RendicontazioneDTO quest'ultima
-            // si trova su Rendicontazione.Queries.cs rga 32
+            // si trova su Rendicontazione.Queries.cs 
             public RendicontazioneViewModel(RendicontazioneDTO rendicontazioneDTO)
             {
                 Id = rendicontazioneDTO.Id;
@@ -78,6 +78,11 @@ namespace UomoMacchina.Areas.Rendicontazioni.Data
                 };
             }
 
+            public string ToJson()
+            {
+                return JsonSerializer.ToJsonCamelCase(this);
+            }
+
         }
 
         //metodo per impostare le Rendicontazioni
@@ -88,7 +93,7 @@ namespace UomoMacchina.Areas.Rendicontazioni.Data
             TotalItems = rendicontazioniDTO.Count;
         }
 
-        // Metodo per utilizzare il filtro di RendicontazioneQuery sul file Rendicontazione.Queries.cs riga 10
+        // Metodo per utilizzare il filtro di RendicontazioneQuery sul file Rendicontazione.Queries.cs 
         public RendicontazioneQuery ToRendicontazioneQuery()
         {
             return new RendicontazioneQuery
@@ -98,22 +103,20 @@ namespace UomoMacchina.Areas.Rendicontazioni.Data
         }
 
 
-        public override IActionResult GetRoute()
-        {
-            throw new NotImplementedException();
-        }
-
         //public override IActionResult GetRoute()
         //{
         //    throw new NotImplementedException();
         //}
 
 
-        // Metodo override IActionResult di cui la rotta presa è su Startup.cs riga 116
-        //public override IActionResult GetRoute() => MVC.Rendicontazioni.Rendicontazioni.Index(this).GetAwaiter().GetResult();
+        // Metodo override IActionResult di cui la rotta presa è su Startup.cs 
+        public override IActionResult GetRoute() => MVC.Rendicontazioni.Rendicontazioni.Index(this).GetAwaiter().GetResult();
 
 
-
+        public string ToJson()
+        {
+            return JsonSerializer.ToJsonCamelCase(this);
+        }
 
     }
 }
