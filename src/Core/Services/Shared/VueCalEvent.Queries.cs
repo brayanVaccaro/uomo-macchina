@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace Core.Services.Shared
 {
-    public class VueCalEventQuery
+    public class EventoQuery
     {
         public Guid IdCurrentUser { get; set; }
         public string Filter { get; set; }
     }
 
-    public class VueCalEventsDTO
+    public class EventiDTO
     {
-        public IEnumerable<VueCalEventDTO> Events { get; set; }
+        public IEnumerable<EventoDTO> Eventi { get; set; }
         public int Count { get; set; }
 
     }
 
-    public class VueCalEventDTO
+    public class EventoDTO
     {
         public Guid Id { get; set; }
         public String StartDate { get; set; }  //da usare in locale
@@ -40,17 +40,17 @@ namespace Core.Services.Shared
     public partial class SharedService
     {
         /// <summary>
-        /// Returns events
+        /// Ritorna gli eventi
         /// </summary>
         /// <param name="qry"></param>
         /// <returns></returns>
-        public async Task<VueCalEventsDTO> Query(VueCalEventQuery qry)
+        public async Task<EventiDTO> GetAllEvents()
         {
 
-            var risultato = new VueCalEventsDTO();
+            var risultato = new EventiDTO();
             try
             {
-                risultato.Events = await _dbContext.VueCalEvent.Select(x => new VueCalEventDTO
+                risultato.Eventi = await _dbContext.VueCalEvent.Select(x => new EventoDTO
                 {
                     Id = x.Id,
 
@@ -60,7 +60,7 @@ namespace Core.Services.Shared
                     EndTime = x.End.ToString("HH:mm"), //da usare in locale
                     Title = x.Title,
                     Content = x.Content,
-                    CssClass = x.CssClass,
+                    CssClass = x.Class,
                     Background = x.Background,
                     Split = x.Split,
                     AllDay = x.AllDay,
