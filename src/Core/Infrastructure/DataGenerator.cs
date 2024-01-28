@@ -66,6 +66,30 @@ namespace Core.Infrastructure
             context.SaveChanges();
         }
 
+        public static void InitializeRendicontazione(TemplateDbContext context)
+        {
+            if (context.Rendicontazione.Any()) { return; }
+
+            context.Rendicontazione.AddRange(
+                new Rendicontazione
+                {
+                    Id = Guid.NewGuid(),
+                    Ore = 7,
+                    Data = DateTime.Now,
+                    Commessa = " Matteo Verdi",
+                    Dettagli = "Dettagli di Rendicontazione 1",
+                },
+                new Rendicontazione
+                {
+                    Id = Guid.NewGuid(),
+                    Ore = 7,
+                    Data = DateTime.Now,
+                    Commessa = " DA ELIMINARE",
+                    Dettagli = "Dettagli di Rendicontazione 2",
+                }
+                );
+            context.SaveChanges();
+        }
         public static void InitializePermesso(TemplateDbContext context)
         {
             if (context.Permesso.Any()) { return; }
@@ -105,20 +129,3 @@ namespace Core.Infrastructure
 }
 
 
-/*
-Permesso:
-Id
-Data --> la giornata in cui si richiede il permesso
-OraInizio
-OraFine
-Durata -> quante ore dura, calcolato in base a: OraInizio + OraFine
-Dettagli? --> eventuali motivazione, righe di testo a spiegare il motivo della richiesta di un permesso
-
-
-Feria:
-Id
-DataInizio
-DataFine
-Durata -> per quanti giorni di ferie effettuo una richiesta di ferie
-Dettagli? ->  eventuali motivazione, righe di testo a spiegare il motivo della richiesta di ferie
-*/

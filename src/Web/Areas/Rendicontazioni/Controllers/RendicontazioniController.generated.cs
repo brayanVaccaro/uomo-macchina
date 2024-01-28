@@ -15,12 +15,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Routing;
 using R4Mvc;
 
-namespace UomoMacchina.Areas.Example.Users
+namespace UomoMacchina.Areas.Rendicontazioni.Controllers
 {
-    public partial class UsersController
+    public partial class RendicontazioniController
     {
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
-        protected UsersController(Dummy d)
+        protected RendicontazioniController(Dummy d)
         {
         }
 
@@ -92,19 +92,26 @@ namespace UomoMacchina.Areas.Example.Users
 
         [NonAction]
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+        public virtual IActionResult SaveEdit()
+        {
+            return new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.SaveEdit);
+        }
+
+        [NonAction]
+        [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
         public virtual IActionResult Delete()
         {
             return new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Delete);
         }
 
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
-        public UsersController Actions => MVC.Example.Users;
+        public RendicontazioniController Actions => MVC.Rendicontazioni.Rendicontazioni;
         [GeneratedCode("R4Mvc", "1.0")]
-        public readonly string Area = "Example";
+        public readonly string Area = "Rendicontazioni";
         [GeneratedCode("R4Mvc", "1.0")]
-        public readonly string Name = "Users";
+        public readonly string Name = "Rendicontazioni";
         [GeneratedCode("R4Mvc", "1.0")]
-        public const string NameConst = "Users";
+        public const string NameConst = "Rendicontazioni";
         [GeneratedCode("R4Mvc", "1.0")]
         static readonly ActionNamesClass s_ActionNames = new ActionNamesClass();
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
@@ -113,9 +120,9 @@ namespace UomoMacchina.Areas.Example.Users
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
-            public readonly string Sidebar = "Sidebar";
             public readonly string New = "New";
             public readonly string Edit = "Edit";
+            public readonly string SaveEdit = "SaveEdit";
             public readonly string Delete = "Delete";
         }
 
@@ -123,9 +130,9 @@ namespace UomoMacchina.Areas.Example.Users
         public class ActionNameConstants
         {
             public const string Index = "Index";
-            public const string Sidebar = "Sidebar";
             public const string New = "New";
             public const string Edit = "Edit";
+            public const string SaveEdit = "SaveEdit";
             public const string Delete = "Delete";
         }
 
@@ -136,7 +143,12 @@ namespace UomoMacchina.Areas.Example.Users
             public _ViewNamesClass ViewNames => s_ViewNames;
             public class _ViewNamesClass
             {
+                public readonly string Edit = "Edit";
+                public readonly string Index = "Index";
             }
+
+            public readonly string Edit = "~/Areas/Rendicontazioni/Views/Rendicontazioni/Edit.cshtml";
+            public readonly string Index = "~/Areas/Rendicontazioni/Views/Rendicontazioni/Index.cshtml";
         }
 
         [GeneratedCode("R4Mvc", "1.0")]
@@ -146,30 +158,20 @@ namespace UomoMacchina.Areas.Example.Users
     }
 
     [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
-    public partial class R4MVC_UsersController : UomoMacchina.Areas.Example.Users.UsersController
+    public partial class R4MVC_RendicontazioniController : UomoMacchina.Areas.Rendicontazioni.Controllers.RendicontazioniController
     {
-        public R4MVC_UsersController(): base(Dummy.Instance)
+        public R4MVC_RendicontazioniController(): base(Dummy.Instance)
         {
         }
 
         [NonAction]
-        partial void IndexOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, UomoMacchina.Areas.Example.Users.IndexViewModel model);
+        partial void IndexOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel model);
         [NonAction]
-        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> Index(UomoMacchina.Areas.Example.Users.IndexViewModel model)
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> Index(UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel model)
         {
             var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             IndexOverride(callInfo, model);
-            return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
-        }
-
-        [NonAction]
-        partial void SidebarOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo);
-        [NonAction]
-        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> Sidebar()
-        {
-            var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Sidebar);
-            SidebarOverride(callInfo);
             return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
         }
 
@@ -195,13 +197,24 @@ namespace UomoMacchina.Areas.Example.Users
         }
 
         [NonAction]
-        partial void EditOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, UomoMacchina.Areas.Example.Users.EditViewModel model);
+        partial void EditOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel.RendicontazioneViewModel model);
         [NonAction]
-        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> Edit(UomoMacchina.Areas.Example.Users.EditViewModel model)
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> Edit(UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel.RendicontazioneViewModel model)
         {
             var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             EditOverride(callInfo, model);
+            return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
+        }
+
+        [NonAction]
+        partial void SaveEditOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel.RendicontazioneViewModel model);
+        [NonAction]
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> SaveEdit(UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel.RendicontazioneViewModel model)
+        {
+            var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.SaveEdit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            SaveEditOverride(callInfo, model);
             return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
         }
 

@@ -63,11 +63,24 @@
     </script>
     
     <script src="~/js/bundle-vue.js" type="" asp-append-version="true"></script>
-   
     <script src="https://unpkg.com/vue-cal@4.8.1/dist/vue-cal.iife.js" asp-append-version="true"></script>
     <script type="text/javascript">
-        
-
+         var Vue
+         var vuecal
     </script>
+    
+
+    <script type="module">
+
+        // Vue.createApp({
+        //     data() {
+        //         return {
+        //             message: 'Hello Vue!'
+        //         }
+        //     },
+            
+        // }).mount('#pageId')
+    </script>
+
     @RenderSection("scripts", false)
 }

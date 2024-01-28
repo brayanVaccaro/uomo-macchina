@@ -36,6 +36,12 @@ namespace UomoMacchina.Areas.Example.Users
         }
         // p1 crea utente 
         [HttpGet]
+        public virtual async Task<IActionResult> Sidebar()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public virtual IActionResult New()
         {  // s3
             return RedirectToAction(Actions.Edit());

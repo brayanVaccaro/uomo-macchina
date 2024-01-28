@@ -1,0 +1,57 @@
+﻿.Prototipo {
+  display: none !important;
+}
+
+/*.col {
+    margin-right:50%
+}*/
+.vuecal__menu {
+  /*display: none*/
+}
+
+.Calendario {
+  pointer-events: none;
+}
+
+.Calendario .vuecal__flex vuecal .vuecal--month-view {
+  pointer-events: none;
+}
+
+.progress-stacked {
+  width: 100%;
+}
+
+vuecal__flex weekday-label {
+  flex-direction: column;
+}
+
+.vuecal__body {
+  display: none !important;
+}
+
+.vuecal__title-bar {
+  /*margin-right: 460px;*/
+}
+
+.vuecal__menu {
+  display: none !important;
+}
+
+.vuecal__flex .vuecal__weekdays-headings {
+  flex-direction: column;
+  /*width: 283px;*/
+  /*text-align: initial;*/
+}
+
+.vuecal__flex .vuecal__weekdays-headings .clickable {
+  width: 100%;
+}
+
+.vuecal--month-view .vuecal__heading .vuecal--week-view .vuecal__heading .vuecal--day-view .vuecal__heading {
+  width: 100%;
+}
+
+/*vuecal__flex vuecal__heading clickable*/
+.vuecal__flex .vuecal__weekdays-headings {
+  padding-left: 0;
+}

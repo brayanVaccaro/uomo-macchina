@@ -113,6 +113,11 @@ namespace UomoMacchina
                 // ROUTING PER HUB
                 endpoints.MapHub<TemplateHub>("/templateHub");
 
+                // Route per le Rendicontazione, Elimina, Salvataggio dati
+                endpoints.MapAreaControllerRoute("TestR", "Rendicontazioni", "Rendicontazioni/{controller=Rendicontazioni}/{action=Index}");
+                endpoints.MapAreaControllerRoute("Elimina Rendicontazioni", "Rendicontazioni", "Rendicontazioni/Delete/{controller=Rendicontazioni}/{action=Delete}/{id?}");
+                endpoints.MapAreaControllerRoute("Modifica Rendicontazioni", "Rendicontazioni", "Rendicontazioni/SaveEdit/{controller=Rendicontazioni}/{action=SaveEdit}/{id?}");
+                
                 // Route per le Permessi
                 endpoints.MapAreaControllerRoute("TestP", "Permessi", "Permessi/{controller=Permessi}/{action=Index}");
 
@@ -120,8 +125,9 @@ namespace UomoMacchina
                 endpoints.MapAreaControllerRoute("TestF", "Ferie", "Ferie/{controller=Ferie}/{action=Index}");
 
                 endpoints.MapAreaControllerRoute("Example", "Example", "Example/{controller=Users}/{action=Index}/{id?}");
-                endpoints.MapAreaControllerRoute("prova", "Main", "Main/{controller=Main}/{action=Index}/{id?}");
-                endpoints.MapAreaControllerRoute("getData", "Main", "Main/{controller=Main}/{action=GetData}");
+                endpoints.MapAreaControllerRoute("Main", "Main", "Main/{controller=Main}/{action=Main}/{id?}");
+                endpoints.MapAreaControllerRoute("SingleDay", "Main", "Main/SingleDay/{controller=Main}/{action=SingleDay}");
+                endpoints.MapAreaControllerRoute("getData", "Main", "Main/{controller=Main}/{action=GetData}"); //endpoint per recuperare i dati
                 endpoints.MapControllerRoute("default", "{controller=Login}/{action=Login}");
             });
         }

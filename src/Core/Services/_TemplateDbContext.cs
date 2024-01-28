@@ -16,11 +16,13 @@ namespace Core.Services
             DataGenerator.InitializeUsers(this);
             DataGenerator.InitializeVueCalEvent(this);
             DataGenerator.InitializePermesso(this);
+            DataGenerator.InitializeRendicontazione(this);
             DataGenerator.InitializeFeria(this);
         }
 
         public DbSet<User> Users { get; set; }
         public DbSet<VueCalEvent> VueCalEvent { get; set; }
+        public DbSet<Rendicontazione> Rendicontazione { get; set; }
         public DbSet<Permesso> Permesso { get; set; }
         public DbSet<Feria> Feria { get; set; }
 
