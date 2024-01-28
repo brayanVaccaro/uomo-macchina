@@ -59,7 +59,7 @@ namespace Core.Infrastructure
                     Id = Guid.NewGuid(), //la stringa presa online
                     Start = new DateTime(2024, 1, 20, 9, 0, 0),
                     End = new DateTime(2024, 1, 20, 12, 0, 0),
-                    CssClass = "rendicontazione"
+                    Class = "rendicontazione"
 
                 });
 

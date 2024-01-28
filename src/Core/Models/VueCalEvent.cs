@@ -14,7 +14,7 @@ namespace Core.Models
         public string Title { get; set; } //Optional
         public string Content { get; set; } //Optional
 
-        public string CssClass { get; set; } // Optional - space-separated css classes.
+        public string Class { get; set; } // Optional - space-separated css classes.
         public bool? Background { get; set; } // Optional. (Event type not CSS property)
         public string Split { get; set; } // Optional.
         public bool? AllDay { get; set; }// Optional.
