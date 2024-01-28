@@ -1,0 +1,17 @@
+﻿@{
+
+}
+    @model UomoMacchina.Areas.Main.Data.MainViewModel
+@* è in questo file che visualizzo il resoconto delle Ferie, Permessi, Notti Fuori. Per il giorno selezionato *@
+<p>questo è SingleDay</p>
+
+<p>{{message}}</p>
+
+<div id="ferie" class="">
+    <partial name="@MVC.Ferie.Ferie.Views.Index" model="@Model.Ferie" />
+</div>
+<div id="permessi" class="">
+    <partial name="@MVC.Permessi.Permessi.Views.Index" model="Model.Permessi" />
+</div>
+
+

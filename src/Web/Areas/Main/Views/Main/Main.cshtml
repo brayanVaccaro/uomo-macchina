@@ -1,9 +1,13 @@
-﻿@* @page
-@using Web.Areas.Home.Home *@
-@inject IHtmlLocalizer<UomoMacchina.Areas.Main.Data.MainViewModel> ModelLocalizer
+﻿@inject IHtmlLocalizer<UomoMacchina.Areas.Main.Data.MainViewModel> ModelLocalizer
 @model UomoMacchina.Areas.Main.Data.MainViewModel
+
+
 @{
     ViewData["Title"] = "Home";
+    var mainModel = @Html.Raw(Model.ToJson());
+    var feriaModel = @Html.Raw(Model.Ferie.ToJson());
+    var eventModel = Html.Raw(Model.Eventi.ToJson());
+    // Console.WriteLine(typeof eventModel);
 }
 @section pageTitle {
     <nav class="navbar navbar-expand navbar-light flex-wrap onit-page-title">
@@ -16,24 +20,73 @@
 @section pageSubtitle {
 
 }
-<div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 p-0">
-                <vue-cal xsmall active-view="week" :disable-views="['years', 'year', 'month']" :events="event" />
-            </div>
+@* <p>@eventModel</p> *@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            @await Html.PartialAsync("~/Views/Shared/_SideBar.cshtml", @Model.Settimana)
+            @* <partial name="@MVC.Shared.Views._SideBar" model="Model" /> *@
+        </div>
+        @* Calendario Settimanale *@
+        <div :class="customClass">
+            @* <h1 v-if="activeView == 'week'">ho scelto di visualizzare la setttimana </h1> *@
+            @* <h1 v-if="activeView == 'day'">ho scelto di visualizzare il giorno {{selectedDate}}</h1> *@
+            <vue-cal 
+                     v-model:active-view="activeView"
+                     v-model:selected-date="selectedDate"
+                     locale="it"
+                     :on-event-click="onEventClick"
+                     :disable-views="['years', 'year', 'month', '', '']"
+                     :events="event"
+                     :time-from="8 * 60"
+                     :time-to="18 * 60" />
+        </div>
+
+        <div v-if="showSingleDay" id="" class="col">
+            <partial name="@MVC.Main.Main.Views._SingleDay" model="Model" />
         </div>
     </div>
-    @* <div id="prova"></div> *@
 </div>
+
+@*
+VISUALIZZAZIONE
+1) all'avvio, quindi quando si entra in main, si devono visualizzare la sidebar (calendario 1) nel calendario 2 e gli eventi della settimana (la visualizzazione di questo calendario è impostata su week). Il SingleDay è all'inizio nascosto tramite v-if
+
+2)  nel calendario 1, al click sul giorno della settimana:
+        1. nel calendario 2 si devono vedere gli eventi del giorno cliccato --> nel calendario 2 la visualizzazione deve passare da week a day
+        2. SingleDay viene mostrato (true il parametro di v-if) sulla destra del calendario 2. SingleDay deve mostrare tutti gli eventi del giorno scelto in formato tabellare.
+
+3) al click su un singolo evento, nel calendario 2, verrà mostrato nel SingleDay solo info relative al singolo evento cliccato
+
+
+INSERIMENTO DATI:
+Ci devono essere due bottoni: Aggiungi, Modifica, ELimina. In Agiungi e Modifica ci sarà un bottone Annulla (per annullare la creazione o la modifica), quando si clicca Elimina un bottone di conferma(sicuro di voler eliminare?)
+
+al click su Aggiungi: si apre il form, seleziono cosa voglio aggiungere, vengono disabilitati/abilitati campi da inserire sulla base della scelta, si preme invia, si salva nel db, si ritorna al Main
+
+al click su Modifica: si apre il form con i campi preimpostati sulla base della scelta fatta, si possono modificare i campi che escono a schermo, si conferma la modifica, si aggiorna ciò che è stato modificato nel db, si ritorna al Main
+
+al click su Elimina: si elimina ciò che si è scelto di eliminare
+*@
+
 @section styles {
     <link href="~/css/bundle-vue-cal.css" asp-append-version="true" rel="stylesheet" />
+    <link href="~/css/main.css" asp-append-version="true" rel="stylesheet" />
+    <link href="~/css/richieste.css" rel="stylesheet" />
+    <link href="~/css/sidebar.css" rel="stylesheet" />
+
+    @* <link href="~/css/sidebar.css" rel="stylesheet" /> *@
 }
 
 @section scripts {
     <script src="~/js/main.js" type="module" asp-append-version="true"></script>
+    <script src="~/js/site.js" type="module" asp-append-version="true"></script>
+    <script>
+        // var Model
+        var mainModel = @Html.Raw(Model.ToJson())
+        const eventModel = @Html.Raw(Model.Eventi.ToJson());
 
-    <script type="text/javascript">
-        
+        // var eventiGlobal = @Html.Raw(Model.Eventi.ToJson()); //salvo il model in una variabile che posso usare nel main.ts
     </script>
 }

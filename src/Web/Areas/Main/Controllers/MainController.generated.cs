@@ -85,6 +85,13 @@ namespace UomoMacchina.Areas.Main
 
         [NonAction]
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+        public virtual IActionResult Delete()
+        {
+            return new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Delete);
+        }
+
+        [NonAction]
+        [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
         public virtual IActionResult GetData()
         {
             return new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.GetData);
@@ -106,6 +113,7 @@ namespace UomoMacchina.Areas.Main
         public class ActionNamesClass
         {
             public readonly string Main = "Main";
+            public readonly string Delete = "Delete";
             public readonly string GetData = "GetData";
         }
 
@@ -113,6 +121,7 @@ namespace UomoMacchina.Areas.Main
         public class ActionNameConstants
         {
             public const string Main = "Main";
+            public const string Delete = "Delete";
             public const string GetData = "GetData";
         }
 
@@ -124,9 +133,11 @@ namespace UomoMacchina.Areas.Main
             public class _ViewNamesClass
             {
                 public readonly string Main = "Main";
+                public readonly string _SingleDay = "_SingleDay";
             }
 
             public readonly string Main = "~/Areas/Main/Views/Main/Main.cshtml";
+            public readonly string _SingleDay = "~/Areas/Main/Views/Main/_SingleDay.cshtml";
         }
 
         [GeneratedCode("R4Mvc", "1.0")]
@@ -154,13 +165,24 @@ namespace UomoMacchina.Areas.Main
         }
 
         [NonAction]
-        partial void GetDataOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, UomoMacchina.Areas.Main.Data.MainViewModel model);
+        partial void DeleteOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, System.Guid id);
         [NonAction]
-        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> GetData(UomoMacchina.Areas.Main.Data.MainViewModel model)
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> Delete(System.Guid id)
+        {
+            var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Delete);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            DeleteOverride(callInfo, id);
+            return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
+        }
+
+        [NonAction]
+        partial void GetDataOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, string dataScelta);
+        [NonAction]
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> GetData(string dataScelta)
         {
             var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.GetData);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            GetDataOverride(callInfo, model);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "dataScelta", dataScelta);
+            GetDataOverride(callInfo, dataScelta);
             return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
         }
     }

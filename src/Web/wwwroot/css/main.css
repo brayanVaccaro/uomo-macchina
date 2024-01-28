@@ -7,26 +7,38 @@
   display: none;
 }
 
-/*.vuecal__body {
-    display: none;
-}*/
 .vuecal__event {
-  /*display: flex;*/
-  /*flex-direction: column;*/
+  display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
 }
 
 /*
-.vuecal__event-time {*/
-/*background-color: red;*/
-/*margin: 3px 0;
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 1.2;
-}
-.vuecal__event-time {
+    LEGGENDA COLORI
+colore verde = Rendicontazione
+colore rosso = ERRORE
+colore arancio = Permesso
+colore viola= Trasferta
+colore blu straordinario
+colore grigio = ferie, giorno feriale
 
-}*/
+*/
 .rendicontazione {
   background: #00ff00;
+}
+
+.permesso {
+  background: #ff8d00;
+}
+
+.trasferta {
+  background: #9700ff;
+}
+
+.straordinario {
+  background: #2552ff;
+}
+
+.libero {
+  background: #808080;
 }

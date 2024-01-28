@@ -5,40 +5,62 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using UomoMacchina.Areas.Example.Users;
+using UomoMacchina.Areas.Ferie.Data;
+using UomoMacchina.Areas.Main.Data.Shared;
+using UomoMacchina.Areas.Permessi.Data;
 using UomoMacchina.Infrastructure;
+using static UomoMacchina.Areas.Ferie.Data.FerieViewModel;
+using static UomoMacchina.Areas.Main.Data.Shared.VueCalEventsViewModel;
+using static UomoMacchina.Areas.Permessi.Data.PermessiViewModel;
 
 namespace UomoMacchina.Areas.Main.Data
 {
+
     public class MainViewModel : PagingViewModel
     {
+
         public MainViewModel()
         {
-            OrderBy = nameof(VueCalEventViewModel.Id);
-            OrderByDescending = false;
-            VueCalEvents = Array.Empty<VueCalEventViewModel>();
+            Eventi = new VueCalEventsViewModel();
+            Ferie = new FerieViewModel();
+            Permessi = new PermessiViewModel();
         }
-        [Display(Name = "Cerca")]
-        public string Filtro { get; set; }
-
-        public VueCalEventViewModel[] VueCalEvents { get; set; }
         
+        public SettimanaViewModel Settimana { get; set; }
+
+        public VueCalEventsViewModel Eventi { get; set; }
+
+        public FerieViewModel Ferie { get; set; }
+
+        public PermessiViewModel Permessi { get; set; }
+
         public override IActionResult GetRoute() => MVC.Main.Main.Main(this).GetAwaiter().GetResult();
-
-
-
-        internal void SetVueCalEvents(VueCalEventsDTO vueCalEvenstDTO)
+       
+        //Inizializzo le settimane
+        public void SetSettimana(SettimanaViewModel settimane)
         {
-            VueCalEvents = vueCalEvenstDTO.Events.Select(x => new VueCalEventViewModel(x)).ToArray();
-            TotalItems = vueCalEvenstDTO.Count;
+            Settimana = settimane;
         }
-        public VueCalEventQuery ToVueCalEventQuery()
+
+        //metodo per trasformare un oggetto FeriaViewModel in un VueCalEventViewModel
+        internal EventoDTO ToVueCalEvent(FeriaViewModel feria)
         {
-            return new VueCalEventQuery
+            return new EventoDTO
             {
-                Filter = this.Filtro
+                StartDate = feria.DataInizio.ToString("d"),
+                StartTime = feria.DataInizio.ToString("d"),
+                EndDate = feria.DataFine.ToString("d"),
+                EndTime = feria.DataFine.ToString("d"),
+                Title = feria.Dettagli,
+                Content = feria.Dettagli,
+                CssClass = feria.Class,
+                AllDay = true,
+                Background = false,
+                Deletable = true,
+                Resizable = true,
             };
         }
+
 
         public string ToJson()
         {
@@ -46,18 +68,17 @@ namespace UomoMacchina.Areas.Main.Data
         }
 
     }
-    public class VueCalEventViewModel
+
+    public class SettimanaViewModel
     {
-        public VueCalEventViewModel(VueCalEventDTO vueCalEventDTO)
+
+        public List<Settimana> Settimane { get; set; }
+
+        public class Settimana
         {
-            Id = vueCalEventDTO.Id;
-            Start = vueCalEventDTO.Start;
-            End = vueCalEventDTO.End;
-
+            public string Nome { get; set; }
+            public List<DateTime> Giorni { get; set; } // Ogni settimana ha la sua lista di giorni
         }
-
-        public Guid Id { get; set; }
-        public String Start { get; set; } //formato YYYY/MM/DD hh:mm
-        public String End { get; set; }
     }
+
 }

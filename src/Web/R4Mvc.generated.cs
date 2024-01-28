@@ -122,6 +122,12 @@ public static partial class Links
         public static readonly string bundle_vue_cal_min_css = Url("bundle-vue-cal.min.css");
         public static readonly string bundle_vue_multiselect_css = Url("bundle-vue-multiselect.css");
         public static readonly string bundle_vue_multiselect_min_css = Url("bundle-vue-multiselect.min.css");
+        public static readonly string main_css = Url("main.css");
+        public static readonly string main_min_css = Url("main.min.css");
+        public static readonly string main_scss = Url("main.scss");
+        public static readonly string richieste_css = Url("richieste.css");
+        public static readonly string richieste_min_css = Url("richieste.min.css");
+        public static readonly string richieste_scss = Url("richieste.scss");
         public static readonly string sidebar_css = Url("sidebar.css");
         public static readonly string sidebar_min_css = Url("sidebar.min.css");
         public static readonly string sidebar_scss = Url("sidebar.scss");
