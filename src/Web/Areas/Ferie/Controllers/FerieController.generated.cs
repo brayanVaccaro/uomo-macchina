@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Routing;
 using R4Mvc;
 
-namespace UomoMacchina.Areas.Ferie
+namespace UomoMacchina.Areas.Ferie.Controllers
 {
     public partial class FerieController
     {
@@ -90,6 +90,20 @@ namespace UomoMacchina.Areas.Ferie
             return new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Edit);
         }
 
+        [NonAction]
+        [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+        public virtual IActionResult SaveEdit()
+        {
+            return new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.SaveEdit);
+        }
+
+        [NonAction]
+        [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+        public virtual IActionResult Delete()
+        {
+            return new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Delete);
+        }
+
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
         public FerieController Actions => MVC.Ferie.Ferie;
         [GeneratedCode("R4Mvc", "1.0")]
@@ -108,6 +122,8 @@ namespace UomoMacchina.Areas.Ferie
             public readonly string Index = "Index";
             public readonly string New = "New";
             public readonly string Edit = "Edit";
+            public readonly string SaveEdit = "SaveEdit";
+            public readonly string Delete = "Delete";
         }
 
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
@@ -116,6 +132,8 @@ namespace UomoMacchina.Areas.Ferie
             public const string Index = "Index";
             public const string New = "New";
             public const string Edit = "Edit";
+            public const string SaveEdit = "SaveEdit";
+            public const string Delete = "Delete";
         }
 
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
@@ -140,7 +158,7 @@ namespace UomoMacchina.Areas.Ferie
     }
 
     [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
-    public partial class R4MVC_FerieController : UomoMacchina.Areas.Ferie.FerieController
+    public partial class R4MVC_FerieController : UomoMacchina.Areas.Ferie.Controllers.FerieController
     {
         public R4MVC_FerieController(): base(Dummy.Instance)
         {
@@ -186,6 +204,28 @@ namespace UomoMacchina.Areas.Ferie
             var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             EditOverride(callInfo, model);
+            return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
+        }
+
+        [NonAction]
+        partial void SaveEditOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, UomoMacchina.Areas.Ferie.Data.FerieViewModel.FeriaViewModel model);
+        [NonAction]
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> SaveEdit(UomoMacchina.Areas.Ferie.Data.FerieViewModel.FeriaViewModel model)
+        {
+            var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.SaveEdit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            SaveEditOverride(callInfo, model);
+            return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
+        }
+
+        [NonAction]
+        partial void DeleteOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, System.Guid id);
+        [NonAction]
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> Delete(System.Guid id)
+        {
+            var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Delete);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            DeleteOverride(callInfo, id);
             return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
         }
     }

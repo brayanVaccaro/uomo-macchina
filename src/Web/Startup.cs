@@ -120,9 +120,15 @@ namespace UomoMacchina
                 
                 // Route per le Permessi
                 endpoints.MapAreaControllerRoute("TestP", "Permessi", "Permessi/{controller=Permessi}/{action=Index}");
+                endpoints.MapAreaControllerRoute("Elimina Permessi", "Permessi", "Permessi/Delete/{controller=Permessi}/{action=Delete}/{id?}");
+                endpoints.MapAreaControllerRoute("Modifica Permessi", "Permessi", "Permessi/SaveEdit/{controller=Permessi}/{action=SaveEdit}/{id?}");
+
 
                 // Route per le Ferie
                 endpoints.MapAreaControllerRoute("TestF", "Ferie", "Ferie/{controller=Ferie}/{action=Index}");
+                endpoints.MapAreaControllerRoute("Elimina Ferie", "Ferie", "Ferie/Delete/{controller=Ferie}/{action=Delete}/{id?}");
+                endpoints.MapAreaControllerRoute("Modifica Ferie", "Ferie", "Ferie/SaveEdit/{controller=Ferie}/{action=SaveEdit}/{id?}");
+
 
                 endpoints.MapAreaControllerRoute("Example", "Example", "Example/{controller=Users}/{action=Index}/{id?}");
                 endpoints.MapAreaControllerRoute("Main", "Main", "Main/{controller=Main}/{action=Main}/{id?}");

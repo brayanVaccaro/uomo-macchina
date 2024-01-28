@@ -46,7 +46,7 @@ namespace UomoMacchina.Areas.Ferie.Data
 
             }
 
-            public Guid Id { get; set; }
+            public Guid? Id { get; set; }
             public DateTime DataInizio { get; set; }
             public DateTime DataFine { get; set; }
             public int Durata { get; set; }
@@ -79,6 +79,10 @@ namespace UomoMacchina.Areas.Ferie.Data
                 };
             }
         }
+            public string ToJson()
+            {
+                return JsonSerializer.ToJsonCamelCase(this);
+            }
 
         //metodo per impostare le Ferie
         internal void SetFerie(FerieDTO ferieDTO)
@@ -88,7 +92,7 @@ namespace UomoMacchina.Areas.Ferie.Data
             TotalItems = ferieDTO.Count;
         }
 
-        // Metodo per utilizzare il filtro di FeriaQuery sul file Feria.Queries.cs riga 10
+        // Metodo per utilizzare il filtro di FeriaQuery sul file Feria.Queries.cs 
         public FeriaQuery ToFeriaQuery()
         {
             return new FeriaQuery
@@ -97,23 +101,13 @@ namespace UomoMacchina.Areas.Ferie.Data
             };
         }
 
-        public override IActionResult GetRoute()
-        {
-            throw new NotImplementedException();
-        }
-
-        //public override IActionResult GetRoute()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-
-        // Metodo override IActionResult di cui la rotta presa è su Startup.cs riga 116
-        //public override IActionResult GetRoute() => MVC.Ferie.Ferie.Index(this).GetAwaiter().GetResult();
-
+        public override IActionResult GetRoute() => MVC.Ferie.Ferie.Index(this).GetAwaiter().GetResult();
 
 
     }
+        // Metodo override IActionResult di cui la rotta presa è su Startup.cs riga 116
+        //public override IActionResult GetRoute() => MVC.Ferie.Ferie.Index(this).GetAwaiter().GetResult();
+
 }
 
 

@@ -8,12 +8,14 @@ using UomoMacchina.Infrastructure;
 using UomoMacchina.SignalR;
 using static UomoMacchina.Areas.Permessi.Data.PermessiViewModel;
 
+
 namespace UomoMacchina.Areas.Permessi
 {
     [Area("Permessi")]
     public partial class PermessiController : AuthenticatedBaseController
     {
         private readonly SharedService _sharedService;
+        private static bool returnToIndex = false;
         private readonly IPublishDomainEvents _publisher;
 
 
@@ -28,7 +30,7 @@ namespace UomoMacchina.Areas.Permessi
         [HttpGet]
         public async virtual Task<IActionResult> Index(PermessiViewModel model)
         {   // schermata index  
-            var permessi = await _sharedService.Query(model.ToPermessoQuery());
+            var permessi = await _sharedService.GetAllPermessi(model.ToPermessoQuery());
             
             model.SetPermessi(permessi);
 
@@ -49,15 +51,26 @@ namespace UomoMacchina.Areas.Permessi
         //secondo metodo che viene chiamato, dopo New
         [HttpGet]
         public virtual async Task<IActionResult> Edit(Guid? id)
-        {   
+        {
+            var model = new PermessoViewModel();
             if (id.HasValue)
             {
-                var model = new PermessiViewModel();
-                return RedirectToAction(Actions.Index(model));
+                model.SetPermesso(await _sharedService.GetPermessoById(new PermessoQuery
+                {
+                    Id = id.Value,
+                }));
+                //qua il controllo
+                if (returnToIndex)
+                {
+                    var indexModel = new PermessiViewModel();
+                    returnToIndex = false;
+                    return RedirectToAction(Actions.Index(indexModel));
+                }
+                return View(model);
+
             }
             else
             {
-                var model = new PermessoViewModel();
                 return View(model);
             }
 
@@ -90,6 +103,61 @@ namespace UomoMacchina.Areas.Permessi
             
             return RedirectToAction(Actions.Edit(model.Id));
         }
+
+
+        [HttpPost]
+        public virtual async Task<IActionResult> SaveEdit(PermessoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Esegui l'effettivo salvataggio delle modifiche nel database
+                    await _sharedService.Handle(model.ToAddOrUpdatePermessoCommand());
+
+                    Alerts.AddSuccess(this, "Modifiche salvate con successo");
+
+                    return RedirectToAction(Actions.Index());
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                }
+            }
+
+            // Se la validazione del modello fallisce, ritorna alla vista di modifica con gli errori
+            return View(model);
+        }
+
+
+
+        [HttpPost]
+        public virtual async Task<IActionResult> Delete(Guid id)
+        {
+            try
+            {
+                var permesso = await _sharedService.GetPermessoById(new PermessoQuery { Id = id });
+
+                if (permesso != null)
+                {
+                    // Effettua l'eliminazione della Permesso
+                    await _sharedService.DeletePermesso(id);
+
+                    Alerts.AddSuccess(this, "Permesso cancellata con successo");
+                }
+                else
+                {
+                    Alerts.AddError(this, "Permesso non trovata");
+                }
+            }
+            catch (Exception ex)
+            {
+                Alerts.AddError(this, $"Errore durante l'eliminazione della Permesso: {ex.Message}");
+            }
+
+            return RedirectToAction(Actions.Index());
+        }
+
 
     }
 

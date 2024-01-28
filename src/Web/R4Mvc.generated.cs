@@ -89,7 +89,7 @@ namespace R4Mvc
     public partial class FerieAreaClass
     {
         public readonly string Name = "Ferie";
-        public readonly UomoMacchina.Areas.Ferie.FerieController Ferie = new UomoMacchina.Areas.Ferie.R4MVC_FerieController();
+        public readonly UomoMacchina.Areas.Ferie.Controllers.FerieController Ferie = new UomoMacchina.Areas.Ferie.Controllers.R4MVC_FerieController();
     }
 
     [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]

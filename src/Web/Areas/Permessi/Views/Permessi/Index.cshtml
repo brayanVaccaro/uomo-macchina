@@ -2,6 +2,8 @@
 @{
 }
 
+@inject IHtmlLocalizer<UomoMacchina.Areas.Permessi.Data.PermessiViewModel> ModelLocalizer
+
 @* Index Permessi *@
 
 <ul class="navbar-nav flex-wrap ms-auto">
@@ -12,61 +14,108 @@
     </li>
 </ul>
 
-<div class="TabellaGenerale container-lg  text-center">
-    @if (Model.Permessi.Any() == false)
-    {
-        <tr>
-            <td colspan="3">Nessun elemento trovato con i filtri correnti</td>
-        </tr>
-    }
-    else
-    {
-        <div class="TabellaPrincipale row text-center">   
-            <div class="colonne col-2">
-                Data
-            </div>
-            <div class="colonne col-2">
-                Ora inizio
-            </div>
-            <div class="colonne col-2">
-                Ora fine
-            </div>
-            <div class="colonne col-2">
-                Durata
-            </div>
-            <div class="colonneUltima col-4">
-                Dettagli
-            </div>
-        </div>
 
-        @foreach (var permesso in Model.Permessi)
-        {
-            @* <div class="TabellaDati container-lg text-center border-5">
-                
-            </div> *@
-            <div class="TabellaDati row text-center">
-                <div class="colonne col-2 ">
-                    @permesso.Data.ToString("d")
-                </div>
-                <div class="colonne col-2">
-                    @permesso.OraInizio.ToString("HH:mm")
-                </div>
-                <div class="colonne col-2">
-                    @permesso.OraFine.ToString("HH:mm")
-                </div>
-                <div class="colonne col-2">
-                    @permesso.Durata
-                </div>
-                <div class="colonneUltima col-4">
-                    @permesso.Dettagli
-                </div>
-            </div>
-        }
-    }
+<h5> Per la modifica ed eliminazione cliccare una riga scelta</h5>
+
+@* Tabella Dati *@
+<div class="TabellaGenerale container-lg  text-center">
+    <table class="table table-hover table-sm table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Data
+                </th>
+                <th>
+                    OraInizio
+                </th>
+                <th>
+                    OraFine
+                </th>
+                <th>
+                    Durata
+                </th>
+                <th>
+                    Dettagli
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @if (Model.Permessi.Any() == false)
+            {
+                <tr>
+                    <td colspan="3">Nessun elemento trovato con i filtri correnti</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var permesso in Model.Permessi)
+                {
+                    <tr class="onit-table-row-link" onclick="javascript:utilities.navigateUrlExcludeOnitNotNavigate('@Url.Action(MVC.Permessi.Permessi.Edit(permesso.Id))')" title="@ModelLocalizer["Modifica utente"] @permesso.Id">
+                        <td scope="row" class="text-nowrap">
+                            @permesso.Id
+                        </td>
+                        <td class="text-nowrap">
+                            @permesso.Data.ToString("d")
+                        </td>
+                        <td scope="row" class="text-nowrap">
+                            @permesso.OraInizio.ToString("t")
+                        </td>
+                        <td class="text-nowrap">
+                            @permesso.OraFine.ToString("t")
+                        </td>
+                        <td class="text-nowrap">
+                            @permesso.Durata
+                        </td>
+                        <td class="text-nowrap">
+                            @permesso.Dettagli
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">
+                    <nav class="navbar navbar-expand justify-content-md-center">
+                        <ul class="navbar-nav flex-wrap"><partial name="@MVC.Shared.Views._PagingPartial" model="Model" /></ul>
+                    </nav>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
 </div>
 
 
-}
+
 @section styles {
     <link href="~/css/richieste.css" rel="stylesheet" />
 }
+
+@section scripts{
+
+
+    <script>
+        var Vue
+        Vue.createApp({
+            data() {
+                return {
+                    message: 'Vue Funziona!',
+                }
+            },
+            methods: {
+                async eliminaPermesso(permessoId) {
+                    console.log("permessoId", permessoId)
+                    await fetch('/Permessi/Permessi/Edit?' + permessoId, {
+                        method: "POST",
+                    });
+
+                }
+            }
+        }).mount("#pageId");
+    </script>
+    }

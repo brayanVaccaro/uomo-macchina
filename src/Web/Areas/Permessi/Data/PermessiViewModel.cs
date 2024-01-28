@@ -82,6 +82,10 @@ namespace UomoMacchina.Areas.Permessi.Data
                     Dettagli = Dettagli,
                 };
             }
+            public string ToJson()
+            {
+                return JsonSerializer.ToJsonCamelCase(this);
+            }
         }
 
         //metodo per impostare le Permessi
@@ -101,10 +105,8 @@ namespace UomoMacchina.Areas.Permessi.Data
             };
         }
 
-        public override IActionResult GetRoute()
-        {
-            throw new NotImplementedException();
-        }
+        public override IActionResult GetRoute() => MVC.Permessi.Permessi.Index(this).GetAwaiter().GetResult();
+
 
         //public override IActionResult GetRoute()
         //{
