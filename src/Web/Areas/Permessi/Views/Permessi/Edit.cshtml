@@ -60,9 +60,10 @@
         @* Sezione dei tasti*@
         <div class="mb-3">
             <!-- Tasto Invia -->
-            <button class="btn btn-primary" type="button" onclick="document.getElementById('edit-form-submitter').click()">Invia</button>
+            <button class="Invia btn btn-primary" type="button" onclick="document.getElementById('edit-form-submitter').click()">Invia</button>
             <!-- Tasto Anulla-->
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Anulla</button>
+            @* <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Anulla</button> *@
+            <a class="Annulla btn btn-primary" href="@Url.Action(MVC.Permessi.Permessi.Index())">Annulla</a>
         </div>
 
     </div>
