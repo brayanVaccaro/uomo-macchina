@@ -33,10 +33,7 @@ namespace UomoMacchina
         {
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
-            services.AddDbContext<TemplateDbContext>(options =>
-            {
-                options.UseInMemoryDatabase(databaseName: "Core");
-            });
+            services.AddDbContext<TemplateDbContext>(options =>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // SERVICES FOR AUTHENTICATION
             services.AddSession();
@@ -107,13 +104,13 @@ namespace UomoMacchina
             var compositeFp = new CustomCompositeFileProvider(env.WebRootFileProvider, node_modules, areas);
             env.WebRootFileProvider = compositeFp;
             app.UseStaticFiles();
-            
+
             app.UseEndpoints(endpoints =>
             {
                 // ROUTING PER HUB
                 endpoints.MapHub<TemplateHub>("/templateHub");
 
-                // Route per le Rendicontazione, Elimina, Salvataggio dati
+                // Route per le Rendicontazioni, Elimina, Salvataggio dati
                 endpoints.MapAreaControllerRoute("TestR", "Rendicontazioni", "Rendicontazioni/{controller=Rendicontazioni}/{action=Index}");
                 endpoints.MapAreaControllerRoute("Elimina Rendicontazioni", "Rendicontazioni", "Rendicontazioni/Delete/{controller=Rendicontazioni}/{action=Delete}/{id?}");
                 endpoints.MapAreaControllerRoute("Modifica Rendicontazioni", "Rendicontazioni", "Rendicontazioni/SaveEdit/{controller=Rendicontazioni}/{action=SaveEdit}/{id?}");
