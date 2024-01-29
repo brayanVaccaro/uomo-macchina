@@ -1,0 +1,113 @@
+﻿@model UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel
+@inject IHtmlLocalizer<UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel> ModelLocalizer
+
+@* Index di Trasferta *@
+
+@* Pulsante creazione data*@
+<ul class="navbar-nav flex-wrap ms-auto">
+    <li>
+        <a class="Nuovo btn btn-light ms-2" href="@Url.Action(MVC.Trasferte.Trasferte.New())" title="Inserisci un nuovo elemento">
+            <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
+        </a>
+    </li>
+</ul>
+
+
+<h5> Per la modifica ed eliminazione cliccare una riga scelta</h5>
+
+@* Tabella Dati *@
+<div class="TabellaGenerale container-lg  text-center">
+    <table class="table table-hover table-sm table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Chilometri
+                </th>
+                <th>
+                    Data
+                </th>
+                <th>
+                    Commessa
+                </th>
+                <th>
+                    Dettagli
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @if (Model.Trasferte.Any() == false)
+            {
+                <tr>
+                    <td colspan="3">Nessun elemento trovato con i filtri correnti</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var trasferta in Model.Trasferte)
+                {
+                    <tr class="onit-table-row-link" onclick="javascript:utilities.navigateUrlExcludeOnitNotNavigate('@Url.Action(MVC.Trasferte.Trasferte.Edit(trasferta.Id))')" title="@ModelLocalizer["Modifica utente"] @trasferta.Id">
+                        <td scope="row" class="text-nowrap">
+                            @trasferta.Id
+                        </td>
+                        <td scope="row" class="text-nowrap">
+                            @trasferta.Chilometri
+                        </td>
+                        <td class="text-nowrap">
+                            @trasferta.Data.ToString("d")
+                        </td>
+                        <td class="text-nowrap">
+                            @trasferta.Commessa
+                        </td>
+                        <td class="text-nowrap">
+                            @trasferta.Dettagli
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">
+                    <nav class="navbar navbar-expand justify-content-md-center">
+                        <ul class="navbar-nav flex-wrap"><partial name="@MVC.Shared.Views._PagingPartial" model="Model" /></ul>
+                    </nav>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+
+
+@section styles {
+    <link href="~/css/richieste.css" rel="stylesheet" />
+}
+
+@section scripts{
+
+
+    <script>
+        var Vue
+        Vue.createApp({
+            data() {
+                return {
+                    message: 'Vue Funziona!',
+                }
+            },
+            methods: {
+                async eliminaTrasferta(trasfertaId) {
+                    console.log("trasfertaId", trasfertaId)
+                    await fetch('/Trasferte/Trasferte/Edit?' + trasfertaId, {
+                        method: "POST",
+                    });
+
+                }
+            }
+        }).mount("#pageId");
+    </script>
+    }

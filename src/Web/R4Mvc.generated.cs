@@ -30,6 +30,8 @@ public static partial class MVC
     public static R4Mvc.PermessiAreaClass Permessi => s_Permessi;
     static readonly R4Mvc.RendicontazioniAreaClass s_Rendicontazioni = new R4Mvc.RendicontazioniAreaClass();
     public static R4Mvc.RendicontazioniAreaClass Rendicontazioni => s_Rendicontazioni;
+    static readonly R4Mvc.TrasferteAreaClass s_Trasferte = new R4Mvc.TrasferteAreaClass();
+    public static R4Mvc.TrasferteAreaClass Trasferte => s_Trasferte;
     public static readonly UomoMacchina.Areas.AuthenticatedBaseController AuthenticatedBase = new UomoMacchina.Areas.R4MVC_AuthenticatedBaseController();
     public static readonly UomoMacchina.Features.Home.HomeController Home = new UomoMacchina.Features.Home.R4MVC_HomeController();
     public static readonly UomoMacchina.Features.Login.LoginController Login = new UomoMacchina.Features.Login.R4MVC_LoginController();
@@ -120,6 +122,13 @@ namespace R4Mvc
     {
         public readonly string Name = "Rendicontazioni";
         public readonly UomoMacchina.Areas.Rendicontazioni.Controllers.RendicontazioniController Rendicontazioni = new UomoMacchina.Areas.Rendicontazioni.Controllers.R4MVC_RendicontazioniController();
+    }
+
+    [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+    public partial class TrasferteAreaClass
+    {
+        public readonly string Name = "Trasferte";
+        public readonly UomoMacchina.Areas.Trasferte.Controllers.TrasferteController Trasferte = new UomoMacchina.Areas.Trasferte.Controllers.R4MVC_TrasferteController();
     }
 }
 

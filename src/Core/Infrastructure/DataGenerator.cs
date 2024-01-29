@@ -3,6 +3,7 @@ using Core.Services;
 using Core.Services.Shared;
 using System;
 using System.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Core.Infrastructure
 {
@@ -145,7 +146,28 @@ namespace Core.Infrastructure
             context.SaveChanges();
         }
 
-        
+        public static void InitializeTrasferta(TemplateDbContext context)
+        {
+            if (context.Trasferta.Any())
+            {
+                return;   // Data was already seeded
+            }
+            context.Trasferta.AddRange(
+                new Trasferta
+                {
+                    Id = Guid.NewGuid(), //la stringa presa online
+                    Chilometri = 50,
+                    Data = DateTime.Now,
+                    Commessa = "Lavoro",
+                    Dettagli = "Dettagli di Trasferta",
+                }
+            );
+
+            context.SaveChanges();
+        }
+
+
+
     }
 }
 
