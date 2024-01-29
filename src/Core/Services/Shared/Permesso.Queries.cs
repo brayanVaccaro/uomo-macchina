@@ -28,7 +28,7 @@ namespace Core.Services.Shared
 
     }
 
-    // La classe PermessoDTO prende in riferimento parametri dal file Permesso.cs
+    // La classe PermessoDTO prende in riferimento parametri dal file Permessi.cs
     public class PermessoDTO
     {
         public Guid Id { get; set; }
@@ -58,39 +58,13 @@ namespace Core.Services.Shared
 
         // La async Task<PermessiDTO> fa una query sulla classe richiestaQuery (nella riga 10) 
         // serve ad far ridare il valore della query
-        //public async Task<PermessiDTO> Query(PermessoQuery qry)
-        //{
-        //    var risultato = new PermessiDTO();
-        //    var prova = _dbContext.Permesso.Select(x => x);
-        //    try
-        //    {
-        //        risultato.Permessi = await prova.Select(x => new PermessoDTO
-        //        {
-        //            Id = x.Id,
-        //            Data = x.Data,
-        //            OraInizio = x.OraInizio,
-        //            OraFine = x.OraFine,
-        //            Durata = x.Durata,
-        //            Dettagli = x.Dettagli,
-        //        }).ToArrayAsync();
-
-        //        risultato.Count = await prova.CountAsync();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return null;
-        //    }
-
-        //    return risultato;
-        //}
-
-        public async Task<PermessiDTO> GetAllPermessi(PermessoQuery qry)
+        public async Task<PermessiDTO> GetAllPermessi()
         {
             var risultato = new PermessiDTO();
-            var prova = _dbContext.Permesso.Select(x => x);
+            var permessi = _dbContext.Permessi.Select(x => x);
             try
             {
-                risultato.Permessi = await prova.Select(x => new PermessoDTO
+                risultato.Permessi = await permessi.Select(x => new PermessoDTO
                 {
                     Id = x.Id,
                     Data = x.Data,
@@ -100,7 +74,32 @@ namespace Core.Services.Shared
                     Dettagli = x.Dettagli,
                 }).ToArrayAsync();
 
-                risultato.Count = await prova.CountAsync();
+                risultato.Count = await permessi.CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return risultato;
+        }
+        public async Task<PermessiDTO> GetAllPermessiByDate(DateTime date)
+        {
+            var risultato = new PermessiDTO();
+            var permessi = _dbContext.Permessi.Where(x => x.Data == date);
+            try
+            {
+                risultato.Permessi = await permessi.Select(x => new PermessoDTO
+                {
+                    Id = x.Id,
+                    Data = x.Data,
+                    OraInizio = x.OraInizio,
+                    OraFine = x.OraFine,
+                    Durata = x.Durata,
+                    Dettagli = x.Dettagli,
+                }).ToArrayAsync();
+
+                risultato.Count = await permessi.CountAsync();
             }
             catch (Exception ex)
             {
@@ -114,7 +113,7 @@ namespace Core.Services.Shared
 
         public async Task<PermessoDTO> GetPermessoById(PermessoQuery id)
         {
-            var prova = await _dbContext.Permesso
+            var permesso = await _dbContext.Permessi
                 .Where(x => x.Id == id.Id)
                 .Select(x => new PermessoDTO
                 {
@@ -128,18 +127,19 @@ namespace Core.Services.Shared
                 .FirstOrDefaultAsync();
 
             
-            return prova;
+            return permesso;
         }
         public async Task DeletePermesso(Guid id)
         {
-            var permesso = await _dbContext.Permesso.FindAsync(id);
+            var permesso = await _dbContext.Permessi.FindAsync(id);
 
             if (permesso != null)
             {
-                _dbContext.Permesso.Remove(permesso);
+                _dbContext.Permessi.Remove(permesso);
                 await _dbContext.SaveChangesAsync();
             }
         }
+        
     }
 }
 

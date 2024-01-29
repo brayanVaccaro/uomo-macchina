@@ -29,19 +29,22 @@ namespace Core.Services.Shared
 
     }
 
-    // La classe TrasfertaDTO prende in riferimento parametri dal file Trasferta.cs
+    // La classe TrasfertaDTO prende in riferimento parametri dal file Trasferte.cs
     public class TrasfertaDTO
     {
         public Guid Id { get; set; }
 
         public int Chilometri { get; set; }
 
-        public DateTime Data { get; set; }
+        public DateTime DataInizio { get; set; }
+
+        public DateTime DataFine { get; set; }
 
         public string Commessa { get; set; }
 
-        public string Dettagli { get; set; }
+        public bool AutoAziendale { get; set; }
 
+        public string Dettagli { get; set; }
     }
 
     public partial class SharedService
@@ -58,19 +61,21 @@ namespace Core.Services.Shared
         public async Task<TrasferteDTO> GetAllTrasferte(TrasfertaQuery qry)
         {
             var risultato = new TrasferteDTO();
-            var prova = _dbContext.Trasferta.Select(x => x);
+            var trasferte = _dbContext.Trasferte.Select(x => x);
             try
             {
-                risultato.Trasferte = await prova.Select(x => new TrasfertaDTO
+                risultato.Trasferte = await trasferte.Select(x => new TrasfertaDTO
                 {
                     Id = x.Id,
                     Chilometri = x.Chilometri,
-                    Data = x.Data,
+                    DataInizio = x.DataInizio,
+                    DataFine = x.DataFine,
                     Commessa = x.Commessa,
+                    AutoAziendale = x.AutoAziendale,
                     Dettagli = x.Dettagli,
                 }).ToArrayAsync();
 
-                risultato.Count = await prova.CountAsync();
+                risultato.Count = await trasferte.CountAsync();
             }
             catch (Exception ex)
             {
@@ -80,31 +85,60 @@ namespace Core.Services.Shared
             return risultato;
         }
 
+        public async Task<TrasferteDTO> GetAllTrasferteByDate(DateTime date)
+        {
+            
+            var risultato = new TrasferteDTO();
+            var trasferte = _dbContext.Trasferte.Where(x => x.DataInizio == date);
+            try
+            {
+                risultato.Trasferte = await trasferte.Select(x => new TrasfertaDTO
+                {
+                    Id = x.Id,
+                    Chilometri = x.Chilometri,
+                    DataInizio = x.DataInizio,
+                    DataFine = x.DataFine,
+                    Commessa = x.Commessa,
+                    AutoAziendale = x.AutoAziendale,
+                    Dettagli = x.Dettagli,
+                }).ToArrayAsync();
+
+                risultato.Count = await trasferte.CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return risultato;
+        }
         public async Task<TrasfertaDTO> GetTrasfertaById(TrasfertaQuery id)
         {
-            var prova = await _dbContext.Trasferta
+            var trasferta = await _dbContext.Trasferte
                 .Where(x => x.Id == id.Id)
                 .Select(x => new TrasfertaDTO
                 {
                     Id = x.Id,
                     Chilometri = x.Chilometri,
-                    Data = x.Data,
+                    DataInizio = x.DataInizio,
+                    DataFine = x.DataFine,
                     Commessa = x.Commessa,
+                    AutoAziendale = x.AutoAziendale,
                     Dettagli = x.Dettagli,
                 })
                 .FirstOrDefaultAsync();
 
 
-            return prova;
+            return trasferta;
         }
 
         public async Task DeleteTrasferta(Guid id)
         {
-            var trasferta = await _dbContext.Trasferta.FindAsync(id);
+            var trasferta = await _dbContext.Trasferte.FindAsync(id);
 
             if (trasferta != null)
             {
-                _dbContext.Trasferta.Remove(trasferta);
+                _dbContext.Trasferte.Remove(trasferta);
                 await _dbContext.SaveChangesAsync();
             }
         }

@@ -26,7 +26,7 @@ namespace Core.Services.Shared
     {
         public async Task<Guid> Handle(AddOrUpdateNotteFuoriCommand cmd)
         {
-            var notteFuori = await _dbContext.NotteFuori
+            var notteFuori = await _dbContext.NottiFuori
                 .Where(x => x.Id == cmd.Id)
                 .FirstOrDefaultAsync();
 
@@ -36,7 +36,7 @@ namespace Core.Services.Shared
                 {
                     Data = cmd.Data,
                 };
-                _dbContext.NotteFuori.Add(notteFuori);
+                _dbContext.NottiFuori.Add(notteFuori);
             }
 
             notteFuori.TipoViaggio = cmd.TipoViaggio;

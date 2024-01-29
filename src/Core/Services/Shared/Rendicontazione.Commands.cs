@@ -12,9 +12,13 @@ namespace Core.Services.Shared
     {
         public Guid? Id { get; set; }
 
-        public int Ore { get; set; }
+        public int OreTotali { get; set; }
 
         public DateTime Data { get; set; }
+
+        public DateTime OraInizio { get; set; } //dalle ore
+
+        public DateTime OraFine { get; set; } // alle ore
 
         public string Commessa { get; set; }
 
@@ -26,7 +30,7 @@ namespace Core.Services.Shared
     {
         public async Task<Guid> Handle(AddOrUpdateRendicontazioneCommand cmd)
         {
-            var rendicontazione = await _dbContext.Rendicontazione
+            var rendicontazione = await _dbContext.Rendicontazioni
                 .Where(x => x.Id == cmd.Id)
                 .FirstOrDefaultAsync();
 
@@ -36,11 +40,12 @@ namespace Core.Services.Shared
                 {
                     Data = cmd.Data,
                 };
-                _dbContext.Rendicontazione.Add(rendicontazione);
+                _dbContext.Rendicontazioni.Add(rendicontazione);
             }
 
-            rendicontazione.Data = cmd.Data;
-            rendicontazione.Ore = cmd.Ore;
+            rendicontazione.OreTotali = cmd.OreTotali;
+            rendicontazione.OraInizio = cmd.OraInizio;
+            rendicontazione.OraFine = cmd.OraFine;
             rendicontazione.Commessa = cmd.Commessa;
             rendicontazione.Dettagli = cmd.Dettagli;
 

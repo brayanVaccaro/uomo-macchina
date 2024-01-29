@@ -17,11 +17,13 @@ namespace Core.Models
 
         public int Chilometri { get; set; }
 
-        public DateTime Data { get; set; }
+        public DateTime DataInizio { get; set; }
+
+        public DateTime DataFine { get; set; }
 
         public string Commessa { get; set; }
 
-        public string AutoAziendale { get; set; }
+        public bool AutoAziendale { get; set; }
 
         public string Dettagli { get; set; }
     }

@@ -50,7 +50,7 @@ namespace Core.Services.Shared
             var risultato = new EventiDTO();
             try
             {
-                risultato.Eventi = await _dbContext.VueCalEvent.Select(x => new EventoDTO
+                risultato.Eventi = await _dbContext.Eventi.Select(x => new EventoDTO
                 {
                     Id = x.Id,
 
@@ -67,7 +67,7 @@ namespace Core.Services.Shared
                     Deletable = x.Deletable,
                     Resizable = x.Resizable,
                 }).ToArrayAsync();
-                risultato.Count = await _dbContext.VueCalEvent.CountAsync();
+                risultato.Count = await _dbContext.Eventi.CountAsync();
             }
             catch (Exception ex)
             {

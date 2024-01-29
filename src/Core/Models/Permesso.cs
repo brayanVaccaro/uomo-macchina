@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Models
 {
-    // Creazione del database con classe Permesso
     public class Permesso
     {
         [Key]

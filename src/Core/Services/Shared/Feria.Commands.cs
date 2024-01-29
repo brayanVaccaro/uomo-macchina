@@ -24,7 +24,7 @@ namespace Core.Services.Shared
     {
         public async Task<Guid> Handle(AddOrUpdateFeriaCommand cmd)
         {
-            var feria = await _dbContext.Feria
+            var feria = await _dbContext.Ferie
                 .Where(x => x.Id == cmd.Id)
                 .FirstOrDefaultAsync();
 
@@ -37,7 +37,7 @@ namespace Core.Services.Shared
                     Durata = cmd.Durata,
                     Dettagli = cmd.Dettagli,
                 };
-                _dbContext.Feria.Add(feria);
+                _dbContext.Ferie.Add(feria);
             }
 
 
@@ -50,6 +50,23 @@ namespace Core.Services.Shared
             await _dbContext.SaveChangesAsync();
 
             return feria.Id;
+        }
+
+        public async Task<bool> Delete(Guid id)
+        {
+            // la feria da eliminare scelta sulla base dell'id di cmd
+            var feria = await _dbContext.Ferie
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
+            if(feria == null)
+            {
+                return false;
+            }
+
+            _dbContext.Ferie.Remove(feria);
+            await _dbContext.SaveChangesAsync();
+            return true;
         }
     }
 }

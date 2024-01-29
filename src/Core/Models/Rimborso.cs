@@ -21,7 +21,7 @@ namespace Core.Models
 
         public string Commessa { get; set; }
 
-        public string CartaAziendale { get; set; }
+        public bool CartaAziendale { get; set; }
 
         public string Dettagli { get; set; }
     }

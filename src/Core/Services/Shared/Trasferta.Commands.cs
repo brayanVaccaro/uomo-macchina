@@ -14,9 +14,13 @@ namespace Core.Services.Shared
 
         public int Chilometri { get; set; }
 
-        public DateTime Data { get; set; }
+        public DateTime DataInizio { get; set; }
+
+        public DateTime DataFine { get; set; }
 
         public string Commessa { get; set; }
+
+        public bool AutoAziendale { get; set; }
 
         public string Dettagli { get; set; }
 
@@ -26,7 +30,7 @@ namespace Core.Services.Shared
     {
         public async Task<Guid> Handle(AddOrUpdateTrasfertaCommand cmd)
         {
-            var trasferta = await _dbContext.Trasferta
+            var trasferta = await _dbContext.Trasferte
                 .Where(x => x.Id == cmd.Id)
                 .FirstOrDefaultAsync();
 
@@ -34,14 +38,15 @@ namespace Core.Services.Shared
             {
                 trasferta = new Trasferta
                 {
-                    Data = cmd.Data,
+                    DataInizio = cmd.DataInizio,
                 };
-                _dbContext.Trasferta.Add(trasferta);
+                _dbContext.Trasferte.Add(trasferta);
             }
 
-            trasferta.Data = cmd.Data;
+            trasferta.DataFine = cmd.DataFine;
             trasferta.Chilometri = cmd.Chilometri;
             trasferta.Commessa = cmd.Commessa;
+            trasferta.AutoAziendale = cmd.AutoAziendale;
             trasferta.Dettagli = cmd.Dettagli;
 
 

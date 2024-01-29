@@ -26,7 +26,7 @@ namespace Core.Services.Shared
     {
         public async Task<Guid> Handle(AddOrUpdatePermessoCommand cmd)
         {
-            var permesso = await _dbContext.Permesso
+            var permesso = await _dbContext.Permessi
                 .Where(x => x.Id == cmd.Id)
                 .FirstOrDefaultAsync();
 
@@ -36,7 +36,7 @@ namespace Core.Services.Shared
                 {
                     Data = cmd.Data,
                 };
-                _dbContext.Permesso.Add(permesso);
+                _dbContext.Permessi.Add(permesso);
             }
 
             permesso.Data = cmd.Data; 
@@ -45,7 +45,11 @@ namespace Core.Services.Shared
             permesso.Durata = cmd.Durata;
             permesso.Dettagli = cmd.Dettagli;
             
-
+            //Eventi vuole 
+            /*
+             Start = Data + OraInizio
+            End = Data + OraFine
+             */
             await _dbContext.SaveChangesAsync();
 
             return permesso.Id;

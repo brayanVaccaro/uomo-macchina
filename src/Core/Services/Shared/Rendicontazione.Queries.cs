@@ -29,14 +29,18 @@ namespace Core.Services.Shared
 
     }
 
-    // La classe RendicontazioneDTO prende in riferimento parametri dal file Rendicontazione.cs
+    // La classe RendicontazioneDTO prende in riferimento parametri dal file Rendicontazioni.cs
     public class RendicontazioneDTO
     {
         public Guid Id { get; set; }
 
-        public int Ore { get; set; }
+        public int OreTotali { get; set; }
 
         public DateTime Data { get; set; }
+
+        public DateTime OraInizio { get; set; } 
+
+        public DateTime OraFine { get; set; } 
 
         public string Commessa { get; set; }
 
@@ -58,19 +62,48 @@ namespace Core.Services.Shared
         public async Task<RendicontazioniDTO> GetAllRendicontazioni(RendicontazioneQuery qry)
         {
             var risultato = new RendicontazioniDTO();
-            var prova = _dbContext.Rendicontazione.Select(x => x);
+            var rendicontazioni = _dbContext.Rendicontazioni.Select(x => x);
             try
             {
-                risultato.Rendicontazioni = await prova.Select(x => new RendicontazioneDTO
+                risultato.Rendicontazioni = await rendicontazioni.Select(x => new RendicontazioneDTO
                 {
                     Id = x.Id,
-                    Ore = x.Ore,
+                    OreTotali = x.OreTotali,
                     Data = x.Data,
+                    OraInizio = x.OraInizio,
+                    OraFine = x.OraFine,
                     Commessa = x.Commessa,
                     Dettagli = x.Dettagli,
                 }).ToArrayAsync();
 
-                risultato.Count = await prova.CountAsync();
+                risultato.Count = await rendicontazioni.CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return risultato;
+        }
+
+        public async Task<RendicontazioniDTO> GetAllRendicontazioniByDate(DateTime date)
+        {
+            var risultato = new RendicontazioniDTO();
+            var rendicontazioni = _dbContext.Rendicontazioni.Where(x => x.Data.Date == date);
+            try
+            {
+                risultato.Rendicontazioni = await rendicontazioni.Select(x => new RendicontazioneDTO
+                {
+                    Id = x.Id,
+                    OreTotali = x.OreTotali,
+                    Data = x.Data,
+                    OraInizio = x.OraInizio,
+                    OraFine = x.OraFine,
+                    Commessa = x.Commessa,
+                    Dettagli = x.Dettagli,
+                }).ToArrayAsync();
+
+                risultato.Count = await rendicontazioni.CountAsync();
             }
             catch (Exception ex)
             {
@@ -82,29 +115,30 @@ namespace Core.Services.Shared
 
         public async Task<RendicontazioneDTO> GetRendicontazioneById(RendicontazioneQuery id)
         {
-            var prova = await _dbContext.Rendicontazione
+            var rendicontazione = await _dbContext.Rendicontazioni
                 .Where(x => x.Id == id.Id)
                 .Select(x => new RendicontazioneDTO
                 {
                     Id = x.Id,
-                    Ore = x.Ore,
-                    Data = x.Data,
+                    OreTotali = x.OreTotali,
+                    OraFine = x.OraFine,
+                    OraInizio = x.OraInizio,
                     Commessa = x.Commessa,
                     Dettagli = x.Dettagli,
                 })
                 .FirstOrDefaultAsync();
 
 
-            return prova;
+            return rendicontazione;
         }
 
-        public async Task Delete(Guid id)
+        public async Task DeleteRendicontazione(Guid id)
         {
-            var rendicontazione = await _dbContext.Rendicontazione.FindAsync(id);
+            var rendicontazione = await _dbContext.Rendicontazioni.FindAsync(id);
 
             if (rendicontazione != null)
             {
-                _dbContext.Rendicontazione.Remove(rendicontazione);
+                _dbContext.Rendicontazioni.Remove(rendicontazione);
                 await _dbContext.SaveChangesAsync();
             }
         }

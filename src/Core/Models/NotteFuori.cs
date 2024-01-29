@@ -14,7 +14,7 @@ namespace Core.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        public string TipoViaggio { get; set; }
+        public string TipoViaggio { get; set; } //nazionale, continentale, intercontinentale
 
         public DateTime Data { get; set; }
 

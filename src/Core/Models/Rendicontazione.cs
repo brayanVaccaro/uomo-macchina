@@ -15,9 +15,13 @@ namespace Core.Models
 
         public Guid Id { get; set; }
 
-        public int Ore { get; set; }
+        public int OreTotali { get; set; }
 
         public DateTime Data { get; set; }
+
+        public DateTime OraInizio { get; set; }
+
+        public DateTime OraFine { get; set; }
 
         public string Commessa { get; set; }
 

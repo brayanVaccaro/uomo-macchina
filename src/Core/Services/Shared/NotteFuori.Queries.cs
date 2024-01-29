@@ -29,7 +29,7 @@ namespace Core.Services.Shared
 
     }
 
-    // La classe NotteFuoriDTO prende in riferimento parametri dal file NotteFuori.cs
+    // La classe NotteFuoriDTO prende in riferimento parametri dal file NottiFuori.cs
     public class NotteFuoriDTO
     {
         public Guid Id { get; set; }
@@ -58,10 +58,10 @@ namespace Core.Services.Shared
         public async Task<NottiFuoriDTO> GetAllNottiFuori(NotteFuoriQuery qry)
         {
             var risultato = new NottiFuoriDTO();
-            var prova = _dbContext.NotteFuori.Select(x => x);
+            var nottiFuori = _dbContext.NottiFuori.Select(x => x);
             try
             {
-                risultato.NottiFuori = await prova.Select(x => new NotteFuoriDTO
+                risultato.NottiFuori = await nottiFuori.Select(x => new NotteFuoriDTO
                 {
                     Id = x.Id,
                     TipoViaggio = x.TipoViaggio,
@@ -70,7 +70,31 @@ namespace Core.Services.Shared
                     Dettagli = x.Dettagli,
                 }).ToArrayAsync();
 
-                risultato.Count = await prova.CountAsync();
+                risultato.Count = await nottiFuori.CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return risultato;
+        }
+        public async Task<NottiFuoriDTO> GetAllNottiFuoriByDate(DateTime date)
+        {
+            var risultato = new NottiFuoriDTO();
+            var nottiFuori = _dbContext.NottiFuori.Where(x => x.Data == date);
+            try
+            {
+                risultato.NottiFuori = await nottiFuori.Select(x => new NotteFuoriDTO
+                {
+                    Id = x.Id,
+                    TipoViaggio = x.TipoViaggio,
+                    Data = x.Data,
+                    Commessa = x.Commessa,
+                    Dettagli = x.Dettagli,
+                }).ToArrayAsync();
+
+                risultato.Count = await nottiFuori.CountAsync();
             }
             catch (Exception ex)
             {
@@ -82,7 +106,7 @@ namespace Core.Services.Shared
 
         public async Task<NotteFuoriDTO> GetNotteFuoriById(NotteFuoriQuery id)
         {
-            var prova = await _dbContext.NotteFuori
+            var notteFuori = await _dbContext.NottiFuori
                 .Where(x => x.Id == id.Id)
                 .Select(x => new NotteFuoriDTO
                 {
@@ -95,16 +119,16 @@ namespace Core.Services.Shared
                 .FirstOrDefaultAsync();
 
 
-            return prova;
+            return notteFuori;
         }
 
         public async Task DeleteNotteFuori(Guid id)
         {
-            var notteFuori = await _dbContext.NotteFuori.FindAsync(id);
+            var notteFuori = await _dbContext.NottiFuori.FindAsync(id);
 
             if (notteFuori != null)
             {
-                _dbContext.NotteFuori.Remove(notteFuori);
+                _dbContext.NottiFuori.Remove(notteFuori);
                 await _dbContext.SaveChangesAsync();
             }
         }

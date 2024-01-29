@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Core.Services.Shared
     // La classe FeriaQuery serve per filtrare i dati selezionati
     public class FeriaQuery
     {
+
         // Vedi su FerieController.cs nella Task<IActionResult> 
         public Guid Id { get; set; }
         public Guid IdCurrentUser { get; set; }
@@ -21,17 +23,13 @@ namespace Core.Services.Shared
 
         public FeriaDTO[] Ferie { get; set; }
 
-
-        // Da CANCELLARE
-        //public IEnumerable<FeriaDTO> Ferie { get; set; }
-
         public int Count { get; set; }
 
 
 
     }
 
-    // La classe FeriaDTO prende in riferimento parametri dal file Permesso.cs
+    // La classe FeriaDTO prende in riferimento parametri dal file Permessi.cs
     public class FeriaDTO
     {
         public Guid Id { get; set; }
@@ -39,6 +37,8 @@ namespace Core.Services.Shared
         public DateTime DataInizio { get; set; }
 
         public DateTime DataFine { get; set; }
+
+        public String Class { get; set; }
 
         public int Durata { get; set; }
 
@@ -59,14 +59,13 @@ namespace Core.Services.Shared
 
         // La async Task<FerieDTO> fa una query sulla classe richiestaQuery (nella riga 10) 
         // serve ad far ridare il valore della query
-
-        public async Task<FerieDTO> GetAllFerie(FeriaQuery qry)
+        public async Task<FerieDTO> GetAllFerie()
         {
             var risultato = new FerieDTO();
-            var prova = _dbContext.Feria.Select(x => x);
+            var ferie = _dbContext.Ferie.Select(x => x);
             try
             {
-                risultato.Ferie = await prova.Select(x => new FeriaDTO
+                risultato.Ferie = await ferie.Select(x => new FeriaDTO
                 {
                     Id = x.Id,
                     DataInizio = x.DataInizio,
@@ -75,7 +74,31 @@ namespace Core.Services.Shared
                     Dettagli = x.Dettagli,
                 }).ToArrayAsync();
 
-                risultato.Count = await prova.CountAsync();
+                risultato.Count = await ferie.CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return risultato;
+        }
+        public async Task<FerieDTO> GetAllFerieByDate(DateTime date)
+        {
+            var risultato = new FerieDTO();
+            var ferie = _dbContext.Ferie.Where(x => x.DataInizio.Date == date);
+            try
+            {
+                risultato.Ferie = await ferie.Select(x => new FeriaDTO
+                {
+                    Id = x.Id,
+                    DataInizio = x.DataInizio,
+                    DataFine = x.DataFine,
+                    Durata = x.Durata,
+                    Dettagli = x.Dettagli,
+                }).ToArrayAsync();
+
+                risultato.Count = await ferie.CountAsync();
             }
             catch (Exception ex)
             {
@@ -85,35 +108,9 @@ namespace Core.Services.Shared
             return risultato;
         }
 
-        /*
-        public async Task<FerieDTO> Query(FeriaQuery qry)
-        {
-            var risultato = new FerieDTO();
-            var prova = _dbContext.Feria.Select(x => x);
-            try
-            {
-                risultato.Ferie = await prova.Select(x => new FeriaDTO
-                {
-                    Id = x.Id,
-                    DataInizio = x.DataInizio,
-                    DataFine = x.DataFine,
-                    Durata = x.Durata,
-                    Dettagli = x.Dettagli,
-                }).ToArrayAsync();
-
-                risultato.Count = await prova.CountAsync();
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-
-            return risultato;
-        }
-        */
         public async Task<FeriaDTO> GetFeriaById(FeriaQuery id)
         {
-            var prova = await _dbContext.Feria
+            var feria = await _dbContext.Ferie
                 .Where(x => x.Id == id.Id)
                 .Select(x => new FeriaDTO
                 {
@@ -126,17 +123,19 @@ namespace Core.Services.Shared
                 .FirstOrDefaultAsync();
 
 
-            return prova;
+            return feria;
         }
         public async Task DeleteFerie(Guid id)
         {
-            var feria = await _dbContext.Feria.FindAsync(id);
+            var feria = await _dbContext.Ferie.FindAsync(id);
 
             if (feria != null)
             {
-                _dbContext.Feria.Remove(feria);
+                _dbContext.Ferie.Remove(feria);
                 await _dbContext.SaveChangesAsync();
             }
         }
+
+        
     }
 }

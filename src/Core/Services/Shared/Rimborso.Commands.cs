@@ -18,7 +18,7 @@ namespace Core.Services.Shared
 
         public string Commessa { get; set; }
 
-        public string CartaAziendale { get; set; }
+        public bool CartaAziendale { get; set; }
 
         public string Dettagli { get; set; }
 
@@ -28,7 +28,7 @@ namespace Core.Services.Shared
     {
         public async Task<Guid> Handle(AddOrUpdateRimborsoCommand cmd)
         {
-            var rimborso = await _dbContext.Rimborso
+            var rimborso = await _dbContext.Rimborsi
                 .Where(x => x.Id == cmd.Id)
                 .FirstOrDefaultAsync();
 
@@ -38,7 +38,7 @@ namespace Core.Services.Shared
                 {
                     Data = cmd.Data,
                 };
-                _dbContext.Rimborso.Add(rimborso);
+                _dbContext.Rimborsi.Add(rimborso);
             }
 
             rimborso.Importo = cmd.Importo;

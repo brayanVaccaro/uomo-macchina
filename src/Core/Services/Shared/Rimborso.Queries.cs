@@ -29,7 +29,7 @@ namespace Core.Services.Shared
 
     }
 
-    // La classe RimborsoDTO prende in riferimento parametri dal file Rimborso.cs
+    // La classe RimborsoDTO prende in riferimento parametri dal file Rimborsi.cs
     public class RimborsoDTO
     {
         public Guid Id { get; set; }
@@ -40,7 +40,7 @@ namespace Core.Services.Shared
 
         public string Commessa { get; set; }
 
-        public string CartaAziendale { get; set; }
+        public bool CartaAziendale { get; set; }
 
         public string Dettagli { get; set; }
 
@@ -60,10 +60,10 @@ namespace Core.Services.Shared
         public async Task<RimborsiDTO> GetAllRimborsi(RimborsoQuery qry)
         {
             var risultato = new RimborsiDTO();
-            var prova = _dbContext.Rimborso.Select(x => x);
+            var rimborsi = _dbContext.Rimborsi.Select(x => x);
             try
             {
-                risultato.Rimborsi = await prova.Select(x => new RimborsoDTO
+                risultato.Rimborsi = await rimborsi.Select(x => new RimborsoDTO
                 {
                     Id = x.Id,
                     Importo = x.Importo,
@@ -73,7 +73,33 @@ namespace Core.Services.Shared
                     Dettagli = x.Dettagli,
                 }).ToArrayAsync();
 
-                risultato.Count = await prova.CountAsync();
+                risultato.Count = await rimborsi.CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return risultato;
+        }
+
+        public async Task<RimborsiDTO> GetAllRimborsiByDate(DateTime date)
+        {
+            var risultato = new RimborsiDTO();
+            var rimborsi = _dbContext.Rimborsi.Where(x => x.Data == date);
+            try
+            {
+                risultato.Rimborsi = await rimborsi.Select(x => new RimborsoDTO
+                {
+                    Id = x.Id,
+                    Importo = x.Importo,
+                    Data = x.Data,
+                    Commessa = x.Commessa,
+                    CartaAziendale = x.CartaAziendale,
+                    Dettagli = x.Dettagli,
+                }).ToArrayAsync();
+
+                risultato.Count = await rimborsi.CountAsync();
             }
             catch (Exception ex)
             {
@@ -85,7 +111,7 @@ namespace Core.Services.Shared
 
         public async Task<RimborsoDTO> GetRimborsoById(RimborsoQuery id)
         {
-            var prova = await _dbContext.Rimborso
+            var rimborso = await _dbContext.Rimborsi
                 .Where(x => x.Id == id.Id)
                 .Select(x => new RimborsoDTO
                 {
@@ -99,16 +125,16 @@ namespace Core.Services.Shared
                 .FirstOrDefaultAsync();
 
 
-            return prova;
+            return rimborso;
         }
 
         public async Task DeleteRimborso(Guid id)
         {
-            var rimborso = await _dbContext.Rimborso.FindAsync(id);
+            var rimborso = await _dbContext.Rimborsi.FindAsync(id);
 
             if (rimborso != null)
             {
-                _dbContext.Rimborso.Remove(rimborso);
+                _dbContext.Rimborsi.Remove(rimborso);
                 await _dbContext.SaveChangesAsync();
             }
         }
