@@ -20,6 +20,7 @@ namespace Core.Services
             DataGenerator.InitializeFeria(this);
             DataGenerator.InitializeNotteFuori(this);
             DataGenerator.InitializeTrasferta(this);
+            DataGenerator.InitializeRimborso(this);
         }
 
         public DbSet<User> Users { get; set; }
@@ -29,6 +30,6 @@ namespace Core.Services
         public DbSet<Feria> Feria { get; set; }
         public DbSet<NotteFuori> NotteFuori { get; set; }
         public DbSet<Trasferta> Trasferta { get; set; }
-
+        public DbSet<Rimborso> Rimborso { get; set; }
     }
 }

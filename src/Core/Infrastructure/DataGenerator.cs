@@ -159,6 +159,7 @@ namespace Core.Infrastructure
                     Chilometri = 50,
                     Data = DateTime.Now,
                     Commessa = "Lavoro",
+                    AutoAziendale = "Si",
                     Dettagli = "Dettagli di Trasferta",
                 }
             );
@@ -166,6 +167,26 @@ namespace Core.Infrastructure
             context.SaveChanges();
         }
 
+        public static void InitializeRimborso(TemplateDbContext context)
+        {
+            if (context.Rimborso.Any())
+            {
+                return;   // Data was already seeded
+            }
+            context.Rimborso.AddRange(
+                new Rimborso
+                {
+                    Id = Guid.NewGuid(), //la stringa presa online
+                    Importo = 50,
+                    Data = DateTime.Now,
+                    Commessa = "Lavoro",
+                    CartaAziendale = "Si",
+                    Dettagli = "Dettagli di Rimborso",
+                }
+            );
+
+            context.SaveChanges();
+        }
 
 
     }

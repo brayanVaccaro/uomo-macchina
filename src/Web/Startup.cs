@@ -142,6 +142,13 @@ namespace UomoMacchina
                 endpoints.MapAreaControllerRoute("Elimina Trasferte", "Trasferte", "Trasferte/Delete/{controller=Trasferte}/{action=Delete}/{id?}");
                 endpoints.MapAreaControllerRoute("Modifica Trasferte", "Trasferte", "Trasferte/SaveEdit/{controller=Trasferte}/{action=SaveEdit}/{id?}");
 
+
+                // Route per i Rimborsi, Elimina, Salvataggio dati
+                endpoints.MapAreaControllerRoute("TestP", "Rimborsi", "Rimborsi/{controller=Rimborsi}/{action=Index}");
+                endpoints.MapAreaControllerRoute("Elimina Rimborsi", "Rimborsi", "Rimborsi/Delete/{controller=Rimborsi}/{action=Delete}/{id?}");
+                endpoints.MapAreaControllerRoute("Modifica Rimborsi", "Rimborsi", "Rimborsi/SaveEdit/{controller=Rimborsi}/{action=SaveEdit}/{id?}");
+
+
                 endpoints.MapAreaControllerRoute("Example", "Example", "Example/{controller=Users}/{action=Index}/{id?}");
                 endpoints.MapAreaControllerRoute("Main", "Main", "Main/{controller=Main}/{action=Main}/{id?}");
                 endpoints.MapAreaControllerRoute("SingleDay", "Main", "Main/SingleDay/{controller=Main}/{action=SingleDay}");
