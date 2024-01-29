@@ -1,6 +1,22 @@
 ﻿@inject IHtmlLocalizer<UomoMacchina.Areas.Main.Data.MainViewModel> ModelLocalizer
 @model UomoMacchina.Areas.Main.Data.MainViewModel
 
+@*
+    1. Inserire il campo Straordinario di tipo bool nella Rendicontazione
+    2. Al clikc sulla riga devo poter editare l'elemento cliccato
+    3. Gestire la creazione di un elemento (aggiungerlo nella tabella specifica dell'elemento scelto) e del relativo evento (aggiungere l'evento alla tabella Eventi):
+        Clicco un bottone, mi esce il modale (Edit.cshtml) per inserire i dati.
+        La prima scelta nel modale sarà quella di selezionare cosa voglio aggiungere e in base a questa scelta mostrare o nascondere elementi del form
+
+    4. Ricerca di un dato --> implementazione da zero
+    5. Colori da cambiare
+    6. Sidebar implementare il cambio del mese al click sulla freccia, miglirare il css. Al clik su una settimana ti deve portare nel vue-cal alla settimana cliccata
+
+    7.pulizia del codice
+    8. modificare la section ereditata dal layout globale _Layout.cshtml
+    9. migliorare _SingleDay
+
+*@
 
 @{
     ViewData["Title"] = "Home";
@@ -10,17 +26,13 @@
     // Console.WriteLine(typeof eventModel);
 }
 @section pageTitle {
-    <nav class="navbar navbar-expand navbar-light flex-wrap onit-page-title">
+   @*  <nav class="navbar navbar-expand navbar-light flex-wrap onit-page-title">
         <a class="navbar-brand">
             @ViewData["Title"]
         </a>
 
-    </nav>
+    </nav> *@
 }
-@section pageSubtitle {
-
-}
-@* <p>@eventModel</p> *@
 
 <div class="container-fluid">
     <div class="row">
@@ -40,10 +52,10 @@
                      :disable-views="['years', 'year', 'month', '', '']"
                      :events="event"
                      :time-from="8 * 60"
-                     :time-to="18 * 60" />
+                     :time-to="24 * 60" />
         </div>
 
-        <div v-if="showSingleDay" id="" class="col">
+        <div v-if="showSingleDay" class="col-8">
             <partial name="@MVC.Main.Main.Views._SingleDay" model="Model" />
         </div>
     </div>

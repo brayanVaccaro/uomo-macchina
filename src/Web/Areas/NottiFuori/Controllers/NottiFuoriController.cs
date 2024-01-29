@@ -90,7 +90,7 @@ namespace UomoMacchina.Areas.NottiFuori.Controllers
                 {
                     model.Id = await _sharedService.Handle(model.ToAddOrUpdateNotteFuoriCommand());
 
-                    Alerts.AddSuccess(this, "NotteFuori effetuata con successo");
+                    Alerts.AddSuccess(this, "NottiFuori effetuata con successo");
 
                     returnToIndex = true;
 
@@ -146,19 +146,19 @@ namespace UomoMacchina.Areas.NottiFuori.Controllers
 
                 if (notteFuori != null)
                 {
-                    // Effettua l'eliminazione della NotteFuori
+                    // Effettua l'eliminazione della NottiFuori
                     await _sharedService.DeleteNotteFuori(id);
 
-                    Alerts.AddSuccess(this, "NotteFuori cancellata con successo");
+                    Alerts.AddSuccess(this, "NottiFuori cancellata con successo");
                 }
                 else
                 {
-                    Alerts.AddError(this, "NotteFuori non trovata");
+                    Alerts.AddError(this, "NottiFuori non trovata");
                 }
             }
             catch (Exception ex)
             {
-                Alerts.AddError(this, $"Errore durante l'eliminazione della NotteFuori: {ex.Message}");
+                Alerts.AddError(this, $"Errore durante l'eliminazione della NottiFuori: {ex.Message}");
             }
 
             return RedirectToAction(Actions.Index());

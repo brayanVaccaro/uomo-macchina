@@ -40,13 +40,24 @@ namespace UomoMacchina.Areas.Main
         [HttpGet]
         public async virtual Task<IActionResult> Main(MainViewModel model)
         {
-            EventiDTO eventi = await _sharedService.GetAllEvents();
+
+            RendicontazioniDTO rendicontazioni = await _sharedService.GetAllRendicontazioni(model.Rendicontazioni.ToRendicontazioneQuery());
             FerieDTO ferie = await _sharedService.GetAllFerie();
             PermessiDTO permessi = await _sharedService.GetAllPermessi();
+            NottiFuoriDTO nottiFuori = await _sharedService.GetAllNottiFuori(model.NottiFuori.ToNotteFuoriQuery());
+            TrasferteDTO trasferte = await _sharedService.GetAllTrasferte(model.Trasferte.ToTrasfertaQuery());
+            RimborsiDTO rimborsi = await _sharedService.GetAllRimborsi(model.Rimborsi.ToRimborsoQuery());
+
+            EventiDTO eventi = await _sharedService.GetAllEvents();
             SettimanaViewModel settimane = CalcolaSettimaneDelMese(DateTime.Now);
 
+            model.Rendicontazioni.SetRendicontazioni(rendicontazioni);
             model.Ferie.SetFerie(ferie);
             model.Permessi.SetPermessi(permessi);
+            model.NottiFuori.SetNottiFuori(nottiFuori);
+            model.Trasferte.SetTrasferte(trasferte);
+            model.Rimborsi.SetRimborsi(rimborsi);
+
             model.Eventi.SetEventi(eventi);
             model.SetSettimana(settimane);
 
@@ -65,12 +76,21 @@ namespace UomoMacchina.Areas.Main
         {
             if (DateTime.TryParseExact(dataScelta, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime dateFilter))
             {
-                FerieDTO ferieDTO = await _sharedService.GetFerieByDate(dateFilter);
-                PermessiDTO permessiDTO = await _sharedService.GetPermessiByDate(dateFilter);
-
+                RendicontazioniDTO rendicontazioni = await _sharedService.GetAllRendicontazioniByDate(dateFilter);
+                FerieDTO ferie = await _sharedService.GetAllFerieByDate(dateFilter);
+                PermessiDTO permessi = await _sharedService.GetAllPermessiByDate(dateFilter);
+                NottiFuoriDTO nottiFuori = await _sharedService.GetAllNottiFuoriByDate(dateFilter);
+                TrasferteDTO trasferte = await _sharedService.GetAllTrasferteByDate(dateFilter);
+                RimborsiDTO rimborsi = await _sharedService.GetAllRimborsiByDate(dateFilter);
+                
                 var model = new MainViewModel();
-                model.Ferie.SetFerie(ferieDTO);
-                model.Permessi.SetPermessi(permessiDTO);
+
+                model.Rendicontazioni.SetRendicontazioni(rendicontazioni);
+                model.Ferie.SetFerie(ferie);
+                model.Permessi.SetPermessi(permessi);
+                model.NottiFuori.SetNottiFuori(nottiFuori);
+                model.Trasferte.SetTrasferte(trasferte);
+                model.Rimborsi.SetRimborsi(rimborsi);
                 return Json(model);
             }
             else

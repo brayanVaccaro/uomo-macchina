@@ -34,11 +34,13 @@ namespace UomoMacchina.Areas.Rendicontazioni.Data
             public RendicontazioneViewModel() { }
 
             // La RendicontazioneViewModel prende i paramtri di RendicontazioneDTO quest'ultima
-            // si trova su Rendicontazione.Queries.cs 
+            // si trova su Rendicontazioni.Queries.cs 
             public RendicontazioneViewModel(RendicontazioneDTO rendicontazioneDTO)
             {
                 Id = rendicontazioneDTO.Id;
-                Ore = rendicontazioneDTO.Ore;
+                OreTotali = rendicontazioneDTO.OreTotali;
+                OraInizio = rendicontazioneDTO.OraInizio;
+                OraFine = rendicontazioneDTO.OraFine;
                 Data = rendicontazioneDTO.Data;
                 Commessa = rendicontazioneDTO.Commessa;
                 Dettagli = rendicontazioneDTO.Dettagli;
@@ -46,8 +48,10 @@ namespace UomoMacchina.Areas.Rendicontazioni.Data
             }
 
             public Guid? Id { get; set; }
-            public int Ore { get; set; }
+            public int OreTotali { get; set; }
             public DateTime Data { get; set; }
+            public DateTime OraInizio { get; set; }
+            public DateTime OraFine { get; set; }
             public string Commessa { get; set; }
             public string Dettagli { get; set; }
 
@@ -58,7 +62,9 @@ namespace UomoMacchina.Areas.Rendicontazioni.Data
                 {
 
                     Id = RendicontazioneDTO.Id;
-                    Ore = RendicontazioneDTO.Ore;
+                    OreTotali = RendicontazioneDTO.OreTotali;
+                    OraInizio = RendicontazioneDTO.OraInizio;
+                    OraFine = RendicontazioneDTO.OraFine;
                     Data = RendicontazioneDTO.Data;
                     Commessa = RendicontazioneDTO.Commessa;
                     Dettagli = RendicontazioneDTO.Dettagli;
@@ -71,7 +77,9 @@ namespace UomoMacchina.Areas.Rendicontazioni.Data
                 return new AddOrUpdateRendicontazioneCommand
                 {
                     Id = Id,
-                    Ore = Ore,
+                    OreTotali = OreTotali,
+                    OraInizio = OraInizio,
+                    OraFine = OraFine,
                     Data = Data,
                     Commessa = Commessa,
                     Dettagli = Dettagli,
@@ -93,7 +101,7 @@ namespace UomoMacchina.Areas.Rendicontazioni.Data
             TotalItems = rendicontazioniDTO.Count;
         }
 
-        // Metodo per utilizzare il filtro di RendicontazioneQuery sul file Rendicontazione.Queries.cs 
+        // Metodo per utilizzare il filtro di RendicontazioneQuery sul file Rendicontazioni.Queries.cs 
         public RendicontazioneQuery ToRendicontazioneQuery()
         {
             return new RendicontazioneQuery

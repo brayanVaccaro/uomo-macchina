@@ -34,35 +34,44 @@ namespace UomoMacchina.Areas.Trasferte.Data
             public TrasfertaViewModel() { }
 
             // La TrasfertaViewModel prende i paramtri di TrasfertaDTO quest'ultima
-            // si trova su Trasferta.Queries.cs 
+            // si trova su Trasferte.Queries.cs 
             public TrasfertaViewModel(TrasfertaDTO trasfertaDTO)
             {
                 Id = trasfertaDTO.Id;
                 Chilometri = trasfertaDTO.Chilometri;
-                Data = trasfertaDTO.Data;
+                DataInizio = trasfertaDTO.DataInizio;
+                DataFine = trasfertaDTO.DataFine;
                 Commessa = trasfertaDTO.Commessa;
+                AutoAziendale = trasfertaDTO.AutoAziendale;
                 Dettagli = trasfertaDTO.Dettagli;
 
             }
 
             public Guid? Id { get; set; }
             public int Chilometri { get; set; }
-            public DateTime Data { get; set; }
+            public DateTime DataInizio { get; set; }
+
+            public DateTime DataFine { get; set; }
+
             public string Commessa { get; set; }
+
+            public bool AutoAziendale { get; set; }
+
             public string Dettagli { get; set; }
 
 
-            public void SetTrasferta(TrasfertaDTO TrasfertaDTO)
+            public void SetTrasferta(TrasfertaDTO trasfertaDTO)
             {
-                if (TrasfertaDTO != null)
+                if (trasfertaDTO != null)
                 {
 
-                    Id = TrasfertaDTO.Id;
-                    Chilometri = TrasfertaDTO.Chilometri;
-                    Data = TrasfertaDTO.Data;
-                    Commessa = TrasfertaDTO.Commessa;
-                    Dettagli = TrasfertaDTO.Dettagli;
-
+                    Id = trasfertaDTO.Id;
+                    Chilometri = trasfertaDTO.Chilometri;
+                    DataInizio = trasfertaDTO.DataInizio;
+                    DataFine = trasfertaDTO.DataFine;
+                    Commessa = trasfertaDTO.Commessa;
+                    AutoAziendale = trasfertaDTO.AutoAziendale;
+                    Dettagli = trasfertaDTO.Dettagli;
                 }
             }
 
@@ -72,8 +81,10 @@ namespace UomoMacchina.Areas.Trasferte.Data
                 {
                     Id = Id,
                     Chilometri = Chilometri,
-                    Data = Data,
+                    DataInizio = DataInizio,
+                    DataFine = DataFine,
                     Commessa = Commessa,
+                    AutoAziendale = AutoAziendale,
                     Dettagli = Dettagli,
                 };
             }
@@ -93,7 +104,7 @@ namespace UomoMacchina.Areas.Trasferte.Data
             TotalItems = trasferteDTO.Count;
         }
 
-        // Metodo per utilizzare il filtro di TrasfertaQuery sul file Trasferta.Queries.cs 
+        // Metodo per utilizzare il filtro di TrasfertaQuery sul file Trasferte.Queries.cs 
         public TrasfertaQuery ToTrasfertaQuery()
         {
             return new TrasfertaQuery

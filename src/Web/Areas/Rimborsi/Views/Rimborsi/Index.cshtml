@@ -1,28 +1,31 @@
-﻿@model UomoMacchina.Areas.Rimborsi.Data.RimborsiViewModel
-@inject IHtmlLocalizer<UomoMacchina.Areas.Rimborsi.Data.RimborsiViewModel> ModelLocalizer
+﻿@inject IHtmlLocalizer<UomoMacchina.Areas.Rimborsi.Data.RimborsiViewModel> ModelLocalizer
+@model UomoMacchina.Areas.Rimborsi.Data.RimborsiViewModel
 
-@* Index di Rimborso *@
-
-@* Pulsante creazione data*@
+@* Index di Rimborsi *@
+@{
+ 
+}
 <ul class="navbar-nav flex-wrap ms-auto">
+
     <li>
         <a class="Nuovo btn btn-light ms-2" href="@Url.Action(MVC.Rimborsi.Rimborsi.New())" title="Inserisci un nuovo elemento">
             <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
         </a>
+       @*  <a class="modifica btn btn-light ms-2" title="Modifica un elemento">
+            <i class="fa-solid fa-plus"></i>&nbsp;Modifica
+        </a>
+        <a class="elimina btn btn-light ms-2" title="Elimina un elemento" href="@Url.Action(MVC.Rimborsi.Rimborsi.Delete())">
+            <i class="fa-solid fa-plus"></i>&nbsp;Elimina
+        </a> *@
     </li>
-</ul>
+</ul> 
 
 
-<h5> Per la modifica ed eliminazione cliccare una riga scelta</h5>
-
-@* Tabella Dati *@
-<div class="TabellaGenerale container-lg  text-center">
-    <table class="table table-hover table-sm table-striped">
+<h1>Rimborsi</h1>
+<div class="text-center">
+    <table class="table table-hover table-striped">
         <thead>
             <tr>
-                <th>
-                    Id
-                </th>
                 <th>
                     Importo
                 </th>
@@ -33,52 +36,41 @@
                     Commessa
                 </th>
                 <th>
-                    Carta aziendale
+                    Carta Aziendale
                 </th>
                 <th>
                     Dettagli
                 </th>
             </tr>
         </thead>
-
         <tbody>
-
-            @if (Model.Rimborsi.Any() == false)
-            {
-                <tr>
-                    <td colspan="3">Nessun elemento trovato con i filtri correnti</td>
-                </tr>
-            }
-            else
-            {
-                @foreach (var rimborso in Model.Rimborsi)
-                {
-                    <tr class="onit-table-row-link" onclick="javascript:utilities.navigateUrlExcludeOnitNotNavigate('@Url.Action(MVC.Rimborsi.Rimborsi.Edit(rimborso.Id))')" title="@ModelLocalizer["Modifica utente"] @rimborso.Id">
-                        <td scope="row" class="text-nowrap">
-                            @rimborso.Id
-                        </td>
-                        <td scope="row" class="text-nowrap">
-                            @rimborso.Importo
-                        </td>
-                        <td class="text-nowrap">
-                            @rimborso.Data.ToString("d")
-                        </td>
-                        <td class="text-nowrap">
-                            @rimborso.Commessa
-                        </td>
-                        <td class="text-nowrap">
-                            @rimborso.CartaAziendale
-                        </td>
-                        <td class="text-nowrap">
-                            @rimborso.Dettagli
-                        </td>
-                    </tr>
-                }
-            }
+            <tr v-if="model.rimborsi.rimborsi.length == 0">
+                <td scope="row" colspan="5">
+                    Nessun elemento trovato
+                </td>
+            </tr>
+            <tr v-for="rimborso in model.rimborsi.rimborsi">
+                
+                <td class="text-nowrap">
+                    {{rimborso.importo}}
+                </td>
+                <td class="text-nowrap">
+                    {{rimborso.data}}
+                </td>
+                <td class="text-nowrap">
+                    {{rimborso.commessa}}
+                </td>
+                <td class="text-nowrap">
+                    {{rimborso.cartaAziendale}}
+                </td>
+                <td class="text-nowrap">
+                    {{rimborso.dettagli}}
+                </td>
+            </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3">
+                <td colspan="5">
                     <nav class="navbar navbar-expand justify-content-md-center">
                         <ul class="navbar-nav flex-wrap"><partial name="@MVC.Shared.Views._PagingPartial" model="Model" /></ul>
                     </nav>
@@ -88,32 +80,10 @@
     </table>
 </div>
 
-
-
 @section styles {
     <link href="~/css/richieste.css" rel="stylesheet" />
 }
 
-@section scripts{
-
-
-    <script>
-        var Vue
-        Vue.createApp({
-            data() {
-                return {
-                    message: 'Vue Funziona!',
-                }
-            },
-            methods: {
-                async eliminaRimborso(rimborsoId) {
-                    console.log("rimborsoId", rimborsoId)
-                    await fetch('/Rimborsi/Rimborsi/Edit?' + rimborsoId, {
-                        method: "POST",
-                    });
-
-                }
-            }
-        }).mount("#pageId");
-    </script>
-    }
+@section scripts {
+    
+}

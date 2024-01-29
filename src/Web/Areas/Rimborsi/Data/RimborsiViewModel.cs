@@ -34,7 +34,7 @@ namespace UomoMacchina.Areas.Rimborsi.Data
             public RimborsoViewModel() { }
 
             // La RimborsoViewModel prende i paramtri di RimborsoDTO quest'ultima
-            // si trova su Rimborso.Queries.cs 
+            // si trova su Rimborsi.Queries.cs 
             public RimborsoViewModel(RimborsoDTO rimborsoDTO)
             {
                 Id = rimborsoDTO.Id;
@@ -50,7 +50,7 @@ namespace UomoMacchina.Areas.Rimborsi.Data
             public int Importo { get; set; }
             public DateTime Data { get; set; }
             public string Commessa { get; set; }
-            public string CartaAziendale { get; set; }
+            public bool CartaAziendale { get; set; }
             public string Dettagli { get; set; }
 
 
@@ -97,7 +97,7 @@ namespace UomoMacchina.Areas.Rimborsi.Data
             TotalItems = rimborsiDTO.Count;
         }
 
-        // Metodo per utilizzare il filtro di RimborsoQuery sul file Rimborso.Queries.cs 
+        // Metodo per utilizzare il filtro di RimborsoQuery sul file Rimborsi.Queries.cs 
         public RimborsoQuery ToRimborsoQuery()
         {
             return new RimborsoQuery

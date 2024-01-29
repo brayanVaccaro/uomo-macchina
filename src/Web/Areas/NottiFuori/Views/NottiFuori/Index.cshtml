@@ -1,30 +1,33 @@
-﻿@model UomoMacchina.Areas.NottiFuori.Data.NottiFuoriViewModel
-@inject IHtmlLocalizer<UomoMacchina.Areas.NottiFuori.Data.NottiFuoriViewModel> ModelLocalizer
+﻿@inject IHtmlLocalizer<UomoMacchina.Areas.NottiFuori.Data.NottiFuoriViewModel> ModelLocalizer
+@model UomoMacchina.Areas.NottiFuori.Data.NottiFuoriViewModel
 
-@* Index di NotteFuori *@
-
-@* Pulsante creazione data*@
+@* Index di NottiFuori *@
+@{
+ 
+}
 <ul class="navbar-nav flex-wrap ms-auto">
+
     <li>
         <a class="Nuovo btn btn-light ms-2" href="@Url.Action(MVC.NottiFuori.NottiFuori.New())" title="Inserisci un nuovo elemento">
             <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
         </a>
+        @* <a class="modifica btn btn-light ms-2" title="Modifica un elemento">
+            <i class="fa-solid fa-plus"></i>&nbsp;Modifica
+        </a>
+        <a class="elimina btn btn-light ms-2" title="Elimina un elemento" href="@Url.Action(MVC.NottiFuori.NottiFuori.Delete())">
+            <i class="fa-solid fa-plus"></i>&nbsp;Elimina
+        </a> *@
     </li>
 </ul>
 
 
-<h5> Per la modifica ed eliminazione cliccare una riga scelta</h5>
-
-@* Tabella Dati *@
-<div class="TabellaGenerale container-lg  text-center">
-    <table class="table table-hover table-sm table-striped">
+<h1>NottiFuori</h1>
+<div class="text-center">
+    <table class="table table-hover table-striped">
         <thead>
             <tr>
                 <th>
-                    Id
-                </th>
-                <th>
-                    TipoViaggio
+                    Tipo Viaggio
                 </th>
                 <th>
                     Data
@@ -37,42 +40,31 @@
                 </th>
             </tr>
         </thead>
-
         <tbody>
-
-            @if (Model.NottiFuori.Any() == false)
-            {
-                <tr>
-                    <td colspan="3">Nessun elemento trovato con i filtri correnti</td>
-                </tr>
-            }
-            else
-            {
-                @foreach (var notteFuori in Model.NottiFuori)
-                {
-                    <tr class="onit-table-row-link" onclick="javascript:utilities.navigateUrlExcludeOnitNotNavigate('@Url.Action(MVC.NottiFuori.NottiFuori.Edit(notteFuori.Id))')" title="@ModelLocalizer["Modifica utente"] @notteFuori.Id">
-                        <td scope="row" class="text-nowrap">
-                            @notteFuori.Id
-                        </td>
-                        <td scope="row" class="text-nowrap">
-                            @notteFuori.TipoViaggio
-                        </td>
-                        <td class="text-nowrap">
-                            @notteFuori.Data.ToString("d")
-                        </td>
-                        <td class="text-nowrap">
-                            @notteFuori.Commessa
-                        </td>
-                        <td class="text-nowrap">
-                            @notteFuori.Dettagli
-                        </td>
-                    </tr>
-                }
-            }
+            <tr v-if="model.nottiFuori.nottiFuori.length == 0">
+                <td scope="row" colspan="5">
+                    Nessun elemento trovato
+                </td>
+            </tr>
+            <tr v-for="notteFuori in model.nottiFuori.nottiFuori">
+                
+                <td class="text-nowrap">
+                    {{notteFuori.tipoViaggio}}
+                </td>
+                <td class="text-nowrap">
+                    {{notteFuori.data}}
+                </td>
+                <td class="text-nowrap">
+                    {{notteFuori.commessa}}
+                </td>
+                <td class="text-nowrap">
+                    {{notteFuori.dettagli}}
+                </td>
+            </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3">
+                <td colspan="5">
                     <nav class="navbar navbar-expand justify-content-md-center">
                         <ul class="navbar-nav flex-wrap"><partial name="@MVC.Shared.Views._PagingPartial" model="Model" /></ul>
                     </nav>
@@ -82,32 +74,10 @@
     </table>
 </div>
 
-
-
 @section styles {
     <link href="~/css/richieste.css" rel="stylesheet" />
 }
 
-@section scripts{
-
-
-    <script>
-        var Vue
-        Vue.createApp({
-            data() {
-                return {
-                    message: 'Vue Funziona!',
-                }
-            },
-            methods: {
-                async eliminaNotteFuori(notteFuoriId) {
-                    console.log("notteFuoriId", notteFuoriId)
-                    await fetch('/NottiFuori/NottiFuori/Edit?' + notteFuoriId, {
-                        method: "POST",
-                    });
-
-                }
-            }
-        }).mount("#pageId");
-    </script>
-    }
+@section scripts {
+    
+}

@@ -15,17 +15,11 @@ namespace UomoMacchina.Areas.Ferie.Data
         //costruttore
         public FerieViewModel()
         {
-            OrderBy = nameof(FeriaViewModel.Id);
-            OrderByDescending = false;
             Ferie = Array.Empty<FeriaViewModel>();
         }
 
         //parametri
         //public Guid? Id { get; set; }
-
-        [Display(Name = "Cerca")]
-        public string Filtro { get; set; }
-
 
         public FeriaViewModel[] Ferie { get; set; }
 
@@ -35,12 +29,13 @@ namespace UomoMacchina.Areas.Ferie.Data
             public FeriaViewModel() { }
 
             // La FeriaViewModel prende i paramtri di FeriaDTO quest'ultima
-            // si trova su Feria.Queries.cs rga 32
+            // si trova su Ferie.Queries.cs rga 32
             public FeriaViewModel(FeriaDTO feriaDTO)
             {
                 Id = feriaDTO.Id;
                 DataInizio = feriaDTO.DataInizio;
                 DataFine = feriaDTO.DataFine;
+                Class = feriaDTO.Class;
                 Durata = feriaDTO.Durata;
                 Dettagli = feriaDTO.Dettagli;
 
@@ -49,6 +44,7 @@ namespace UomoMacchina.Areas.Ferie.Data
             public Guid? Id { get; set; }
             public DateTime DataInizio { get; set; }
             public DateTime DataFine { get; set; }
+            public String Class { get; set; }
             public int Durata { get; set; }
             public string Dettagli { get; set; }
 
@@ -78,11 +74,13 @@ namespace UomoMacchina.Areas.Ferie.Data
                     Dettagli = Dettagli,
                 };
             }
+           
         }
-            public string ToJson()
-            {
-                return JsonSerializer.ToJsonCamelCase(this);
-            }
+        public string ToJson()
+        {
+            return JsonSerializer.ToJsonCamelCase(this);
+        }
+
 
         //metodo per impostare le Ferie
         internal void SetFerie(FerieDTO ferieDTO)
@@ -92,21 +90,12 @@ namespace UomoMacchina.Areas.Ferie.Data
             TotalItems = ferieDTO.Count;
         }
 
-        // Metodo per utilizzare il filtro di FeriaQuery sul file Feria.Queries.cs 
-        public FeriaQuery ToFeriaQuery()
-        {
-            return new FeriaQuery
-            {
-                Filter = this.Filtro
-            };
-        }
 
         public override IActionResult GetRoute() => MVC.Ferie.Ferie.Index(this).GetAwaiter().GetResult();
 
 
     }
-        // Metodo override IActionResult di cui la rotta presa è su Startup.cs riga 116
-        //public override IActionResult GetRoute() => MVC.Ferie.Ferie.Index(this).GetAwaiter().GetResult();
+        
 
 }
 

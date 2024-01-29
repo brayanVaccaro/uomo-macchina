@@ -90,7 +90,7 @@ namespace UomoMacchina.Areas.Trasferte.Controllers
                 {
                     model.Id = await _sharedService.Handle(model.ToAddOrUpdateTrasfertaCommand());
 
-                    Alerts.AddSuccess(this, "Trasferta effetuata con successo");
+                    Alerts.AddSuccess(this, "Trasferte effetuata con successo");
 
                     returnToIndex = true;
 
@@ -146,19 +146,19 @@ namespace UomoMacchina.Areas.Trasferte.Controllers
 
                 if (trasferta != null)
                 {
-                    // Effettua l'eliminazione della Trasferta
+                    // Effettua l'eliminazione della Trasferte
                     await _sharedService.DeleteTrasferta(id);
 
-                    Alerts.AddSuccess(this, "Trasferta cancellata con successo");
+                    Alerts.AddSuccess(this, "Trasferte cancellata con successo");
                 }
                 else
                 {
-                    Alerts.AddError(this, "Trasferta non trovata");
+                    Alerts.AddError(this, "Trasferte non trovata");
                 }
             }
             catch (Exception ex)
             {
-                Alerts.AddError(this, $"Errore durante l'eliminazione della Trasferta: {ex.Message}");
+                Alerts.AddError(this, $"Errore durante l'eliminazione della Trasferte: {ex.Message}");
             }
 
             return RedirectToAction(Actions.Index());

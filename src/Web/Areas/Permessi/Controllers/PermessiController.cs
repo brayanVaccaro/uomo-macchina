@@ -30,7 +30,7 @@ namespace UomoMacchina.Areas.Permessi
         [HttpGet]
         public async virtual Task<IActionResult> Index(PermessiViewModel model)
         {   // schermata index  
-            var permessi = await _sharedService.GetAllPermessi(model.ToPermessoQuery());
+            var permessi = await _sharedService.GetAllPermessi();
             
             model.SetPermessi(permessi);
 
@@ -46,7 +46,7 @@ namespace UomoMacchina.Areas.Permessi
             return RedirectToAction(Actions.Edit());
         }
 
-        // Costrutto della Query
+        // Costrutto della GetAllPermessi
 
         //secondo metodo che viene chiamato, dopo New
         [HttpGet]
@@ -86,7 +86,7 @@ namespace UomoMacchina.Areas.Permessi
                 {
                     model.Id = await _sharedService.Handle(model.ToAddOrUpdatePermessoCommand());
                     
-                    Alerts.AddSuccess(this, "Permesso effetuata con successo");
+                    Alerts.AddSuccess(this, "Permessi effetuata con successo");
 
                     }
                 catch (Exception ex)
@@ -140,19 +140,19 @@ namespace UomoMacchina.Areas.Permessi
 
                 if (permesso != null)
                 {
-                    // Effettua l'eliminazione della Permesso
+                    // Effettua l'eliminazione della Permessi
                     await _sharedService.DeletePermesso(id);
 
-                    Alerts.AddSuccess(this, "Permesso cancellata con successo");
+                    Alerts.AddSuccess(this, "Permessi cancellata con successo");
                 }
                 else
                 {
-                    Alerts.AddError(this, "Permesso non trovata");
+                    Alerts.AddError(this, "Permessi non trovata");
                 }
             }
             catch (Exception ex)
             {
-                Alerts.AddError(this, $"Errore durante l'eliminazione della Permesso: {ex.Message}");
+                Alerts.AddError(this, $"Errore durante l'eliminazione della Permessi: {ex.Message}");
             }
 
             return RedirectToAction(Actions.Index());

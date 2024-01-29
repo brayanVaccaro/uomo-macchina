@@ -15,27 +15,14 @@ namespace UomoMacchina.Areas.Permessi.Data
         //costruttore
         public PermessiViewModel()
         {
-            OrderBy = nameof(PermessoViewModel.Id);
-            OrderByDescending = false;
             Permessi = Array.Empty<PermessoViewModel>();
         }
-
-        //parametri
-        //public Guid? Id { get; set; }
-
-        [Display(Name = "Cerca")]
-        public string Filtro { get; set; }
-
-        
         public PermessoViewModel[] Permessi { get; set; }
-
 
         public class PermessoViewModel
         {
             public PermessoViewModel(){}
 
-            // La PermessoViewModel prende i paramtri di PermessoDTO quest'ultima
-            // si trova su Permesso.Queries.cs rga 32
             public PermessoViewModel(PermessoDTO permessoDTO)
             {
                 Id = permessoDTO.Id;
@@ -88,7 +75,7 @@ namespace UomoMacchina.Areas.Permessi.Data
             }
         }
 
-        //metodo per impostare le Permessi
+        //metodo per impostare i Permessi
         internal void SetPermessi(PermessiDTO permessiDTO)
         {   
             Permessi = permessiDTO.Permessi.Select(x => new PermessoViewModel(x)).ToArray();
@@ -96,28 +83,9 @@ namespace UomoMacchina.Areas.Permessi.Data
             TotalItems = permessiDTO.Count;
         }
 
-        // Metodo per utilizzare il filtro di PermessoQuery sul file Permesso.Queries.cs riga 10
-        public PermessoQuery ToPermessoQuery()
-        {
-            return new PermessoQuery
-            {
-                Filter = this.Filtro
-            };
-        }
+        
 
         public override IActionResult GetRoute() => MVC.Permessi.Permessi.Index(this).GetAwaiter().GetResult();
-
-
-        //public override IActionResult GetRoute()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-
-        // Metodo override IActionResult di cui la rotta presa è su Startup.cs riga 116
-        //public override IActionResult GetRoute() => MVC.Permessi.Permessi.Index(this).GetAwaiter().GetResult();
-
-
 
     }
 }

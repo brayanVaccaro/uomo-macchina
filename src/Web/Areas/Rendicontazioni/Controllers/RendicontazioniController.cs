@@ -90,7 +90,7 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
                 {
                     model.Id = await _sharedService.Handle(model.ToAddOrUpdateRendicontazioneCommand());
 
-                    Alerts.AddSuccess(this, "Rendicontazione effetuata con successo");
+                    Alerts.AddSuccess(this, "Rendicontazioni effetuata con successo");
 
                     returnToIndex = true;
 
@@ -146,19 +146,19 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
 
                 if (rendicontazione != null)
                 {
-                    // Effettua l'eliminazione della Rendicontazione
+                    // Effettua l'eliminazione della Rendicontazioni
                     await _sharedService.Delete(id);
 
-                    Alerts.AddSuccess(this, "Rendicontazione cancellata con successo");
+                    Alerts.AddSuccess(this, "Rendicontazioni cancellata con successo");
                 }
                 else
                 {
-                    Alerts.AddError(this, "Rendicontazione non trovata");
+                    Alerts.AddError(this, "Rendicontazioni non trovata");
                 }
             }
             catch (Exception ex)
             {
-                Alerts.AddError(this, $"Errore durante l'eliminazione della Rendicontazione: {ex.Message}");
+                Alerts.AddError(this, $"Errore durante l'eliminazione della Rendicontazioni: {ex.Message}");
             }
 
             return RedirectToAction(Actions.Index());

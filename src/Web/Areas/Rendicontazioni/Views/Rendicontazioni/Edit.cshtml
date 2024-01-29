@@ -19,10 +19,10 @@
                 <div>
                     <!-- Ore -->
                     <div class="col-md-4 position-relative">
-                        <label asp-for="Ore" class="form-label">Ore:</label>
-                        <input type="text" class="form-control" asp-for="Ore" value="" required>
-                        <span asp-validation-for="Ore" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
-                        <span asp-validation-for="Ore" class="valid-feedback">Ora di inizio inserita</span>
+                        <label asp-for="OreTotali" class="form-label">Ore:</label>
+                        <input type="text" class="form-control" asp-for="OreTotali" value="" required>
+                        <span asp-validation-for="OreTotali" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
+                        <span asp-validation-for="OreTotali" class="valid-feedback">Ora di inizio inserita</span>
                     </div>
 
                     <!-- Data  -->
@@ -66,10 +66,10 @@
                 <div>
                     <!-- Ore -->
                     <div class="col-md-4 position-relative">
-                        <label asp-for="Ore" class="form-label">Ore:</label>
-                        <input type="text" class="form-control" asp-for="Ore" value="" required>
-                        <span asp-validation-for="Ore" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
-                        <span asp-validation-for="Ore" class="valid-feedback">Ora di inizio inserita</span>
+                        <label asp-for="OreTotali" class="form-label">Ore:</label>
+                        <input type="text" class="form-control" asp-for="OreTotali" value="" required>
+                        <span asp-validation-for="OreTotali" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
+                        <span asp-validation-for="OreTotali" class="valid-feedback">Ora di inizio inserita</span>
                     </div>
 
                     <!-- Data  -->
@@ -117,7 +117,7 @@
                 @* MODIFICA ELEMENTO *@
                 <form method="post" id="" action="@Url.Action(MVC.Rendicontazioni.Rendicontazioni.SaveEdit())">
                     <input id="Id" type="hidden" asp-for="Id" />
-                    <input id="Ore" type="hidden" asp-for="Ore" />
+                    <input id="Ore" type="hidden" asp-for="OreTotali" />
                     <input id="Data" type="hidden" asp-for="Data" />
                     <input id="Commessa" type="hidden" asp-for="Commessa" />
                     <input id="Dettagli" type="hidden" asp-for="Dettagli" />

@@ -12,8 +12,7 @@
     "inputFile": "wwwroot/css/main.scss"
   },
   {
-    "outputFile": "wwwroot/css/richieste.css",
-    "inputFile": "wwwroot/css/richieste.scss"
-
+    "inputFile": "wwwroot/css/richieste.scss",
+    "outputFile": "wwwroot/css/richieste.css"
   }
 ]

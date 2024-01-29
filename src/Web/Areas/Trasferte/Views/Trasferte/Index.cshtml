@@ -1,78 +1,80 @@
-﻿@model UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel
-@inject IHtmlLocalizer<UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel> ModelLocalizer
+﻿@inject IHtmlLocalizer<UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel> ModelLocalizer
+@model UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel
 
-@* Index di Trasferta *@
-
-@* Pulsante creazione data*@
+@* Index di Trasferte *@
+@{
+ 
+}
 <ul class="navbar-nav flex-wrap ms-auto">
+
     <li>
         <a class="Nuovo btn btn-light ms-2" href="@Url.Action(MVC.Trasferte.Trasferte.New())" title="Inserisci un nuovo elemento">
             <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
         </a>
+        @* <a class="modifica btn btn-light ms-2" title="Modifica un elemento">
+            <i class="fa-solid fa-plus"></i>&nbsp;Modifica
+        </a>
+        <a class="elimina btn btn-light ms-2" title="Elimina un elemento" href="@Url.Action(MVC.Trasferte.Trasferte.Delete())">
+            <i class="fa-solid fa-plus"></i>&nbsp;Elimina
+        </a> *@
     </li>
 </ul>
 
-
-<h5> Per la modifica ed eliminazione cliccare una riga scelta</h5>
-
-@* Tabella Dati *@
-<div class="TabellaGenerale container-lg  text-center">
-    <table class="table table-hover table-sm table-striped">
+<h1>Trasferte</h1>
+<div class="text-center">
+    <table class="table table-hover table-striped">
         <thead>
             <tr>
-                <th>
-                    Id
-                </th>
                 <th>
                     Chilometri
                 </th>
                 <th>
-                    Data
+                    DataInizio
+                </th>
+                <th>
+                    DataFine
                 </th>
                 <th>
                     Commessa
+                </th>
+                <th>
+                    Auto Aziendale
                 </th>
                 <th>
                     Dettagli
                 </th>
             </tr>
         </thead>
-
         <tbody>
-
-            @if (Model.Trasferte.Any() == false)
-            {
-                <tr>
-                    <td colspan="3">Nessun elemento trovato con i filtri correnti</td>
-                </tr>
-            }
-            else
-            {
-                @foreach (var trasferta in Model.Trasferte)
-                {
-                    <tr class="onit-table-row-link" onclick="javascript:utilities.navigateUrlExcludeOnitNotNavigate('@Url.Action(MVC.Trasferte.Trasferte.Edit(trasferta.Id))')" title="@ModelLocalizer["Modifica utente"] @trasferta.Id">
-                        <td scope="row" class="text-nowrap">
-                            @trasferta.Id
-                        </td>
-                        <td scope="row" class="text-nowrap">
-                            @trasferta.Chilometri
-                        </td>
-                        <td class="text-nowrap">
-                            @trasferta.Data.ToString("d")
-                        </td>
-                        <td class="text-nowrap">
-                            @trasferta.Commessa
-                        </td>
-                        <td class="text-nowrap">
-                            @trasferta.Dettagli
-                        </td>
-                    </tr>
-                }
-            }
+            <tr v-if="model.trasferte.trasferte.length == 0">
+                <td scope="row" colspan="5">
+                    Nessun elemento trovato
+                </td>
+            </tr>
+            <tr v-for="trasferta in model.trasferte.trasferte">
+                <td class="text-nowrap">
+                    {{trasferta.chilometri}}
+                </td>
+                <td class="text-nowrap">
+                    {{trasferta.dataInizio}}
+                </td>
+                <td class="text-nowrap">
+                    {{trasferta.dataFine}}
+                </td>
+                <td class="text-nowrap">
+                    {{trasferta.commessa}}
+                </td>
+                <td class="text-nowrap">
+                    {{trasferta.autoAziendale}}
+                </td>
+                <td class="text-nowrap">
+                    {{trasferta.dettagli}}
+                </td>
+            </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3">
+                <td colspan="5">
                     <nav class="navbar navbar-expand justify-content-md-center">
                         <ul class="navbar-nav flex-wrap"><partial name="@MVC.Shared.Views._PagingPartial" model="Model" /></ul>
                     </nav>
@@ -82,32 +84,10 @@
     </table>
 </div>
 
-
-
 @section styles {
     <link href="~/css/richieste.css" rel="stylesheet" />
 }
 
-@section scripts{
-
-
-    <script>
-        var Vue
-        Vue.createApp({
-            data() {
-                return {
-                    message: 'Vue Funziona!',
-                }
-            },
-            methods: {
-                async eliminaTrasferta(trasfertaId) {
-                    console.log("trasfertaId", trasfertaId)
-                    await fetch('/Trasferte/Trasferte/Edit?' + trasfertaId, {
-                        method: "POST",
-                    });
-
-                }
-            }
-        }).mount("#pageId");
-    </script>
-    }
+@section scripts {
+    
+}

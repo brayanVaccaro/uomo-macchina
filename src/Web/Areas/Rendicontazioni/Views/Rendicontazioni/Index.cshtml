@@ -1,33 +1,41 @@
-﻿@model UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel
-@inject IHtmlLocalizer<UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel> ModelLocalizer
+﻿@inject IHtmlLocalizer<UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel> ModelLocalizer
+@model UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel
 
-@* Index di Rendicontazione *@
+@* Index di Rendicontazioni *@
+@{
+ 
+}
+ <ul class="navbar-nav flex-wrap ms-auto">
 
-@* Pulsante creazione data*@
-<ul class="navbar-nav flex-wrap ms-auto">
     <li>
         <a class="Nuovo btn btn-light ms-2" href="@Url.Action(MVC.Rendicontazioni.Rendicontazioni.New())" title="Inserisci un nuovo elemento">
             <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
         </a>
+        @* <a class="modifica btn btn-light ms-2" title="Modifica un elemento">
+            <i class="fa-solid fa-plus"></i>&nbsp;Modifica
+        </a>
+        <a class="elimina btn btn-light ms-2" title="Elimina un elemento" href="@Url.Action(MVC.Rendicontazioni.Rendicontazioni.Delete())">
+            <i class="fa-solid fa-plus"></i>&nbsp;Elimina
+        </a> *@
     </li>
-</ul>
+</ul> 
 
-
-<h5> Per la modifica ed eliminazione cliccare una riga scelta</h5>
-
-@* Tabella Dati *@
-<div class="TabellaGenerale container-lg  text-center">
-    <table class="table table-hover table-sm table-striped">
+<h1>Rendicontazioni</h1>
+<div class="text-center">
+    <table class="table table-hover table-striped">
         <thead>
             <tr>
                 <th>
-                    Id
-                </th>
-                <th>
-                    Ore
+                    OreTotali
                 </th>
                 <th>
                     Data
+                </th>
+                <th>
+                    OraInizio
+                </th>
+                <th>
+                    OraFine
                 </th>
                 <th>
                     Commessa
@@ -37,42 +45,36 @@
                 </th>
             </tr>
         </thead>
-
         <tbody>
-
-            @if (Model.Rendicontazioni.Any() == false)
-            {
-                <tr>
-                    <td colspan="3">Nessun elemento trovato con i filtri correnti</td>
-                </tr>
-            }
-            else
-            {
-                @foreach (var rendicontazione in Model.Rendicontazioni)
-                {
-                    <tr class="onit-table-row-link" onclick="javascript:utilities.navigateUrlExcludeOnitNotNavigate('@Url.Action(MVC.Rendicontazioni.Rendicontazioni.Edit(rendicontazione.Id))')" title="@ModelLocalizer["Modifica utente"] @rendicontazione.Id">
-                        <td scope="row" class="text-nowrap">
-                            @rendicontazione.Id
-                        </td>
-                        <td scope="row" class="text-nowrap">
-                            @rendicontazione.Ore
-                        </td>
-                        <td class="text-nowrap">
-                            @rendicontazione.Data.ToString("d")
-                        </td>
-                        <td class="text-nowrap">
-                            @rendicontazione.Commessa
-                        </td>
-                        <td class="text-nowrap">
-                            @rendicontazione.Dettagli
-                        </td>
-                    </tr>
-                }
-            }
+            <tr v-if="model.rendicontazioni.rendicontazioni.length == 0">
+                <td scope="row" colspan="5">
+                    Nessun elemento trovato
+                </td>
+            </tr>
+            <tr v-for="rendicontazione in model.rendicontazioni.rendicontazioni" onclick="javascript:utilities.navigateUrlExcludeOnitNotNavigate('@Url.Action(MVC.Rendicontazioni.Rendicontazioni.Edit(@Model.Id))')">
+                <td class="text-nowrap">
+                    {{rendicontazione.oreTotali}}
+                </td>
+                <td class="text-nowrap">
+                    {{rendicontazione.data}}
+                </td>
+                <td class="text-nowrap">
+                    {{rendicontazione.oraInizio}}
+                </td>
+                <td class="text-nowrap">
+                    {{rendicontazione.oraFine}}
+                </td>
+                <td class="text-nowrap">
+                    {{rendicontazione.commessa}}
+                </td>
+                <td class="text-nowrap">
+                    {{rendicontazione.dettagli}}
+                </td>
+            </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3">
+                <td colspan="5">
                     <nav class="navbar navbar-expand justify-content-md-center">
                         <ul class="navbar-nav flex-wrap"><partial name="@MVC.Shared.Views._PagingPartial" model="Model" /></ul>
                     </nav>
@@ -82,32 +84,10 @@
     </table>
 </div>
 
-
-
 @section styles {
     <link href="~/css/richieste.css" rel="stylesheet" />
 }
 
-@section scripts{
+@section scripts {
     
-
-    <script>
-        var Vue
-        Vue.createApp({
-            data() {
-                return {
-                    message: 'Vue Funziona!',
-                }
-            },
-            methods: {
-                async eliminaRendicontazione(rendicontazioneId) {
-                    console.log("rendicontazioneId", rendicontazioneId)
-                    await fetch('/Rendicontazioni/Rendicontazioni/Edit?' + rendicontazioneId, {
-                        method: "POST",
-                    });
-                    
-                }
-            }
-        }).mount("#pageId");
-    </script>
-    }
+}

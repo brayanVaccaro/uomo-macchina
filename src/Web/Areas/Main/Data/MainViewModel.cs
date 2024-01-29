@@ -7,7 +7,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using UomoMacchina.Areas.Ferie.Data;
 using UomoMacchina.Areas.Main.Data.Shared;
+using UomoMacchina.Areas.NottiFuori.Data;
 using UomoMacchina.Areas.Permessi.Data;
+using UomoMacchina.Areas.Rendicontazioni.Data;
+using UomoMacchina.Areas.Rimborsi.Data;
+using UomoMacchina.Areas.Trasferte.Data;
 using UomoMacchina.Infrastructure;
 using static UomoMacchina.Areas.Ferie.Data.FerieViewModel;
 using static UomoMacchina.Areas.Main.Data.Shared.VueCalEventsViewModel;
@@ -21,9 +25,13 @@ namespace UomoMacchina.Areas.Main.Data
 
         public MainViewModel()
         {
-            Eventi = new VueCalEventsViewModel();
+            Rendicontazioni = new RendicontazioniViewModel();
             Ferie = new FerieViewModel();
             Permessi = new PermessiViewModel();
+            NottiFuori = new NottiFuoriViewModel();
+            Trasferte = new TrasferteViewModel();
+            Rimborsi = new RimborsiViewModel();
+            Eventi = new VueCalEventsViewModel();
         }
         
         public SettimanaViewModel Settimana { get; set; }
@@ -33,6 +41,15 @@ namespace UomoMacchina.Areas.Main.Data
         public FerieViewModel Ferie { get; set; }
 
         public PermessiViewModel Permessi { get; set; }
+
+        public NottiFuoriViewModel NottiFuori { get; set; }
+
+        public TrasferteViewModel Trasferte { get; set; }
+
+        public RimborsiViewModel Rimborsi { get; set; }
+
+        public RendicontazioniViewModel Rendicontazioni { get; set; }
+
 
         public override IActionResult GetRoute() => MVC.Main.Main.Main(this).GetAwaiter().GetResult();
        

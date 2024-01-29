@@ -90,7 +90,7 @@ namespace UomoMacchina.Areas.Rimborsi.Controllers
                 {
                     model.Id = await _sharedService.Handle(model.ToAddOrUpdateRimborsoCommand());
 
-                    Alerts.AddSuccess(this, "Rimborso effetuata con successo");
+                    Alerts.AddSuccess(this, "Rimborsi effetuata con successo");
 
                     returnToIndex = true;
 
@@ -146,19 +146,19 @@ namespace UomoMacchina.Areas.Rimborsi.Controllers
 
                 if (rimborso != null)
                 {
-                    // Effettua l'eliminazione della Rimborso
+                    // Effettua l'eliminazione della Rimborsi
                     await _sharedService.DeleteRimborso(id);
 
-                    Alerts.AddSuccess(this, "Rimborso cancellata con successo");
+                    Alerts.AddSuccess(this, "Rimborsi cancellata con successo");
                 }
                 else
                 {
-                    Alerts.AddError(this, "Rimborso non trovata");
+                    Alerts.AddError(this, "Rimborsi non trovata");
                 }
             }
             catch (Exception ex)
             {
-                Alerts.AddError(this, $"Errore durante l'eliminazione della Rimborso: {ex.Message}");
+                Alerts.AddError(this, $"Errore durante l'eliminazione della Rimborsi: {ex.Message}");
             }
 
             return RedirectToAction(Actions.Index());

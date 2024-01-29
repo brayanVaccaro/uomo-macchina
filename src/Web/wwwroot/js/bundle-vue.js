@@ -9046,7 +9046,7 @@ Component that was made reactive: `,
           validateDirectiveName(names[i]);
         }
       }
-      if (Component.compilerOptions && isRuntimeOnly()) {
+      if (Component.compilerOptions && isRunDateTime()) {
         warn$1(
           `"compilerOptions" is only supported when using a build of Vue that includes the runtime compiler. Since you are using a runtime-only build, the options should be passed via your build tool config instead.`
         );
@@ -9132,7 +9132,7 @@ Component that was made reactive: `,
       }
     };
   }
-  const isRuntimeOnly = () => !compile$1;
+  const isRunDateTime = () => !compile$1;
   function finishComponentSetup(instance, isSSR, skipOptions) {
     const Component = instance.type;
     if (!instance.render) {
@@ -11058,7 +11058,7 @@ Component that was made reactive: `,
     });
   }
   function injectCompilerOptionsCheck(app) {
-    if (isRuntimeOnly()) {
+    if (isRunDateTime()) {
       const isCustomElement = app.config.isCustomElement;
       Object.defineProperty(app.config, "isCustomElement", {
         get() {
@@ -16524,7 +16524,7 @@ ${codeFrame}` : message);
   exports.isReactive = isReactive;
   exports.isReadonly = isReadonly;
   exports.isRef = isRef;
-  exports.isRuntimeOnly = isRuntimeOnly;
+  exports.isRunDateTime = isRunDateTime;
   exports.isShallow = isShallow;
   exports.isVNode = isVNode;
   exports.markRaw = markRaw;

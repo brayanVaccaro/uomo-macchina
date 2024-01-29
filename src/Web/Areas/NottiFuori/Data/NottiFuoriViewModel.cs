@@ -34,7 +34,7 @@ namespace UomoMacchina.Areas.NottiFuori.Data
             public NotteFuoriViewModel() { }
 
             // La NotteFuoriViewModel prende i paramtri di NotteFuoriDTO quest'ultima
-            // si trova su NotteFuori.Queries.cs 
+            // si trova su NottiFuori.Queries.cs 
             public NotteFuoriViewModel(NotteFuoriDTO notteFuoriDTO)
             {
                 Id = notteFuoriDTO.Id;
@@ -93,7 +93,7 @@ namespace UomoMacchina.Areas.NottiFuori.Data
             TotalItems = nottiFuoriDTO.Count;
         }
 
-        // Metodo per utilizzare il filtro di NotteFuoriQuery sul file NotteFuori.Queries.cs 
+        // Metodo per utilizzare il filtro di NotteFuoriQuery sul file NottiFuori.Queries.cs 
         public NotteFuoriQuery ToNotteFuoriQuery()
         {
             return new NotteFuoriQuery
