@@ -143,7 +143,12 @@ namespace UomoMacchina.Areas.NottiFuori.Controllers
             public _ViewNamesClass ViewNames => s_ViewNames;
             public class _ViewNamesClass
             {
+                public readonly string Edit = "Edit";
+                public readonly string Index = "Index";
             }
+
+            public readonly string Edit = "~/Areas/NottiFuori/Views/NottiFuori/Edit.cshtml";
+            public readonly string Index = "~/Areas/NottiFuori/Views/NottiFuori/Index.cshtml";
         }
 
         [GeneratedCode("R4Mvc", "1.0")]

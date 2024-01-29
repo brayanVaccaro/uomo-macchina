@@ -143,7 +143,12 @@ namespace UomoMacchina.Areas.Trasferte.Controllers
             public _ViewNamesClass ViewNames => s_ViewNames;
             public class _ViewNamesClass
             {
+                public readonly string Edit = "Edit";
+                public readonly string Index = "Index";
             }
+
+            public readonly string Edit = "~/Areas/Trasferte/Views/Trasferte/Edit.cshtml";
+            public readonly string Index = "~/Areas/Trasferte/Views/Trasferte/Index.cshtml";
         }
 
         [GeneratedCode("R4Mvc", "1.0")]
