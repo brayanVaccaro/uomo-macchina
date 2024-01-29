@@ -24,8 +24,16 @@ public static partial class MVC
     public static R4Mvc.FerieAreaClass Ferie => s_Ferie;
     static readonly R4Mvc.MainAreaClass s_Main = new R4Mvc.MainAreaClass();
     public static R4Mvc.MainAreaClass Main => s_Main;
+    static readonly R4Mvc.NottiFuoriAreaClass s_NottiFuori = new R4Mvc.NottiFuoriAreaClass();
+    public static R4Mvc.NottiFuoriAreaClass NottiFuori => s_NottiFuori;
     static readonly R4Mvc.PermessiAreaClass s_Permessi = new R4Mvc.PermessiAreaClass();
     public static R4Mvc.PermessiAreaClass Permessi => s_Permessi;
+    static readonly R4Mvc.RendicontazioniAreaClass s_Rendicontazioni = new R4Mvc.RendicontazioniAreaClass();
+    public static R4Mvc.RendicontazioniAreaClass Rendicontazioni => s_Rendicontazioni;
+    static readonly R4Mvc.RimborsiAreaClass s_Rimborsi = new R4Mvc.RimborsiAreaClass();
+    public static R4Mvc.RimborsiAreaClass Rimborsi => s_Rimborsi;
+    static readonly R4Mvc.TrasferteAreaClass s_Trasferte = new R4Mvc.TrasferteAreaClass();
+    public static R4Mvc.TrasferteAreaClass Trasferte => s_Trasferte;
     public static readonly UomoMacchina.Areas.AuthenticatedBaseController AuthenticatedBase = new UomoMacchina.Areas.R4MVC_AuthenticatedBaseController();
     public static readonly UomoMacchina.Features.Home.HomeController Home = new UomoMacchina.Features.Home.R4MVC_HomeController();
     public static readonly UomoMacchina.Features.Login.LoginController Login = new UomoMacchina.Features.Login.R4MVC_LoginController();
@@ -87,7 +95,7 @@ namespace R4Mvc
     public partial class FerieAreaClass
     {
         public readonly string Name = "Ferie";
-        public readonly UomoMacchina.Areas.Ferie.FerieController Ferie = new UomoMacchina.Areas.Ferie.R4MVC_FerieController();
+        public readonly UomoMacchina.Areas.Ferie.Controllers.FerieController Ferie = new UomoMacchina.Areas.Ferie.Controllers.R4MVC_FerieController();
     }
 
     [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
@@ -98,10 +106,38 @@ namespace R4Mvc
     }
 
     [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+    public partial class NottiFuoriAreaClass
+    {
+        public readonly string Name = "NottiFuori";
+        public readonly UomoMacchina.Areas.NottiFuori.Controllers.NottiFuoriController NottiFuori = new UomoMacchina.Areas.NottiFuori.Controllers.R4MVC_NottiFuoriController();
+    }
+
+    [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
     public partial class PermessiAreaClass
     {
         public readonly string Name = "Permessi";
         public readonly UomoMacchina.Areas.Permessi.PermessiController Permessi = new UomoMacchina.Areas.Permessi.R4MVC_PermessiController();
+    }
+
+    [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+    public partial class RendicontazioniAreaClass
+    {
+        public readonly string Name = "Rendicontazioni";
+        public readonly UomoMacchina.Areas.Rendicontazioni.Controllers.RendicontazioniController Rendicontazioni = new UomoMacchina.Areas.Rendicontazioni.Controllers.R4MVC_RendicontazioniController();
+    }
+
+    [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+    public partial class RimborsiAreaClass
+    {
+        public readonly string Name = "Rimborsi";
+        public readonly UomoMacchina.Areas.Rimborsi.Controllers.RimborsiController Rimborsi = new UomoMacchina.Areas.Rimborsi.Controllers.R4MVC_RimborsiController();
+    }
+
+    [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+    public partial class TrasferteAreaClass
+    {
+        public readonly string Name = "Trasferte";
+        public readonly UomoMacchina.Areas.Trasferte.Controllers.TrasferteController Trasferte = new UomoMacchina.Areas.Trasferte.Controllers.R4MVC_TrasferteController();
     }
 }
 

@@ -113,11 +113,41 @@ namespace UomoMacchina
                 // ROUTING PER HUB
                 endpoints.MapHub<TemplateHub>("/templateHub");
 
-                // Route per le Permessi
-                endpoints.MapAreaControllerRoute("TestP", "Permessi", "Permessi/{controller=Permessi}/{action=Index}");
+                // Route per le Rendicontazione, Elimina, Salvataggio dati
+                endpoints.MapAreaControllerRoute("TestR", "Rendicontazioni", "Rendicontazioni/{controller=Rendicontazioni}/{action=Index}");
+                endpoints.MapAreaControllerRoute("Elimina Rendicontazioni", "Rendicontazioni", "Rendicontazioni/Delete/{controller=Rendicontazioni}/{action=Delete}/{id?}");
+                endpoints.MapAreaControllerRoute("Modifica Rendicontazioni", "Rendicontazioni", "Rendicontazioni/SaveEdit/{controller=Rendicontazioni}/{action=SaveEdit}/{id?}");
 
-                // Route per le Ferie
+
+                // Route per le Permessi, Elimina, Salvataggio dati
+                endpoints.MapAreaControllerRoute("TestP", "Permessi", "Permessi/{controller=Permessi}/{action=Index}");
+                endpoints.MapAreaControllerRoute("Elimina Permessi", "Permessi", "Permessi/Delete/{controller=Permessi}/{action=Delete}/{id?}");
+                endpoints.MapAreaControllerRoute("Modifica Permessi", "Permessi", "Permessi/SaveEdit/{controller=Permessi}/{action=SaveEdit}/{id?}");
+
+
+                // Route per le Ferie, Elimina, Salvataggio dati
                 endpoints.MapAreaControllerRoute("TestF", "Ferie", "Ferie/{controller=Ferie}/{action=Index}");
+                endpoints.MapAreaControllerRoute("Elimina Ferie", "Ferie", "Ferie/Delete/{controller=Ferie}/{action=Delete}/{id?}");
+                endpoints.MapAreaControllerRoute("Modifica Ferie", "Ferie", "Ferie/SaveEdit/{controller=Ferie}/{action=SaveEdit}/{id?}");
+
+
+                // Route per le NottiFuori, Elimina, Salvataggio dati
+                endpoints.MapAreaControllerRoute("TestN", "NottiFuori", "NottiFuori/{controller=NottiFuori}/{action=Index}");
+                endpoints.MapAreaControllerRoute("Elimina NottiFuori", "NottiFuori", "NottiFuori/Delete/{controller=NottiFuori}/{action=Delete}/{id?}");
+                endpoints.MapAreaControllerRoute("Modifica NottiFuori", "NottiFuori", "NottiFuori/SaveEdit/{controller=NottiFuori}/{action=SaveEdit}/{id?}");
+
+
+                // Route per le Trasferte, Elimina, Salvataggio dati
+                endpoints.MapAreaControllerRoute("TestT", "Trasferte", "Trasferte/{controller=Trasferte}/{action=Index}");
+                endpoints.MapAreaControllerRoute("Elimina Trasferte", "Trasferte", "Trasferte/Delete/{controller=Trasferte}/{action=Delete}/{id?}");
+                endpoints.MapAreaControllerRoute("Modifica Trasferte", "Trasferte", "Trasferte/SaveEdit/{controller=Trasferte}/{action=SaveEdit}/{id?}");
+
+
+                // Route per i Rimborsi, Elimina, Salvataggio dati
+                endpoints.MapAreaControllerRoute("TestP", "Rimborsi", "Rimborsi/{controller=Rimborsi}/{action=Index}");
+                endpoints.MapAreaControllerRoute("Elimina Rimborsi", "Rimborsi", "Rimborsi/Delete/{controller=Rimborsi}/{action=Delete}/{id?}");
+                endpoints.MapAreaControllerRoute("Modifica Rimborsi", "Rimborsi", "Rimborsi/SaveEdit/{controller=Rimborsi}/{action=SaveEdit}/{id?}");
+
 
                 endpoints.MapAreaControllerRoute("Example", "Example", "Example/{controller=Users}/{action=Index}/{id?}");
                 endpoints.MapAreaControllerRoute("Main", "Main", "Main/{controller=Main}/{action=Main}/{id?}");

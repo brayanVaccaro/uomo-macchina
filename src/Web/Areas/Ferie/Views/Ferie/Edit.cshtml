@@ -1,5 +1,173 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿
+@model UomoMacchina.Areas.Ferie.Data.FerieViewModel.FeriaViewModel
+
+@* Edit di Ferie *@
+
+<div class="Testo d-flex flex-column bg-body-tertiary">
+
+    @* Campi da completare *@
+    <div class="container text-primary col-sm-8">
+
+        @if (Model.Id != null)
+        {
+
+            <form class="was-validated" method="post" action="@Url.Action(MVC.Ferie.Ferie.SaveEdit())">
+                <input id="Save-Edit" class="d-none" type="submit" />
+                <input id="Id" type="hidden" asp-for="Id" />
+
+                @* Qui ci sono i vari campi del form*@
+                <div>
+                    <!-- Data inizio -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="DataInizio" class="form-label">Data inizio:</label>
+                        <input type="date" class="form-control" asp-for="DataInizio" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                        <span asp-validation-for="DataInizio" class="invalid-feedback">Non hai ancora inserito la data di inizio</span>
+                        <span asp-validation-for="DataInizio" class="valid-feedback">Data di inizio inserita</span>
+                    </div>
+
+                    <!-- Data fine -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="DataFine" class="form-label">Data fine:</label>
+                        <input type="date" class="form-control" asp-for="DataFine" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                        <span asp-validation-for="DataFine" class="text-danger"></span>
+                        <span asp-validation-for="DataFine" class="invalid-feedback">Non hai ancora inserito la data fine</span>
+                        <span asp-validation-for="DataFine" class="valid-feedback">Data di fine inserita</span>
+                    </div>
+
+                    <!-- Durata -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="Durata" class="form-label">Durata:</label>
+                        <input type="text" class="form-control" asp-for="Durata" value="" required>
+                        <span asp-validation-for="Durata" class="text-danger"></span>
+                        <span asp-validation-for="Durata" class="invalid-feedback">Non hai ancora inserito la commessa</span>
+                        <span asp-validation-for="Durata" class="valid-feedback">Durata inserita</span>
+                    </div>
+
+
+                    <!-- Dettagli -->
+                    <div class="mb-3">
+                        <label asp-for="Dettagli" class="form-label">Dettagli:</label>
+                        <textarea class="form-control" asp-for="Dettagli" placeholder="Scrivere i dettagli" required></textarea>
+                        <span asp-validation-for="Dettagli" class="invalid-feedback">Non hai ancora scritto i dettagli</span>
+                        <span asp-validation-for="Dettagli" class="valid-feedback">Dettagli inserita</span>
+                    </div>
+
+                </div>
+
+            </form>
+        }
+        else
+        {
+            <!-- Compilazione e validazione della richiesta di permesso tramite pulsante -->
+            <form class="was-validated" method="post" action="@Url.Action(MVC.Ferie.Ferie.Edit())">
+                <input id="edit-form-submitter" class="d-none" type="submit" />
+
+                @* Qui ci sono i vari campi del form*@
+                <div>
+                    <!-- Data inizio -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="DataInizio" class="form-label">Data inizio:</label>
+                        <input type="date" class="form-control" asp-for="DataInizio" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                        <span asp-validation-for="DataInizio" class="invalid-feedback">Non hai ancora inserito la data di inizio</span>
+                        <span asp-validation-for="DataInizio" class="valid-feedback">Data di inizio inserita</span>
+                    </div>
+
+                    <!-- Data fine -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="DataFine" class="form-label">Data fine:</label>
+                        <input type="date" class="form-control" asp-for="DataFine" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                        <span asp-validation-for="DataFine" class="text-danger"></span>
+                        <span asp-validation-for="DataFine" class="invalid-feedback">Non hai ancora inserito la data di fine</span>
+                        <span asp-validation-for="DataFine" class="valid-feedback">Data di fine inserita</span>
+                    </div>
+
+                    <!-- Durata -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="Durata" class="form-label">Durata:</label>
+                        <input type="text" class="form-control" asp-for="Durata" value="" required>
+                        <span asp-validation-for="Durata" class="text-danger"></span>
+                        <span asp-validation-for="Durata" class="invalid-feedback">Non hai ancora inserito la commessa</span>
+                        <span asp-validation-for="Durata" class="valid-feedback">Durata inserita</span>
+                    </div>
+
+
+                    <!-- Dettagli -->
+                    <div class="mb-3">
+                        <label asp-for="Dettagli" class="form-label">Dettagli:</label>
+                        <textarea class="form-control" asp-for="Dettagli" placeholder="Scrivere i dettagli" required></textarea>
+                        <span asp-validation-for="Dettagli" class="invalid-feedback">Non hai ancora scritto i dettagli</span>
+                        <span asp-validation-for="Dettagli" class="valid-feedback">Dettagli inserita</span>
+                    </div>
+
+                </div>
+
+            </form>
+
+        }
+
+        @* Sezione dei tasti*@
+        <div class="mb-3">
+
+            <!-- Tasto Anulla-->
+            <a class="Annulla btn btn-warning" href="@Url.Action(MVC.Ferie.Ferie.Index())">Annulla</a>
+
+            @if (Model.Id != null)
+            {
+
+                @* MODIFICA ELEMENTO *@
+                <form method="post" id="" action="@Url.Action(MVC.Ferie.Ferie.SaveEdit())">
+                    <input id="Id" type="hidden" asp-for="Id" />
+                    <input id="DataInizio" type="hidden" asp-for="DataInizio" />
+                    <input id="DataFine" type="hidden" asp-for="DataFine" />
+                    <input id="Durata" type="hidden" asp-for="Durata" />
+                    <input id="Dettagli" type="hidden" asp-for="Dettagli" />
+                </form>
+                <button class="Salva btn btn-primary" type="button" onclick="document.getElementById('Save-Edit').click()">Salva Modifiche</button>
+
+
+                @* ELIMINA ELEMENTO *@
+                <form hidden autocomplete="off" id="delete-form" method="post" action="@Url.Action(MVC.Ferie.Ferie.Delete())">
+                    <input type="hidden" asp-for="Id" />
+                </form>
+                <button class="Elimina btn btn-danger ms-2" title="Elimina Rendicontazione" type="button" onclick="document.getElementById('delete-form').submit();">
+                    <i class="fa-solid "></i>&nbsp;Elimina
+                </button>
+            }
+            else
+            {
+                <!-- Tasto Invia -->
+                <button class="Invia btn btn-primary" type="button" onclick="document.getElementById('edit-form-submitter').click()">Invia</button>
+
+            }
+        </div>
+
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="module">
+
+        Vue.createApp({
+            data() {
+                return {
+                    message: 'Vue Funziona!',
+                    permesso: false,
+                    feria: false
+                }
+            },
+            methods: {
+                updateTipoRichiesta() {
+                    // Codice per disabilitare la validazione dei campi
+                    $("form :input[required]").prop("required", false);
+                }
+            }
+        }).mount('#pageId')
+    </script>
+}
+
+
+
+@section styles {
+    <link href="~/css/richieste.css" rel="stylesheet" />
 }

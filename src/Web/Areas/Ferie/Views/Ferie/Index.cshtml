@@ -1,13 +1,10 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
 @model UomoMacchina.Areas.Ferie.Data.FerieViewModel
-@{
-}
+
+@inject IHtmlLocalizer<UomoMacchina.Areas.Ferie.Data.FerieViewModel> ModelLocalizer
 @* Index Ferie *@
 
+@* Pulsante creazione data*@
 <ul class="navbar-nav flex-wrap ms-auto">
     <li>
         <a class="btn btn-light ms-2" href="@Url.Action(MVC.Ferie.Ferie.New())" title="Inserisci un nuovo elemento">
@@ -16,94 +13,101 @@
     </li>
 </ul>
 
-<div class="container-lg text-primary">
-    @if (Model.Ferie.Any() == false)
-    {
-        <tr>
-            <td colspan="3">Nessun elemento trovato con i filtri correnti</td>
-        </tr>
-    }
-    else
-    {
-        @foreach (var ferie in Model.Ferie)
-        {
+<h5> Per la modifica ed eliminazione cliccare una riga scelta</h5>
 
-            <p>@ferie.DataInizio</p>
-            <p>@ferie.DataFine</p>
-            <p>@ferie.Durata</p>
-            <p>@ferie.Dettagli</p>
+@* Tabella Dati *@
+<div class="TabellaGenerale container-lg  text-center">
+    <table class="table table-hover table-sm table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Data inizio
+                </th>
+                <th>
+                    Data fine
+                </th>
+                <th>
+                    Dettagli
+                </th>
+                <th>
+                    Dettagli
+                </th>
+            </tr>
+        </thead>
 
+        <tbody>
 
-            <div class="Prototipo container-lg text-primary">
-                <div class="container-sm text-primary">
-                    <PROVA></PROVA>
-                    <h1 v-if="prova">ciao</h1>
-
-                    <!-- Data inizio -->
-                    @* <div class="col-md-4 position-relative">
-            <label asp-for="@ferie.DataInizio" class="form-label">Data inizio:</label>
-            <input type="date" class="form-control" asp-for="@ferie.DataInizio" value="@ferie.DataInizio.ToString("yyyy-MM-dd")" required :disabled="Tipologia === '1'">
-            </div> *@
-
-                    <!-- Dettagli -->
-                    <div class="mb-3">
-                        <label asp-for="@ferie.Dettagli" class="form-label">Dettagli:</label>
-                        <textarea class="form-control" asp-for="@ferie.Dettagli" required>@ferie.Dettagli</textarea>
-                    </div>
-
-
-                </div>
-            </div>
-
-        }
-    }
+            @if (Model.Ferie.Any() == false)
+            {
+                <tr>
+                    <td colspan="3">Nessun elemento trovato con i filtri correnti</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var ferie in Model.Ferie)
+                {
+                    <tr class="onit-table-row-link" onclick="javascript:utilities.navigateUrlExcludeOnitNotNavigate('@Url.Action(MVC.Ferie.Ferie.Edit(ferie.Id))')" title="@ModelLocalizer["Modifica utente"] @ferie.Id">
+                        <td scope="row" class="text-nowrap">
+                            @ferie.Id
+                        </td>
+                        <td scope="row" class="text-nowrap">
+                            @ferie.DataInizio.ToString("d")
+                        </td>
+                        <td class="text-nowrap">
+                            @ferie.DataFine.ToString("d")
+                        </td>
+                        <td class="text-nowrap">
+                            @ferie.Durata
+                        </td>
+                        <td class="text-nowrap">
+                            @ferie.Dettagli
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">
+                    <nav class="navbar navbar-expand justify-content-md-center">
+                        <ul class="navbar-nav flex-wrap"><partial name="@MVC.Shared.Views._PagingPartial" model="Model" /></ul>
+                    </nav>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
 </div>
-@section scripts {
-    <script type="module">
-        // var Vue
-        // var vuecal
-        var prova = false
-        // export default Vue.defineComponent({
-        //     name: "PROVA",
-        //     data() {
-        //         return {
-        //             message: 'siamo in main.ts!'
-        //         }
-        //     },
-        //     computed: {
-        //         greeting() {
-        //             return this.message
-        //         }
-        //     },
-        //     components: {
-        //         VueCal: vuecal
-        //     },
 
-        //     mounted() {
-        //         console.log("sono in mounted")
-        //         this.greeting // type: string
-        //     }
-        // })
-        // export default Vue.defineComponent({
-        //     // type inference enabled
-        //     props: {
-        //         name: String,
-        //         msg: { type: String, required: true }
-        //     },
-        //     data() {
-        //         return {
-        //             count: 1
-        //         }
-        //     },
-        //     mounted() {
-        //         this.name // type: string | undefined
-        //         this.msg // type: string
-        //         this.count // type: number
-        //     }
-        // })
-    </script>
 
-}
+
 @section styles {
     <link href="~/css/richieste.css" rel="stylesheet" />
 }
+
+@section scripts{
+
+
+    <script>
+        var Vue
+        Vue.createApp({
+            data() {
+                return {
+                    message: 'Vue Funziona!',
+                }
+            },
+            methods: {
+                async eliminaRendicontazione(feriaId) {
+                    console.log("feriaId", feriaId)
+                    await fetch('/Ferie/Ferie/Edit?' + feriaId, {
+                        method: "POST",
+                    });
+
+                }
+            }
+        }).mount("#pageId");
+    </script>
+    }

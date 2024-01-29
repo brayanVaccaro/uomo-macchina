@@ -15,12 +15,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Routing;
 using R4Mvc;
 
-namespace UomoMacchina.Areas.Permessi
+namespace UomoMacchina.Areas.Trasferte.Controllers
 {
-    public partial class PermessiController
+    public partial class TrasferteController
     {
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
-        protected PermessiController(Dummy d)
+        protected TrasferteController(Dummy d)
         {
         }
 
@@ -105,13 +105,13 @@ namespace UomoMacchina.Areas.Permessi
         }
 
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
-        public PermessiController Actions => MVC.Permessi.Permessi;
+        public TrasferteController Actions => MVC.Trasferte.Trasferte;
         [GeneratedCode("R4Mvc", "1.0")]
-        public readonly string Area = "Permessi";
+        public readonly string Area = "Trasferte";
         [GeneratedCode("R4Mvc", "1.0")]
-        public readonly string Name = "Permessi";
+        public readonly string Name = "Trasferte";
         [GeneratedCode("R4Mvc", "1.0")]
-        public const string NameConst = "Permessi";
+        public const string NameConst = "Trasferte";
         [GeneratedCode("R4Mvc", "1.0")]
         static readonly ActionNamesClass s_ActionNames = new ActionNamesClass();
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
@@ -147,8 +147,8 @@ namespace UomoMacchina.Areas.Permessi
                 public readonly string Index = "Index";
             }
 
-            public readonly string Edit = "~/Areas/Permessi/Views/Permessi/Edit.cshtml";
-            public readonly string Index = "~/Areas/Permessi/Views/Permessi/Index.cshtml";
+            public readonly string Edit = "~/Areas/Trasferte/Views/Trasferte/Edit.cshtml";
+            public readonly string Index = "~/Areas/Trasferte/Views/Trasferte/Index.cshtml";
         }
 
         [GeneratedCode("R4Mvc", "1.0")]
@@ -158,16 +158,16 @@ namespace UomoMacchina.Areas.Permessi
     }
 
     [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
-    public partial class R4MVC_PermessiController : UomoMacchina.Areas.Permessi.PermessiController
+    public partial class R4MVC_TrasferteController : UomoMacchina.Areas.Trasferte.Controllers.TrasferteController
     {
-        public R4MVC_PermessiController(): base(Dummy.Instance)
+        public R4MVC_TrasferteController(): base(Dummy.Instance)
         {
         }
 
         [NonAction]
-        partial void IndexOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, UomoMacchina.Areas.Permessi.Data.PermessiViewModel model);
+        partial void IndexOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel model);
         [NonAction]
-        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> Index(UomoMacchina.Areas.Permessi.Data.PermessiViewModel model)
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> Index(UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel model)
         {
             var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -197,9 +197,9 @@ namespace UomoMacchina.Areas.Permessi
         }
 
         [NonAction]
-        partial void EditOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, UomoMacchina.Areas.Permessi.Data.PermessiViewModel.PermessoViewModel model);
+        partial void EditOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel.TrasfertaViewModel model);
         [NonAction]
-        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> Edit(UomoMacchina.Areas.Permessi.Data.PermessiViewModel.PermessoViewModel model)
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> Edit(UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel.TrasfertaViewModel model)
         {
             var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -208,9 +208,9 @@ namespace UomoMacchina.Areas.Permessi
         }
 
         [NonAction]
-        partial void SaveEditOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, UomoMacchina.Areas.Permessi.Data.PermessiViewModel.PermessoViewModel model);
+        partial void SaveEditOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel.TrasfertaViewModel model);
         [NonAction]
-        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> SaveEdit(UomoMacchina.Areas.Permessi.Data.PermessiViewModel.PermessoViewModel model)
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> SaveEdit(UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel.TrasfertaViewModel model)
         {
             var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.SaveEdit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);

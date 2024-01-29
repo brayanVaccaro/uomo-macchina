@@ -1,20 +1,30 @@
-﻿@* namespace Web.Areas.Main.Views.Main *@
-@model UomoMacchina.Areas.Permessi.Data.PermessiViewModel.PermessoViewModel
+﻿@model UomoMacchina.Areas.Rimborsi.Data.RimborsiViewModel.RimborsoViewModel
 
-@* Edit di Permessi *@
+
+@* Edit di Rimborso *@
+
+
 <div class="Testo d-flex flex-column bg-body-tertiary">
-    
+
     @* Campi da completare *@
     <div class="container text-primary col-sm-8">
         @if (Model.Id != null)
         {
 
-            <form class="was-validated" method="post" action="@Url.Action(MVC.Permessi.Permessi.SaveEdit())">
+            <form class="was-validated" method="post" action="@Url.Action(MVC.Rimborsi.Rimborsi.SaveEdit())">
                 <input id="Save-Edit" class="d-none" type="submit" />
                 <input id="Id" type="hidden" asp-for="Id" />
 
                 @* Qui ci sono i vari campi del form*@
                 <div>
+                    <!-- Importo -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="Importo" class="form-label">Importo €:</label>
+                        <input type="text" class="form-control" asp-for="Importo" value="" required>
+                        <span asp-validation-for="Importo" class="invalid-feedback">Non hai ancora inserito l'importo</span>
+                        <span asp-validation-for="Importo" class="valid-feedback">Importo inserito</span>
+                    </div>
+
                     <!-- Data  -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="Data" class="form-label">Data inizio:</label>
@@ -24,30 +34,24 @@
                         <span asp-validation-for="Data" class="valid-feedback">Data di inizio inserita</span>
                     </div>
 
-                    <!-- Ora inizio -->
+
+
+                    <!-- Commessa -->
                     <div class="col-md-4 position-relative">
-                        <label asp-for="OraInizio" class="form-label">Ora inizio:</label>
-                        <input type="time" class="form-control" asp-for="OraInizio" value="" required>
-                        <span asp-validation-for="OraInizio" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
-                        <span asp-validation-for="OraInizio" class="valid-feedback">Ora di inizio inserita</span>
+                        <label asp-for="Commessa" class="form-label">Commessa:</label>
+                        <input type="text" class="form-control" asp-for="Commessa" value="" required>
+                        <span asp-validation-for="Commessa" class="text-danger"></span>
+                        <span asp-validation-for="Commessa" class="invalid-feedback">Non hai ancora inserito la commessa</span>
+                        <span asp-validation-for="Commessa" class="valid-feedback">Commessa inserita</span>
                     </div>
 
-
-                    <!-- Ora fine -->
+                    <!-- Carta aziendale -->
                     <div class="col-md-4 position-relative">
-                        <label asp-for="OraFine" class="form-label">Ora inizio:</label>
-                        <input type="time" class="form-control" asp-for="OraFine" value="" required>
-                        <span asp-validation-for="OraFine" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
-                        <span asp-validation-for="OraFine" class="valid-feedback">Ora di inizio inserita</span>
-                    </div>
-
-                    <!-- Durata -->
-                    <div class="col-md-4 position-relative">
-                        <label asp-for="Durata" class="form-label">Durata:</label>
-                        <input type="text" class="form-control" asp-for="Durata" value="" required>
-                        <span asp-validation-for="Durata" class="text-danger"></span>
-                        <span asp-validation-for="Durata" class="invalid-feedback">Non hai ancora inserito la commessa</span>
-                        <span asp-validation-for="Durata" class="valid-feedback">Durata inserita</span>
+                        <label asp-for="CartaAziendale" class="form-label">Carta aziendale:</label>
+                        <input type="text" class="form-control" asp-for="CartaAziendale" value="" required>
+                        <span asp-validation-for="CartaAziendale" class="text-danger"></span>
+                        <span asp-validation-for="CartaAziendale" class="invalid-feedback">Non hai ancora inserito la carta aziendale</span>
+                        <span asp-validation-for="CartaAziendale" class="valid-feedback">Carta aziendale inserita</span>
                     </div>
 
                     <!-- Dettagli -->
@@ -65,11 +69,19 @@
         else
         {
             <!-- Compilazione e validazione della richiesta di permesso tramite pulsante -->
-            <form class="was-validated" method="post" action="@Url.Action(MVC.Permessi.Permessi.Edit())">
+            <form class="was-validated" method="post" action="@Url.Action(MVC.Rimborsi.Rimborsi.Edit())">
                 <input id="edit-form-submitter" class="d-none" type="submit" />
 
                 @* Qui ci sono i vari campi del form*@
                 <div>
+                    <!-- Importo -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="Importo" class="form-label">Importo:</label>
+                        <input type="text" class="form-control" asp-for="Importo" value="" required>
+                        <span asp-validation-for="Importo" class="invalid-feedback">Non hai ancora inserito l'importo</span>
+                        <span asp-validation-for="Importo" class="valid-feedback">Importo inserito</span>
+                    </div>
+
                     <!-- Data  -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="Data" class="form-label">Data inizio:</label>
@@ -79,30 +91,24 @@
                         <span asp-validation-for="Data" class="valid-feedback">Data di inizio inserita</span>
                     </div>
 
-                    <!-- Ora inizio -->
+
+
+                    <!-- Commessa -->
                     <div class="col-md-4 position-relative">
-                        <label asp-for="OraInizio" class="form-label">Ora inizio:</label>
-                        <input type="time" class="form-control" asp-for="OraInizio" value="" required>
-                        <span asp-validation-for="OraInizio" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
-                        <span asp-validation-for="OraInizio" class="valid-feedback">Ora di inizio inserita</span>
+                        <label asp-for="Commessa" class="form-label">Commessa:</label>
+                        <input type="text" class="form-control" asp-for="Commessa" value="" required>
+                        <span asp-validation-for="Commessa" class="text-danger"></span>
+                        <span asp-validation-for="Commessa" class="invalid-feedback">Non hai ancora inserito la commessa</span>
+                        <span asp-validation-for="Commessa" class="valid-feedback">Commessa inserita</span>
                     </div>
 
-
-                    <!-- Ora fine -->
+                    <!-- Carta aziendale -->
                     <div class="col-md-4 position-relative">
-                        <label asp-for="OraFine" class="form-label">Ora fine:</label>
-                        <input type="time" class="form-control" asp-for="OraFine" value="" required>
-                        <span asp-validation-for="OraFine" class="invalid-feedback">Non hai ancora inserito l'ora di fine</span>
-                        <span asp-validation-for="OraFine" class="valid-feedback">Ora di fine inserita</span>
-                    </div>
-
-                    <!-- Durata -->
-                    <div class="col-md-4 position-relative">
-                        <label asp-for="Durata" class="form-label">Durata:</label>
-                        <input type="text" class="form-control" asp-for="Durata" value="" required>
-                        <span asp-validation-for="Durata" class="text-danger"></span>
-                        <span asp-validation-for="Durata" class="invalid-feedback">Non hai ancora inserito la commessa</span>
-                        <span asp-validation-for="Durata" class="valid-feedback">Durata inserita</span>
+                        <label asp-for="CartaAziendale" class="form-label">Carta aziendale:</label>
+                        <input type="text" class="form-control" asp-for="CartaAziendale" value="" required>
+                        <span asp-validation-for="CartaAziendale" class="text-danger"></span>
+                        <span asp-validation-for="CartaAziendale" class="invalid-feedback">Non hai ancora inserito la carta aziendale</span>
+                        <span asp-validation-for="CartaAziendale" class="valid-feedback">Carta aziendale inserita</span>
                     </div>
 
                     <!-- Dettagli -->
@@ -123,28 +129,28 @@
         <div class="mb-3">
 
             <!-- Tasto Anulla-->
-            <a class="Annulla btn btn-warning" href="@Url.Action(MVC.Permessi.Permessi.Index())">Annulla</a>
+            <a class="Annulla btn btn-warning" href="@Url.Action(MVC.Rimborsi.Rimborsi.Index())">Annulla</a>
 
             @if (Model.Id != null)
             {
 
                 @* MODIFICA ELEMENTO *@
-                <form method="post" id="" action="@Url.Action(MVC.Permessi.Permessi.SaveEdit())">
+                <form method="post" id="" action="@Url.Action(MVC.Rimborsi.Rimborsi.SaveEdit())">
                     <input id="Id" type="hidden" asp-for="Id" />
+                    <input id="Importo" type="hidden" asp-for="Importo" />
                     <input id="Data" type="hidden" asp-for="Data" />
-                    <input id="OraInzio" type="hidden" asp-for="OraInizio" />
-                    <input id="OraFine" type="hidden" asp-for="OraFine" />
-                    <input id="Durata" type="hidden" asp-for="Durata" />
+                    <input id="Commessa" type="hidden" asp-for="Commessa" />
+                    <input id="CartaAziendale" type="hidden" asp-for="CartaAziendale" />
                     <input id="Dettagli" type="hidden" asp-for="Dettagli" />
                 </form>
                 <button class="Salva btn btn-primary" type="button" onclick="document.getElementById('Save-Edit').click()">Salva Modifiche</button>
 
 
                 @* ELIMINA ELEMENTO *@
-                <form hidden autocomplete="off" id="delete-form" method="post" action="@Url.Action(MVC.Permessi.Permessi.Delete())">
+                <form hidden autocomplete="off" id="delete-form" method="post" action="@Url.Action(MVC.Rimborsi.Rimborsi.Delete())">
                     <input type="hidden" asp-for="Id" />
                 </form>
-                <button class="Elimina btn btn-danger ms-2" title="Elimina Permesso" type="button" onclick="document.getElementById('delete-form').submit();">
+                <button class="Elimina btn btn-danger ms-2" title="Elimina Rimborso" type="button" onclick="document.getElementById('delete-form').submit();">
                     <i class="fa-solid "></i>&nbsp;Elimina
                 </button>
             }

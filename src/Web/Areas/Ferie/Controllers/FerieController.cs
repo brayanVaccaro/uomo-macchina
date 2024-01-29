@@ -1,18 +1,22 @@
-﻿using Core.Services.Shared;
+﻿
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
-using UomoMacchina.Areas.Ferie.Data;
+using Core.Services.Shared;
 using UomoMacchina.Infrastructure;
 using UomoMacchina.SignalR;
+using UomoMacchina.Areas.Ferie.Data;
 using static UomoMacchina.Areas.Ferie.Data.FerieViewModel;
 
-namespace UomoMacchina.Areas.Ferie
+
+namespace UomoMacchina.Areas.Ferie.Controllers
 {
     [Area ("Ferie")]
-    public partial class FerieController : Controller
+    public partial class FerieController : AuthenticatedBaseController
     {
         private readonly SharedService _sharedService;
+        private static bool returnToIndex = false;
         private readonly IPublishDomainEvents _publisher;
 
 
@@ -27,7 +31,7 @@ namespace UomoMacchina.Areas.Ferie
         [HttpGet]
         public async virtual Task<IActionResult> Index(FerieViewModel model)
         {   // schermata index  
-            var ferie = await _sharedService.Query(model.ToFeriaQuery());
+            var ferie = await _sharedService.GetAllFerie(model.ToFeriaQuery());
 
             model.SetFerie(ferie);
 
@@ -49,14 +53,26 @@ namespace UomoMacchina.Areas.Ferie
         [HttpGet]
         public virtual async Task<IActionResult> Edit(Guid? id)
         {
+            var model = new FeriaViewModel();
+
             if (id.HasValue)
             {
-                var model = new FerieViewModel();
-                return RedirectToAction(Actions.Index(model));
+                model.SetFeria(await _sharedService.GetFeriaById(new FeriaQuery
+                {
+                    Id = id.Value,
+                }));
+                //qua il controllo
+                if (returnToIndex)
+                {
+                    var indexModel = new FerieViewModel();
+                    returnToIndex = false;
+                    return RedirectToAction(Actions.Index(indexModel));
+                }
+                return View(model);
+
             }
             else
             {
-                var model = new FeriaViewModel();
                 return View(model);
             }
 
@@ -74,6 +90,7 @@ namespace UomoMacchina.Areas.Ferie
 
                     Alerts.AddSuccess(this, "Ferie effetuata con successo");
 
+                    returnToIndex = true;
                 }
                 catch (Exception ex)
                 {
@@ -88,6 +105,58 @@ namespace UomoMacchina.Areas.Ferie
             }
 
             return RedirectToAction(Actions.Edit(model.Id));
+        }
+
+        [HttpPost]
+        public virtual async Task<IActionResult> SaveEdit(FeriaViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Esegui l'effettivo salvataggio delle modifiche nel database
+                    await _sharedService.Handle(model.ToAddOrUpdateFeriaCommand());
+
+                    Alerts.AddSuccess(this, "Modifiche salvate con successo");
+
+                    return RedirectToAction(Actions.Index());
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                }
+            }
+
+            // Se la validazione del modello fallisce, ritorna alla vista di modifica con gli errori
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public virtual async Task<IActionResult> Delete(Guid id)
+        {
+            try
+            {
+                var feria = await _sharedService.GetFeriaById(new FeriaQuery { Id = id });
+
+                if (feria != null)
+                {
+                    // Effettua l'eliminazione della Feria
+                    await _sharedService.DeleteFerie(id);
+
+                    Alerts.AddSuccess(this, "Feria cancellata con successo");
+                }
+                else
+                {
+                    Alerts.AddError(this, "Feria non trovata");
+                }
+            }
+            catch (Exception ex)
+            {
+                Alerts.AddError(this, $"Errore durante l'eliminazione della Feria: {ex.Message}");
+            }
+
+            return RedirectToAction(Actions.Index());
         }
 
     }

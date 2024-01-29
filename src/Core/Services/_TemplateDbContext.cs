@@ -16,13 +16,20 @@ namespace Core.Services
             DataGenerator.InitializeUsers(this);
             DataGenerator.InitializeVueCalEvent(this);
             DataGenerator.InitializePermesso(this);
+            DataGenerator.InitializeRendicontazione(this);
             DataGenerator.InitializeFeria(this);
+            DataGenerator.InitializeNotteFuori(this);
+            DataGenerator.InitializeTrasferta(this);
+            DataGenerator.InitializeRimborso(this);
         }
 
         public DbSet<User> Users { get; set; }
         public DbSet<VueCalEvent> VueCalEvent { get; set; }
+        public DbSet<Rendicontazione> Rendicontazione { get; set; }
         public DbSet<Permesso> Permesso { get; set; }
         public DbSet<Feria> Feria { get; set; }
-
+        public DbSet<NotteFuori> NotteFuori { get; set; }
+        public DbSet<Trasferta> Trasferta { get; set; }
+        public DbSet<Rimborso> Rimborso { get; set; }
     }
 }

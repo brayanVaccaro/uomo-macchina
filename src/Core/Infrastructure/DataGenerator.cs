@@ -3,6 +3,7 @@ using Core.Services;
 using Core.Services.Shared;
 using System;
 using System.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Core.Infrastructure
 {
@@ -66,6 +67,30 @@ namespace Core.Infrastructure
             context.SaveChanges();
         }
 
+        public static void InitializeRendicontazione(TemplateDbContext context)
+        {
+            if (context.Rendicontazione.Any()) { return; }
+
+            context.Rendicontazione.AddRange(
+                new Rendicontazione
+                {
+                    Id = Guid.NewGuid(),
+                    Ore = 7,
+                    Data = DateTime.Now,
+                    Commessa = " Matteo Verdi",
+                    Dettagli = "Dettagli di Rendicontazione 1",
+                },
+                new Rendicontazione
+                {
+                    Id = Guid.NewGuid(),
+                    Ore = 7,
+                    Data = DateTime.Now,
+                    Commessa = " DA ELIMINARE",
+                    Dettagli = "Dettagli di Rendicontazione 2",
+                }
+                );
+            context.SaveChanges();
+        }
         public static void InitializePermesso(TemplateDbContext context)
         {
             if (context.Permesso.Any()) { return; }
@@ -101,24 +126,70 @@ namespace Core.Infrastructure
             context.SaveChanges();
         }
 
+        public static void InitializeNotteFuori(TemplateDbContext context)
+        {
+            if (context.NotteFuori.Any())
+            {
+                return;   // Data was already seeded
+            }
+            context.NotteFuori.AddRange(
+                new NotteFuori
+                {
+                    Id = Guid.NewGuid(), //la stringa presa online
+                    TipoViaggio = "Trasferta",
+                    Data = DateTime.Now,
+                    Commessa = "Lavoro",
+                    Dettagli = "Dettagli di Notti fuori",
+                }
+            );
+
+            context.SaveChanges();
+        }
+
+        public static void InitializeTrasferta(TemplateDbContext context)
+        {
+            if (context.Trasferta.Any())
+            {
+                return;   // Data was already seeded
+            }
+            context.Trasferta.AddRange(
+                new Trasferta
+                {
+                    Id = Guid.NewGuid(), //la stringa presa online
+                    Chilometri = 50,
+                    Data = DateTime.Now,
+                    Commessa = "Lavoro",
+                    AutoAziendale = "Si",
+                    Dettagli = "Dettagli di Trasferta",
+                }
+            );
+
+            context.SaveChanges();
+        }
+
+        public static void InitializeRimborso(TemplateDbContext context)
+        {
+            if (context.Rimborso.Any())
+            {
+                return;   // Data was already seeded
+            }
+            context.Rimborso.AddRange(
+                new Rimborso
+                {
+                    Id = Guid.NewGuid(), //la stringa presa online
+                    Importo = 50,
+                    Data = DateTime.Now,
+                    Commessa = "Lavoro",
+                    CartaAziendale = "Si",
+                    Dettagli = "Dettagli di Rimborso",
+                }
+            );
+
+            context.SaveChanges();
+        }
+
+
     }
 }
 
 
-/*
-Permesso:
-Id
-Data --> la giornata in cui si richiede il permesso
-OraInizio
-OraFine
-Durata -> quante ore dura, calcolato in base a: OraInizio + OraFine
-Dettagli? --> eventuali motivazione, righe di testo a spiegare il motivo della richiesta di un permesso
-
-
-Feria:
-Id
-DataInizio
-DataFine
-Durata -> per quanti giorni di ferie effettuo una richiesta di ferie
-Dettagli? ->  eventuali motivazione, righe di testo a spiegare il motivo della richiesta di ferie
-*/

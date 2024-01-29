@@ -1,14 +1,12 @@
-﻿@model UomoMacchina.Areas.Permessi.Data.PermessiViewModel
-@{
-}
+﻿@model UomoMacchina.Areas.Rimborsi.Data.RimborsiViewModel
+@inject IHtmlLocalizer<UomoMacchina.Areas.Rimborsi.Data.RimborsiViewModel> ModelLocalizer
 
-@inject IHtmlLocalizer<UomoMacchina.Areas.Permessi.Data.PermessiViewModel> ModelLocalizer
+@* Index di Rimborso *@
 
-@* Index Permessi *@
-
+@* Pulsante creazione data*@
 <ul class="navbar-nav flex-wrap ms-auto">
     <li>
-        <a class="btn btn-light ms-2" href="@Url.Action(MVC.Permessi.Permessi.New())" title="Inserisci un nuovo elemento">
+        <a class="Nuovo btn btn-light ms-2" href="@Url.Action(MVC.Rimborsi.Rimborsi.New())" title="Inserisci un nuovo elemento">
             <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
         </a>
     </li>
@@ -26,16 +24,16 @@
                     Id
                 </th>
                 <th>
+                    Importo
+                </th>
+                <th>
                     Data
                 </th>
                 <th>
-                    OraInizio
+                    Commessa
                 </th>
                 <th>
-                    OraFine
-                </th>
-                <th>
-                    Durata
+                    Carta aziendale
                 </th>
                 <th>
                     Dettagli
@@ -45,7 +43,7 @@
 
         <tbody>
 
-            @if (Model.Permessi.Any() == false)
+            @if (Model.Rimborsi.Any() == false)
             {
                 <tr>
                     <td colspan="3">Nessun elemento trovato con i filtri correnti</td>
@@ -53,26 +51,26 @@
             }
             else
             {
-                @foreach (var permesso in Model.Permessi)
+                @foreach (var rimborso in Model.Rimborsi)
                 {
-                    <tr class="onit-table-row-link" onclick="javascript:utilities.navigateUrlExcludeOnitNotNavigate('@Url.Action(MVC.Permessi.Permessi.Edit(permesso.Id))')" title="@ModelLocalizer["Modifica utente"] @permesso.Id">
+                    <tr class="onit-table-row-link" onclick="javascript:utilities.navigateUrlExcludeOnitNotNavigate('@Url.Action(MVC.Rimborsi.Rimborsi.Edit(rimborso.Id))')" title="@ModelLocalizer["Modifica utente"] @rimborso.Id">
                         <td scope="row" class="text-nowrap">
-                            @permesso.Id
-                        </td>
-                        <td class="text-nowrap">
-                            @permesso.Data.ToString("d")
+                            @rimborso.Id
                         </td>
                         <td scope="row" class="text-nowrap">
-                            @permesso.OraInizio.ToString("t")
+                            @rimborso.Importo
                         </td>
                         <td class="text-nowrap">
-                            @permesso.OraFine.ToString("t")
+                            @rimborso.Data.ToString("d")
                         </td>
                         <td class="text-nowrap">
-                            @permesso.Durata
+                            @rimborso.Commessa
                         </td>
                         <td class="text-nowrap">
-                            @permesso.Dettagli
+                            @rimborso.CartaAziendale
+                        </td>
+                        <td class="text-nowrap">
+                            @rimborso.Dettagli
                         </td>
                     </tr>
                 }
@@ -108,9 +106,9 @@
                 }
             },
             methods: {
-                async eliminaPermesso(permessoId) {
-                    console.log("permessoId", permessoId)
-                    await fetch('/Permessi/Permessi/Edit?' + permessoId, {
+                async eliminaRimborso(rimborsoId) {
+                    console.log("rimborsoId", rimborsoId)
+                    await fetch('/Rimborsi/Rimborsi/Edit?' + rimborsoId, {
                         method: "POST",
                     });
 

@@ -19,7 +19,11 @@ namespace Core.Services.Shared
     public class FerieDTO
     {
 
-        public IEnumerable<FeriaDTO> Ferie { get; set; }
+        public FeriaDTO[] Ferie { get; set; }
+
+
+        // Da CANCELLARE
+        //public IEnumerable<FeriaDTO> Ferie { get; set; }
 
         public int Count { get; set; }
 
@@ -55,7 +59,8 @@ namespace Core.Services.Shared
 
         // La async Task<FerieDTO> fa una query sulla classe richiestaQuery (nella riga 10) 
         // serve ad far ridare il valore della query
-        public async Task<FerieDTO> Query(FeriaQuery qry)
+
+        public async Task<FerieDTO> GetAllFerie(FeriaQuery qry)
         {
             var risultato = new FerieDTO();
             var prova = _dbContext.Feria.Select(x => x);
@@ -80,7 +85,33 @@ namespace Core.Services.Shared
             return risultato;
         }
 
-        public async Task<FeriaDTO> QueryById(FeriaQuery id)
+        /*
+        public async Task<FerieDTO> Query(FeriaQuery qry)
+        {
+            var risultato = new FerieDTO();
+            var prova = _dbContext.Feria.Select(x => x);
+            try
+            {
+                risultato.Ferie = await prova.Select(x => new FeriaDTO
+                {
+                    Id = x.Id,
+                    DataInizio = x.DataInizio,
+                    DataFine = x.DataFine,
+                    Durata = x.Durata,
+                    Dettagli = x.Dettagli,
+                }).ToArrayAsync();
+
+                risultato.Count = await prova.CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return risultato;
+        }
+        */
+        public async Task<FeriaDTO> GetFeriaById(FeriaQuery id)
         {
             var prova = await _dbContext.Feria
                 .Where(x => x.Id == id.Id)
@@ -96,6 +127,16 @@ namespace Core.Services.Shared
 
 
             return prova;
+        }
+        public async Task DeleteFerie(Guid id)
+        {
+            var feria = await _dbContext.Feria.FindAsync(id);
+
+            if (feria != null)
+            {
+                _dbContext.Feria.Remove(feria);
+                await _dbContext.SaveChangesAsync();
+            }
         }
     }
 }

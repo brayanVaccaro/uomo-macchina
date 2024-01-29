@@ -1,38 +1,41 @@
-
-using Core.Services.Shared;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Threading.Tasks;
-using UomoMacchina.Areas.Permessi.Data;
+using Core.Services.Shared;
 using UomoMacchina.Infrastructure;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using UomoMacchina.SignalR;
-using static UomoMacchina.Areas.Permessi.Data.PermessiViewModel;
+using UomoMacchina.SignalR.Hubs.Events;
+using UomoMacchina.Areas.Trasferte.Data;
+using static UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel;
+using Microsoft.Extensions.Options;
 
-
-namespace UomoMacchina.Areas.Permessi
+namespace UomoMacchina.Areas.Trasferte.Controllers
 {
-    [Area("Permessi")]
-    public partial class PermessiController : AuthenticatedBaseController
+    [Area("Trasferte")]
+    public partial class TrasferteController : AuthenticatedBaseController
     {
         private readonly SharedService _sharedService;
         private static bool returnToIndex = false;
         private readonly IPublishDomainEvents _publisher;
 
 
-        public PermessiController(SharedService sharedService)
+        public TrasferteController(SharedService sharedService)
         {
             _sharedService = sharedService;
         }
 
         // La Task<IActionResult> serve ad ricevere i valori sul file Index.cshtml
-        // (dato dal nome stesso) e tramite il per corso di riferimento alla classe PermessiViewModel
-        // nel file PermessiViewModel.cs
+        // (dato dal nome stesso) e tramite il per corso di riferimento alla classe TrasferteViewModel
+        // nel file TrasferteViewModel.cs
         [HttpGet]
-        public async virtual Task<IActionResult> Index(PermessiViewModel model)
+        public async virtual Task<IActionResult> Index(TrasferteViewModel model)
         {   // schermata index  
-            var permessi = await _sharedService.GetAllPermessi(model.ToPermessoQuery());
-            
-            model.SetPermessi(permessi);
+            var trasferte = await _sharedService.GetAllTrasferte(model.ToTrasfertaQuery());
+
+            model.SetTrasferte(trasferte);
 
             return View(model);//mi carica il file Index nell'area richieste
         }
@@ -46,23 +49,23 @@ namespace UomoMacchina.Areas.Permessi
             return RedirectToAction(Actions.Edit());
         }
 
-        // Costrutto della Query
+        // Costrutto della GetAllTrasferte
 
         //secondo metodo che viene chiamato, dopo New
         [HttpGet]
         public virtual async Task<IActionResult> Edit(Guid? id)
         {
-            var model = new PermessoViewModel();
+            var model = new TrasfertaViewModel();
             if (id.HasValue)
             {
-                model.SetPermesso(await _sharedService.GetPermessoById(new PermessoQuery
+                model.SetTrasferta(await _sharedService.GetTrasfertaById(new TrasfertaQuery
                 {
                     Id = id.Value,
                 }));
                 //qua il controllo
                 if (returnToIndex)
                 {
-                    var indexModel = new PermessiViewModel();
+                    var indexModel = new TrasferteViewModel();
                     returnToIndex = false;
                     return RedirectToAction(Actions.Index(indexModel));
                 }
@@ -75,20 +78,23 @@ namespace UomoMacchina.Areas.Permessi
             }
 
         }
-        
+
+
         // Metodo che mi mostra il pop-up di conferma della compilazione richiesta
         [HttpPost]
-        public virtual async Task<IActionResult> Edit(PermessoViewModel model)
+        public virtual async Task<IActionResult> Edit(TrasfertaViewModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    model.Id = await _sharedService.Handle(model.ToAddOrUpdatePermessoCommand());
-                    
-                    Alerts.AddSuccess(this, "Permesso effetuata con successo");
+                    model.Id = await _sharedService.Handle(model.ToAddOrUpdateTrasfertaCommand());
 
-                    }
+                    Alerts.AddSuccess(this, "Trasferta effetuata con successo");
+
+                    returnToIndex = true;
+
+                }
                 catch (Exception ex)
                 {
                     ModelState.AddModelError(string.Empty, ex.Message);
@@ -98,22 +104,22 @@ namespace UomoMacchina.Areas.Permessi
             // Metodo che mi mostra il pop-up di effore nella compilazione richiesta
             if (ModelState.IsValid == false)
             {
-                Alerts.AddError(this, "Errore nella compilazione richiesta");
+                Alerts.AddError(this, "Errore nella compilazione trasferta");
             }
-            
+
             return RedirectToAction(Actions.Edit(model.Id));
         }
 
 
         [HttpPost]
-        public virtual async Task<IActionResult> SaveEdit(PermessoViewModel model)
+        public virtual async Task<IActionResult> SaveEdit(TrasfertaViewModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
                     // Esegui l'effettivo salvataggio delle modifiche nel database
-                    await _sharedService.Handle(model.ToAddOrUpdatePermessoCommand());
+                    await _sharedService.Handle(model.ToAddOrUpdateTrasfertaCommand());
 
                     Alerts.AddSuccess(this, "Modifiche salvate con successo");
 
@@ -136,28 +142,27 @@ namespace UomoMacchina.Areas.Permessi
         {
             try
             {
-                var permesso = await _sharedService.GetPermessoById(new PermessoQuery { Id = id });
+                var trasferta = await _sharedService.GetTrasfertaById(new TrasfertaQuery { Id = id });
 
-                if (permesso != null)
+                if (trasferta != null)
                 {
-                    // Effettua l'eliminazione della Permesso
-                    await _sharedService.DeletePermesso(id);
+                    // Effettua l'eliminazione della Trasferta
+                    await _sharedService.DeleteTrasferta(id);
 
-                    Alerts.AddSuccess(this, "Permesso cancellata con successo");
+                    Alerts.AddSuccess(this, "Trasferta cancellata con successo");
                 }
                 else
                 {
-                    Alerts.AddError(this, "Permesso non trovata");
+                    Alerts.AddError(this, "Trasferta non trovata");
                 }
             }
             catch (Exception ex)
             {
-                Alerts.AddError(this, $"Errore durante l'eliminazione della Permesso: {ex.Message}");
+                Alerts.AddError(this, $"Errore durante l'eliminazione della Trasferta: {ex.Message}");
             }
 
             return RedirectToAction(Actions.Index());
         }
-
 
     }
 

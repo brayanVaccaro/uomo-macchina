@@ -1,14 +1,12 @@
-﻿@model UomoMacchina.Areas.Permessi.Data.PermessiViewModel
-@{
-}
+﻿@model UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel
+@inject IHtmlLocalizer<UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel> ModelLocalizer
 
-@inject IHtmlLocalizer<UomoMacchina.Areas.Permessi.Data.PermessiViewModel> ModelLocalizer
+@* Index di Rendicontazione *@
 
-@* Index Permessi *@
-
+@* Pulsante creazione data*@
 <ul class="navbar-nav flex-wrap ms-auto">
     <li>
-        <a class="btn btn-light ms-2" href="@Url.Action(MVC.Permessi.Permessi.New())" title="Inserisci un nuovo elemento">
+        <a class="Nuovo btn btn-light ms-2" href="@Url.Action(MVC.Rendicontazioni.Rendicontazioni.New())" title="Inserisci un nuovo elemento">
             <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
         </a>
     </li>
@@ -26,16 +24,13 @@
                     Id
                 </th>
                 <th>
+                    Ore
+                </th>
+                <th>
                     Data
                 </th>
                 <th>
-                    OraInizio
-                </th>
-                <th>
-                    OraFine
-                </th>
-                <th>
-                    Durata
+                    Commessa
                 </th>
                 <th>
                     Dettagli
@@ -45,7 +40,7 @@
 
         <tbody>
 
-            @if (Model.Permessi.Any() == false)
+            @if (Model.Rendicontazioni.Any() == false)
             {
                 <tr>
                     <td colspan="3">Nessun elemento trovato con i filtri correnti</td>
@@ -53,26 +48,23 @@
             }
             else
             {
-                @foreach (var permesso in Model.Permessi)
+                @foreach (var rendicontazione in Model.Rendicontazioni)
                 {
-                    <tr class="onit-table-row-link" onclick="javascript:utilities.navigateUrlExcludeOnitNotNavigate('@Url.Action(MVC.Permessi.Permessi.Edit(permesso.Id))')" title="@ModelLocalizer["Modifica utente"] @permesso.Id">
+                    <tr class="onit-table-row-link" onclick="javascript:utilities.navigateUrlExcludeOnitNotNavigate('@Url.Action(MVC.Rendicontazioni.Rendicontazioni.Edit(rendicontazione.Id))')" title="@ModelLocalizer["Modifica utente"] @rendicontazione.Id">
                         <td scope="row" class="text-nowrap">
-                            @permesso.Id
-                        </td>
-                        <td class="text-nowrap">
-                            @permesso.Data.ToString("d")
+                            @rendicontazione.Id
                         </td>
                         <td scope="row" class="text-nowrap">
-                            @permesso.OraInizio.ToString("t")
+                            @rendicontazione.Ore
                         </td>
                         <td class="text-nowrap">
-                            @permesso.OraFine.ToString("t")
+                            @rendicontazione.Data.ToString("d")
                         </td>
                         <td class="text-nowrap">
-                            @permesso.Durata
+                            @rendicontazione.Commessa
                         </td>
                         <td class="text-nowrap">
-                            @permesso.Dettagli
+                            @rendicontazione.Dettagli
                         </td>
                     </tr>
                 }
@@ -97,7 +89,7 @@
 }
 
 @section scripts{
-
+    
 
     <script>
         var Vue
@@ -108,12 +100,12 @@
                 }
             },
             methods: {
-                async eliminaPermesso(permessoId) {
-                    console.log("permessoId", permessoId)
-                    await fetch('/Permessi/Permessi/Edit?' + permessoId, {
+                async eliminaRendicontazione(rendicontazioneId) {
+                    console.log("rendicontazioneId", rendicontazioneId)
+                    await fetch('/Rendicontazioni/Rendicontazioni/Edit?' + rendicontazioneId, {
                         method: "POST",
                     });
-
+                    
                 }
             }
         }).mount("#pageId");
