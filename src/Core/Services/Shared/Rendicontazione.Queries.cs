@@ -121,6 +121,7 @@ namespace Core.Services.Shared
                 {
                     Id = x.Id,
                     OreTotali = x.OreTotali,
+                    Data = x.Data,
                     OraFine = x.OraFine,
                     OraInizio = x.OraInizio,
                     Commessa = x.Commessa,

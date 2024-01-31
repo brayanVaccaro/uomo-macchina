@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Core.Services.Shared
 {
@@ -44,6 +45,7 @@ namespace Core.Services.Shared
             }
 
             rendicontazione.OreTotali = cmd.OreTotali;
+            rendicontazione.Data = cmd.Data;
             rendicontazione.OraInizio = cmd.OraInizio;
             rendicontazione.OraFine = cmd.OraFine;
             rendicontazione.Commessa = cmd.Commessa;
