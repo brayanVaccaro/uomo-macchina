@@ -35,7 +35,7 @@
 
                     <!-- Ora fine -->
                     <div class="col-md-4 position-relative">
-                        <label asp-for="OraFine" class="form-label">Ora inizio:</label>
+                        <label asp-for="OraFine" class="form-label">Ora fine:</label>
                         <input type="time" class="form-control" asp-for="OraFine" value="" required>
                         <span asp-validation-for="OraFine" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
                         <span asp-validation-for="OraFine" class="valid-feedback">Ora di inizio inserita</span>
@@ -43,8 +43,8 @@
 
                     <!-- Durata -->
                     <div class="col-md-4 position-relative">
-                        <label asp-for="Durata" class="form-label">Durata:</label>
-                        <input type="text" class="form-control" asp-for="Durata" value="" required>
+                        <label asp-for="Durata" class="form-label">Durata (ore):</label>
+                        <input type="number" class="form-control" asp-for="Durata" value="" required>
                         <span asp-validation-for="Durata" class="text-danger"></span>
                         <span asp-validation-for="Durata" class="invalid-feedback">Non hai ancora inserito la commessa</span>
                         <span asp-validation-for="Durata" class="valid-feedback">Durata inserita</span>
@@ -98,8 +98,8 @@
 
                     <!-- Durata -->
                     <div class="col-md-4 position-relative">
-                        <label asp-for="Durata" class="form-label">Durata:</label>
-                        <input type="text" class="form-control" asp-for="Durata" value="" required>
+                        <label asp-for="Durata" class="form-label">Durata (ore):</label>
+                        <input type="number" class="form-control" asp-for="Durata" value="" required>
                         <span asp-validation-for="Durata" class="text-danger"></span>
                         <span asp-validation-for="Durata" class="invalid-feedback">Non hai ancora inserito la commessa</span>
                         <span asp-validation-for="Durata" class="valid-feedback">Durata inserita</span>

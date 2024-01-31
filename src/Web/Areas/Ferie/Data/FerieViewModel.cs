@@ -22,7 +22,22 @@ namespace UomoMacchina.Areas.Ferie.Data
         //public Guid? Id { get; set; }
 
         public FeriaViewModel[] Ferie { get; set; }
+        /*
+         Ferie [
+        
+        FeriaViewModel feria1 {
+        Guid Id
+        }
+        FeriaViewModel feria2{
+        Guid Id
+        }
+        FeriaViewModel feria3{
+        Guid Id
+        }
 
+        ]
+         
+         */
 
         public class FeriaViewModel
         {

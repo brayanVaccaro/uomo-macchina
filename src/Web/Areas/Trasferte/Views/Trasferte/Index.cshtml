@@ -1,4 +1,5 @@
-﻿@inject IHtmlLocalizer<UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel> ModelLocalizer
+﻿@using Core.Models;
+@inject IHtmlLocalizer<UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel> ModelLocalizer
 @model UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel
 
 @* Index di Trasferte *@
@@ -26,13 +27,13 @@
         <thead>
             <tr>
                 <th>
-                    Chilometri
+                    Chilometri (Km)
                 </th>
                 <th>
-                    DataInizio
+                    Data Inizio
                 </th>
                 <th>
-                    DataFine
+                    Data Fine
                 </th>
                 <th>
                     Commessa
@@ -51,7 +52,7 @@
                     Nessun elemento trovato
                 </td>
             </tr>
-            <tr v-for="trasferta in model.trasferte.trasferte">
+            <tr v-for="trasferta in model.trasferte.trasferte" v-on:click='navigateToEdit(trasferta.id, "Trasferte")'>
                 <td class="text-nowrap">
                     {{trasferta.chilometri}}
                 </td>

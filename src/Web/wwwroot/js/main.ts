@@ -1,7 +1,7 @@
 ﻿declare var Vue: any;
 declare var vuecal: any;
 declare var mainModel: any; //variabile globale che rappresenta il mainViewModel
-
+declare var ferieEditURL: any;
 //accedo a @Model
 ////Vue 3
 const app = Vue.createApp({
@@ -36,7 +36,7 @@ const app = Vue.createApp({
                     throw new Error(`Network response was not ok, status: ${response.status}`);
                 }
                 const data = await response.json();
-                
+
                 this.model = data
                 console.log("this.model.ferie..lenght", this.model.ferie.ferie.length)
 
@@ -88,7 +88,7 @@ const app = Vue.createApp({
         async selezionaGiorno(idGiorno) {
             this.selectedDate = idGiorno
             await this.setDataByDate(this.selectedDate)
-            
+
             this.mostraSettimana = false;
             this.mostraGiorno = true;
             this.customClass = "col-2"
@@ -100,6 +100,63 @@ const app = Vue.createApp({
             this.selectedEvent = event
             console.log("this.selectedEvent", this.selectedEvent)
             e.stopPropagation()
+        },
+        async navigateToEdit(id, nome) {
+            // Usa il valore di ferieId per costruire l'URL desiderato
+            console.log(typeof (id))
+            console.log(id)
+            console.log(id, nome)    // nome = Ferie
+            
+            const url = `/${nome}/${nome}/Edit?id=${id}`
+            console.log(url)
+
+            //const urlR = `/Rendicontazioni/Rendicontazioni/Rendicontazioni?id=${id}`;
+            //const urlP = `/Permessi/Permessi/Permessi?id=${id}`;
+            //const url = `/Ferie/Ferie/Edit?id=${id}`;
+            //const urlF = `/NottiFuori/NottiFuori/NottiFuori?id=${id}`;
+            //const urlT = `/Trasferte/Trasferte/Trasferte?id=${id}`;
+            //const urlRi = `/Rimborsi/Rimborsi/Rimborsi?id=${id}`;
+
+            window.location.href = url                          
+
+            //await fetch(url)
+            //    .then(response => {
+            //        if (!response.ok) {
+            //            console.log(response.statusText)
+            //            throw new Error('Network response was not ok ');
+            //        }
+            //        console.log(response)
+            //        console.log(response.body)
+            //        console.log(response.type)
+            //        console.log(response.url)
+                    
+            //        return window.open(response.url)
+            //    })
+                
+            //    .catch(
+            //        error => {
+            //            console.error('Unable to get events')
+            //            console.log(error)
+            //        }
+            //    );
+
+
+            //try {
+            //    if (!response.ok) {
+            //        throw new Error(`Network response was not ok, status: ${response.status}`);
+            //    }
+            //    const data = response.json();
+
+            //    this.model = data
+            //    console.log("this.model.ferie..lenght", this.model.ferie.ferie.length)
+
+            //}
+            //catch (error) {
+            //    console.error('Unable to get events', error);
+            //    throw new Error(`Network response was not ok, error: ${error}`);
+            //}
+
+
         }
     },
     computed: {
@@ -109,6 +166,7 @@ const app = Vue.createApp({
         }
     },
     created() {
+        /*console.log("this.ferieEditURLLocale = ", this.ferieEditURLLocale)*/
         // Inserisco l'evento lunch in tutte i giorni della settimana corrente
         for (let i = 0; i < 5; i++) {
 

@@ -1,4 +1,5 @@
-﻿@inject IHtmlLocalizer<UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel> ModelLocalizer
+﻿@using Core.Models;
+@inject IHtmlLocalizer<UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel> ModelLocalizer
 @model UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel
 
 @* Index di Rendicontazioni *@
@@ -26,16 +27,16 @@
         <thead>
             <tr>
                 <th>
-                    OreTotali
+                    Ore Totali
                 </th>
                 <th>
                     Data
                 </th>
                 <th>
-                    OraInizio
+                    Ora Inizio
                 </th>
                 <th>
-                    OraFine
+                    Ora Fine
                 </th>
                 <th>
                     Commessa
@@ -51,12 +52,12 @@
                     Nessun elemento trovato
                 </td>
             </tr>
-            <tr v-for="rendicontazione in model.rendicontazioni.rendicontazioni" onclick="javascript:utilities.navigateUrlExcludeOnitNotNavigate('@Url.Action(MVC.Rendicontazioni.Rendicontazioni.Edit(@Model.Id))')">
+            <tr v-for="rendicontazione in model.rendicontazioni.rendicontazioni" v-on:click='navigateToEdit(rendicontazione.id, "Rendicontazioni")'>
                 <td class="text-nowrap">
                     {{rendicontazione.oreTotali}}
                 </td>
                 <td class="text-nowrap">
-                    {{rendicontazione.data}}
+                    {{(rendicontazione.data)}}
                 </td>
                 <td class="text-nowrap">
                     {{rendicontazione.oraInizio}}
@@ -89,5 +90,28 @@
 }
 
 @section scripts {
-    
+    <script type="module">
+
+        Vue.createApp({
+            data() {
+                return {
+                    message: 'Vue Funziona!',
+                    permesso: false,
+                    feria: false
+                }
+            },
+            methods: {
+                formatDate(dateString) {
+                    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+                    return new Date(dateString).toLocaleDateString(undefined, options);
+                },
+                formatTime(timeString) {
+                    return new Date(`1970-01-01T${timeString}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                },
+                navigateToEdit(id, type) {
+                    // Implementazione della tua funzione navigateToEdit
+                }
+            }
+        }).mount('#pageId')
+    </script>
 }

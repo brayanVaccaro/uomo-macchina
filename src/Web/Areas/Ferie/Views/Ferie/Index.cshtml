@@ -1,3 +1,4 @@
+@using Core.Models;
 @inject IHtmlLocalizer<UomoMacchina.Areas.Ferie.Data.FerieViewModel> ModelLocalizer
 @model UomoMacchina.Areas.Ferie.Data.FerieViewModel
 
@@ -27,10 +28,10 @@
         <thead>
             <tr>
                 <th>
-                    DataInizio
+                    Data Inizio
                 </th>
                 <th>
-                    DataFine
+                    Data Fine
                 </th>
                 <th>
                     Durarata
@@ -46,7 +47,7 @@
                     Nessun elemento trovato
                 </td>
             </tr>
-            <tr v-for="ferie in model.ferie.ferie">
+            <tr v-for="ferie in model.ferie.ferie" v-on:click='navigateToEdit(ferie.id, "Ferie" )'>
                 
                 <td class="text-nowrap">
                     {{ferie.dataInizio}}

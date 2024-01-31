@@ -1,4 +1,5 @@
-﻿@inject IHtmlLocalizer<UomoMacchina.Areas.Permessi.Data.PermessiViewModel> ModelLocalizer
+﻿@using Core.Models;
+@inject IHtmlLocalizer<UomoMacchina.Areas.Permessi.Data.PermessiViewModel> ModelLocalizer
 @model UomoMacchina.Areas.Permessi.Data.PermessiViewModel
 
 @* Index di Permessi *@
@@ -29,10 +30,10 @@
                     Data
                 </th>
                 <th>
-                    OraInizio
+                    Ora Inizio
                 </th>
                 <th>
-                    OraFine
+                    Ora Fine
                 </th>
                 <th>
                     Durata
@@ -48,7 +49,7 @@
                     Nessun elemento trovato
                 </td>
             </tr>
-            <tr v-for="permesso in model.permessi.permessi">
+            <tr v-for="permesso in model.permessi.permessi" v-on:click='navigateToEdit(permesso.id, "Permessi")'>
                 <td class="text-nowrap">
                     {{permesso.data}}
                 </td>

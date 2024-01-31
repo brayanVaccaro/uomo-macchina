@@ -3,6 +3,7 @@
 
 @* Edit di Rendicontazione *@
 
+@* Sistemare l'edit della modifica dati della rendicontazione *@
 
 <div class="Testo d-flex flex-column bg-body-tertiary">
 
@@ -17,12 +18,12 @@
 
                 @* Qui ci sono i vari campi del form*@
                 <div>
-                    <!-- Ore -->
+                    <!-- Ore Totali -->
                     <div class="col-md-4 position-relative">
-                        <label asp-for="OreTotali" class="form-label">Ore:</label>
-                        <input type="text" class="form-control" asp-for="OreTotali" value="" required>
-                        <span asp-validation-for="OreTotali" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
-                        <span asp-validation-for="OreTotali" class="valid-feedback">Ora di inizio inserita</span>
+                        <label asp-for="OreTotali" class="form-label">Ore Totali:</label>
+                        <input type="number" class="form-control" asp-for="OreTotali" value="" required>
+                        <span asp-validation-for="OreTotali" class="invalid-feedback">Non hai ancora inserito le ore totali</span>
+                        <span asp-validation-for="OreTotali" class="valid-feedback">Ore totali inserita</span>
                     </div>
 
                     <!-- Data  -->
@@ -32,6 +33,22 @@
                         <span asp-validation-for="Data" class="text-danger"></span>
                         <span asp-validation-for="Data" class="invalid-feedback">Non hai ancora inserito la data di inizio</span>
                         <span asp-validation-for="Data" class="valid-feedback">Data di inizio inserita</span>
+                    </div>
+
+                    <!-- Ora Inizio -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="OraInizio" class="form-label">Ora inizio:</label>
+                        <input type="time" class="form-control" asp-for="OraInizio" value="" required>
+                        <span asp-validation-for="OraInizio" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
+                        <span asp-validation-for="OraInizio" class="valid-feedback">Ora di inizio inserita</span>
+                    </div>
+
+                    <!-- Ora Fine -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="OraFine" class="form-label">Ora fine:</label>
+                        <input type="time" class="form-control" asp-for="OraFine" value="" required>
+                        <span asp-validation-for="OraFine" class="invalid-feedback">Non hai ancora inserito l'ora di fine</span>
+                        <span asp-validation-for="OraFine" class="valid-feedback">Ora di fine inserita</span>
                     </div>
 
                     <!-- Commessa -->
@@ -64,10 +81,10 @@
 
                 @* Qui ci sono i vari campi del form*@
                 <div>
-                    <!-- Ore -->
+                    <!-- Ore Totali -->
                     <div class="col-md-4 position-relative">
-                        <label asp-for="OreTotali" class="form-label">Ore:</label>
-                        <input type="text" class="form-control" asp-for="OreTotali" value="" required>
+                        <label asp-for="OreTotali" class="form-label">Ore Totali:</label>
+                        <input type="number" class="form-control" asp-for="OreTotali" value="" required>
                         <span asp-validation-for="OreTotali" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
                         <span asp-validation-for="OreTotali" class="valid-feedback">Ora di inizio inserita</span>
                     </div>
@@ -79,6 +96,22 @@
                         <span asp-validation-for="Data" class="text-danger"></span>
                         <span asp-validation-for="Data" class="invalid-feedback">Non hai ancora inserito la data di inizio</span>
                         <span asp-validation-for="Data" class="valid-feedback">Data di inizio inserita</span>
+                    </div>
+
+                    <!-- Ora Inizio -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="OraInizio" class="form-label">Ora inizio:</label>
+                        <input type="time" class="form-control" asp-for="OraInizio" value="" required>
+                        <span asp-validation-for="OraInizio" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
+                        <span asp-validation-for="OraInizio" class="valid-feedback">Ora di inizio inserita</span>
+                    </div>
+
+                    <!-- Ora Fine -->
+                    <div class="col-md-4 position-relative">
+                        <label asp-for="OraFine" class="form-label">Ora fine:</label>
+                        <input type="time" class="form-control" asp-for="OraFine" value="" required>
+                        <span asp-validation-for="OraFine" class="invalid-feedback">Non hai ancora inserito l'ora di fine</span>
+                        <span asp-validation-for="OraFine" class="valid-feedback">Ora di fine inserita</span>
                     </div>
 
                     <!-- Commessa -->

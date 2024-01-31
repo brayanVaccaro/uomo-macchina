@@ -1,4 +1,5 @@
-﻿@inject IHtmlLocalizer<UomoMacchina.Areas.Rimborsi.Data.RimborsiViewModel> ModelLocalizer
+﻿@using Core.Models;
+@inject IHtmlLocalizer<UomoMacchina.Areas.Rimborsi.Data.RimborsiViewModel> ModelLocalizer
 @model UomoMacchina.Areas.Rimborsi.Data.RimborsiViewModel
 
 @* Index di Rimborsi *@
@@ -27,7 +28,7 @@
         <thead>
             <tr>
                 <th>
-                    Importo
+                    Importo (€)
                 </th>
                 <th>
                     Data
@@ -49,7 +50,7 @@
                     Nessun elemento trovato
                 </td>
             </tr>
-            <tr v-for="rimborso in model.rimborsi.rimborsi">
+            <tr v-for="rimborso in model.rimborsi.rimborsi" v-on:click='navigateToEdit(rimborso.id, "Rimborsi")'>
                 
                 <td class="text-nowrap">
                     {{rimborso.importo}}

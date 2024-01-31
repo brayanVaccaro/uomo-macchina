@@ -16,9 +16,8 @@ namespace UomoMacchina.Areas.Ferie.Controllers
     public partial class FerieController : AuthenticatedBaseController
     {
         private readonly SharedService _sharedService;
-        private readonly IPublishDomainEvents _publisher;
         private static bool returnToIndex = false;
-        
+        private readonly IPublishDomainEvents _publisher;
 
 
         public FerieController(SharedService sharedService)
@@ -36,7 +35,10 @@ namespace UomoMacchina.Areas.Ferie.Controllers
 
             model.SetFerie(ferie);
 
-            return View(model);//mi carica il file Index nell'area richieste
+            // Reindirizza a "Main" nell'area desiderata
+            return RedirectToAction("Main", "Main", new { area = "Main" });
+            //return RedirectToAction("Main");
+            //return View(model);//mi carica il file Index nell'area richieste
         }
 
         // Creazione della richiesta
@@ -88,7 +90,7 @@ namespace UomoMacchina.Areas.Ferie.Controllers
                 try
                 {
                     model.Id = await _sharedService.Handle(model.ToAddOrUpdateFeriaCommand());
-                    returnToIndex = true;
+
                     Alerts.AddSuccess(this, "Ferie effetuata con successo");
 
                     returnToIndex = true;
@@ -142,19 +144,19 @@ namespace UomoMacchina.Areas.Ferie.Controllers
 
                 if (feria != null)
                 {
-                    // Effettua l'eliminazione della Ferie
+                    // Effettua l'eliminazione della Feria
                     await _sharedService.DeleteFerie(id);
 
-                    Alerts.AddSuccess(this, "Ferie cancellata con successo");
+                    Alerts.AddSuccess(this, "Feria cancellata con successo");
                 }
                 else
                 {
-                    Alerts.AddError(this, "Ferie non trovata");
+                    Alerts.AddError(this, "Feria non trovata");
                 }
             }
             catch (Exception ex)
             {
-                Alerts.AddError(this, $"Errore durante l'eliminazione della Ferie: {ex.Message}");
+                Alerts.AddError(this, $"Errore durante l'eliminazione della Feria: {ex.Message}");
             }
 
             return RedirectToAction(Actions.Index());

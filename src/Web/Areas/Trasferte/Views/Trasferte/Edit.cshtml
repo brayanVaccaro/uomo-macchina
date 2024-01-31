@@ -19,23 +19,24 @@
                 <div>
                     <!-- Chilometri -->
                     <div class="col-md-4 position-relative">
-                        <label asp-for="Chilometri" class="form-label"> Chilometri:</label>
-                        <input type="text" class="form-control" asp-for="Chilometri" value="" required>
+                        <label asp-for="Chilometri" class="form-label"> Chilometri (Km):</label>
+                        <input type="number" class="form-control" asp-for="Chilometri" value="" required>
                         <span asp-validation-for="Chilometri" class="invalid-feedback"> Non hai ancora inserito i Chilometri</span>
                         <span asp-validation-for="Chilometri" class="valid-feedback"> Chilometri inserita</span>
                     </div>
 
                     <!-- DataInizio  -->
                     <div class="col-md-4 position-relative">
-                        <label asp-for="DataInizio" class="form-label"> DataInizio:</label>
+                        <label asp-for="DataInizio" class="form-label"> Data inizio:</label>
                         <input type="date" class="form-control" asp-for="DataInizio" value="@DateTime.Now.ToString("yyyy - MM - dd")" required>
                         <span asp-validation-for="DataInizio" class="text-danger"></span>
                         <span asp-validation-for="DataInizio" class="invalid-feedback"> Non hai ancora inserito la data</span>
                         <span asp-validation-for="DataInizio" class="valid-feedback"> Data inserita</span>
                     </div>
+
                     <!-- DataFine  -->
                     <div class="col-md-4 position-relative">
-                        <label asp-for="DataFine" class="form-label"> DataFine:</label>
+                        <label asp-for="DataFine" class="form-label"> Data fine:</label>
                         <input type="date" class="form-control" asp-for="DataFine" value="@DateTime.Now.AddDays(2).ToString("yyyy - MM - dd")" required>
                         <span asp-validation-for="DataFine" class="text-danger"></span>
                         <span asp-validation-for="DataFine" class="invalid-feedback"> Non hai ancora inserito la data</span>
@@ -54,10 +55,10 @@
                     <!-- AutoAziendale  -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="AutoAziendale" class="form-label"> AutoAziendale:</label>
-                        <input type="date" class="form-control" asp-for="AutoAziendale" value="" required>
+                        <input type="text" class="form-control" asp-for="AutoAziendale" value="" required>
                         <span asp-validation-for="AutoAziendale" class="text-danger"></span>
-                        <span asp-validation-for="AutoAziendale" class="invalid-feedback"> Non hai ancora inserito la data</span>
-                        <span asp-validation-for="AutoAziendale" class="valid-feedback"> Data inserita</span>
+                        <span asp-validation-for="AutoAziendale" class="invalid-feedback"> Non hai ancora segnato l'auto aziendale</span>
+                        <span asp-validation-for="AutoAziendale" class="valid-feedback"> Auto aziendale seganto</span>
                     </div>
 
 
@@ -83,23 +84,24 @@
                 <div>
                     <!-- Chilometri -->
                     <div class="col-md-4 position-relative">
-                        <label asp-for="Chilometri" class="form-label"> Chilometri:</label>
-                        <input type="text" class="form-control" asp-for="Chilometri" value="" required>
+                        <label asp-for="Chilometri" class="form-label"> Chilometri (Km):</label>
+                        <input type="number" class="form-control" asp-for="Chilometri" value="" required>
                         <span asp-validation-for="Chilometri" class="invalid-feedback"> Non hai ancora inserito i Chilometri</span>
                         <span asp-validation-for="Chilometri" class="valid-feedback"> Chilometri inserita</span>
                     </div>
 
-                    <!-- DataInizio  -->
+                    <!-- Data Inizio  -->
                     <div class="col-md-4 position-relative">
-                        <label asp-for="DataInizio" class="form-label"> DataInizio:</label>
+                        <label asp-for="DataInizio" class="form-label"> Data inizio:</label>
                         <input type="date" class="form-control" asp-for="DataInizio" value="@DateTime.Now.ToString("yyyy - MM - dd")" required>
                         <span asp-validation-for="DataInizio" class="text-danger"></span>
                         <span asp-validation-for="DataInizio" class="invalid-feedback"> Non hai ancora inserito la data</span>
                         <span asp-validation-for="DataInizio" class="valid-feedback"> Data inserita</span>
                     </div>
-                    <!-- DataFine  -->
+
+                    <!-- Data Fine  -->
                     <div class="col-md-4 position-relative">
-                        <label asp-for="DataFine" class="form-label"> DataFine:</label>
+                        <label asp-for="DataFine" class="form-label"> Data fine:</label>
                         <input type="date" class="form-control" asp-for="DataFine" value="@DateTime.Now.AddDays(2).ToString("yyyy - MM - dd")" required>
                         <span asp-validation-for="DataFine" class="text-danger"></span>
                         <span asp-validation-for="DataFine" class="invalid-feedback"> Non hai ancora inserito la data</span>
@@ -118,11 +120,12 @@
                     <!-- AutoAziendale  -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="AutoAziendale" class="form-label"> AutoAziendale:</label>
-                        <input type="date" class="form-control" asp-for="AutoAziendale" value="" required>
+                        <input type="text" class="form-control" asp-for="AutoAziendale" value="" required>
                         <span asp-validation-for="AutoAziendale" class="text-danger"></span>
-                        <span asp-validation-for="AutoAziendale" class="invalid-feedback"> Non hai ancora inserito la data</span>
-                        <span asp-validation-for="AutoAziendale" class="valid-feedback"> Data inserita</span>
+                        <span asp-validation-for="AutoAziendale" class="invalid-feedback"> Non hai ancora segnato l'auto aziendale</span>
+                        <span asp-validation-for="AutoAziendale" class="valid-feedback"> Auto aziendale seganto</span>
                     </div>
+
                     <!-- Dettagli -->
                     <div class="mb-3">
                         <label asp-for="Dettagli" class="form-label"> Dettagli:</label>

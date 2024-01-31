@@ -37,7 +37,10 @@ namespace UomoMacchina.Areas.Rimborsi.Controllers
 
             model.SetRimborsi(rimborsi);
 
-            return View(model);//mi carica il file Index nell'area richieste
+            // Reindirizza a "Main" nell'area desiderata
+            return RedirectToAction("Main", "Main", new { area = "Main" });
+            //return RedirectToAction("Main");
+            //return View(model);//mi carica il file Index nell'area richieste
         }
 
         // Creazione della richiesta

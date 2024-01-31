@@ -1,4 +1,5 @@
-﻿@inject IHtmlLocalizer<UomoMacchina.Areas.NottiFuori.Data.NottiFuoriViewModel> ModelLocalizer
+﻿@using Core.Models;
+@inject IHtmlLocalizer<UomoMacchina.Areas.NottiFuori.Data.NottiFuoriViewModel> ModelLocalizer
 @model UomoMacchina.Areas.NottiFuori.Data.NottiFuoriViewModel
 
 @* Index di NottiFuori *@
@@ -46,7 +47,7 @@
                     Nessun elemento trovato
                 </td>
             </tr>
-            <tr v-for="notteFuori in model.nottiFuori.nottiFuori">
+            <tr v-for="notteFuori in model.nottiFuori.nottiFuori " v-on:click='navigateToEdit(notteFuori.id, "NottiFuori")'>
                 
                 <td class="text-nowrap">
                     {{notteFuori.tipoViaggio}}

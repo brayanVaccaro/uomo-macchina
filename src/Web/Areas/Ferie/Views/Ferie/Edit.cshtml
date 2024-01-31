@@ -15,7 +15,7 @@
                 <input id="Save-Edit" class="d-none" type="submit" />
                 <input id="Id" type="hidden" asp-for="Id" />
 
-                @* Qui ci sono i vari campi del form*@
+                @* Qui ci sono i vari campi del form *@
                 <div>
                     <!-- Data inizio -->
                     <div class="col-md-4 position-relative">
@@ -37,7 +37,7 @@
                     <!-- Durata -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="Durata" class="form-label">Durata:</label>
-                        <input type="text" class="form-control" asp-for="Durata" value="" required>
+                        <input type="number" class="form-control" asp-for="Durata" value="" required>
                         <span asp-validation-for="Durata" class="text-danger"></span>
                         <span asp-validation-for="Durata" class="invalid-feedback">Non hai ancora inserito la commessa</span>
                         <span asp-validation-for="Durata" class="valid-feedback">Durata inserita</span>
@@ -84,7 +84,7 @@
                     <!-- Durata -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="Durata" class="form-label">Durata:</label>
-                        <input type="text" class="form-control" asp-for="Durata" value="" required>
+                        <input type="number" class="form-control" asp-for="Durata" value="" required>
                         <span asp-validation-for="Durata" class="text-danger"></span>
                         <span asp-validation-for="Durata" class="invalid-feedback">Non hai ancora inserito la commessa</span>
                         <span asp-validation-for="Durata" class="valid-feedback">Durata inserita</span>
