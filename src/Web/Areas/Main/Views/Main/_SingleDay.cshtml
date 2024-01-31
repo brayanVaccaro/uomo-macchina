@@ -1,29 +1,29 @@
 ﻿@{
 
 }
-    @model UomoMacchina.Areas.Main.Data.MainViewModel
+    @* @model UomoMacchina.Areas.Main.Data.MainViewModel *@
 @* è in questo file che visualizzo il resoconto delle Ferie, Permessi, Notti Fuori. Per il giorno selezionato *@
 
 
 
 <div class="col-auto">
-    <div id="rendicontazioni" class="">
+    <div id="rendicontazioni" class="row">
         <partial name="@MVC.Rendicontazioni.Rendicontazioni.Views.Index" model="Model.Rendicontazioni" />
     </div>
-    <div id="ferie" class="">
+    <div id="ferie" class="row">
         <partial name="@MVC.Ferie.Ferie.Views.Index" model="@Model.Ferie" />
     </div>
-    <div id="permessi" class="">
+    <div id="permessi" class="row">
         <partial name="@MVC.Permessi.Permessi.Views.Index" model="Model.Permessi" />
     </div>
-    <div id="nottiFuori" class="">
+    <div id="nottiFuori" class="row">
         <partial name="@MVC.NottiFuori.NottiFuori.Views.Index" model="Model.NottiFuori" />
     </div>
-    <div id="trasferte" class="">
+    <div id="trasferte" class="row">
         <partial name="@MVC.Trasferte.Trasferte.Views.Index" model="Model.Trasferte" />
     </div>
 
-    <div id="rimborsi" class="">
+    <div id="rimborsi" class="row">
         <partial name="@MVC.Rimborsi.Rimborsi.Views.Index" model="Model.Rimborsi" />
     </div>
 </div>

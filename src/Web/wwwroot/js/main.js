@@ -3,6 +3,7 @@
 const app = Vue.createApp({
     data() {
         return {
+            properties: filteredProperties,
             model: mainModel, //oggetto model locale, da poter modificare
             mostraSettimana: true,
             mostraGiorno: false,

@@ -1,13 +1,18 @@
 ﻿declare var Vue: any;
 declare var vuecal: any;
 declare var mainModel: any; //variabile globale che rappresenta il mainViewModel
+
 declare var ferieEditURL: any;
+
+declare var filteredProperties: any
+
 //accedo a @Model
 ////Vue 3
 const app = Vue.createApp({
 
     data() {
         return {
+            properties: filteredProperties,
             model: mainModel, //oggetto model locale, da poter modificare
             mostraSettimana: true,
             mostraGiorno: false,

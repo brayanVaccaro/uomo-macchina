@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using UomoMacchina.Areas.Ferie.Data;
 using UomoMacchina.Areas.Main.Data.Shared;
 using UomoMacchina.Areas.NottiFuori.Data;
@@ -50,6 +51,7 @@ namespace UomoMacchina.Areas.Main.Data
 
         public RendicontazioniViewModel Rendicontazioni { get; set; }
 
+        //public readonly PropertyInfo[] properties = typeof(MainViewModel).GetProperties();
 
         public override IActionResult GetRoute() => MVC.Main.Main.Main(this).GetAwaiter().GetResult();
        
