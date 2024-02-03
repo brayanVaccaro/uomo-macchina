@@ -33,9 +33,9 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
         [HttpGet]
         public async virtual Task<IActionResult> Index(RendicontazioniViewModel model)
         {   // schermata index  
-            var rendicontazioni = await _sharedService.GetAllRendicontazioni(model.ToRendicontazioneQuery());
+            //var rendicontazioni = await _sharedService.GetAllRendicontazioni(model.ToRendicontazioneQuery());
 
-            model.SetRendicontazioni(rendicontazioni);
+            //model.SetRendicontazioni(rendicontazioni);
 
             // Reindirizza a "Main" nell'area desiderata
             return RedirectToAction("Main", "Main", new { area = "Main" });

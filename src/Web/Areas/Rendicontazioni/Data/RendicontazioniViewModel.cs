@@ -102,13 +102,13 @@ namespace UomoMacchina.Areas.Rendicontazioni.Data
         }
 
         // Metodo per utilizzare il filtro di RendicontazioneQuery sul file Rendicontazioni.Queries.cs 
-        public RendicontazioneQuery ToRendicontazioneQuery()
-        {
-            return new RendicontazioneQuery
-            {
-                Filter = this.Filtro
-            };
-        }
+        //public RendicontazioneQuery ToRendicontazioneQuery()
+        //{
+        //    return new RendicontazioneQuery
+        //    {
+        //        Filter = this.Filtro
+        //    };
+        //}
 
 
         //public override IActionResult GetRoute()
