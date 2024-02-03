@@ -10,7 +10,9 @@
     <div class="container text-primary col-sm-8">
         @if (Model.Id != null)
         {
+            @* Modifica del dato *@
 
+            <h3> Modifica notti fuori del giorno: @Model.Data.ToString("dd-MM-yyyy") </h3>
             <form class="was-validated" method="post" action="@Url.Action(MVC.NottiFuori.NottiFuori.SaveEdit())">
                 <input id="Save-Edit" class="d-none" type="submit" />
                 <input id="Id" type="hidden" asp-for="Id" />
@@ -20,7 +22,7 @@
                     <!-- Tipo di viaggio -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="TipoViaggio" class="form-label">Tipo di viaggio:</label>
-                        <input type="text" class="form-control" asp-for="TipoViaggio" value="" required>
+                        <input type="text" class="form-control" asp-for="TipoViaggio" required>
                         <span asp-validation-for="TipoViaggio" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
                         <span asp-validation-for="TipoViaggio" class="valid-feedback">Ora di inizio inserita</span>
                     </div>
@@ -28,7 +30,7 @@
                     <!-- Data  -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="Data" class="form-label">Data inizio:</label>
-                        <input type="date" class="form-control" asp-for="Data" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                        <input type="date" class="form-control" asp-for="Data" required>
                         <span asp-validation-for="Data" class="text-danger"></span>
                         <span asp-validation-for="Data" class="invalid-feedback">Non hai ancora inserito la data di inizio</span>
                         <span asp-validation-for="Data" class="valid-feedback">Data di inizio inserita</span>
@@ -37,7 +39,7 @@
                     <!-- Commessa -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="Commessa" class="form-label">Commessa:</label>
-                        <input type="text" class="form-control" asp-for="Commessa" value="" required>
+                        <input type="text" class="form-control" asp-for="Commessa" required>
                         <span asp-validation-for="Commessa" class="text-danger"></span>
                         <span asp-validation-for="Commessa" class="invalid-feedback">Non hai ancora inserito la commessa</span>
                         <span asp-validation-for="Commessa" class="valid-feedback">Commessa inserita</span>
@@ -58,6 +60,10 @@
         }
         else
         {
+            @* Inserimento del nuovo dato *@
+
+            <h3> Inserimento Notti Fuori </h3>
+
             <!-- Compilazione e validazione della richiesta di permesso tramite pulsante -->
             <form class="was-validated" method="post" action="@Url.Action(MVC.NottiFuori.NottiFuori.Edit())">
                 <input id="edit-form-submitter" class="d-none" type="submit" />
@@ -75,7 +81,7 @@
                     <!-- Data  -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="Data" class="form-label">Data inizio:</label>
-                        <input type="date" class="form-control" asp-for="Data" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                        <input type="date" class="form-control" asp-for="Data" value="@DateTime.Now.ToString("dd-MM-yyyy")" required>
                         <span asp-validation-for="Data" class="text-danger"></span>
                         <span asp-validation-for="Data" class="invalid-feedback">Non hai ancora inserito la data di inizio</span>
                         <span asp-validation-for="Data" class="valid-feedback">Data di inizio inserita</span>
@@ -106,7 +112,7 @@
         }
 
         @* Sezione dei tasti*@
-        <div class="mb-3">
+        <div class=" d-flex flex-row justify-content-around ">
 
             <!-- Tasto Anulla-->
             <a class="Annulla btn btn-warning" href="@Url.Action(MVC.NottiFuori.NottiFuori.Index())">Annulla</a>
@@ -115,13 +121,7 @@
             {
 
                 @* MODIFICA ELEMENTO *@
-                <form method="post" id="" action="@Url.Action(MVC.NottiFuori.NottiFuori.SaveEdit())">
-                    <input id="Id" type="hidden" asp-for="Id" />
-                    <input id="TipoViaggio" type="hidden" asp-for="TipoViaggio" />
-                    <input id="Data" type="hidden" asp-for="Data" />
-                    <input id="Commessa" type="hidden" asp-for="Commessa" />
-                    <input id="Dettagli" type="hidden" asp-for="Dettagli" />
-                </form>
+                
                 <button class="Salva btn btn-primary" type="button" onclick="document.getElementById('Save-Edit').click()">Salva Modifiche</button>
 
 
@@ -129,7 +129,7 @@
                 <form hidden autocomplete="off" id="delete-form" method="post" action="@Url.Action(MVC.NottiFuori.NottiFuori.Delete())">
                     <input type="hidden" asp-for="Id" />
                 </form>
-                <button class="Elimina btn btn-danger ms-2" title="Elimina NotteFuori" type="button" onclick="document.getElementById('delete-form').submit();">
+                <button class="Elimina btn btn-danger " title="Elimina NotteFuori" type="button" onclick="document.getElementById('delete-form').submit();">
                     <i class="fa-solid "></i>&nbsp;Elimina
                 </button>
             }

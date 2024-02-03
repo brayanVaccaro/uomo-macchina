@@ -94,13 +94,7 @@ namespace UomoMacchina.Areas.NottiFuori.Data
         }
 
         // Metodo per utilizzare il filtro di NotteFuoriQuery sul file NottiFuori.Queries.cs 
-        public NotteFuoriQuery ToNotteFuoriQuery()
-        {
-            return new NotteFuoriQuery
-            {
-                Filter = this.Filtro
-            };
-        }
+        
 
 
         //public override IActionResult GetRoute()

@@ -79,6 +79,8 @@ namespace Core.Services.Shared
 
             return risultato;
         }
+
+        /* Filtro per Data */
         public async Task<NottiFuoriDTO> GetAllNottiFuoriByDate(DateTime date)
         {
             var risultato = new NottiFuoriDTO();
@@ -103,6 +105,60 @@ namespace Core.Services.Shared
 
             return risultato;
         }
+
+        /* Filtro per Commessa */
+        public async Task<NottiFuoriDTO> GetAllNottiFuoriByCommessa(string commessaScelta)
+        {
+            var risultato = new NottiFuoriDTO();
+            var nottiFuori = _dbContext.NottiFuori.Where(y => y.Commessa == commessaScelta);
+            try
+            {
+                risultato.NottiFuori = await nottiFuori.Select(x => new NotteFuoriDTO
+                {
+                    Id = x.Id,
+                    TipoViaggio = x.TipoViaggio,
+                    Data = x.Data,
+                    Commessa = x.Commessa,
+                    Dettagli = x.Dettagli,
+                }).ToArrayAsync();
+
+                risultato.Count = await nottiFuori.CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return risultato;
+        }
+
+
+        /* Filtro per Dettaglio */
+        public async Task<NottiFuoriDTO> GetAllNottiFuoriByDettaglio(string dettaglioScelta)
+        {
+            var risultato = new NottiFuoriDTO();
+            var nottiFuori = _dbContext.NottiFuori.Where(x => x.Dettagli.Contains(dettaglioScelta));
+            try
+            {
+                risultato.NottiFuori = await nottiFuori.Select(x => new NotteFuoriDTO
+                {
+                    Id = x.Id,
+                    TipoViaggio = x.TipoViaggio,
+                    Data = x.Data,
+                    Commessa = x.Commessa,
+                    Dettagli = x.Dettagli,
+                }).ToArrayAsync();
+
+                risultato.Count = await nottiFuori.CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return risultato;
+        }
+
 
         public async Task<NotteFuoriDTO> GetNotteFuoriById(NotteFuoriQuery id)
         {

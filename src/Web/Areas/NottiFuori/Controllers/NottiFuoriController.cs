@@ -33,9 +33,9 @@ namespace UomoMacchina.Areas.NottiFuori.Controllers
         [HttpGet]
         public async virtual Task<IActionResult> Index(NottiFuoriViewModel model)
         {   // schermata index  
-            var nottiFuori = await _sharedService.GetAllNottiFuori(model.ToNotteFuoriQuery());
+            //var nottiFuori = await _sharedService.GetAllNottiFuori(model.ToNotteFuoriQuery());
 
-            model.SetNottiFuori(nottiFuori);
+            //model.SetNottiFuori(nottiFuori);
 
             // Reindirizza a "Main" nell'area desiderata
             return RedirectToAction("Main", "Main", new { area = "Main" });
