@@ -62,7 +62,7 @@
                     {{rimborso.commessa}}
                 </td>
                 <td class="text-nowrap">
-                    {{rimborso.cartaAziendale}}
+                    {{rimborso.cartaAziendale ? 'Si' : 'No'}}
                 </td>
                 <td class="text-nowrap">
                     {{rimborso.dettagli}}
@@ -86,5 +86,17 @@
 }
 
 @section scripts {
-    
+
+    @* <script>
+        function matchesKeyword(data) {
+            //var keyword = "@Model.DataRicerca";
+
+            if (!keyword || keyword.trim() === "") {
+                return true; // Se la keyword è vuota, mostra tutti gli elementi
+            }
+
+            // Esempio di confronto per la data (adatta secondo il tuo formato)
+            return data.includes(keyword);
+        }
+    </script> *@
 }

@@ -10,47 +10,58 @@
     <div class="container text-primary col-sm-8">
         @if (Model.Id != null)
         {
+            @* Modifica del dato *@
+
+            <h3> Modifica la Rimborso del giorno: @Model.Data.ToString("dd-MM-yyyy") </h3>
 
             <form class="was-validated" method="post" action="@Url.Action(MVC.Rimborsi.Rimborsi.SaveEdit())">
                 <input id="Save-Edit" class="d-none" type="submit" />
                 <input id="Id" type="hidden" asp-for="Id" />
 
                 @* Qui ci sono i vari campi del form*@
+
                 <div>
                     <!-- Importo -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="Importo" class="form-label">Importo (€):</label>
-                        <input type="text" class="form-control" asp-for="Importo" value="" required>
+                        <input type="text" class="form-control" asp-for="Importo" required>
                         <span asp-validation-for="Importo" class="invalid-feedback">Non hai ancora inserito l'importo</span>
                         <span asp-validation-for="Importo" class="valid-feedback">Importo inserito</span>
                     </div>
 
+
                     <!-- Data  -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="Data" class="form-label">Data inizio:</label>
-                        <input type="date" class="form-control" asp-for="Data" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                        <input type="date" class="form-control" asp-for="Data" required>
                         <span asp-validation-for="Data" class="text-danger"></span>
                         <span asp-validation-for="Data" class="invalid-feedback">Non hai ancora inserito la data di inizio</span>
                         <span asp-validation-for="Data" class="valid-feedback">Data di inizio inserita</span>
                     </div>
 
+
                     <!-- Commessa -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="Commessa" class="form-label">Commessa:</label>
-                        <input type="text" class="form-control" asp-for="Commessa" value="" required>
+                        <input type="text" class="form-control" asp-for="Commessa" required>
                         <span asp-validation-for="Commessa" class="text-danger"></span>
                         <span asp-validation-for="Commessa" class="invalid-feedback">Non hai ancora inserito la commessa</span>
                         <span asp-validation-for="Commessa" class="valid-feedback">Commessa inserita</span>
                     </div>
 
+
                     <!-- Carta aziendale -->
-                    <div class="col-md-4 position-relative">
-                        <label asp-for="CartaAziendale" class="form-label">Carta aziendale:</label>
-                        <input type="text" class="form-control" asp-for="CartaAziendale" value="" required>
-                        <span asp-validation-for="CartaAziendale" class="text-danger"></span>
-                        <span asp-validation-for="CartaAziendale" class="invalid-feedback">Non hai ancora inserito la carta aziendale</span>
-                        <span asp-validation-for="CartaAziendale" class="valid-feedback">Carta aziendale inserita</span>
+                    <div class="col-md-6 position-relative">
+                        <label asp-for="CartaAziendale" class="form-label">AutoAziendale:</label>
+                        <select class="form-select is-invalid" asp-for="CartaAziendale" required>
+                            <option selected disabled value="">Selezionare se è stato usato la carta aziendale</option>
+                            <option value="true">Si</option>
+                            <option value="false">No</option>
+                            <span asp-validation-for="CartaAziendale" class="invalid-feedback"> Non hai ancora segnato la carta aziendale</span>
+                        </select>
+                        <span asp-validation-for="CartaAziendale" class="valid-feedback"> Carta aziendale seganto</span>
                     </div>
+
 
                     <!-- Dettagli -->
                     <div class="mb-3">
@@ -66,11 +77,16 @@
         }
         else
         {
+            @* Inserimento del nuovo dato *@
+
+            <h3> Inserimento Rimborso </h3>
+
             <!-- Compilazione e validazione della richiesta di permesso tramite pulsante -->
             <form class="was-validated" method="post" action="@Url.Action(MVC.Rimborsi.Rimborsi.Edit())">
                 <input id="edit-form-submitter" class="d-none" type="submit" />
 
                 @* Qui ci sono i vari campi del form*@
+
                 <div>
                     <!-- Importo -->
                     <div class="col-md-4 position-relative">
@@ -80,15 +96,15 @@
                         <span asp-validation-for="Importo" class="valid-feedback">Importo inserito</span>
                     </div>
 
+
                     <!-- Data  -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="Data" class="form-label">Data inizio:</label>
-                        <input type="date" class="form-control" asp-for="Data" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                        <input type="date" class="form-control" asp-for="Data" value="@DateTime.Now.ToString("dd-MM-yyyy")" required>
                         <span asp-validation-for="Data" class="text-danger"></span>
                         <span asp-validation-for="Data" class="invalid-feedback">Non hai ancora inserito la data di inizio</span>
                         <span asp-validation-for="Data" class="valid-feedback">Data di inizio inserita</span>
                     </div>
-
 
 
                     <!-- Commessa -->
@@ -100,14 +116,19 @@
                         <span asp-validation-for="Commessa" class="valid-feedback">Commessa inserita</span>
                     </div>
 
+
                     <!-- Carta aziendale -->
-                    <div class="col-md-4 position-relative">
-                        <label asp-for="CartaAziendale" class="form-label">Carta aziendale:</label>
-                        <input type="text" class="form-control" asp-for="CartaAziendale" value="" required>
-                        <span asp-validation-for="CartaAziendale" class="text-danger"></span>
-                        <span asp-validation-for="CartaAziendale" class="invalid-feedback">Non hai ancora inserito la carta aziendale</span>
-                        <span asp-validation-for="CartaAziendale" class="valid-feedback">Carta aziendale inserita</span>
+                    <div class="col-md-6 position-relative">
+                        <label asp-for="CartaAziendale" class="form-label">AutoAziendale:</label>
+                        <select class="form-select is-invalid" asp-for="CartaAziendale" required>
+                            <option selected disabled value="">Selezionare se è stato usato la carta aziendale</option>
+                            <option value="true">Si</option>
+                            <option value="false">No</option>
+                            <span asp-validation-for="CartaAziendale" class="invalid-feedback"> Non hai ancora segnato la carta aziendale</span>
+                        </select>
+                        <span asp-validation-for="CartaAziendale" class="valid-feedback"> Carta aziendale seganto</span>
                     </div>
+
 
                     <!-- Dettagli -->
                     <div class="mb-3">
@@ -124,7 +145,7 @@
         }
 
         @* Sezione dei tasti*@
-        <div class="mb-3">
+        <div class=" d-flex flex-row justify-content-around ">
 
             <!-- Tasto Anulla-->
             <a class="Annulla btn btn-warning" href="@Url.Action(MVC.Rimborsi.Rimborsi.Index())">Annulla</a>
@@ -133,14 +154,7 @@
             {
 
                 @* MODIFICA ELEMENTO *@
-                <form method="post" id="" action="@Url.Action(MVC.Rimborsi.Rimborsi.SaveEdit())">
-                    <input id="Id" type="hidden" asp-for="Id" />
-                    <input id="Importo" type="hidden" asp-for="Importo" />
-                    <input id="Data" type="hidden" asp-for="Data" />
-                    <input id="Commessa" type="hidden" asp-for="Commessa" />
-                    <input id="CartaAziendale" type="hidden" asp-for="CartaAziendale" />
-                    <input id="Dettagli" type="hidden" asp-for="Dettagli" />
-                </form>
+                
                 <button class="Salva btn btn-primary" type="button" onclick="document.getElementById('Save-Edit').click()">Salva Modifiche</button>
 
 
@@ -148,7 +162,7 @@
                 <form hidden autocomplete="off" id="delete-form" method="post" action="@Url.Action(MVC.Rimborsi.Rimborsi.Delete())">
                     <input type="hidden" asp-for="Id" />
                 </form>
-                <button class="Elimina btn btn-danger ms-2" title="Elimina Rimborso" type="button" onclick="document.getElementById('delete-form').submit();">
+                <button class="Elimina btn btn-danger " title="Elimina Rimborso" type="button" onclick="document.getElementById('delete-form').submit();">
                     <i class="fa-solid "></i>&nbsp;Elimina
                 </button>
             }

@@ -98,14 +98,7 @@ namespace UomoMacchina.Areas.Rimborsi.Data
         }
 
         // Metodo per utilizzare il filtro di RimborsoQuery sul file Rimborsi.Queries.cs 
-        public RimborsoQuery ToRimborsoQuery()
-        {
-            return new RimborsoQuery
-            {
-                Filter = this.Filtro
-            };
-        }
-
+        
 
         //public override IActionResult GetRoute()
         //{

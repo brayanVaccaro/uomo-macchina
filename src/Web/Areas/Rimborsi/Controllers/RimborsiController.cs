@@ -33,9 +33,9 @@ namespace UomoMacchina.Areas.Rimborsi.Controllers
         [HttpGet]
         public async virtual Task<IActionResult> Index(RimborsiViewModel model)
         {   // schermata index  
-            var rimborsi = await _sharedService.GetAllRimborsi(model.ToRimborsoQuery());
+            //var rimborsi = await _sharedService.GetAllRimborsi(model.ToRimborsoQuery());
 
-            model.SetRimborsi(rimborsi);
+            //model.SetRimborsi(rimborsi);
 
             // Reindirizza a "Main" nell'area desiderata
             return RedirectToAction("Main", "Main", new { area = "Main" });

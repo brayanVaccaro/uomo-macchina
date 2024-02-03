@@ -83,6 +83,7 @@ namespace Core.Services.Shared
             return risultato;
         }
 
+        /* Filtro per Data */
         public async Task<RimborsiDTO> GetAllRimborsiByDate(DateTime date)
         {
             var risultato = new RimborsiDTO();
@@ -108,6 +109,63 @@ namespace Core.Services.Shared
 
             return risultato;
         }
+
+        /* Filtro per Commessa */
+        public async Task<RimborsiDTO> GetAllRimborsiByCommessa(string commessaScelta)
+        {
+            var risultato = new RimborsiDTO();
+            var rimborsi = _dbContext.Rimborsi.Where(y => y.Commessa == commessaScelta);
+            try
+            {
+                risultato.Rimborsi = await rimborsi.Select(x => new RimborsoDTO
+                {
+                    Id = x.Id,
+                    Importo = x.Importo,
+                    Data = x.Data,
+                    Commessa = x.Commessa,
+                    CartaAziendale = x.CartaAziendale,
+                    Dettagli = x.Dettagli,
+                }).ToArrayAsync();
+
+                risultato.Count = await rimborsi.CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return risultato;
+        }
+
+
+        /* Filtro per Dettaglio */
+        public async Task<RimborsiDTO> GetAllRimborsiByDettaglio(string dettaglioScelta)
+        {
+            var risultato = new RimborsiDTO();
+            var rimborsi = _dbContext.Rimborsi.Where(x => x.Dettagli.Contains(dettaglioScelta));
+            try
+            {
+                risultato.Rimborsi = await rimborsi.Select(x => new RimborsoDTO
+                {
+                    Id = x.Id,
+                    Importo = x.Importo,
+                    Data = x.Data,
+                    Commessa = x.Commessa,
+                    CartaAziendale = x.CartaAziendale,
+                    Dettagli = x.Dettagli,
+                }).ToArrayAsync();
+
+                risultato.Count = await rimborsi.CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return risultato;
+        }
+
+
 
         public async Task<RimborsoDTO> GetRimborsoById(RimborsoQuery id)
         {
