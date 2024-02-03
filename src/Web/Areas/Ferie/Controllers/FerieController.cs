@@ -31,9 +31,9 @@ namespace UomoMacchina.Areas.Ferie.Controllers
         [HttpGet]
         public async virtual Task<IActionResult> Index(FerieViewModel model)
         {   // schermata index  
-            var ferie = await _sharedService.GetAllFerie();
+            //var ferie = await _sharedService.GetAllFerie();
 
-            model.SetFerie(ferie);
+            //model.SetFerie(ferie);
 
             // Reindirizza a "Main" nell'area desiderata
             return RedirectToAction("Main", "Main", new { area = "Main" });

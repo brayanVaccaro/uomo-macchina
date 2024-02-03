@@ -59,7 +59,7 @@ namespace Core.Services.Shared
 
         // La async Task<FerieDTO> fa una query sulla classe richiestaQuery (nella riga 10) 
         // serve ad far ridare il valore della query
-        public async Task<FerieDTO> GetAllFerie()
+        public async Task<FerieDTO> GetAllFerie(FeriaQuery qry)
         {
             var risultato = new FerieDTO();
             var ferie = _dbContext.Ferie.Select(x => x);
@@ -108,6 +108,34 @@ namespace Core.Services.Shared
             return risultato;
         }
 
+
+        /* Filtro per Dettaglio */
+        public async Task<FerieDTO> GetAllFerieByDettaglio(string dettaglioScelta)
+        {
+            var risultato = new FerieDTO();
+            var ferie = _dbContext.Ferie.Where(x => x.Dettagli.Contains(dettaglioScelta));
+            try
+            {
+                risultato.Ferie = await ferie.Select(x => new FeriaDTO
+                {
+                    Id = x.Id,
+                    DataInizio = x.DataInizio,
+                    DataFine = x.DataFine,
+                    Durata = x.Durata,
+                    Dettagli = x.Dettagli,
+                }).ToArrayAsync();
+
+                risultato.Count = await ferie.CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return risultato;
+        }
+
+
         public async Task<FeriaDTO> GetFeriaById(FeriaQuery id)
         {
             var feria = await _dbContext.Ferie
@@ -125,6 +153,8 @@ namespace Core.Services.Shared
 
             return feria;
         }
+
+
         public async Task DeleteFerie(Guid id)
         {
             var feria = await _dbContext.Ferie.FindAsync(id);

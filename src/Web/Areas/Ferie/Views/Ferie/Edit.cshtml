@@ -10,6 +10,9 @@
 
         @if (Model.Id != null)
         {
+            @* Modifica del dato *@
+
+            <h3> Modifica la ferie del giorno: @Model.DataInizio.ToString("dd-MM-yyyy") </h3>
 
             <form class="was-validated" method="post" action="@Url.Action(MVC.Ferie.Ferie.SaveEdit())">
                 <input id="Save-Edit" class="d-none" type="submit" />
@@ -20,7 +23,7 @@
                     <!-- Data inizio -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="DataInizio" class="form-label">Data inizio:</label>
-                        <input type="date" class="form-control" asp-for="DataInizio" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                        <input type="date" class="form-control" asp-for="DataInizio" required>
                         <span asp-validation-for="DataInizio" class="invalid-feedback">Non hai ancora inserito la data di inizio</span>
                         <span asp-validation-for="DataInizio" class="valid-feedback">Data di inizio inserita</span>
                     </div>
@@ -28,7 +31,7 @@
                     <!-- Data fine -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="DataFine" class="form-label">Data fine:</label>
-                        <input type="date" class="form-control" asp-for="DataFine" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                        <input type="date" class="form-control" asp-for="DataFine" required>
                         <span asp-validation-for="DataFine" class="text-danger"></span>
                         <span asp-validation-for="DataFine" class="invalid-feedback">Non hai ancora inserito la data fine</span>
                         <span asp-validation-for="DataFine" class="valid-feedback">Data di fine inserita</span>
@@ -37,7 +40,7 @@
                     <!-- Durata -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="Durata" class="form-label">Durata:</label>
-                        <input type="number" class="form-control" asp-for="Durata" value="" required>
+                        <input type="number" class="form-control" asp-for="Durata" required>
                         <span asp-validation-for="Durata" class="text-danger"></span>
                         <span asp-validation-for="Durata" class="invalid-feedback">Non hai ancora inserito la commessa</span>
                         <span asp-validation-for="Durata" class="valid-feedback">Durata inserita</span>
@@ -58,6 +61,10 @@
         }
         else
         {
+            @* Inserimento del nuovo dato *@
+
+            <h3> Inserimento Ferie </h3>
+
             <!-- Compilazione e validazione della richiesta di permesso tramite pulsante -->
             <form class="was-validated" method="post" action="@Url.Action(MVC.Ferie.Ferie.Edit())">
                 <input id="edit-form-submitter" class="d-none" type="submit" />
@@ -67,7 +74,7 @@
                     <!-- Data inizio -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="DataInizio" class="form-label">Data inizio:</label>
-                        <input type="date" class="form-control" asp-for="DataInizio" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                        <input type="date" class="form-control" asp-for="DataInizio" value="@DateTime.Now.ToString("dd-MM-yyyy")" required>
                         <span asp-validation-for="DataInizio" class="invalid-feedback">Non hai ancora inserito la data di inizio</span>
                         <span asp-validation-for="DataInizio" class="valid-feedback">Data di inizio inserita</span>
                     </div>
@@ -75,7 +82,7 @@
                     <!-- Data fine -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="DataFine" class="form-label">Data fine:</label>
-                        <input type="date" class="form-control" asp-for="DataFine" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                        <input type="date" class="form-control" asp-for="DataFine" value="@DateTime.Now.ToString("dd-MM-yyyy")" required>
                         <span asp-validation-for="DataFine" class="text-danger"></span>
                         <span asp-validation-for="DataFine" class="invalid-feedback">Non hai ancora inserito la data di fine</span>
                         <span asp-validation-for="DataFine" class="valid-feedback">Data di fine inserita</span>
@@ -106,30 +113,24 @@
         }
 
         @* Sezione dei tasti*@
-        <div class="mb-3">
+        <div class=" d-flex flex-row justify-content-around ">
 
-            <!-- Tasto Anulla-->
-            <a class="Annulla btn btn-warning" href="@Url.Action(MVC.Ferie.Ferie.Index())">Annulla</a>
+            <!-- Tasto Anulla -->
+            <a class="Annulla btn btn-warning " href="@Url.Action(MVC.Ferie.Ferie.Index())">Annulla</a>
 
             @if (Model.Id != null)
             {
 
                 @* MODIFICA ELEMENTO *@
-                <form method="post" id="" action="@Url.Action(MVC.Ferie.Ferie.SaveEdit())">
-                    <input id="Id" type="hidden" asp-for="Id" />
-                    <input id="DataInizio" type="hidden" asp-for="DataInizio" />
-                    <input id="DataFine" type="hidden" asp-for="DataFine" />
-                    <input id="Durata" type="hidden" asp-for="Durata" />
-                    <input id="Dettagli" type="hidden" asp-for="Dettagli" />
-                </form>
-                <button class="Salva btn btn-primary" type="button" onclick="document.getElementById('Save-Edit').click()">Salva Modifiche</button>
+
+                <button class="Salva btn btn-primary " type="button" onclick="document.getElementById('Save-Edit').click()">Salva Modifiche</button>
 
 
                 @* ELIMINA ELEMENTO *@
                 <form hidden autocomplete="off" id="delete-form" method="post" action="@Url.Action(MVC.Ferie.Ferie.Delete())">
                     <input type="hidden" asp-for="Id" />
                 </form>
-                <button class="Elimina btn btn-danger ms-2" title="Elimina Rendicontazione" type="button" onclick="document.getElementById('delete-form').submit();">
+                <button class="Elimina btn btn-danger " title="Elimina Rendicontazione" type="button" onclick="document.getElementById('delete-form').submit();">
                     <i class="fa-solid "></i>&nbsp;Elimina
                 </button>
             }
