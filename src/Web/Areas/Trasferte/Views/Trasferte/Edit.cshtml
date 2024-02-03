@@ -6,58 +6,70 @@
 
 <div class="Testo d-flex flex-column bg-body-tertiary">
 
+            
     @*Campi da completare *@
     <div class="container text-primary col-sm-8">
         @if (Model.Id != null)
         {
+            @* Modifica del dato *@
+
+            <h3> Modifica la Trasferta del giorno: @Model.DataInizio.ToString("dd-MM-yyyy") </h3>
 
             <form class="was-validated" method="post" action="@Url.Action(MVC.Trasferte.Trasferte.SaveEdit())">
                 <input id="Save-Edit" class="d-none" type="submit" />
                 <input id="Id" type="hidden" asp-for="Id" />
 
                 @*Qui ci sono i vari campi del form *@
+
                 <div>
                     <!-- Chilometri -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="Chilometri" class="form-label"> Chilometri (Km):</label>
-                        <input type="number" class="form-control" asp-for="Chilometri" value="" required>
+                        <input type="number" class="form-control" asp-for="Chilometri" required>
                         <span asp-validation-for="Chilometri" class="invalid-feedback"> Non hai ancora inserito i Chilometri</span>
                         <span asp-validation-for="Chilometri" class="valid-feedback"> Chilometri inserita</span>
                     </div>
 
+
                     <!-- DataInizio  -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="DataInizio" class="form-label"> Data inizio:</label>
-                        <input type="date" class="form-control" asp-for="DataInizio" value="@DateTime.Now.ToString("yyyy - MM - dd")" required>
+                        <input type="date" class="form-control" asp-for="DataInizio" required>
                         <span asp-validation-for="DataInizio" class="text-danger"></span>
                         <span asp-validation-for="DataInizio" class="invalid-feedback"> Non hai ancora inserito la data</span>
                         <span asp-validation-for="DataInizio" class="valid-feedback"> Data inserita</span>
                     </div>
 
+
                     <!-- DataFine  -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="DataFine" class="form-label"> Data fine:</label>
-                        <input type="date" class="form-control" asp-for="DataFine" value="@DateTime.Now.AddDays(2).ToString("yyyy - MM - dd")" required>
+                        <input type="date" class="form-control" asp-for="DataFine" required>
                         <span asp-validation-for="DataFine" class="text-danger"></span>
                         <span asp-validation-for="DataFine" class="invalid-feedback"> Non hai ancora inserito la data</span>
                         <span asp-validation-for="DataFine" class="valid-feedback"> Data inserita</span>
                     </div>
 
+
                     <!-- Commessa -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="Commessa" class="form-label"> Commessa:</label>
-                        <input type="text" class="form-control" asp-for="Commessa" value="" required>
+                        <input type="text" class="form-control" asp-for="Commessa" required>
                         <span asp-validation-for="Commessa" class="text-danger"></span>
                         <span asp-validation-for="Commessa" class="invalid-feedback"> Non hai ancora inserito la commessa</span>
                         <span asp-validation-for="Commessa" class="valid-feedback"> Commessa inserita </span>
                     </div>
 
+
                     <!-- AutoAziendale  -->
-                    <div class="col-md-4 position-relative">
-                        <label asp-for="AutoAziendale" class="form-label"> AutoAziendale:</label>
-                        <input type="text" class="form-control" asp-for="AutoAziendale" value="" required>
-                        <span asp-validation-for="AutoAziendale" class="text-danger"></span>
+                    <div class="col-md-6 position-relative">
+                        <label asp-for="AutoAziendale" class="form-label">AutoAziendale:</label>
+                        <select class="form-select is-invalid" asp-for="AutoAziendale" required>
+                            <option selected disabled value="">Selezionare se è stato usato l'auto aziendale</option>
+                            <option value="true">Si</option>
+                            <option value="false">No</option>
                         <span asp-validation-for="AutoAziendale" class="invalid-feedback"> Non hai ancora segnato l'auto aziendale</span>
+                        </select>
                         <span asp-validation-for="AutoAziendale" class="valid-feedback"> Auto aziendale seganto</span>
                     </div>
 
@@ -76,6 +88,10 @@
         }
         else
         {
+            @* Inserimento del nuovo dato *@
+
+            <h3> Inserimento Trasferta </h3>
+
             <!-- Compilazione e validazione della richiesta di permesso tramite pulsante -->
             <form class="was-validated" method="post" action="@Url.Action(MVC.Trasferte.Trasferte.Edit())">
                 <input id="edit-form-submitter" class="d-none" type="submit" />
@@ -90,23 +106,26 @@
                         <span asp-validation-for="Chilometri" class="valid-feedback"> Chilometri inserita</span>
                     </div>
 
+
                     <!-- Data Inizio  -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="DataInizio" class="form-label"> Data inizio:</label>
-                        <input type="date" class="form-control" asp-for="DataInizio" value="@DateTime.Now.ToString("yyyy - MM - dd")" required>
+                        <input type="date" class="form-control" asp-for="DataInizio" value="@DateTime.Now.ToString("dd-MM-yyyy")" required>
                         <span asp-validation-for="DataInizio" class="text-danger"></span>
                         <span asp-validation-for="DataInizio" class="invalid-feedback"> Non hai ancora inserito la data</span>
                         <span asp-validation-for="DataInizio" class="valid-feedback"> Data inserita</span>
                     </div>
 
+
                     <!-- Data Fine  -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="DataFine" class="form-label"> Data fine:</label>
-                        <input type="date" class="form-control" asp-for="DataFine" value="@DateTime.Now.AddDays(2).ToString("yyyy - MM - dd")" required>
+                        <input type="date" class="form-control" asp-for="DataFine" value="@DateTime.Now.AddDays(2).ToString("dd-MM-yyyy")" required>
                         <span asp-validation-for="DataFine" class="text-danger"></span>
                         <span asp-validation-for="DataFine" class="invalid-feedback"> Non hai ancora inserito la data</span>
                         <span asp-validation-for="DataFine" class="valid-feedback"> Data inserita</span>
                     </div>
+
 
                     <!-- Commessa -->
                     <div class="col-md-4 position-relative">
@@ -117,14 +136,19 @@
                         <span asp-validation-for="Commessa" class="valid-feedback"> Commessa inserita </span>
                     </div>
 
+
                     <!-- AutoAziendale  -->
-                    <div class="col-md-4 position-relative">
-                        <label asp-for="AutoAziendale" class="form-label"> AutoAziendale:</label>
-                        <input type="text" class="form-control" asp-for="AutoAziendale" value="" required>
-                        <span asp-validation-for="AutoAziendale" class="text-danger"></span>
-                        <span asp-validation-for="AutoAziendale" class="invalid-feedback"> Non hai ancora segnato l'auto aziendale</span>
+                    <div class="col-md-6 position-relative">
+                        <label asp-for="AutoAziendale" class="form-label">AutoAziendale:</label>
+                        <select class="form-select is-invalid" asp-for="AutoAziendale" required>
+                            <option selected disabled value="">Selezionare se è stato usato l'auto aziendale</option>
+                            <option value="true">Si</option>
+                            <option value="false">No</option>
+                            <span asp-validation-for="AutoAziendale" class="invalid-feedback"> Non hai ancora segnato l'auto aziendale</span>
+                        </select>
                         <span asp-validation-for="AutoAziendale" class="valid-feedback"> Auto aziendale seganto</span>
                     </div>
+
 
                     <!-- Dettagli -->
                     <div class="mb-3">
@@ -141,7 +165,7 @@
         }
 
         @*Sezione dei tasti*@
-        <div class="mb-3">
+        <div class=" d-flex flex-row justify-content-around ">
 
             <!-- Tasto Anulla -->
             <a class="Annulla btn btn-warning" href="@Url.Action(MVC.Trasferte.Trasferte.Index())"> Annulla </a>
@@ -149,6 +173,7 @@
             @if (Model.Id != null)
             {
 
+                @* MODIFICA ELEMENTO *@
 
                 <button class="Salva btn btn-primary" type="button" onclick="document.getElementById('Save-Edit').click()"> Salva Modifiche </button>
 
@@ -157,7 +182,7 @@
                 <form hidden autocomplete="off" id="delete-form" method="post" action="@Url.Action(MVC.Trasferte.Trasferte.Delete())">
                     <input type="hidden" asp-for="Id" />
                 </form>
-                <button class="Elimina btn btn-danger ms-2" title="Elimina Trasferta" type="button" onclick="document.getElementById('delete-form').submit();">
+                <button class="Elimina btn btn-danger " title="Elimina Trasferta" type="button" onclick="document.getElementById('delete-form').submit();">
                     <i class="fa-solid "></i> &nbsp; Elimina
                 </button>
             }

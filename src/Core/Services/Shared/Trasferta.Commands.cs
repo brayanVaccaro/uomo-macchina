@@ -43,6 +43,7 @@ namespace Core.Services.Shared
                 _dbContext.Trasferte.Add(trasferta);
             }
 
+            trasferta.DataInizio = cmd.DataInizio;
             trasferta.DataFine = cmd.DataFine;
             trasferta.Chilometri = cmd.Chilometri;
             trasferta.Commessa = cmd.Commessa;

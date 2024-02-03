@@ -5,9 +5,12 @@ declare var ferieEditURL: any;
 //accedo a @Model
 ////Vue 3
 const app = Vue.createApp({
-
+    
     data() {
         return {
+            filterDate: "",
+            filterCommessa: "",
+            filterDettagli:"",
             model: mainModel, //oggetto model locale, da poter modificare
             mostraSettimana: true,
             mostraGiorno: false,
@@ -27,6 +30,10 @@ const app = Vue.createApp({
     },
     methods: {
         //visualizzo sulla destra gli eventi per il giorno selezionato
+
+
+        /* Funzione del filtro setDataByDate */
+
         async setDataByDate(dataScelta) {
             const url = `/Main/Main/GetData?dataScelta=${encodeURIComponent(dataScelta)}`;
 
@@ -46,6 +53,53 @@ const app = Vue.createApp({
                 throw new Error(`Network response was not ok, error: ${error}`);
             }
         },
+
+
+        /* Funzione del filtro setCommessa */
+
+        async setCommessa(commessaScelta) {
+            const url = `/Main/Main/GetAllByCommessa?commessaScelta=${encodeURIComponent(commessaScelta)}`;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok, status: ${response.status}`);
+                }
+                const data = await response.json();
+
+                this.model = data
+                
+
+            }
+            catch (error) {
+                console.error('Unable to get events', error);
+                throw new Error(`Network response was not ok, error: ${error}`);
+            }
+        },
+
+
+        /* Funzione del filtro setDettagli */
+
+        async setDettagli(dettaglioScelta) {
+            const url = `/Main/Main/GetAllByDettaglio?dettaglioScelta=${encodeURIComponent(dettaglioScelta)}`;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok, status: ${response.status}`);
+                }
+                const data = await response.json();
+
+                this.model = data
+
+
+            }
+            catch (error) {
+                console.error('Unable to get events', error);
+                throw new Error(`Network response was not ok, error: ${error}`);
+            }
+        },
+
 
         //metodo per settare gli eventi del backend nel calendario vue-cal
         setEvents() {

@@ -105,13 +105,7 @@ namespace UomoMacchina.Areas.Trasferte.Data
         }
 
         // Metodo per utilizzare il filtro di TrasfertaQuery sul file Trasferte.Queries.cs 
-        public TrasfertaQuery ToTrasfertaQuery()
-        {
-            return new TrasfertaQuery
-            {
-                Filter = this.Filtro
-            };
-        }
+        
 
 
         //public override IActionResult GetRoute()

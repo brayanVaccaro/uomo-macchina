@@ -85,6 +85,7 @@ namespace Core.Services.Shared
             return risultato;
         }
 
+        /* Filtro per Data */
         public async Task<TrasferteDTO> GetAllTrasferteByDate(DateTime date)
         {
             
@@ -112,6 +113,66 @@ namespace Core.Services.Shared
 
             return risultato;
         }
+
+        /* Filtro per Commessa */
+        public async Task<TrasferteDTO> GetAllTrasferteByCommessa(string commessaScelta)
+        {
+            var risultato = new TrasferteDTO();
+            var trasferte = _dbContext.Trasferte.Where(y => y.Commessa == commessaScelta);
+            try
+            {
+                risultato.Trasferte = await trasferte.Select(x => new TrasfertaDTO
+                {
+                    Id = x.Id,
+                    Chilometri = x.Chilometri,
+                    DataInizio = x.DataInizio,
+                    DataFine = x.DataFine,
+                    Commessa = x.Commessa,
+                    AutoAziendale = x.AutoAziendale,
+                    Dettagli = x.Dettagli,
+                }).ToArrayAsync();
+
+                risultato.Count = await trasferte.CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return risultato;
+        }
+
+
+        /* Filtro per Dettaglio */
+        public async Task<TrasferteDTO> GetAllTrasferteByDettaglio(string dettaglioScelta)
+        {
+            var risultato = new TrasferteDTO();
+            var trasferte = _dbContext.Trasferte.Where(x => x.Dettagli.Contains(dettaglioScelta));
+            try
+            {
+                risultato.Trasferte = await trasferte.Select(x => new TrasfertaDTO
+                {
+                    Id = x.Id,
+                    Chilometri = x.Chilometri,
+                    DataInizio = x.DataInizio,
+                    DataFine = x.DataFine,
+                    Commessa = x.Commessa,
+                    AutoAziendale = x.AutoAziendale,
+                    Dettagli = x.Dettagli,
+                }).ToArrayAsync();
+
+                risultato.Count = await trasferte.CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return risultato;
+        }
+
+
+
         public async Task<TrasfertaDTO> GetTrasfertaById(TrasfertaQuery id)
         {
             var trasferta = await _dbContext.Trasferte

@@ -33,9 +33,9 @@ namespace UomoMacchina.Areas.Trasferte.Controllers
         [HttpGet]
         public async virtual Task<IActionResult> Index(TrasferteViewModel model)
         {   // schermata index  
-            var trasferte = await _sharedService.GetAllTrasferte(model.ToTrasfertaQuery());
+            //var trasferte = await _sharedService.GetAllTrasferte(model.ToTrasfertaQuery());
 
-            model.SetTrasferte(trasferte);
+            //model.SetTrasferte(trasferte);
 
             // Reindirizza a "Main" nell'area desiderata
             return RedirectToAction("Main", "Main", new { area = "Main" });
