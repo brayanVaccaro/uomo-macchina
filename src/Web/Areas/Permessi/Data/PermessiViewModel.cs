@@ -34,7 +34,7 @@ namespace UomoMacchina.Areas.Permessi.Data
                 
             }
 
-            public Guid Id { get; set; }
+            public Guid? Id { get; set; }
             public DateTime Data { get; set; }
             public DateTime OraInizio { get; set; }
             public DateTime OraFine { get; set; }

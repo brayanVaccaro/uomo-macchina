@@ -30,9 +30,9 @@ namespace UomoMacchina.Areas.Permessi
         [HttpGet]
         public async virtual Task<IActionResult> Index(PermessiViewModel model)
         {   // schermata index  
-            var permessi = await _sharedService.GetAllPermessi();
+            //var permessi = await _sharedService.GetAllPermessi();
             
-            model.SetPermessi(permessi);
+            //model.SetPermessi(permessi);
 
             // Reindirizza a "Main" nell'area desiderata
             return RedirectToAction("Main", "Main", new { area = "Main" });

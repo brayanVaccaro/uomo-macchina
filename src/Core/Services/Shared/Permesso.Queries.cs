@@ -58,7 +58,7 @@ namespace Core.Services.Shared
 
         // La async Task<PermessiDTO> fa una query sulla classe richiestaQuery (nella riga 10) 
         // serve ad far ridare il valore della query
-        public async Task<PermessiDTO> GetAllPermessi()
+        public async Task<PermessiDTO> GetAllPermessi(PermessoQuery qry)
         {
             var risultato = new PermessiDTO();
             var permessi = _dbContext.Permessi.Select(x => x);
@@ -83,6 +83,8 @@ namespace Core.Services.Shared
 
             return risultato;
         }
+
+        /* Filtro per Data */
         public async Task<PermessiDTO> GetAllPermessiByDate(DateTime date)
         {
             var risultato = new PermessiDTO();
@@ -109,6 +111,33 @@ namespace Core.Services.Shared
             return risultato;
         }
 
+
+        /* Filtro per Dettaglio */
+        public async Task<PermessiDTO> GetAllPermessiByDettaglio(string dettaglioScelta)
+        {
+            var risultato = new PermessiDTO();
+            var permessi = _dbContext.Permessi.Where(x => x.Dettagli.Contains(dettaglioScelta));
+            try
+            {
+                risultato.Permessi = await permessi.Select(x => new PermessoDTO
+                {
+                    Id = x.Id,
+                    Data = x.Data,
+                    OraInizio = x.OraInizio,
+                    OraFine = x.OraFine,
+                    Durata = x.Durata,
+                    Dettagli = x.Dettagli,
+                }).ToArrayAsync();
+
+                risultato.Count = await permessi.CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return risultato;
+        }
 
 
         public async Task<PermessoDTO> GetPermessoById(PermessoQuery id)

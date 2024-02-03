@@ -8,6 +8,9 @@
     <div class="container text-primary col-sm-8">
         @if (Model.Id != null)
         {
+            @* Modifica del dato *@
+
+            <h3> Modifica il permesso del giorno: @Model.Data.ToString("dd-MM-yyyy") </h3>
 
             <form class="was-validated" method="post" action="@Url.Action(MVC.Permessi.Permessi.SaveEdit())">
                 <input id="Save-Edit" class="d-none" type="submit" />
@@ -18,7 +21,7 @@
                     <!-- Data  -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="Data" class="form-label">Data inizio:</label>
-                        <input type="date" class="form-control" asp-for="Data" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                        <input type="date" class="form-control" asp-for="Data" required>
                         <span asp-validation-for="Data" class="text-danger"></span>
                         <span asp-validation-for="Data" class="invalid-feedback">Non hai ancora inserito la data di inizio</span>
                         <span asp-validation-for="Data" class="valid-feedback">Data di inizio inserita</span>
@@ -27,7 +30,7 @@
                     <!-- Ora inizio -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="OraInizio" class="form-label">Ora inizio:</label>
-                        <input type="time" class="form-control" asp-for="OraInizio" value="" required>
+                        <input type="time" class="form-control" asp-for="OraInizio" required>
                         <span asp-validation-for="OraInizio" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
                         <span asp-validation-for="OraInizio" class="valid-feedback">Ora di inizio inserita</span>
                     </div>
@@ -36,7 +39,7 @@
                     <!-- Ora fine -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="OraFine" class="form-label">Ora fine:</label>
-                        <input type="time" class="form-control" asp-for="OraFine" value="" required>
+                        <input type="time" class="form-control" asp-for="OraFine" required>
                         <span asp-validation-for="OraFine" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
                         <span asp-validation-for="OraFine" class="valid-feedback">Ora di inizio inserita</span>
                     </div>
@@ -44,7 +47,7 @@
                     <!-- Durata -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="Durata" class="form-label">Durata (ore):</label>
-                        <input type="number" class="form-control" asp-for="Durata" value="" required>
+                        <input type="number" class="form-control" asp-for="Durata" required>
                         <span asp-validation-for="Durata" class="text-danger"></span>
                         <span asp-validation-for="Durata" class="invalid-feedback">Non hai ancora inserito la commessa</span>
                         <span asp-validation-for="Durata" class="valid-feedback">Durata inserita</span>
@@ -64,6 +67,10 @@
         }
         else
         {
+            @* Inserimento del nuovo dato *@
+
+            <h3> Inserimento Permesso </h3>
+
             <!-- Compilazione e validazione della richiesta di permesso tramite pulsante -->
             <form class="was-validated" method="post" action="@Url.Action(MVC.Permessi.Permessi.Edit())">
                 <input id="edit-form-submitter" class="d-none" type="submit" />
@@ -73,7 +80,7 @@
                     <!-- Data  -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="Data" class="form-label">Data inizio:</label>
-                        <input type="date" class="form-control" asp-for="Data" value="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                        <input type="date" class="form-control" asp-for="Data" value="@DateTime.Now.ToString("dd-MM-yyyy")" required>
                         <span asp-validation-for="Data" class="text-danger"></span>
                         <span asp-validation-for="Data" class="invalid-feedback">Non hai ancora inserito la data di inizio</span>
                         <span asp-validation-for="Data" class="valid-feedback">Data di inizio inserita</span>
@@ -120,23 +127,16 @@
         }
 
         @* Sezione dei tasti*@
-        <div class="mb-3">
+        <div class=" d-flex flex-row justify-content-around ">
 
-            <!-- Tasto Anulla-->
+            <!-- Tasto Anulla -->
             <a class="Annulla btn btn-warning" href="@Url.Action(MVC.Permessi.Permessi.Index())">Annulla</a>
 
             @if (Model.Id != null)
             {
 
                 @* MODIFICA ELEMENTO *@
-                <form method="post" id="" action="@Url.Action(MVC.Permessi.Permessi.SaveEdit())">
-                    <input id="Id" type="hidden" asp-for="Id" />
-                    <input id="Data" type="hidden" asp-for="Data" />
-                    <input id="OraInzio" type="hidden" asp-for="OraInizio" />
-                    <input id="OraFine" type="hidden" asp-for="OraFine" />
-                    <input id="Durata" type="hidden" asp-for="Durata" />
-                    <input id="Dettagli" type="hidden" asp-for="Dettagli" />
-                </form>
+                
                 <button class="Salva btn btn-primary" type="button" onclick="document.getElementById('Save-Edit').click()">Salva Modifiche</button>
 
 
@@ -144,7 +144,7 @@
                 <form hidden autocomplete="off" id="delete-form" method="post" action="@Url.Action(MVC.Permessi.Permessi.Delete())">
                     <input type="hidden" asp-for="Id" />
                 </form>
-                <button class="Elimina btn btn-danger ms-2" title="Elimina Permesso" type="button" onclick="document.getElementById('delete-form').submit();">
+                <button class="Elimina btn btn-danger " title="Elimina Permesso" type="button" onclick="document.getElementById('delete-form').submit();">
                     <i class="fa-solid "></i>&nbsp;Elimina
                 </button>
             }
