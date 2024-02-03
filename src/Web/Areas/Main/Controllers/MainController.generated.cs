@@ -85,6 +85,20 @@ namespace UomoMacchina.Areas.Main
 
         [NonAction]
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+        public virtual IActionResult GetAllByCommessa()
+        {
+            return new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.GetAllByCommessa);
+        }
+
+        [NonAction]
+        [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+        public virtual IActionResult GetAllByDettaglio()
+        {
+            return new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.GetAllByDettaglio);
+        }
+
+        [NonAction]
+        [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
         public virtual IActionResult Delete()
         {
             return new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Delete);
@@ -113,6 +127,8 @@ namespace UomoMacchina.Areas.Main
         public class ActionNamesClass
         {
             public readonly string Main = "Main";
+            public readonly string GetAllByCommessa = "GetAllByCommessa";
+            public readonly string GetAllByDettaglio = "GetAllByDettaglio";
             public readonly string Delete = "Delete";
             public readonly string GetData = "GetData";
         }
@@ -121,6 +137,8 @@ namespace UomoMacchina.Areas.Main
         public class ActionNameConstants
         {
             public const string Main = "Main";
+            public const string GetAllByCommessa = "GetAllByCommessa";
+            public const string GetAllByDettaglio = "GetAllByDettaglio";
             public const string Delete = "Delete";
             public const string GetData = "GetData";
         }
@@ -161,6 +179,28 @@ namespace UomoMacchina.Areas.Main
             var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Main);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             MainOverride(callInfo, model);
+            return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
+        }
+
+        [NonAction]
+        partial void GetAllByCommessaOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, string commessaScelta);
+        [NonAction]
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> GetAllByCommessa(string commessaScelta)
+        {
+            var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.GetAllByCommessa);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "commessaScelta", commessaScelta);
+            GetAllByCommessaOverride(callInfo, commessaScelta);
+            return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
+        }
+
+        [NonAction]
+        partial void GetAllByDettaglioOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, string dettaglioScelta);
+        [NonAction]
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> GetAllByDettaglio(string dettaglioScelta)
+        {
+            var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.GetAllByDettaglio);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "dettaglioScelta", dettaglioScelta);
+            GetAllByDettaglioOverride(callInfo, dettaglioScelta);
             return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
         }
 

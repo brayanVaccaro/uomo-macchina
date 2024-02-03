@@ -1,9 +1,61 @@
 ﻿@{
 
 }
-    @model UomoMacchina.Areas.Main.Data.MainViewModel
+@model UomoMacchina.Areas.Main.Data.MainViewModel
 @* è in questo file che visualizzo il resoconto delle Ferie, Permessi, Notti Fuori. Per il giorno selezionato *@
 
+
+<nav class="navbar navbar-expand navbar-light flex-wrap onit-page-subtitle d-flex ">
+    <form method="get" id="annullaRicerca">
+    </form>
+    @* <form class="onit-form-search" method="get" autocomplete="off">
+        <div class="row">
+            <div class="col-sm-auto onit-form-search-col-auto-2x">
+                <label asp-for="Filter"></label>
+                <div class="input-group onit-input-group-union">
+                    <span class="input-group-text"><i class="fa-solid fa-fw fa-magnifying-glass"></i></span>
+                </div>
+            </div>
+        </div>
+    </form> *@
+
+    <div class="d-flex flex-column ">
+        @* col-sm-auto pt-2 mt-auto *@
+
+
+        <!-- Filtro Data -->
+        <button class="btn btn-primary" type="button" v-on:click="setDataByDate(filterDate)">
+            Cerca
+        </button>
+        <input type="date" class="" v-model="filterDate" />
+        <p>{{filterDate}}</p>
+
+
+        <!-- Filtro Commessa -->
+        <button class="btn btn-primary" type="button" v-on:click="setCommessa(filterCommessa)">
+            Cerca
+        </button>
+        <input type="text" class="" v-model="filterCommessa" />
+        <p>{{filterCommessa}}</p>
+
+
+        <!-- Filtro Dettagli -->
+        <button class="btn btn-primary" type="button" v-on:click="setDettagli(filterDettagli)">
+            Cerca
+        </button>
+        <input type="text" class="" v-model="filterDettagli" />
+        <p>{{filterDettagli}}</p>
+        @* <button class="btn btn-link" type="button" title="Annulla tutti i parametri della ricerca" onclick="document.getElementById('annullaRicerca').submit();">
+            Azzera ricerca
+        </button> *@
+    </div>
+
+    @* @* <div class="col-sm-auto ms-auto mt-2 pt-2 d-flex flex-row">
+        @*                     <partial name="@MVC.Shared.Views._PagingPartialFilter" model="Model" />
+        
+    </div>*@
+    
+</nav>
 
 
 <div class="col-auto">

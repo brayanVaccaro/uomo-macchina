@@ -6,7 +6,7 @@ using Core.Infrastructure.AspNetCore;
 using System.Threading.Tasks;
 using UomoMacchina.Areas.Main.Data;
 using
-Microsoft.AspNetCore.Mvc.RazorPages;
+    Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -41,12 +41,12 @@ namespace UomoMacchina.Areas.Main
         public async virtual Task<IActionResult> Main(MainViewModel model)
         {
 
-            RendicontazioniDTO rendicontazioni = await _sharedService.GetAllRendicontazioni(model.Rendicontazioni.ToRendicontazioneQuery());
-            FerieDTO ferie = await _sharedService.GetAllFerie();
-            PermessiDTO permessi = await _sharedService.GetAllPermessi();
-            NottiFuoriDTO nottiFuori = await _sharedService.GetAllNottiFuori(model.NottiFuori.ToNotteFuoriQuery());
-            TrasferteDTO trasferte = await _sharedService.GetAllTrasferte(model.Trasferte.ToTrasfertaQuery());
-            RimborsiDTO rimborsi = await _sharedService.GetAllRimborsi(model.Rimborsi.ToRimborsoQuery());
+            RendicontazioniDTO rendicontazioni = await _sharedService.GetAllRendicontazioni(model.ToRendicontazioneQuery());
+            FerieDTO ferie = await _sharedService.GetAllFerie(model.ToFeriaQuery());
+            PermessiDTO permessi = await _sharedService.GetAllPermessi(model.ToPermessoQuery());
+            NottiFuoriDTO nottiFuori = await _sharedService.GetAllNottiFuori(model.ToNotteFuoriQuery());
+            TrasferteDTO trasferte = await _sharedService.GetAllTrasferte(model.ToTrasfertaQuery());
+            RimborsiDTO rimborsi = await _sharedService.GetAllRimborsi(model.ToRimborsoQuery());
 
             EventiDTO eventi = await _sharedService.GetAllEvents();
             SettimanaViewModel settimane = CalcolaSettimaneDelMese(DateTime.Now);
@@ -64,6 +64,61 @@ namespace UomoMacchina.Areas.Main
             return View(model);
         }
 
+
+        /* Action filtro per Commessa */
+        [HttpGet]
+        public async virtual Task<IActionResult> GetAllByCommessa(string commessaScelta)
+        {
+
+            RendicontazioniDTO rendicontazioni = await _sharedService.GetAllByCommessa(commessaScelta);
+            // FerieDTO ferie = await _sharedService.GetAllFerieByCommessa(commessaScelta);
+            // PermessiDTO permessi = await _sharedService.GetAllPermessiByCommessa(commessaScelta);
+            NottiFuoriDTO nottiFuori = await _sharedService.GetAllNottiFuoriByCommessa(commessaScelta);
+            TrasferteDTO trasferte = await _sharedService.GetAllTrasferteByCommessa(commessaScelta);
+            RimborsiDTO rimborsi = await _sharedService.GetAllRimborsiByCommessa(commessaScelta);
+
+
+            var model = new MainViewModel();
+
+            model.Rendicontazioni.SetRendicontazioni(rendicontazioni);
+            //model.Ferie.SetFerie(ferie);
+            //model.Permessi.SetPermessi(permessi);
+            model.NottiFuori.SetNottiFuori(nottiFuori);
+            model.Trasferte.SetTrasferte(trasferte);
+            model.Rimborsi.SetRimborsi(rimborsi);
+
+
+            return Json(model);
+
+        }
+
+        /* Action filtro per Dettaglio */
+        [HttpGet]
+        public async virtual Task<IActionResult> GetAllByDettaglio(string dettaglioScelta)
+        {
+
+            RendicontazioniDTO rendicontazioni = await _sharedService.GetAllRendicontazioniByDettaglio(dettaglioScelta);
+            FerieDTO ferie = await _sharedService.GetAllFerieByDettaglio(dettaglioScelta);
+            PermessiDTO permessi = await _sharedService.GetAllPermessiByDettaglio(dettaglioScelta);
+            NottiFuoriDTO nottiFuori = await _sharedService.GetAllNottiFuoriByDettaglio(dettaglioScelta);
+            TrasferteDTO trasferte = await _sharedService.GetAllTrasferteByDettaglio(dettaglioScelta);
+            RimborsiDTO rimborsi = await _sharedService.GetAllRimborsiByDettaglio(dettaglioScelta);
+
+            
+            var model = new MainViewModel();
+
+            model.Rendicontazioni.SetRendicontazioni(rendicontazioni);
+            model.Ferie.SetFerie(ferie);
+            model.Permessi.SetPermessi(permessi);
+            model.NottiFuori.SetNottiFuori(nottiFuori);
+            model.Trasferte.SetTrasferte(trasferte);
+            model.Rimborsi.SetRimborsi(rimborsi);
+
+
+            return Json(model);
+
+        }
+
         [HttpGet]
         public virtual async Task<IActionResult> Delete(Guid id)
         {
@@ -71,6 +126,8 @@ namespace UomoMacchina.Areas.Main
             return RedirectToAction(Actions.Main());
         }
 
+
+        /* Action filtro per data */
         [HttpGet]
         public async virtual Task<IActionResult> GetData(string dataScelta)
         {
@@ -82,7 +139,7 @@ namespace UomoMacchina.Areas.Main
                 NottiFuoriDTO nottiFuori = await _sharedService.GetAllNottiFuoriByDate(dateFilter);
                 TrasferteDTO trasferte = await _sharedService.GetAllTrasferteByDate(dateFilter);
                 RimborsiDTO rimborsi = await _sharedService.GetAllRimborsiByDate(dateFilter);
-                
+
                 var model = new MainViewModel();
 
                 model.Rendicontazioni.SetRendicontazioni(rendicontazioni);
@@ -95,7 +152,7 @@ namespace UomoMacchina.Areas.Main
             }
             else
             {
-                return RedirectToAction(Actions.Main()); //da fixare
+                return RedirectToAction(Actions.Main());
             }
         }
 

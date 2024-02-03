@@ -33,7 +33,10 @@ namespace UomoMacchina.Areas.Main.Data
             Rimborsi = new RimborsiViewModel();
             Eventi = new VueCalEventsViewModel();
         }
-        
+
+        [Display(Name = "Cerca")]
+        public string Filter { get; set; }
+
         public SettimanaViewModel Settimana { get; set; }
 
         public VueCalEventsViewModel Eventi { get; set; }
@@ -78,12 +81,60 @@ namespace UomoMacchina.Areas.Main.Data
             };
         }
 
+        public RendicontazioneQuery ToRendicontazioneQuery()
+        {
+            return new RendicontazioneQuery
+            {
+                Filter = this.Filter
+            };
+        }
+        public FeriaQuery ToFeriaQuery()
+        {
+            return new FeriaQuery
+            {
+                Filter = this.Filter
+            };
+        }
+
+        public PermessoQuery ToPermessoQuery()
+        {
+            return new PermessoQuery
+            {
+                Filter = this.Filter
+            };
+        }
+
+        public NotteFuoriQuery ToNotteFuoriQuery()
+        {
+            return new NotteFuoriQuery
+            {
+                Filter = this.Filter
+            };
+        }
+
+        public TrasfertaQuery ToTrasfertaQuery()
+        {
+            return new TrasfertaQuery
+            {
+                Filter = this.Filter
+            };
+        }
+
+        public RimborsoQuery ToRimborsoQuery()
+        {
+            return new RimborsoQuery
+            {
+                Filter = this.Filter
+            };
+        }
+
 
         public string ToJson()
         {
             return JsonSerializer.ToJsonCamelCase(this);
         }
 
+        
     }
 
     public class SettimanaViewModel
