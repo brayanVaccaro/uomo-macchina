@@ -13,7 +13,7 @@
     <div class="col">
         <ul class="navbar-nav flex-wrap ms-auto">
             <li>
-                <a class="Nuovo btn btn-light ms-2" href="@Url.Action(MVC.NottiFuori.NottiFuori.New())" title="Inserisci un nuovo elemento">
+                <a class="Nuovo btn btn-light ms-2" v-on:click='navigateToEdit(null, "NottiFuori", dataNew)' title="Inserisci un nuovo elemento">
                     <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
                 </a>
             </li>

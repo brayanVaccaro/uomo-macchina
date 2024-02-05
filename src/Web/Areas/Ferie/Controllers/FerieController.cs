@@ -12,7 +12,7 @@ using static UomoMacchina.Areas.Ferie.Data.FerieViewModel;
 
 namespace UomoMacchina.Areas.Ferie.Controllers
 {
-    [Area ("Ferie")]
+    [Area("Ferie")]
     public partial class FerieController : AuthenticatedBaseController
     {
         private readonly SharedService _sharedService;
@@ -54,7 +54,7 @@ namespace UomoMacchina.Areas.Ferie.Controllers
 
         //secondo metodo che viene chiamato, dopo New
         [HttpGet]
-        public virtual async Task<IActionResult> Edit(Guid? id)
+        public virtual async Task<IActionResult> Edit(Guid? id, string data)
         {
             var model = new FeriaViewModel();
 
@@ -71,19 +71,24 @@ namespace UomoMacchina.Areas.Ferie.Controllers
                     returnToIndex = false;
                     return RedirectToAction(Actions.Index(indexModel));
                 }
-                return View(model);
+                return Ok(model);
 
             }
             else
             {
-                return View(model);
+                model.SetFeria(new FeriaDTO
+                {
+                    Id = null,
+                    DataInizio = DateTime.Parse(data),
+                });
+                return Ok(model);
             }
 
         }
 
         // Metodo che mi mostra il pop-up di conferma della compilazione richiesta
         [HttpPost]
-        public virtual async Task<IActionResult> Edit(FeriaViewModel model)
+        public virtual async Task<IActionResult> Edit([FromBody]FeriaViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +98,7 @@ namespace UomoMacchina.Areas.Ferie.Controllers
 
                     Alerts.AddSuccess(this, "Ferie effetuata con successo");
 
-                    returnToIndex = true;
+                    return RedirectToAction("Main", "Main", new { area = "Main" });
                 }
                 catch (Exception ex)
                 {
@@ -107,7 +112,7 @@ namespace UomoMacchina.Areas.Ferie.Controllers
                 Alerts.AddError(this, "Errore nella compilazione richiesta");
             }
 
-            return RedirectToAction(Actions.Edit(model.Id));
+            return RedirectToAction(Actions.Edit(model.Id,""));
         }
 
         [HttpPost]

@@ -1,30 +1,7 @@
 ﻿@inject IHtmlLocalizer<UomoMacchina.Areas.Main.Data.MainViewModel> ModelLocalizer
 @model UomoMacchina.Areas.Main.Data.MainViewModel
 
-@*
-    1. Inserire il campo Straordinario di tipo bool nella Rendicontazione
-    2. Al clikc sulla riga devo poter editare l'elemento cliccato
-    3. Gestire la creazione di un elemento (aggiungerlo nella tabella specifica dell'elemento scelto) e del relativo evento (aggiungere l'evento alla tabella Eventi):
-        Clicco un bottone, mi esce il modale (Edit.cshtml) per inserire i dati.
-        La prima scelta nel modale sarà quella di selezionare cosa voglio aggiungere e in base a questa scelta mostrare o nascondere elementi del form
-
-    4. Ricerca di un dato --> implementazione da zero
-    5. Colori da cambiare
-    6. Sidebar implementare il cambio del mese al click sulla freccia, miglirare il css. Al clik su una settimana ti deve portare nel vue-cal alla settimana cliccata
-
-    7.pulizia del codice
-    8. modificare la section ereditata dal layout globale _Layout.cshtml
-    9. migliorare _SingleDay
-
-*@
-
 @{
-    // ViewData["Title"] = "Home";
-    // var mainModel = @Html.Raw(Model.ToJson());
-    // var feriaModel = @Html.Raw(Model.Ferie.ToJson());
-    // var eventModel = Html.Raw(Model.Eventi.ToJson());
-    // Console.WriteLine(typeof eventModel);
-
     // Lista vuota per memorizzare le informazioni delle proprietà che corrispondono al criterio
     var viewModelProperties = new List<string>();
 
@@ -52,32 +29,76 @@
     <div class="row">
         <div class="col-2">
             @await Html.PartialAsync("~/Views/Shared/_SideBar.cshtml", @Model.Settimana)
-            @* <partial name="@MVC.Shared.Views._SideBar" model="Model" /> *@
+
         </div>
         @* Calendario Settimanale *@
         <div :class="customClass">
-            @* <h1 v-if="activeView == 'week'">ho scelto di visualizzare la setttimana </h1> *@
-            @* <h1 v-if="activeView == 'day'">ho scelto di visualizzare il giorno {{selectedDate}}</h1> *@
-            <vue-cal v-model:active-view="activeView"
+            <vue-cal ref="vuecal"
+                     v-model:active-view="activeView"
                      v-model:selected-date="selectedDate"
                      locale="it"
                      :on-event-click="onEventClick"
                      :disable-views="['years', 'year', 'month', '', '']"
                      :events="event"
                      :time-from="8 * 60"
-                     :time-to="24 * 60" />
+                     :time-to="24 * 60"
+                     :cell-click-hold="false"
+                     :drag-to-create-event="false" />
         </div>
-        
-        <div v-if="showSingleDay" class="col-8">
 
+
+        <div v-if="showSingleDay" class="col-8">
             <partial name="@MVC.Main.Main.Views._SingleDay" model="Model" />
         </div>
-    </div>
-    <div class="row">
-        <p v-for="prop in properties">{{prop}}</p>
 
+        <div v-if="showEventCreationDialog" class="col-8">
+            <partial name="@MVC.Main.Main.Views.EditForm" />
+        </div>
     </div>
 </div>
+
+@section styles {
+    <link href="~/css/bundle-vue-cal.css" asp-append-version="true" rel="stylesheet" />
+    <link href="~/css/main.css" asp-append-version="true" rel="stylesheet" />
+    <link href="~/css/richieste.css" rel="stylesheet" />
+    <link href="~/css/sidebar.css" rel="stylesheet" />
+}
+
+@section scripts {
+    <script src="~/js/site.js" type="module" asp-append-version="true"></script>
+    <script type="module" src="~/js/EditForm.js"></script>
+
+    <script src="~/js/main.js" type="module" asp-append-version="true"></script>
+
+
+    <script type="text/javascript">
+        var mainModel = @Html.Raw(Model.ToJson());
+        var filteredProperties = @Html.Raw(Json.Serialize(viewModelProperties));
+        console.log(filteredProperties)
+        console.log(mainModel)
+    </script>
+
+}
+
+
+
+
+@*
+    1. Inserire il campo Straordinario di tipo bool nella Rendicontazione
+    2. Al clikc sulla riga devo poter editare l'elemento cliccato
+    3. Gestire la creazione di un elemento (aggiungerlo nella tabella specifica dell'elemento scelto) e del relativo evento (aggiungere l'evento alla tabella Eventi):
+        Clicco un bottone, mi esce il modale (Edit.cshtml) per inserire i dati.
+        La prima scelta nel modale sarà quella di selezionare cosa voglio aggiungere e in base a questa scelta mostrare o nascondere elementi del form
+
+    4. Ricerca di un dato --> implementazione da zero
+    5. Colori da cambiare
+    6. Sidebar implementare il cambio del mese al click sulla freccia, miglirare il css. Al clik su una settimana ti deve portare nel vue-cal alla settimana cliccata
+
+    7.pulizia del codice
+    8. modificare la section ereditata dal layout globale _Layout.cshtml
+    9. migliorare _SingleDay
+
+*@
 
 @*
 VISUALIZZAZIONE
@@ -99,180 +120,3 @@ al click su Modifica: si apre il form con i campi preimpostati sulla base della 
 
 al click su Elimina: si elimina ciò che si è scelto di eliminare
 *@
-
-@section styles {
-    <link href="~/css/bundle-vue-cal.css" asp-append-version="true" rel="stylesheet" />
-    <link href="~/css/main.css" asp-append-version="true" rel="stylesheet" />
-    <link href="~/css/richieste.css" rel="stylesheet" />
-    <link href="~/css/sidebar.css" rel="stylesheet" />
-
-    @* <link href="~/css/sidebar.css" rel="stylesheet" /> *@
-}
-
-@section scripts {
-    <script src="~/js/main.js" type="module" asp-append-version="true"></script>
-    <script src="~/js/site.js" type="module" asp-append-version="true"></script>
-    <script setup>
-        // var Model
-        var mainModel = @Html.Raw(Model.ToJson());
-        var filteredProperties = @Html.Raw(Json.Serialize(viewModelProperties));
-        console.log(filteredProperties)
-        // declare var Vue: any;
-        // declare var vuecal: any;
-        // declare var mainModel: any; //variabile globale che rappresenta il mainViewModel
-        // declare var filteredProperties: any
-        //accedo a @Model
-        ////Vue 3
-        const app = Vue.createApp({
-
-            data() {
-                return {
-                    properties: filteredProperties,
-                    model: mainModel, //oggetto model locale, da poter modificare
-                    mostraSettimana: true,
-                    mostraGiorno: false,
-                    message: `Vue works!`,
-                    activeView: "week", //la vista attiva, fra day e week
-                    selectedDate: "",
-                    customClass: "col", //classe custom per ridurre la larghezza quando si seleziona activeView=day
-                    selectedEvent: [],
-                    singleDay: false,
-                    showSingleDay: false,
-                    event: [], //eventi presi dal backend
-                };
-            },
-            mounted() {
-                //setto gli eventi
-                this.setEvents()
-            },
-            methods: {
-                //visualizzo sulla destra gli eventi per il giorno selezionato
-                async setDataByDate(dataScelta) {
-                    const url = `/Main/Main/GetData?dataScelta=${encodeURIComponent(dataScelta)}`;
-
-                    try {
-                        const response = await fetch(url);
-                        if (!response.ok) {
-                            throw new Error(`Network response was not ok, status: ${response.status}`);
-                        }
-                        const data = await response.json();
-
-                        this.model = data
-                        console.log("this.model.ferie..lenght", this.model.ferie.ferie.length)
-
-                    }
-                    catch (error) {
-                        console.error('Unable to get events', error);
-                        throw new Error(`Network response was not ok, error: ${error}`);
-                    }
-                },
-
-                //metodo per settare gli eventi del backend nel calendario vue-cal
-                setEvents() {
-                    this.model.eventi.eventi.forEach(x => {
-                        //pusho gli eventi presi dal backend
-                        this.event.push(
-                            {
-                                // questi sono i parametri che il componente si aspetta per gli eventi
-                                start: `${x.startDate} ${x.startTime}`, //questo è dataInizio + orario dell'evento
-                                end: `${x.endDate} ${x.endTime}`,
-                                title: x.title,
-                                content: x.content,
-                                class: x.class,
-                                background: x.background,
-                                split: x.split,
-                                allDay: x.allDay,
-                                deletable: x.deletable,
-                                resizable: x.resizable,
-                                //da qui in poi i valori che uso localmente, quindi non richiesti dal componente ma che mi servono per visualizzarli al click
-                                id: x.id,
-                                startDate: x.startDate,
-                                startTime: x.starTime,
-
-                            })
-                    })
-                },
-                //metodo per gestire cosa succede se si sceglie di visualizzare una settimana
-                selezionaSettimana(idSettimana) {
-                    console.log("ho cliccato sulla settimana")
-
-                    this.mostraGiorno = false;
-                    this.mostraSettimana = true;
-                    this.showSingleDay = false
-
-                    this.customClass = "col"
-                    this.activeView = "week";
-
-                },
-                //metodo per gestire cosa succede se si sceglie di visualizzare un giorno, idGiorno è il giorno scelto
-                async selezionaGiorno(idGiorno) {
-                    this.selectedDate = idGiorno
-                    await this.setDataByDate(this.selectedDate)
-
-                    this.mostraSettimana = false;
-                    this.mostraGiorno = true;
-                    this.customClass = "col-2"
-                    this.showSingleDay = true
-                    this.activeView = "day";
-                },
-
-                onEventClick(event, e) {
-                    this.selectedEvent = event
-                    console.log("this.selectedEvent", this.selectedEvent)
-                    e.stopPropagation()
-                }
-            },
-            computed: {
-                // Get the Monday of the real time current week.
-                previousFirstDayOfWeek() {
-                    return new Date(new Date().setDate(new Date().getDate() - (new Date().getDay() + 6) % 7))
-                }
-            },
-            created() {
-                // Inserisco l'evento lunch in tutte i giorni della settimana corrente
-                for (let i = 0; i < 5; i++) {
-
-                    const day = this.previousFirstDayOfWeek.addDays(i).format()
-                    //console.log("day vale =", day)
-
-                    this.event.push(
-                        {
-                            start: `${day} 13:00`,
-                            end: `${day} 14:00`,
-                            title: 'LUNCH',
-                            class: 'lunch',
-                            background: true,
-                            deletable: false,
-                            resizable: false,
-
-                        }
-                    )
-                }
-                // Inserisco in sabato e domenica il giorno feriale
-                for (let i = 5; i <= 6; i++) {
-
-                    const day = this.previousFirstDayOfWeek.addDays(i).format();
-                    //console.log("day vale =", day)
-
-                    this.event.push({
-                        start: `${day} 13:00`,
-                        end: `${day} 14:00`,
-                        title: 'giorno feriale',
-                        class: 'libero',
-                        allDay: true,
-                        background: true,
-                        deletable: false,
-                        resizable: false,
-                    });
-                }
-            },
-            components: { 'vue-cal': vuecal }
-        });
-
-        // app.mount('#pageId');
-
-        // var ferieEditURL = @Url.Action(MVC.Ferie.Ferie.Edit())
-
-        // var eventiGlobal = @Html.Raw(Model.Eventi.ToJson()); //salvo il model in una variabile che posso usare nel main.ts
-    </script>
-}

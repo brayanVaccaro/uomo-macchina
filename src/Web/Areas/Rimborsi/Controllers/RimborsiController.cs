@@ -56,7 +56,7 @@ namespace UomoMacchina.Areas.Rimborsi.Controllers
 
         //secondo metodo che viene chiamato, dopo New
         [HttpGet]
-        public virtual async Task<IActionResult> Edit(Guid? id)
+        public virtual async Task<IActionResult> Edit(Guid? id, string data)
         {
             var model = new RimborsoViewModel();
             if (id.HasValue)
@@ -65,19 +65,18 @@ namespace UomoMacchina.Areas.Rimborsi.Controllers
                 {
                     Id = id.Value,
                 }));
-                //qua il controllo
-                if (returnToIndex)
-                {
-                    var indexModel = new RimborsiViewModel();
-                    returnToIndex = false;
-                    return RedirectToAction(Actions.Index(indexModel));
-                }
-                return View(model);
+                
+                return Ok(model);
 
             }
             else
             {
-                return View(model);
+                model.SetRimborso(new RimborsoDTO
+                {
+                    Id = null,
+                    Data = DateTime.Parse(data),
+                });
+                return Ok(model);
             }
 
         }
@@ -95,7 +94,7 @@ namespace UomoMacchina.Areas.Rimborsi.Controllers
 
                     Alerts.AddSuccess(this, "Rimborsi effetuata con successo");
 
-                    returnToIndex = true;
+                    return RedirectToAction("Main", "Main", new { area = "Main" });
 
                 }
                 catch (Exception ex)
@@ -110,7 +109,7 @@ namespace UomoMacchina.Areas.Rimborsi.Controllers
                 Alerts.AddError(this, "Errore nella compilazione rimborso");
             }
 
-            return RedirectToAction(Actions.Edit(model.Id));
+            return RedirectToAction(Actions.Edit(model.Id,""));
         }
 
 

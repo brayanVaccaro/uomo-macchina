@@ -53,7 +53,7 @@ namespace UomoMacchina.Areas.Permessi
 
         //secondo metodo che viene chiamato, dopo New
         [HttpGet]
-        public virtual async Task<IActionResult> Edit(Guid? id)
+        public virtual async Task<IActionResult> Edit(Guid? id, string data)
         {
             var model = new PermessoViewModel();
             if (id.HasValue)
@@ -62,19 +62,20 @@ namespace UomoMacchina.Areas.Permessi
                 {
                     Id = id.Value,
                 }));
-                //qua il controllo
-                if (returnToIndex)
-                {
-                    var indexModel = new PermessiViewModel();
-                    returnToIndex = false;
-                    return RedirectToAction(Actions.Index(indexModel));
-                }
-                return View(model);
+                
+                return Ok(model);
 
             }
             else
             {
-                return View(model);
+                model.SetPermesso(new PermessoDTO
+                {
+                    Id = null,
+                    Data = DateTime.Parse(data),
+                    OraInizio = DateTime.Parse(data),
+                    OraFine = DateTime.Parse(data),
+                });
+                return Ok(model);
             }
 
         }
@@ -104,7 +105,7 @@ namespace UomoMacchina.Areas.Permessi
                 Alerts.AddError(this, "Errore nella compilazione richiesta");
             }
             
-            return RedirectToAction(Actions.Edit(model.Id));
+            return RedirectToAction(Actions.Edit(model.Id,""));
         }
 
 

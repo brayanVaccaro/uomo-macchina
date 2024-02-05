@@ -12,13 +12,13 @@
         <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#tabellaRendicontazioni" aria-expanded="true" aria-controls="tabellaRendicontazioni"><h1>Rendicontazioni</h1></button>
     </div>
     <div class="col">
-    <ul class="navbar-nav flex-wrap ms-auto">
-        <li>
-            <a class="Nuovo btn btn-light ms-2" href="@Url.Action(MVC.Rendicontazioni.Rendicontazioni.New())" title="Inserisci un nuovo elemento">
-                <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
-            </a>
-        </li>
-    </ul>
+        <ul class="navbar-nav flex-wrap ms-auto">
+            <li>
+                <a class="Nuovo btn btn-light ms-2" v-on:click='navigateToEdit(null, "Rendicontazioni", dataNew)' title="Inserisci un nuovo elemento">
+                    <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
+                </a>
+            </li>
+        </ul>
     </div>
 </div>
 <div id="tabellaRendicontazioni" class="row text-center collapse show multi-collapse">
@@ -52,7 +52,7 @@
                 </td>
             </tr>
 
-            <tr v-for="rendicontazione in model.rendicontazioni.rendicontazioni" v-on:click='navigateToEdit(rendicontazione.id, "Rendicontazioni")'>
+            <tr v-for="rendicontazione in model.rendicontazioni.rendicontazioni" v-on:click='navigateToEdit(rendicontazione.id, "Rendicontazioni", rendicontazione.data)'>
 
                 <td class="text-nowrap">
                     {{rendicontazione.oreTotali}}

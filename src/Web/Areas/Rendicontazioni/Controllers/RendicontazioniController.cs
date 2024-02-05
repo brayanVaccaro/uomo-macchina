@@ -11,7 +11,14 @@ using UomoMacchina.SignalR.Hubs.Events;
 using UomoMacchina.Areas.Rendicontazioni.Data;
 using static UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel;
 using Microsoft.Extensions.Options;
+using System.Globalization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
+
+
+// quando creo un elemento devo ritornare direttamente alltutti i controller devono ritornare alla action Main
+
+ 
 namespace UomoMacchina.Areas.Rendicontazioni.Controllers
 {
     [Area("Rendicontazioni")]
@@ -49,14 +56,17 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
         [HttpGet]
         public virtual IActionResult New()
         {
-            return RedirectToAction(Actions.Edit());
+            return RedirectToAction(Actions.Edit(null, ""));
         }
 
         // Costrutto della GetAllRendicontazioni
 
-        //secondo metodo che viene chiamato, dopo New
+        //**
+        // * Metodo per creare una nuova rendicontazione
+        // * 
+        
         [HttpGet]
-        public virtual async Task<IActionResult> Edit(Guid? id)
+        public virtual async Task<IActionResult> Edit(Guid? id, string data)
         {
             var model = new RendicontazioneViewModel();
             if (id.HasValue)
@@ -65,27 +75,28 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
                 {
                     Id = id.Value,
                 }));
-                //qua il controllo
-                if(returnToIndex)
-                {
-                    var indexModel = new RendicontazioniViewModel();
-                    returnToIndex = false;
-                    return RedirectToAction(Actions.Index(indexModel));
-                }
-                return View(model);
+
+                return Ok(model);
 
             }
             else
             {
-                return View(model);
+                model.SetRendicontazione(new RendicontazioneDTO
+                {
+                    Id = null,
+                    Data = DateTime.Parse(data),
+                    OraInizio = DateTime.Parse(data),
+                    OraFine = DateTime.Parse(data),
+                });
+                return Ok(model);
             }
 
         }
-        
+
 
         // Metodo che mi mostra il pop-up di conferma della compilazione richiesta
         [HttpPost]
-        public virtual async Task<IActionResult> Edit(RendicontazioneViewModel model)
+        public virtual async Task<IActionResult> Edit([FromBody]RendicontazioneViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +106,7 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
 
                     Alerts.AddSuccess(this, "Rendicontazioni effetuata con successo");
 
-                    returnToIndex = true;
+                    return RedirectToAction("Main", "Main", new { area = "Main" });
 
                 }
                 catch (Exception ex)
@@ -110,7 +121,7 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
                 Alerts.AddError(this, "Errore nella compilazione rendicontazione");
             }
 
-            return RedirectToAction(Actions.Edit(model.Id));
+            return RedirectToAction(Actions.Edit(model.Id, ""));
         }
 
 
