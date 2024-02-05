@@ -87,7 +87,7 @@ namespace Core.Services.Shared
         public async Task<RimborsiDTO> GetAllRimborsiByDate(DateTime date)
         {
             var risultato = new RimborsiDTO();
-            var rimborsi = _dbContext.Rimborsi.Where(x => x.Data == date);
+            var rimborsi = _dbContext.Rimborsi.Where(x => x.Data.Date == date);
             try
             {
                 risultato.Rimborsi = await rimborsi.Select(x => new RimborsoDTO
@@ -111,10 +111,12 @@ namespace Core.Services.Shared
         }
 
         /* Filtro per Commessa */
-        public async Task<RimborsiDTO> GetAllRimborsiByCommessa(string commessaScelta)
+        public async Task<RimborsiDTO> GetAllRimborsiByCommessa(string commessaScelta, DateTime giornoSelezionato)
         {
             var risultato = new RimborsiDTO();
-            var rimborsi = _dbContext.Rimborsi.Where(y => y.Commessa == commessaScelta);
+
+            var rimborsi = _dbContext.Rimborsi.Where(x => x.Commessa.Contains(commessaScelta) && x.Data.Date == giornoSelezionato.Date);
+
             try
             {
                 risultato.Rimborsi = await rimborsi.Select(x => new RimborsoDTO
@@ -139,10 +141,10 @@ namespace Core.Services.Shared
 
 
         /* Filtro per Dettaglio */
-        public async Task<RimborsiDTO> GetAllRimborsiByDettaglio(string dettaglioScelta)
+        public async Task<RimborsiDTO> GetAllRimborsiByDettaglio(string dettaglioScelta, DateTime giornoSelezionato)
         {
             var risultato = new RimborsiDTO();
-            var rimborsi = _dbContext.Rimborsi.Where(x => x.Dettagli.Contains(dettaglioScelta));
+            var rimborsi = _dbContext.Rimborsi.Where(x => x.Dettagli.Contains(dettaglioScelta) && x.Data.Date == giornoSelezionato.Date);
             try
             {
                 risultato.Rimborsi = await rimborsi.Select(x => new RimborsoDTO
@@ -166,7 +168,7 @@ namespace Core.Services.Shared
         }
 
 
-
+        /* Modifica della tabella */
         public async Task<RimborsoDTO> GetRimborsoById(RimborsoQuery id)
         {
             var rimborso = await _dbContext.Rimborsi
@@ -186,6 +188,7 @@ namespace Core.Services.Shared
             return rimborso;
         }
 
+        /* Cancellazione del dato */
         public async Task DeleteRimborso(Guid id)
         {
             var rimborso = await _dbContext.Rimborsi.FindAsync(id);
