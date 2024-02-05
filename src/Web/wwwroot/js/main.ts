@@ -2,6 +2,7 @@
 declare var vuecal: any;
 declare var mainModel: any; //variabile globale che rappresenta il mainViewModel
 declare var ferieEditURL: any;
+
 //accedo a @Model
 ////Vue 3
 const app = Vue.createApp({
@@ -57,8 +58,8 @@ const app = Vue.createApp({
 
         /* Funzione del filtro setCommessa */
 
-        async setCommessa(commessaScelta) {
-            const url = `/Main/Main/GetAllByCommessa?commessaScelta=${encodeURIComponent(commessaScelta)}`;
+        async setCommessa(commessaScelta, giornoSelezionato) {
+            const url = `/Main/Main/GetAllByCommessa?commessaScelta=${encodeURIComponent(commessaScelta)}&giornoSelezionato=${encodeURIComponent(giornoSelezionato)}`;
 
             try {
                 const response = await fetch(url);
@@ -80,8 +81,8 @@ const app = Vue.createApp({
 
         /* Funzione del filtro setDettagli */
 
-        async setDettagli(dettaglioScelta) {
-            const url = `/Main/Main/GetAllByDettaglio?dettaglioScelta=${encodeURIComponent(dettaglioScelta)}`;
+        async setDettagli(dettaglioScelta, giornoSelezionato) {
+            const url = `/Main/Main/GetAllByDettaglio?dettaglioScelta=${encodeURIComponent(dettaglioScelta)}&giornoSelezionato=${encodeURIComponent(giornoSelezionato)}`;
 
             try {
                 const response = await fetch(url);
@@ -128,6 +129,7 @@ const app = Vue.createApp({
         },
         //metodo per gestire cosa succede se si sceglie di visualizzare una settimana
         selezionaSettimana(idSettimana) {
+            this.selectedDate = idSettimana
             console.log("ho cliccato sulla settimana")
 
             this.mostraGiorno = false;
@@ -173,6 +175,7 @@ const app = Vue.createApp({
 
             window.location.href = url                          
 
+
             //await fetch(url)
             //    .then(response => {
             //        if (!response.ok) {
@@ -211,8 +214,14 @@ const app = Vue.createApp({
             //}
 
 
-        }
+        },
+
+        async cambioMese(idMese) {
+
+        },
+
     },
+
     computed: {
         // Get the Monday of the real time current week.
         previousFirstDayOfWeek() {

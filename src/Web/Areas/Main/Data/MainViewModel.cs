@@ -13,9 +13,12 @@ using UomoMacchina.Areas.Rendicontazioni.Data;
 using UomoMacchina.Areas.Rimborsi.Data;
 using UomoMacchina.Areas.Trasferte.Data;
 using UomoMacchina.Infrastructure;
-using static UomoMacchina.Areas.Ferie.Data.FerieViewModel;
 using static UomoMacchina.Areas.Main.Data.Shared.VueCalEventsViewModel;
+using static UomoMacchina.Areas.Ferie.Data.FerieViewModel;
+using static UomoMacchina.Areas.Rendicontazioni.Data.RendicontazioniViewModel;
 using static UomoMacchina.Areas.Permessi.Data.PermessiViewModel;
+using static UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel;
+
 
 namespace UomoMacchina.Areas.Main.Data
 {
@@ -37,7 +40,7 @@ namespace UomoMacchina.Areas.Main.Data
         [Display(Name = "Cerca")]
         public string Filter { get; set; }
 
-        public SettimanaViewModel Settimana { get; set; }
+        public AnnoViewModel Anno { get; set; }
 
         public VueCalEventsViewModel Eventi { get; set; }
 
@@ -57,27 +60,84 @@ namespace UomoMacchina.Areas.Main.Data
         public override IActionResult GetRoute() => MVC.Main.Main.Main(this).GetAwaiter().GetResult();
        
         //Inizializzo le settimane
-        public void SetSettimana(SettimanaViewModel settimane)
+        public void SetAnno(AnnoViewModel anno)
         {
-            Settimana = settimane;
+            Anno = anno;
         }
 
-        //metodo per trasformare un oggetto FeriaViewModel in un VueCalEventViewModel
+        //metodo per trasformare un oggetto FeriaViewModel in un EventoDTO
         internal EventoDTO ToVueCalEvent(FeriaViewModel feria)
         {
             return new EventoDTO
             {
                 StartDate = feria.DataInizio.ToString("d"),
-                StartTime = feria.DataInizio.ToString("d"),
+                StartTime = feria.DataInizio.ToString("HH:mm"),
                 EndDate = feria.DataFine.ToString("d"),
-                EndTime = feria.DataFine.ToString("d"),
+                EndTime = feria.DataFine.ToString("HH:mm"),
                 Title = feria.Dettagli,
                 Content = feria.Dettagli,
                 CssClass = feria.Class,
-                AllDay = true,
+                AllDay = false,
                 Background = false,
                 Deletable = true,
-                Resizable = true,
+                Resizable = false,
+            };
+        }
+
+        //metodo per trasformare un oggetto RendicontazioneViewModel in un EventoDTO
+        internal EventoDTO ToVueCalEvent(RendicontazioneViewModel rendicontazione)
+        {
+            return new EventoDTO
+            {
+                StartDate = rendicontazione.Data.ToString("d"),
+                StartTime = rendicontazione.OraInizio.ToString("HH:mm"),
+                EndDate = rendicontazione.Data.ToString("d"),
+                EndTime = rendicontazione.OraFine.ToString("HH:mm"),
+                Title = rendicontazione.Dettagli,
+                Content = rendicontazione.Dettagli,
+                CssClass = rendicontazione.Class,
+                AllDay = false,
+                Background = false,
+                Deletable = true,
+                Resizable = false,
+            };
+        }
+
+        //metodo per trasformare un oggetto PermessoViewModel in un EventoDTO
+        internal EventoDTO ToVueCalEvent(PermessoViewModel permesso)
+        {
+            return new EventoDTO
+            {
+                StartDate = permesso.Data.ToString("d"),
+                StartTime = permesso.OraInizio.ToString("HH:mm"),
+                EndDate = permesso.Data.ToString("d"),
+                EndTime = permesso.OraFine.ToString("HH:mm"),
+                Title = permesso.Dettagli,
+                Content = permesso.Dettagli,
+                CssClass = permesso.Class,
+                AllDay = false,
+                Background = false,
+                Deletable = true,
+                Resizable = false,
+            };
+        }
+
+        //metodo per trasformare un oggetto TrasfertaViewModel in un EventoDTO
+        internal EventoDTO ToVueCalEvent(TrasfertaViewModel trasferta)
+        {
+            return new EventoDTO
+            {
+                StartDate = trasferta.DataInizio.ToString("d"),
+                StartTime = trasferta.DataInizio.ToString("HH:mm"),
+                EndDate = trasferta.DataFine.ToString("d"),
+                EndTime = trasferta.DataFine.ToString("HH:mm"),
+                Title = trasferta.Dettagli,
+                Content = trasferta.Dettagli,
+                CssClass = trasferta.Class,
+                AllDay = false,
+                Background = false,
+                Deletable = true,
+                Resizable = false,
             };
         }
 
@@ -136,17 +196,21 @@ namespace UomoMacchina.Areas.Main.Data
 
         
     }
-
-    public class SettimanaViewModel
+    public class AnnoViewModel
     {
+        public List<MeseViewModel> Mesi { get; set; }
 
-        public List<Settimana> Settimane { get; set; }
-
-        public class Settimana
+        public class MeseViewModel
         {
-            public string Nome { get; set; }
-            public List<DateTime> Giorni { get; set; } // Ogni settimana ha la sua lista di giorni
+            public string NomeMese { get; set; }
+            public List<SettimanaViewModel> Settimane { get; set; }
         }
     }
 
+    public class SettimanaViewModel
+    {
+        public string Nome { get; set; }
+        public List<DateTime> Giorni { get; set; }
+    }
+   
 }

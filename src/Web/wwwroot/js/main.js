@@ -43,8 +43,8 @@ const app = Vue.createApp({
             }
         },
         /* Funzione del filtro setCommessa */
-        async setCommessa(commessaScelta) {
-            const url = `/Main/Main/GetAllByCommessa?commessaScelta=${encodeURIComponent(commessaScelta)}`;
+        async setCommessa(commessaScelta, giornoSelezionato) {
+            const url = `/Main/Main/GetAllByCommessa?commessaScelta=${encodeURIComponent(commessaScelta)}&giornoSelezionato=${encodeURIComponent(giornoSelezionato)}`;
             try {
                 const response = await fetch(url);
                 if (!response.ok) {
@@ -59,8 +59,8 @@ const app = Vue.createApp({
             }
         },
         /* Funzione del filtro setDettagli */
-        async setDettagli(dettaglioScelta) {
-            const url = `/Main/Main/GetAllByDettaglio?dettaglioScelta=${encodeURIComponent(dettaglioScelta)}`;
+        async setDettagli(dettaglioScelta, giornoSelezionato) {
+            const url = `/Main/Main/GetAllByDettaglio?dettaglioScelta=${encodeURIComponent(dettaglioScelta)}&giornoSelezionato=${encodeURIComponent(giornoSelezionato)}`;
             try {
                 const response = await fetch(url);
                 if (!response.ok) {
@@ -99,6 +99,7 @@ const app = Vue.createApp({
         },
         //metodo per gestire cosa succede se si sceglie di visualizzare una settimana
         selezionaSettimana(idSettimana) {
+            this.selectedDate = idSettimana;
             console.log("ho cliccato sulla settimana");
             this.mostraGiorno = false;
             this.mostraSettimana = true;
@@ -165,7 +166,9 @@ const app = Vue.createApp({
             //    console.error('Unable to get events', error);
             //    throw new Error(`Network response was not ok, error: ${error}`);
             //}
-        }
+        },
+        async cambioMese(idMese) {
+        },
     },
     computed: {
         // Get the Monday of the real time current week.

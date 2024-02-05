@@ -16,7 +16,7 @@ using UomoMacchina.Areas.Example.Users;
 using static UomoMacchina.Areas.Ferie.Data.FerieViewModel;
 using NuGet.Protocol;
 using UomoMacchina.Areas.Ferie.Data;
-
+using static UomoMacchina.Areas.Main.Data.AnnoViewModel;
 
 namespace UomoMacchina.Areas.Main
 {
@@ -49,7 +49,8 @@ namespace UomoMacchina.Areas.Main
             RimborsiDTO rimborsi = await _sharedService.GetAllRimborsi(model.ToRimborsoQuery());
 
             EventiDTO eventi = await _sharedService.GetAllEvents();
-            SettimanaViewModel settimane = CalcolaSettimaneDelMese(DateTime.Now);
+            AnnoViewModel anno = CalcolaAnno(DateTime.Now);
+            //SettimanaViewModel settimane = CalcolaSettimaneDelMese(DateTime.Now);
 
             model.Rendicontazioni.SetRendicontazioni(rendicontazioni);
             model.Ferie.SetFerie(ferie);
@@ -59,7 +60,7 @@ namespace UomoMacchina.Areas.Main
             model.Rimborsi.SetRimborsi(rimborsi);
 
             model.Eventi.SetEventi(eventi);
-            model.SetSettimana(settimane);
+            model.SetAnno(anno);
 
             return View(model);
         }
@@ -67,15 +68,16 @@ namespace UomoMacchina.Areas.Main
 
         /* Action filtro per Commessa */
         [HttpGet]
-        public async virtual Task<IActionResult> GetAllByCommessa(string commessaScelta)
+        public async virtual Task<IActionResult> GetAllByCommessa(string commessaScelta, string giornoSelezionato)
         {
+            DateTime dateTime = DateTime.ParseExact(giornoSelezionato, "ddd MMM dd yyyy HH:mm:ss 'GMT'zzz '(Ora standard dell’Europa centrale)'", CultureInfo.InvariantCulture);
 
-            RendicontazioniDTO rendicontazioni = await _sharedService.GetAllByCommessa(commessaScelta);
+            RendicontazioniDTO rendicontazioni = await _sharedService.GetAllByCommessa(commessaScelta, dateTime);
             // FerieDTO ferie = await _sharedService.GetAllFerieByCommessa(commessaScelta);
             // PermessiDTO permessi = await _sharedService.GetAllPermessiByCommessa(commessaScelta);
-            NottiFuoriDTO nottiFuori = await _sharedService.GetAllNottiFuoriByCommessa(commessaScelta);
-            TrasferteDTO trasferte = await _sharedService.GetAllTrasferteByCommessa(commessaScelta);
-            RimborsiDTO rimborsi = await _sharedService.GetAllRimborsiByCommessa(commessaScelta);
+            NottiFuoriDTO nottiFuori = await _sharedService.GetAllNottiFuoriByCommessa(commessaScelta, dateTime);
+            TrasferteDTO trasferte = await _sharedService.GetAllTrasferteByCommessa(commessaScelta, dateTime);
+            RimborsiDTO rimborsi = await _sharedService.GetAllRimborsiByCommessa(commessaScelta, dateTime);
 
 
             var model = new MainViewModel();
@@ -94,15 +96,16 @@ namespace UomoMacchina.Areas.Main
 
         /* Action filtro per Dettaglio */
         [HttpGet]
-        public async virtual Task<IActionResult> GetAllByDettaglio(string dettaglioScelta)
+        public async virtual Task<IActionResult> GetAllByDettaglio(string dettaglioScelta, string giornoSelezionato)
         {
+            DateTime dateTime = DateTime.ParseExact(giornoSelezionato, "ddd MMM dd yyyy HH:mm:ss 'GMT'zzz '(Ora standard dell’Europa centrale)'", CultureInfo.InvariantCulture);
 
-            RendicontazioniDTO rendicontazioni = await _sharedService.GetAllRendicontazioniByDettaglio(dettaglioScelta);
-            FerieDTO ferie = await _sharedService.GetAllFerieByDettaglio(dettaglioScelta);
-            PermessiDTO permessi = await _sharedService.GetAllPermessiByDettaglio(dettaglioScelta);
-            NottiFuoriDTO nottiFuori = await _sharedService.GetAllNottiFuoriByDettaglio(dettaglioScelta);
-            TrasferteDTO trasferte = await _sharedService.GetAllTrasferteByDettaglio(dettaglioScelta);
-            RimborsiDTO rimborsi = await _sharedService.GetAllRimborsiByDettaglio(dettaglioScelta);
+            RendicontazioniDTO rendicontazioni = await _sharedService.GetAllRendicontazioniByDettaglio(dettaglioScelta, dateTime);
+            FerieDTO ferie = await _sharedService.GetAllFerieByDettaglio(dettaglioScelta, dateTime);
+            PermessiDTO permessi = await _sharedService.GetAllPermessiByDettaglio(dettaglioScelta, dateTime);
+            NottiFuoriDTO nottiFuori = await _sharedService.GetAllNottiFuoriByDettaglio(dettaglioScelta, dateTime);
+            TrasferteDTO trasferte = await _sharedService.GetAllTrasferteByDettaglio(dettaglioScelta, dateTime);
+            RimborsiDTO rimborsi = await _sharedService.GetAllRimborsiByDettaglio(dettaglioScelta, dateTime);
 
             
             var model = new MainViewModel();
@@ -148,6 +151,7 @@ namespace UomoMacchina.Areas.Main
                 model.NottiFuori.SetNottiFuori(nottiFuori);
                 model.Trasferte.SetTrasferte(trasferte);
                 model.Rimborsi.SetRimborsi(rimborsi);
+
                 return Json(model);
             }
             else
@@ -156,48 +160,105 @@ namespace UomoMacchina.Areas.Main
             }
         }
 
-        private static SettimanaViewModel CalcolaSettimaneDelMese(DateTime data)
+        private static AnnoViewModel CalcolaAnno(DateTime data)
         {
-            var settimaneModel = new SettimanaViewModel();
-            settimaneModel.Settimane = new List<SettimanaViewModel.Settimana>();
+            var annoModel = new AnnoViewModel();
+            annoModel.Mesi = new List<MeseViewModel>();
 
             var cultura = CultureInfo.CurrentCulture;
-            var primoDelMese = new DateTime(data.Year, data.Month, 1);
-            var ultimoDelMese = primoDelMese.AddMonths(1).AddDays(-1);
 
-            // Inizializza numeroSettimanaCorrente con il numero della settimana del primo giorno del mese
-            var numeroSettimanaCorrente = cultura.Calendar.GetWeekOfYear(primoDelMese, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
-
-            // Inizializza una nuova settimana all'inizio
-            var settimanaCorrente = new SettimanaViewModel.Settimana
+            for (int mese = 1; mese <= 12; mese++)
             {
-                Nome = "Settimana " + numeroSettimanaCorrente.ToString(),
-                Giorni = new List<DateTime>()
-            };
-            settimaneModel.Settimane.Add(settimanaCorrente);
-
-            for (DateTime giorno = primoDelMese; giorno <= ultimoDelMese; giorno = giorno.AddDays(1))
-            {
-                var numeroSettimana = cultura.Calendar.GetWeekOfYear(giorno, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
-
-                if (numeroSettimana != numeroSettimanaCorrente)
+                var meseModel = new MeseViewModel
                 {
-                    numeroSettimanaCorrente = numeroSettimana;
-                    settimanaCorrente = new SettimanaViewModel.Settimana
+                    NomeMese = new DateTime(data.Year, mese, 1).ToString("MMMM"),
+                    Settimane = new List<SettimanaViewModel>()
+                };
+
+                var primoDelMese = new DateTime(data.Year, mese, 1);
+                var ultimoDelMese = primoDelMese.AddMonths(1).AddDays(-1);
+
+                var numeroSettimanaCorrente = cultura.Calendar.GetWeekOfYear(primoDelMese, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+
+                var settimanaCorrente = new SettimanaViewModel
+                {
+                    Nome = "Settimana " + numeroSettimanaCorrente.ToString(),
+                    Giorni = new List<DateTime>()
+                };
+                meseModel.Settimane.Add(settimanaCorrente);
+
+                for (DateTime giorno = primoDelMese; giorno <= ultimoDelMese; giorno = giorno.AddDays(1))
+                {
+                    var numeroSettimana = cultura.Calendar.GetWeekOfYear(giorno, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+
+                    if (numeroSettimana != numeroSettimanaCorrente)
                     {
-                        Nome = "Settimana " + numeroSettimanaCorrente.ToString(),
-                        Giorni = new List<DateTime>()
-                    };
-                    settimaneModel.Settimane.Add(settimanaCorrente);
+                        numeroSettimanaCorrente = numeroSettimana;
+                        settimanaCorrente = new SettimanaViewModel
+                        {
+                            Nome = "Settimana " + numeroSettimanaCorrente.ToString(),
+                            Giorni = new List<DateTime>()
+                        };
+                        meseModel.Settimane.Add(settimanaCorrente);
+                    }
+
+                    var giornoString = giorno;
+                    settimanaCorrente.Giorni.Add(giornoString);
                 }
 
-                var giornoString = giorno;
-                settimanaCorrente.Giorni.Add(giornoString);
+                annoModel.Mesi.Add(meseModel);
             }
 
-            return settimaneModel;
+            return annoModel;
         }
 
+
+        //private static List<SettimanaViewModel> CalcolaSettimaneDelMese(DateTime data)
+        //{
+        //    var settimaneModel = new SettimanaViewModel();
+        //    settimaneModel.Settimane = new List<SettimanaViewModel.Settimana>();
+
+        //    var cultura = CultureInfo.CurrentCulture;
+        //    var primoDelMese = new DateTime(data.Year, data.Month, 1);
+        //    var ultimoDelMese = primoDelMese.AddMonths(1).AddDays(-1);
+
+        //    // Inizializza numeroSettimanaCorrente con il numero della settimana del primo giorno del mese
+        //    var numeroSettimanaCorrente = cultura.Calendar.GetWeekOfYear(primoDelMese, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+
+        //    // Inizializza una nuova settimana all'inizio
+        //    var settimanaCorrente = new SettimanaViewModel.Settimana
+        //    {
+        //        Nome = "Settimana " + numeroSettimanaCorrente.ToString(),
+        //        Giorni = new List<DateTime>()
+        //    };
+        //    settimaneModel.Settimane.Add(settimanaCorrente);
+
+        //    for (DateTime giorno = primoDelMese; giorno <= ultimoDelMese; giorno = giorno.AddDays(1))
+        //    {
+        //        var numeroSettimana = cultura.Calendar.GetWeekOfYear(giorno, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+
+        //        if (numeroSettimana != numeroSettimanaCorrente)
+        //        {
+        //            numeroSettimanaCorrente = numeroSettimana;
+        //            settimanaCorrente = new SettimanaViewModel.Settimana
+        //            {
+        //                Nome = "Settimana " + numeroSettimanaCorrente.ToString(),
+        //                Giorni = new List<DateTime>()
+        //            };
+        //            settimaneModel.Settimane.Add(settimanaCorrente);
+        //        }
+
+        //        var giornoString = giorno;
+        //        settimanaCorrente.Giorni.Add(giornoString);
+        //    }
+
+        //    return settimaneModel;
+        //}
+
+
+        /**
+        devi cambiare il metodo in CalcolaMesiDiAnno(Datetime data)
+        */
 
 
     }

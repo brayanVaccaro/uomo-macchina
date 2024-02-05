@@ -22,10 +22,10 @@ namespace Core.Services.Shared
     public class EventoDTO
     {
         public Guid Id { get; set; }
-        public String StartDate { get; set; }  //da usare in locale
-        public String EndDate { get; set; } //da usare in locale
-        public String StartTime { get; set; } //da usare in locale
-        public String EndTime { get; set;} //da usare in locale
+        public string StartDate { get; set; }  //da usare in locale
+        public string EndDate { get; set; } //da usare in locale
+        public string StartTime { get; set; } //da usare in locale
+        public string EndTime { get; set; } //da usare in locale
         public string Title { get; set; }
         public string Content { get; set; }
         public string CssClass { get; set; }

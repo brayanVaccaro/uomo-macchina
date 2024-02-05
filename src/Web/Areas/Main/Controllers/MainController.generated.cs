@@ -183,24 +183,26 @@ namespace UomoMacchina.Areas.Main
         }
 
         [NonAction]
-        partial void GetAllByCommessaOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, string commessaScelta);
+        partial void GetAllByCommessaOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, string commessaScelta, string giornoSelezionato);
         [NonAction]
-        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> GetAllByCommessa(string commessaScelta)
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> GetAllByCommessa(string commessaScelta, string giornoSelezionato)
         {
             var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.GetAllByCommessa);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "commessaScelta", commessaScelta);
-            GetAllByCommessaOverride(callInfo, commessaScelta);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "giornoSelezionato", giornoSelezionato);
+            GetAllByCommessaOverride(callInfo, commessaScelta, giornoSelezionato);
             return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
         }
 
         [NonAction]
-        partial void GetAllByDettaglioOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, string dettaglioScelta);
+        partial void GetAllByDettaglioOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, string dettaglioScelta, string giornoSelezionato);
         [NonAction]
-        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> GetAllByDettaglio(string dettaglioScelta)
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> GetAllByDettaglio(string dettaglioScelta, string giornoSelezionato)
         {
             var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.GetAllByDettaglio);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "dettaglioScelta", dettaglioScelta);
-            GetAllByDettaglioOverride(callInfo, dettaglioScelta);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "giornoSelezionato", giornoSelezionato);
+            GetAllByDettaglioOverride(callInfo, dettaglioScelta, giornoSelezionato);
             return System.Threading.Tasks.Task.FromResult<Microsoft.AspNetCore.Mvc.IActionResult>(callInfo);
         }
 
