@@ -41,8 +41,8 @@ namespace UomoMacchina.Infrastructure
 
         public virtual void SetPagingDefaults()
         {
-            PageSize = 25;
-            PageSizes = new int[] { 15, 25, 50, 100 };
+            PageSize = 5;
+            PageSizes = new int[] { 5, 10, 15, 20, 25, 50, 75, 100 };
         }
 
         public int TotalPages()
