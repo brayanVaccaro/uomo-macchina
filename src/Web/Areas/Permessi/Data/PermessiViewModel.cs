@@ -29,6 +29,7 @@ namespace UomoMacchina.Areas.Permessi.Data
                 Data = permessoDTO.Data;
                 OraInizio = permessoDTO.OraInizio;
                 OraFine = permessoDTO.OraFine;
+                Class = permessoDTO.Class;
                 Durata = permessoDTO.Durata;
                 Dettagli = permessoDTO.Dettagli;
                 
@@ -38,9 +39,9 @@ namespace UomoMacchina.Areas.Permessi.Data
             public DateTime Data { get; set; }
             public DateTime OraInizio { get; set; }
             public DateTime OraFine { get; set; }
+            public string Class { get; set; }
             public int Durata { get; set; }
             public string Dettagli { get; set; }
-            
 
             public void SetPermesso(PermessoDTO permessoDTO)
             {   

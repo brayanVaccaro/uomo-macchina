@@ -39,6 +39,8 @@ namespace Core.Services.Shared
 
         public DateTime OraFine { get; set; }
 
+        public string Class {  get; set; }
+
         public int Durata { get; set; }
 
         public string Dettagli { get; set; }
@@ -56,7 +58,7 @@ namespace Core.Services.Shared
         /// <returns></returns>
         ///
 
-        // La async Task<PermessiDTO> fa una query sulla classe richiestaQuery (nella riga 10) 
+        // La async Task<PermessiDTO> fa una query sulla classe richiestaQuery 
         // serve ad far ridare il valore della query
         public async Task<PermessiDTO> GetAllPermessi(PermessoQuery qry)
         {
@@ -88,7 +90,7 @@ namespace Core.Services.Shared
         public async Task<PermessiDTO> GetAllPermessiByDate(DateTime date)
         {
             var risultato = new PermessiDTO();
-            var permessi = _dbContext.Permessi.Where(x => x.Data == date);
+            var permessi = _dbContext.Permessi.Where(x => x.Data.Date == date);
             try
             {
                 risultato.Permessi = await permessi.Select(x => new PermessoDTO
@@ -113,10 +115,10 @@ namespace Core.Services.Shared
 
 
         /* Filtro per Dettaglio */
-        public async Task<PermessiDTO> GetAllPermessiByDettaglio(string dettaglioScelta)
+        public async Task<PermessiDTO> GetAllPermessiByDettaglio(string dettaglioScelta, DateTime giornoSelezionato)
         {
             var risultato = new PermessiDTO();
-            var permessi = _dbContext.Permessi.Where(x => x.Dettagli.Contains(dettaglioScelta));
+            var permessi = _dbContext.Permessi.Where(x => x.Dettagli.Contains(dettaglioScelta) && x.Data.Date == giornoSelezionato.Date);
             try
             {
                 risultato.Permessi = await permessi.Select(x => new PermessoDTO
@@ -139,7 +141,7 @@ namespace Core.Services.Shared
             return risultato;
         }
 
-
+        /* Modifica della tabella */
         public async Task<PermessoDTO> GetPermessoById(PermessoQuery id)
         {
             var permesso = await _dbContext.Permessi
@@ -158,6 +160,8 @@ namespace Core.Services.Shared
             
             return permesso;
         }
+
+        /* Cancellazione del dato */
         public async Task DeletePermesso(Guid id)
         {
             var permesso = await _dbContext.Permessi.FindAsync(id);
