@@ -84,7 +84,7 @@ namespace Core.Services.Shared
         public async Task<NottiFuoriDTO> GetAllNottiFuoriByDate(DateTime date)
         {
             var risultato = new NottiFuoriDTO();
-            var nottiFuori = _dbContext.NottiFuori.Where(x => x.Data == date);
+            var nottiFuori = _dbContext.NottiFuori.Where(x => x.Data.Date == date);
             try
             {
                 risultato.NottiFuori = await nottiFuori.Select(x => new NotteFuoriDTO
@@ -107,10 +107,13 @@ namespace Core.Services.Shared
         }
 
         /* Filtro per Commessa */
-        public async Task<NottiFuoriDTO> GetAllNottiFuoriByCommessa(string commessaScelta)
+        public async Task<NottiFuoriDTO> GetAllNottiFuoriByCommessa(string commessaScelta, DateTime giornoSelezionato)
         {
             var risultato = new NottiFuoriDTO();
-            var nottiFuori = _dbContext.NottiFuori.Where(y => y.Commessa == commessaScelta);
+
+            var nottiFuori = _dbContext.NottiFuori.Where(x => x.Commessa.Contains(commessaScelta) && x.Data.Date == giornoSelezionato.Date);
+
+            
             try
             {
                 risultato.NottiFuori = await nottiFuori.Select(x => new NotteFuoriDTO
@@ -134,10 +137,10 @@ namespace Core.Services.Shared
 
 
         /* Filtro per Dettaglio */
-        public async Task<NottiFuoriDTO> GetAllNottiFuoriByDettaglio(string dettaglioScelta)
+        public async Task<NottiFuoriDTO> GetAllNottiFuoriByDettaglio(string dettaglioScelta, DateTime giornoSelezionato)
         {
             var risultato = new NottiFuoriDTO();
-            var nottiFuori = _dbContext.NottiFuori.Where(x => x.Dettagli.Contains(dettaglioScelta));
+            var nottiFuori = _dbContext.NottiFuori.Where(x => x.Dettagli.Contains(dettaglioScelta) && x.Data.Date == giornoSelezionato.Date);
             try
             {
                 risultato.NottiFuori = await nottiFuori.Select(x => new NotteFuoriDTO
@@ -159,7 +162,7 @@ namespace Core.Services.Shared
             return risultato;
         }
 
-
+        /* Modifica della tabella */
         public async Task<NotteFuoriDTO> GetNotteFuoriById(NotteFuoriQuery id)
         {
             var notteFuori = await _dbContext.NottiFuori
@@ -178,6 +181,7 @@ namespace Core.Services.Shared
             return notteFuori;
         }
 
+        /* Cancellazione del dato */
         public async Task DeleteNotteFuori(Guid id)
         {
             var notteFuori = await _dbContext.NottiFuori.FindAsync(id);
