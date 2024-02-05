@@ -2,19 +2,21 @@
 @model UomoMacchina.Areas.Main.Data.MainViewModel
 
 @*
-    1. Inserire il campo Straordinario di tipo bool nella Rendicontazione
-    2. Al clikc sulla riga devo poter editare l'elemento cliccato
+    1. FUNZIONA --> Inserire il campo Straordinario di tipo bool nella Rendicontazione
+    2. FUNZIONA --> Al click sulla riga devo poter editare l'elemento cliccato
     3. Gestire la creazione di un elemento (aggiungerlo nella tabella specifica dell'elemento scelto) e del relativo evento (aggiungere l'evento alla tabella Eventi):
         Clicco un bottone, mi esce il modale (Edit.cshtml) per inserire i dati.
         La prima scelta nel modale sarà quella di selezionare cosa voglio aggiungere e in base a questa scelta mostrare o nascondere elementi del form
 
-    4. Ricerca di un dato --> implementazione da zero
+    4. FUNZIONA (PER COMMESSA, PER DATA, PER DETTAGLI) --> Ricerca di un dato --> implementazione da zero
     5. Colori da cambiare
-    6. Sidebar implementare il cambio del mese al click sulla freccia, miglirare il css. Al clik su una settimana ti deve portare nel vue-cal alla settimana cliccata
+    6. Sidebar implementare il cambio del mese al click sulla freccia, migliorare il css. Al clik su una settimana ti deve portare nel vue-cal alla settimana cliccata
 
     7.pulizia del codice
     8. modificare la section ereditata dal layout globale _Layout.cshtml
     9. migliorare _SingleDay
+    10. implementare un modo per convertire da un elemento di un ViewModel ad un EventoDTO
+
 
 *@
 
@@ -37,7 +39,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-2">
-            @await Html.PartialAsync("~/Views/Shared/_SideBar.cshtml", @Model.Settimana)
+            @await Html.PartialAsync("~/Views/Shared/_SideBar.cshtml", @Model.Anno)
             @* <partial name="@MVC.Shared.Views._SideBar" model="Model" /> *@
         </div>
         @* Calendario Settimanale *@

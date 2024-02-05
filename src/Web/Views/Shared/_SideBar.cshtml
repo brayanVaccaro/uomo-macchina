@@ -1,73 +1,82 @@
-﻿@model UomoMacchina.Areas.Main.Data.SettimanaViewModel
+﻿@model UomoMacchina.Areas.Main.Data.AnnoViewModel
 @{
-    var today = DateTime.Now.Date;
+    var today = DateTime.Now;
+    var nomeMeseAttuale = today.ToString("MMMM");
 }
 
 <nav class="navbar d-flex flex-column justify-content-center bg-body-tertiary">
-    <!--Mese-->
-    <div class="mesi d-flex flex-row justify-content-end">
+    @foreach (var mese in Model.Mesi)
+    {
 
-        <div class="col">
-            <i class="fa-solid fa-caret-left fa-2x"></i>
+        <!--Gli altri mesi non visualizzati-->
+        @if (mese.NomeMese == nomeMeseAttuale)
+        {
+            <div class="mesi d-flex flex-row justify-content-end">
 
-        </div>
-        <div class="col">
-            <h3 class="m-0">Gennaio</h3>
+                <div class="col" v-on:click="cambioMese() ">
+                    <i class="fa-solid fa-caret-left fa-2x"></i>
 
-        </div>
-        <div class="col">
-            <i class="fa-solid fa-caret-right fa-2x"></i>
-        </div>
+                </div>
+                <div class="col">
+                    <h3 class="m-0">@mese.NomeMese</h3>
 
-        @* <div class="calendario">
-        <i class="fa-regular fa-calendar-days fa-2x"></i>
-        </div> *@
+                </div>
+                <div class="col" v-on:click="cambioMese() ">
+                    <i class="fa-solid fa-caret-right fa-2x"></i>
+                </div>
 
-    </div>
-    <div class="row">
-        <ul class="navbar-nav d-flex flex-column col">
+            </div>
 
-            @foreach (var settimana in Model.Settimane)
-            {
-                <li class="nav-item dropdown col">
 
-                    @if (settimana.Giorni.Contains(today))
+            <div class="row">
+                <ul class="navbar-nav d-flex flex-column col">
+
+                    @foreach (var settimana in mese.Settimane)
                     {
-                        <a class="nav-link show" v-on:click="selezionaSettimana('@settimana.Nome')" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-                            @settimana.Nome
-                        </a>
+                        <li class="nav-item dropdown col">
 
-                        <ul class="dropdown-menu row show" data-bs-popper="static">
-                            @foreach (var giorno in settimana.Giorni)
+                            @if (settimana.Giorni.Contains(today))
                             {
-                                <li class="dropdown-item" v-on:click.stop="selezionaGiorno('@giorno.ToString("yyyy-MM-dd")')">
-                                    <a>@giorno.ToString("dddd dd")</a>
-                                </li>
-                            }
-                        </ul>
-                    }
-                    else
-                    {
-                        <a class="nav-link" v-on:click="selezionaSettimana('@settimana.Nome')" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            @settimana.Nome
-                        </a>
+                                @* nome della settimana *@
+                                <a class="nav-link show" v-on:click="selezionaSettimana('@settimana.Giorni.FirstOrDefault().ToString("yyyy-MM-dd")')" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                                    @settimana.Nome
+                                </a>
 
-                        <ul class="dropdown-menu row">
-                            @foreach (var giorno in settimana.Giorni)
+                                @* ciclo per generare i giorni delle settimane *@
+                                <ul class="dropdown-menu row show" data-bs-popper="static">
+                                    @foreach (var giorno in settimana.Giorni)
+                                    {
+                                        <li class="dropdown-item" v-on:click.stop="selezionaGiorno('@giorno.ToString("yyyy-MM-dd")')">
+                                            <a>@giorno.ToString("dddd dd")</a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            else
                             {
-                                <li class="dropdown-item" v-on:click.stop="selezionaGiorno('@giorno.ToString("yyyy-MM-dd")')">
+                                <a class="nav-link" v-on:click="selezionaSettimana('@settimana.Giorni.FirstOrDefault().ToString("yyyy-MM-dd")')" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @settimana.Nome
+                                </a>
 
-                                    <a>@giorno.ToString("dddd dd")</a>
-                                    <!-- Aggiungi ulteriori elementi dell'interfaccia utente per ogni giorno qui -->
+                                <ul class="dropdown-menu row">
+                                    @foreach (var giorno in settimana.Giorni)
+                                    {
+                                        <li class="dropdown-item" v-on:click.stop="selezionaGiorno('@giorno.ToString("yyyy-MM-dd")')">
 
-                                </li>
+                                            <a>@giorno.ToString("dddd dd")</a>
+                                            <!-- Aggiungi ulteriori elementi dell'interfaccia utente per ogni giorno qui -->
+
+                                        </li>
+                                    }
+                                </ul>
                             }
-                        </ul>
+                        </li>
                     }
-                </li>
-            }
-        </ul>
-    </div>
+                </ul>
+            </div>
+        }
+                
+    }
 </nav>
 
 
