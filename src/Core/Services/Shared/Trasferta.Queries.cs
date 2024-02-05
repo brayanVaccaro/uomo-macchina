@@ -42,6 +42,8 @@ namespace Core.Services.Shared
 
         public string Commessa { get; set; }
 
+        public string Class { get; set; }
+
         public bool AutoAziendale { get; set; }
 
         public string Dettagli { get; set; }
@@ -90,7 +92,7 @@ namespace Core.Services.Shared
         {
             
             var risultato = new TrasferteDTO();
-            var trasferte = _dbContext.Trasferte.Where(x => x.DataInizio == date);
+            var trasferte = _dbContext.Trasferte.Where(x => x.DataInizio.Date == date);
             try
             {
                 risultato.Trasferte = await trasferte.Select(x => new TrasfertaDTO
@@ -115,10 +117,13 @@ namespace Core.Services.Shared
         }
 
         /* Filtro per Commessa */
-        public async Task<TrasferteDTO> GetAllTrasferteByCommessa(string commessaScelta)
+        public async Task<TrasferteDTO> GetAllTrasferteByCommessa(string commessaScelta, DateTime giornoSelezionato)
         {
             var risultato = new TrasferteDTO();
-            var trasferte = _dbContext.Trasferte.Where(y => y.Commessa == commessaScelta);
+
+            var trasferte = _dbContext.Trasferte.Where(x => x.Commessa.Contains(commessaScelta) && x.DataInizio.Date == giornoSelezionato.Date);
+
+            
             try
             {
                 risultato.Trasferte = await trasferte.Select(x => new TrasfertaDTO
@@ -141,13 +146,12 @@ namespace Core.Services.Shared
 
             return risultato;
         }
-
 
         /* Filtro per Dettaglio */
-        public async Task<TrasferteDTO> GetAllTrasferteByDettaglio(string dettaglioScelta)
+        public async Task<TrasferteDTO> GetAllTrasferteByDettaglio(string dettaglioScelta, DateTime giornoSelezionato)
         {
             var risultato = new TrasferteDTO();
-            var trasferte = _dbContext.Trasferte.Where(x => x.Dettagli.Contains(dettaglioScelta));
+            var trasferte = _dbContext.Trasferte.Where(x => x.Dettagli.Contains(dettaglioScelta) && x.DataInizio.Date == giornoSelezionato.Date);
             try
             {
                 risultato.Trasferte = await trasferte.Select(x => new TrasfertaDTO
@@ -172,7 +176,7 @@ namespace Core.Services.Shared
         }
 
 
-
+        /* Modifica della tabella */
         public async Task<TrasfertaDTO> GetTrasfertaById(TrasfertaQuery id)
         {
             var trasferta = await _dbContext.Trasferte
@@ -193,6 +197,7 @@ namespace Core.Services.Shared
             return trasferta;
         }
 
+        /* Cancellazione del dato */
         public async Task DeleteTrasferta(Guid id)
         {
             var trasferta = await _dbContext.Trasferte.FindAsync(id);

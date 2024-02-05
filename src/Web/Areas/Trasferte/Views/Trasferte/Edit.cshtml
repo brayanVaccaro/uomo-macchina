@@ -51,16 +51,6 @@
                     </div>
 
 
-                    <!-- Commessa -->
-                    <div class="col-md-4 position-relative">
-                        <label asp-for="Commessa" class="form-label"> Commessa:</label>
-                        <input type="text" class="form-control" asp-for="Commessa" required>
-                        <span asp-validation-for="Commessa" class="text-danger"></span>
-                        <span asp-validation-for="Commessa" class="invalid-feedback"> Non hai ancora inserito la commessa</span>
-                        <span asp-validation-for="Commessa" class="valid-feedback"> Commessa inserita </span>
-                    </div>
-
-
                     <!-- AutoAziendale  -->
                     <div class="col-md-6 position-relative">
                         <label asp-for="AutoAziendale" class="form-label">AutoAziendale:</label>
@@ -70,7 +60,17 @@
                             <option value="false">No</option>
                         <span asp-validation-for="AutoAziendale" class="invalid-feedback"> Non hai ancora segnato l'auto aziendale</span>
                         </select>
-                        <span asp-validation-for="AutoAziendale" class="valid-feedback"> Auto aziendale seganto</span>
+                        <span asp-validation-for="AutoAziendale" class="valid-feedback"> Auto aziendale segnato</span>
+                    </div>
+
+
+                    <!-- Commessa -->
+                    <div class="col-md-8 position-relative">
+                        <label asp-for="Commessa" class="form-label"> Commessa:</label>
+                        <input type="text" class="form-control" asp-for="Commessa" required>
+                        <span asp-validation-for="Commessa" class="text-danger"></span>
+                        <span asp-validation-for="Commessa" class="invalid-feedback"> Non hai ancora inserito la commessa</span>
+                        <span asp-validation-for="Commessa" class="valid-feedback"> Commessa inserita </span>
                     </div>
 
 
@@ -127,16 +127,6 @@
                     </div>
 
 
-                    <!-- Commessa -->
-                    <div class="col-md-4 position-relative">
-                        <label asp-for="Commessa" class="form-label"> Commessa:</label>
-                        <input type="text" class="form-control" asp-for="Commessa" value="" required>
-                        <span asp-validation-for="Commessa" class="text-danger"></span>
-                        <span asp-validation-for="Commessa" class="invalid-feedback"> Non hai ancora inserito la commessa</span>
-                        <span asp-validation-for="Commessa" class="valid-feedback"> Commessa inserita </span>
-                    </div>
-
-
                     <!-- AutoAziendale  -->
                     <div class="col-md-6 position-relative">
                         <label asp-for="AutoAziendale" class="form-label">AutoAziendale:</label>
@@ -146,7 +136,17 @@
                             <option value="false">No</option>
                             <span asp-validation-for="AutoAziendale" class="invalid-feedback"> Non hai ancora segnato l'auto aziendale</span>
                         </select>
-                        <span asp-validation-for="AutoAziendale" class="valid-feedback"> Auto aziendale seganto</span>
+                        <span asp-validation-for="AutoAziendale" class="valid-feedback"> Auto aziendale segnato</span>
+                    </div>
+                    
+                    
+                    <!-- Commessa -->
+                    <div class="col-md-8 position-relative">
+                        <label asp-for="Commessa" class="form-label"> Commessa:</label>
+                        <input type="text" class="form-control" asp-for="Commessa" value="" required>
+                        <span asp-validation-for="Commessa" class="text-danger"></span>
+                        <span asp-validation-for="Commessa" class="invalid-feedback"> Non hai ancora inserito la commessa</span>
+                        <span asp-validation-for="Commessa" class="valid-feedback"> Commessa inserita </span>
                     </div>
 
 

@@ -42,6 +42,7 @@ namespace UomoMacchina.Areas.Trasferte.Data
                 DataInizio = trasfertaDTO.DataInizio;
                 DataFine = trasfertaDTO.DataFine;
                 Commessa = trasfertaDTO.Commessa;
+                Class = trasfertaDTO.Class;
                 AutoAziendale = trasfertaDTO.AutoAziendale;
                 Dettagli = trasfertaDTO.Dettagli;
 
@@ -54,6 +55,8 @@ namespace UomoMacchina.Areas.Trasferte.Data
             public DateTime DataFine { get; set; }
 
             public string Commessa { get; set; }
+
+            public string Class { get; set; }
 
             public bool AutoAziendale { get; set; }
 
