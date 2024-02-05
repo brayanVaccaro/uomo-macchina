@@ -19,6 +19,7 @@
 
                 @* Qui ci sono i vari campi del form*@
                 <div>
+
                     <!-- Ore Totali -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="OreTotali" class="form-label">Ore Totali:</label>
@@ -26,6 +27,7 @@
                         <span asp-validation-for="OreTotali" class="invalid-feedback">Non hai ancora inserito le ore totali</span>
                         <span asp-validation-for="OreTotali" class="valid-feedback">Ore totali inserita</span>
                     </div>
+
 
                     <!-- Data  -->
                     <div class="col-md-4 position-relative">
@@ -36,6 +38,7 @@
                         <span asp-validation-for="Data" class="valid-feedback">Data di inizio inserita</span>
                     </div>
 
+
                     <!-- Ora Inizio -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="OraInizio" class="form-label">Ora inizio:</label>
@@ -43,6 +46,7 @@
                         <span asp-validation-for="OraInizio" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
                         <span asp-validation-for="OraInizio" class="valid-feedback">Ora di inizio inserita</span>
                     </div>
+
 
                     <!-- Ora Fine -->
                     <div class="col-md-4 position-relative">
@@ -52,8 +56,22 @@
                         <span asp-validation-for="OraFine" class="valid-feedback">Ora di fine inserita</span>
                     </div>
 
+
+                    <!-- Straordinario -->
+                    <div class="col-md-6 position-relative">
+                        <label asp-for="Straordinario" class="form-label">Straordinario:</label>
+                        <select class="form-select is-invalid" asp-for="Straordinario" required>
+                            <option selected disabled value="">Selezionare se è stato fatto lo straordinario</option>
+                            <option value="true">Si</option>
+                            <option value="false">No</option>
+                            <span asp-validation-for="Straordinario" class="invalid-feedback"> Non hai ancora segnato se è stato fatto lo straordinario </span>
+                        </select>
+                        <span asp-validation-for="Straordinario" class="valid-feedback"> Straordinario segnato</span>
+                    </div>
+
+
                     <!-- Commessa -->
-                    <div class="col-md-4 position-relative">
+                    <div class="col-md-8 position-relative">
                         <label asp-for="Commessa" class="form-label">Commessa:</label>
                         <input type="text" class="form-control" asp-for="Commessa" required>
                         <span asp-validation-for="Commessa" class="text-danger"></span>
@@ -86,6 +104,7 @@
 
                 @* Qui ci sono i vari campi del form*@
                 <div>
+
                     <!-- Ore Totali -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="OreTotali" class="form-label">Ore Totali:</label>
@@ -93,6 +112,7 @@
                         <span asp-validation-for="OreTotali" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
                         <span asp-validation-for="OreTotali" class="valid-feedback">Ora di inizio inserita</span>
                     </div>
+
 
                     <!-- Data  -->
                     <div class="col-md-4 position-relative">
@@ -103,6 +123,7 @@
                         <span asp-validation-for="Data" class="valid-feedback">Data di inizio inserita</span>
                     </div>
 
+
                     <!-- Ora Inizio -->
                     <div class="col-md-4 position-relative">
                         <label asp-for="OraInizio" class="form-label">Ora inizio:</label>
@@ -110,6 +131,7 @@
                         <span asp-validation-for="OraInizio" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
                         <span asp-validation-for="OraInizio" class="valid-feedback">Ora di inizio inserita</span>
                     </div>
+
 
                     <!-- Ora Fine -->
                     <div class="col-md-4 position-relative">
@@ -119,8 +141,22 @@
                         <span asp-validation-for="OraFine" class="valid-feedback">Ora di fine inserita</span>
                     </div>
 
+
+                    <!-- Straordinario -->
+                    <div class="col-md-6 position-relative">
+                        <label asp-for="Straordinario" class="form-label">Straordinario:</label>
+                        <select class="form-select is-invalid" asp-for="Straordinario" required>
+                            <option selected disabled value="">Selezionare se è stato fatto lo straordinario</option>
+                            <option value="true">Si</option>
+                            <option value="false">No</option>
+                            <span asp-validation-for="Straordinario" class="invalid-feedback"> Non hai ancora segnato se è stato fatto lo straordinario </span>
+                        </select>
+                        <span asp-validation-for="Straordinario" class="valid-feedback"> Straordinario segnato</span>
+                    </div>
+
+
                     <!-- Commessa -->
-                    <div class="col-md-4 position-relative">
+                    <div class="col-md-8 position-relative">
                         <label asp-for="Commessa" class="form-label">Commessa:</label>
                         <input type="text" class="form-control" asp-for="Commessa" value="" required>
                         <span asp-validation-for="Commessa" class="text-danger"></span>

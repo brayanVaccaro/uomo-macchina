@@ -23,6 +23,8 @@ namespace Core.Models
 
         public DateTime OraFine { get; set; }
 
+        public bool Straordinario { get; set; }
+
         public string Commessa { get; set; }
 
         public string Dettagli { get; set; }

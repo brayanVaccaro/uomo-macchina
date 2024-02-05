@@ -39,9 +39,11 @@ namespace UomoMacchina.Areas.Rendicontazioni.Data
             {
                 Id = rendicontazioneDTO.Id;
                 OreTotali = rendicontazioneDTO.OreTotali;
+                Data = rendicontazioneDTO.Data;
                 OraInizio = rendicontazioneDTO.OraInizio;
                 OraFine = rendicontazioneDTO.OraFine;
-                Data = rendicontazioneDTO.Data;
+                Straordinario = rendicontazioneDTO.Straordinario;
+                Class = rendicontazioneDTO.Class;
                 Commessa = rendicontazioneDTO.Commessa;
                 Dettagli = rendicontazioneDTO.Dettagli;
 
@@ -52,7 +54,9 @@ namespace UomoMacchina.Areas.Rendicontazioni.Data
             public DateTime Data { get; set; }
             public DateTime OraInizio { get; set; }
             public DateTime OraFine { get; set; }
+            public string Class { get; set; }
             public string Commessa { get; set; }
+            public bool Straordinario { get; set; }
             public string Dettagli { get; set; }
 
 
@@ -63,9 +67,10 @@ namespace UomoMacchina.Areas.Rendicontazioni.Data
 
                     Id = RendicontazioneDTO.Id;
                     OreTotali = RendicontazioneDTO.OreTotali;
+                    Data = RendicontazioneDTO.Data;
                     OraInizio = RendicontazioneDTO.OraInizio;
                     OraFine = RendicontazioneDTO.OraFine;
-                    Data = RendicontazioneDTO.Data;
+                    Straordinario = RendicontazioneDTO.Straordinario;
                     Commessa = RendicontazioneDTO.Commessa;
                     Dettagli = RendicontazioneDTO.Dettagli;
 
@@ -78,9 +83,10 @@ namespace UomoMacchina.Areas.Rendicontazioni.Data
                 {
                     Id = Id,
                     OreTotali = OreTotali,
+                    Data = Data,
                     OraInizio = OraInizio,
                     OraFine = OraFine,
-                    Data = Data,
+                    Straordinario = Straordinario,
                     Commessa = Commessa,
                     Dettagli = Dettagli,
                 };

@@ -150,7 +150,7 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
                 if (rendicontazione != null)
                 {
                     // Effettua l'eliminazione della Rendicontazioni
-                    await _sharedService.Delete(id);
+                    await _sharedService.DeleteRendicontazione(id);
 
                     Alerts.AddSuccess(this, "Rendicontazioni cancellata con successo");
                 }

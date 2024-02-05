@@ -46,6 +46,10 @@ namespace Core.Services.Shared
 
         public DateTime OraFine { get; set; } 
 
+        public bool Straordinario { get; set; }
+
+        public string Class { get; set; }
+
         public string Commessa { get; set; }
 
         public string Dettagli { get; set; }
@@ -88,6 +92,7 @@ namespace Core.Services.Shared
                     Data = x.Data,
                     OraInizio = x.OraInizio,
                     OraFine = x.OraFine,
+                    Straordinario = x.Straordinario,
                     Commessa = x.Commessa,
                     Dettagli = x.Dettagli,
                 }).ToArrayAsync();
@@ -116,6 +121,7 @@ namespace Core.Services.Shared
                     Data = x.Data,
                     OraInizio = x.OraInizio,
                     OraFine = x.OraFine,
+                    Straordinario = x.Straordinario,
                     Commessa = x.Commessa,
                     Dettagli = x.Dettagli,
                 }).ToArrayAsync();
@@ -131,10 +137,11 @@ namespace Core.Services.Shared
         }
 
         /* Filtro per Commessa */
-        public async Task<RendicontazioniDTO> GetAllByCommessa(string commessaScelta)
+        public async Task<RendicontazioniDTO> GetAllByCommessa(string commessaScelta, DateTime giornoSelezionato)
         {
             var risultato = new RendicontazioniDTO();
-            var rendicontazioni = _dbContext.Rendicontazioni.Where(x => x.Commessa == commessaScelta);
+
+            var rendicontazioni = _dbContext.Rendicontazioni.Where(x => x.Commessa.Contains(commessaScelta) && x.Data.Date == giornoSelezionato.Date);
             try
             {
                 risultato.Rendicontazioni = await rendicontazioni.Select(x => new RendicontazioneDTO
@@ -144,6 +151,7 @@ namespace Core.Services.Shared
                     Data = x.Data,
                     OraInizio = x.OraInizio,
                     OraFine = x.OraFine,
+                    Straordinario = x.Straordinario,
                     Commessa = x.Commessa,
                     Dettagli = x.Dettagli,
                 }).ToArrayAsync();
@@ -159,10 +167,11 @@ namespace Core.Services.Shared
         }
 
         /* Filtro per Dettaglio */
-        public async Task<RendicontazioniDTO> GetAllRendicontazioniByDettaglio(string dettaglioScelta)
+        public async Task<RendicontazioniDTO> GetAllRendicontazioniByDettaglio(string dettaglioScelta, DateTime giornoSelezionato)
         {
             var risultato = new RendicontazioniDTO();
-            var rendicontazioni = _dbContext.Rendicontazioni.Where(x => x.Dettagli.Contains(dettaglioScelta));
+
+            var rendicontazioni = _dbContext.Rendicontazioni.Where(x => x.Dettagli.Contains(dettaglioScelta) && x.Data.Date == giornoSelezionato.Date);
             try
             {
                 risultato.Rendicontazioni = await rendicontazioni.Select(x => new RendicontazioneDTO
@@ -172,6 +181,7 @@ namespace Core.Services.Shared
                     Data = x.Data,
                     OraInizio = x.OraInizio,
                     OraFine = x.OraFine,
+                    Straordinario = x.Straordinario,
                     Commessa = x.Commessa,
                     Dettagli = x.Dettagli,
                 }).ToArrayAsync();
@@ -186,6 +196,7 @@ namespace Core.Services.Shared
             return risultato;
         }
 
+        /* Modifica della tabella */
         public async Task<RendicontazioneDTO> GetRendicontazioneById(RendicontazioneQuery id)
         {
             var rendicontazione = await _dbContext.Rendicontazioni
@@ -197,6 +208,7 @@ namespace Core.Services.Shared
                     Data = x.Data,
                     OraFine = x.OraFine,
                     OraInizio = x.OraInizio,
+                    Straordinario= x.Straordinario,
                     Commessa = x.Commessa,
                     Dettagli = x.Dettagli,
                 })
@@ -206,6 +218,7 @@ namespace Core.Services.Shared
             return rendicontazione;
         }
 
+        /* Cancellazione del dato */
         public async Task DeleteRendicontazione(Guid id)
         {
             var rendicontazione = await _dbContext.Rendicontazioni.FindAsync(id);

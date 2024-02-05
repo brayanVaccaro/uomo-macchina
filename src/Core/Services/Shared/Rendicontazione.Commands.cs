@@ -21,6 +21,8 @@ namespace Core.Services.Shared
 
         public DateTime OraFine { get; set; } // alle ore
 
+        public bool Straordinario { get; set; }
+
         public string Commessa { get; set; }
 
         public string Dettagli { get; set; }
@@ -48,6 +50,7 @@ namespace Core.Services.Shared
             rendicontazione.Data = cmd.Data;
             rendicontazione.OraInizio = cmd.OraInizio;
             rendicontazione.OraFine = cmd.OraFine;
+            rendicontazione.Straordinario = cmd.Straordinario;
             rendicontazione.Commessa = cmd.Commessa;
             rendicontazione.Dettagli = cmd.Dettagli;
 
