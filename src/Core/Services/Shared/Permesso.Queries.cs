@@ -31,7 +31,7 @@ namespace Core.Services.Shared
     // La classe PermessoDTO prende in riferimento parametri dal file Permessi.cs
     public class PermessoDTO
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         public DateTime Data { get; set; }
 
@@ -70,7 +70,7 @@ namespace Core.Services.Shared
                     Data = x.Data,
                     OraInizio = x.OraInizio,
                     OraFine = x.OraFine,
-                    Durata = x.Durata,
+                    Durata = x.OreTotali,
                     Dettagli = x.Dettagli,
                 }).ToArrayAsync();
 
@@ -95,7 +95,7 @@ namespace Core.Services.Shared
                     Data = x.Data,
                     OraInizio = x.OraInizio,
                     OraFine = x.OraFine,
-                    Durata = x.Durata,
+                    Durata = x.OreTotali,
                     Dettagli = x.Dettagli,
                 }).ToArrayAsync();
 
@@ -121,7 +121,7 @@ namespace Core.Services.Shared
                     Data = x.Data,
                     OraInizio = x.OraInizio,
                     OraFine = x.OraFine,
-                    Durata = x.Durata,
+                    Durata = x.OreTotali,
                     Dettagli = x.Dettagli,
                 })
                 .FirstOrDefaultAsync();

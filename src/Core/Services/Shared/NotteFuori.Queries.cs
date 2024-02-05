@@ -32,7 +32,7 @@ namespace Core.Services.Shared
     // La classe NotteFuoriDTO prende in riferimento parametri dal file NottiFuori.cs
     public class NotteFuoriDTO
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         public string TipoViaggio { get; set; }
 

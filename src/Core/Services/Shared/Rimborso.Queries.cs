@@ -32,7 +32,7 @@ namespace Core.Services.Shared
     // La classe RimborsoDTO prende in riferimento parametri dal file Rimborsi.cs
     public class RimborsoDTO
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         public int Importo { get; set; }
 

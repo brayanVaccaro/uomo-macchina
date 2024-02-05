@@ -16,7 +16,7 @@ namespace Core.Models
 
         public DateTime OraFine { get; set; }
 
-        public int Durata { get; set; }
+        public int OreTotali { get; set; }
 
         public string Dettagli { get; set; }
 

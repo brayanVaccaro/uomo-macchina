@@ -32,7 +32,7 @@ namespace Core.Services.Shared
     // La classe TrasfertaDTO prende in riferimento parametri dal file Trasferte.cs
     public class TrasfertaDTO
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         public int Chilometri { get; set; }
 
