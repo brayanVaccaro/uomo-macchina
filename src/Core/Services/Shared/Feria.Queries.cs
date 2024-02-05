@@ -57,7 +57,7 @@ namespace Core.Services.Shared
         /// <returns></returns>
         ///
 
-        // La async Task<FerieDTO> fa una query sulla classe richiestaQuery (nella riga 10) 
+        // La async Task<FerieDTO> fa una query sulla classe richiestaQuery 
         // serve ad far ridare il valore della query
         public async Task<FerieDTO> GetAllFerie(FeriaQuery qry)
         {
@@ -83,6 +83,8 @@ namespace Core.Services.Shared
 
             return risultato;
         }
+
+        /* Filtro per Data */
         public async Task<FerieDTO> GetAllFerieByDate(DateTime date)
         {
             var risultato = new FerieDTO();
@@ -110,10 +112,11 @@ namespace Core.Services.Shared
 
 
         /* Filtro per Dettaglio */
-        public async Task<FerieDTO> GetAllFerieByDettaglio(string dettaglioScelta)
+        public async Task<FerieDTO> GetAllFerieByDettaglio(string dettaglioScelta, DateTime giornoSelezionato)
         {
             var risultato = new FerieDTO();
-            var ferie = _dbContext.Ferie.Where(x => x.Dettagli.Contains(dettaglioScelta));
+            var ferie = _dbContext.Ferie.Where(x => x.Dettagli.Contains(dettaglioScelta) && x.DataInizio.Date == giornoSelezionato.Date);
+
             try
             {
                 risultato.Ferie = await ferie.Select(x => new FeriaDTO
@@ -135,7 +138,7 @@ namespace Core.Services.Shared
             return risultato;
         }
 
-
+        /* Modifica della tabella */
         public async Task<FeriaDTO> GetFeriaById(FeriaQuery id)
         {
             var feria = await _dbContext.Ferie
@@ -154,7 +157,7 @@ namespace Core.Services.Shared
             return feria;
         }
 
-
+        /* Cancellazione del dato */
         public async Task DeleteFerie(Guid id)
         {
             var feria = await _dbContext.Ferie.FindAsync(id);

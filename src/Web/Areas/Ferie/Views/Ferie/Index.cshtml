@@ -3,26 +3,30 @@
 @model UomoMacchina.Areas.Ferie.Data.FerieViewModel
 
 @* Index di Ferie *@
-@{
- 
-}
+
+
 <ul class="navbar-nav flex-wrap ms-auto">
 
     <li>
         <a class="Nuovo btn btn-light ms-2" href="@Url.Action(MVC.Ferie.Ferie.New())" title="Inserisci un nuovo elemento">
             <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
         </a>
-        @* <a class="modifica btn btn-light ms-2" title="Modifica un elemento">
-            <i class="fa-solid fa-plus"></i>&nbsp;Modifica
-        </a>
-        <a class="elimina btn btn-light ms-2" title="Elimina un elemento" href="@Url.Action(MVC.Ferie.Ferie.Delete())">
-            <i class="fa-solid fa-plus"></i>&nbsp;Elimina
-        </a> *@
+        
     </li>
 </ul>
 
 
-<h1>Ferie</h1>
+<div class="container d-flex flex-col ">
+    <div class="col-4">
+        <h1>Ferie</h1>
+    </div>
+    <div class="col-1 align-self-center ">
+        <i class="fa-solid fa-square fa-2x bg-secondary"></i>
+    </div>
+</div>
+
+
+
 <div class="text-center">
     <table class="table table-hover table-striped">
         <thead>
@@ -34,7 +38,7 @@
                     Data Fine
                 </th>
                 <th>
-                    Durarata
+                    Durarata (Giorni)
                 </th>
                 <th>
                     Dettagli

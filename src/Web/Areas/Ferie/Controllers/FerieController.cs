@@ -28,17 +28,14 @@ namespace UomoMacchina.Areas.Ferie.Controllers
         // La Task<IActionResult> serve ad ricevere i valori sul file Index.cshtml
         // (dato dal nome stesso) e tramite il per corso di riferimento alla classe FerieViewModel
         // nel file FerieViewModel.cs
+
+        // schermata index 
         [HttpGet]
         public async virtual Task<IActionResult> Index(FerieViewModel model)
-        {   // schermata index  
-            //var ferie = await _sharedService.GetAllFerie();
-
-            //model.SetFerie(ferie);
-
+        { 
             // Reindirizza a "Main" nell'area desiderata
             return RedirectToAction("Main", "Main", new { area = "Main" });
-            //return RedirectToAction("Main");
-            //return View(model);//mi carica il file Index nell'area richieste
+            
         }
 
         // Creazione della richiesta
@@ -110,6 +107,8 @@ namespace UomoMacchina.Areas.Ferie.Controllers
             return RedirectToAction(Actions.Edit(model.Id));
         }
 
+
+        /* Metodo salva dato */
         [HttpPost]
         public virtual async Task<IActionResult> SaveEdit(FeriaViewModel model)
         {
@@ -134,7 +133,7 @@ namespace UomoMacchina.Areas.Ferie.Controllers
             return View(model);
         }
 
-
+        /* Metodo cancellazione */
         [HttpPost]
         public virtual async Task<IActionResult> Delete(Guid id)
         {

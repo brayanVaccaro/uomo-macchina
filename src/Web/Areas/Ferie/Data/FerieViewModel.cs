@@ -22,29 +22,14 @@ namespace UomoMacchina.Areas.Ferie.Data
         //public Guid? Id { get; set; }
 
         public FeriaViewModel[] Ferie { get; set; }
-        /*
-         Ferie [
         
-        FeriaViewModel feria1 {
-        Guid Id
-        }
-        FeriaViewModel feria2{
-        Guid Id
-        }
-        FeriaViewModel feria3{
-        Guid Id
-        }
-
-        ]
-         
-         */
 
         public class FeriaViewModel
         {
             public FeriaViewModel() { }
 
             // La FeriaViewModel prende i paramtri di FeriaDTO quest'ultima
-            // si trova su Ferie.Queries.cs rga 32
+            // si trova su Ferie.Queries.cs 
             public FeriaViewModel(FeriaDTO feriaDTO)
             {
                 Id = feriaDTO.Id;
