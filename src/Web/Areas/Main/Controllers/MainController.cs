@@ -70,27 +70,32 @@ namespace UomoMacchina.Areas.Main
         [HttpGet]
         public async virtual Task<IActionResult> GetAllByCommessa(string commessaScelta, string giornoSelezionato)
         {
-            DateTime dateTime = DateTime.ParseExact(giornoSelezionato, "ddd MMM dd yyyy HH:mm:ss 'GMT'zzz '(Ora standard dell’Europa centrale)'", CultureInfo.InvariantCulture);
-
-            RendicontazioniDTO rendicontazioni = await _sharedService.GetAllByCommessa(commessaScelta, dateTime);
-            // FerieDTO ferie = await _sharedService.GetAllFerieByCommessa(commessaScelta);
-            // PermessiDTO permessi = await _sharedService.GetAllPermessiByCommessa(commessaScelta);
-            NottiFuoriDTO nottiFuori = await _sharedService.GetAllNottiFuoriByCommessa(commessaScelta, dateTime);
-            TrasferteDTO trasferte = await _sharedService.GetAllTrasferteByCommessa(commessaScelta, dateTime);
-            RimborsiDTO rimborsi = await _sharedService.GetAllRimborsiByCommessa(commessaScelta, dateTime);
-
-
-            var model = new MainViewModel();
-
-            model.Rendicontazioni.SetRendicontazioni(rendicontazioni);
-            //model.Ferie.SetFerie(ferie);
-            //model.Permessi.SetPermessi(permessi);
-            model.NottiFuori.SetNottiFuori(nottiFuori);
-            model.Trasferte.SetTrasferte(trasferte);
-            model.Rimborsi.SetRimborsi(rimborsi);
+            if (DateTime.TryParseExact(giornoSelezionato, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateTime))
+            {
+                RendicontazioniDTO rendicontazioni = await _sharedService.GetAllByCommessa(commessaScelta, dateTime);
+                // FerieDTO ferie = await _sharedService.GetAllFerieByCommessa(commessaScelta);
+                // PermessiDTO permessi = await _sharedService.GetAllPermessiByCommessa(commessaScelta);
+                NottiFuoriDTO nottiFuori = await _sharedService.GetAllNottiFuoriByCommessa(commessaScelta, dateTime);
+                TrasferteDTO trasferte = await _sharedService.GetAllTrasferteByCommessa(commessaScelta, dateTime);
+                RimborsiDTO rimborsi = await _sharedService.GetAllRimborsiByCommessa(commessaScelta, dateTime);
 
 
-            return Json(model);
+                var model = new MainViewModel();
+
+                model.Rendicontazioni.SetRendicontazioni(rendicontazioni);
+                //model.Ferie.SetFerie(ferie);
+                //model.Permessi.SetPermessi(permessi);
+                model.NottiFuori.SetNottiFuori(nottiFuori);
+                model.Trasferte.SetTrasferte(trasferte);
+                model.Rimborsi.SetRimborsi(rimborsi);
+
+
+                return Json(model);
+            }
+            else
+            {
+                return RedirectToAction(Actions.Main());
+            }
 
         }
 
@@ -98,27 +103,34 @@ namespace UomoMacchina.Areas.Main
         [HttpGet]
         public async virtual Task<IActionResult> GetAllByDettaglio(string dettaglioScelta, string giornoSelezionato)
         {
-            DateTime dateTime = DateTime.ParseExact(giornoSelezionato, "ddd MMM dd yyyy HH:mm:ss 'GMT'zzz '(Ora standard dell’Europa centrale)'", CultureInfo.InvariantCulture);
-
-            RendicontazioniDTO rendicontazioni = await _sharedService.GetAllRendicontazioniByDettaglio(dettaglioScelta, dateTime);
-            FerieDTO ferie = await _sharedService.GetAllFerieByDettaglio(dettaglioScelta, dateTime);
-            PermessiDTO permessi = await _sharedService.GetAllPermessiByDettaglio(dettaglioScelta, dateTime);
-            NottiFuoriDTO nottiFuori = await _sharedService.GetAllNottiFuoriByDettaglio(dettaglioScelta, dateTime);
-            TrasferteDTO trasferte = await _sharedService.GetAllTrasferteByDettaglio(dettaglioScelta, dateTime);
-            RimborsiDTO rimborsi = await _sharedService.GetAllRimborsiByDettaglio(dettaglioScelta, dateTime);
-
-            
-            var model = new MainViewModel();
-
-            model.Rendicontazioni.SetRendicontazioni(rendicontazioni);
-            model.Ferie.SetFerie(ferie);
-            model.Permessi.SetPermessi(permessi);
-            model.NottiFuori.SetNottiFuori(nottiFuori);
-            model.Trasferte.SetTrasferte(trasferte);
-            model.Rimborsi.SetRimborsi(rimborsi);
+            if (DateTime.TryParseExact(giornoSelezionato, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateTime))
+            {
 
 
-            return Json(model);
+                RendicontazioniDTO rendicontazioni = await _sharedService.GetAllRendicontazioniByDettaglio(dettaglioScelta, dateTime);
+                FerieDTO ferie = await _sharedService.GetAllFerieByDettaglio(dettaglioScelta, dateTime);
+                PermessiDTO permessi = await _sharedService.GetAllPermessiByDettaglio(dettaglioScelta, dateTime);
+                NottiFuoriDTO nottiFuori = await _sharedService.GetAllNottiFuoriByDettaglio(dettaglioScelta, dateTime);
+                TrasferteDTO trasferte = await _sharedService.GetAllTrasferteByDettaglio(dettaglioScelta, dateTime);
+                RimborsiDTO rimborsi = await _sharedService.GetAllRimborsiByDettaglio(dettaglioScelta, dateTime);
+
+
+                var model = new MainViewModel();
+
+                model.Rendicontazioni.SetRendicontazioni(rendicontazioni);
+                model.Ferie.SetFerie(ferie);
+                model.Permessi.SetPermessi(permessi);
+                model.NottiFuori.SetNottiFuori(nottiFuori);
+                model.Trasferte.SetTrasferte(trasferte);
+                model.Rimborsi.SetRimborsi(rimborsi);
+
+
+                return Json(model);
+            }
+            else
+            {
+                return RedirectToAction(Actions.Main());
+            }
 
         }
 

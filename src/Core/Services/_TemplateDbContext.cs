@@ -925,7 +925,7 @@ namespace Core.Services
                     Data = new DateTime(2024, 1, 15, 14, 0, 0),
                     OraInizio = new DateTime(2024, 1, 15, 14, 0, 0),
                     OraFine = new DateTime(2024, 1, 15, 16, 0, 0),
-                    Durata = 120,
+                    OreTotali = 120,
                     Dettagli = "Medica",
                 },
                 
@@ -936,7 +936,7 @@ namespace Core.Services
                     Data = new DateTime(2024, 1, 26, 11, 0, 0),
                     OraInizio = new DateTime(2024, 1, 26, 11, 0, 0),
                     OraFine = new DateTime(2024, 1, 26, 13, 0, 0),
-                    Durata = 180,
+                    OreTotali = 180,
                     Dettagli = "Dettagli di permesso",
                 },
 
@@ -947,7 +947,7 @@ namespace Core.Services
                     Data = new DateTime(2024, 1, 29, 14, 0, 0),
                     OraInizio = new DateTime(2024, 1, 29, 14, 0, 0),
                     OraFine = new DateTime(2024, 1, 29, 17, 0, 0),
-                    Durata = 180,
+                    OreTotali = 180,
                     Dettagli = "Familiare",
                 },
 
@@ -958,7 +958,7 @@ namespace Core.Services
                     Data = new DateTime(2024, 2, 5, 14, 0, 0),
                     OraInizio = new DateTime(2024, 2, 5, 14, 0, 0),
                     OraFine = new DateTime(2024, 2, 5, 18, 0, 0),
-                    Durata = 240,
+                    OreTotali = 240,
                     Dettagli = "Malattia",
                 },
 
@@ -969,7 +969,7 @@ namespace Core.Services
                     Data = new DateTime(2024, 2, 6, 9, 0, 0),
                     OraInizio = new DateTime(2024, 2, 6, 9, 0, 0),
                     OraFine = new DateTime(2024, 2, 6, 13, 0, 0),
-                    Durata = 180,
+                    OreTotali = 180,
                     Dettagli = "Malattia",
                 },
 
@@ -980,7 +980,7 @@ namespace Core.Services
                     Data = new DateTime(2024, 2, 7, 9, 0, 0),
                     OraInizio = new DateTime(2024, 2, 7, 9, 0, 0),
                     OraFine = new DateTime(2024, 2, 7, 13, 0, 0),
-                    Durata = 180,
+                    OreTotali = 180,
                     Dettagli = "Familiare",
                 }
 

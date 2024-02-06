@@ -3,40 +3,37 @@
 @model UomoMacchina.Areas.NottiFuori.Data.NottiFuoriViewModel
 
 @* Index di NottiFuori *@
-
-
-<ul class="navbar-nav flex-wrap ms-auto">
-
-    <li>
-        <a class="Nuovo btn btn-light ms-2" href="@Url.Action(MVC.NottiFuori.NottiFuori.New())" title="Inserisci un nuovo elemento">
-            <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
-        </a>
-        
-    </li>
-</ul>
-
-
-<div class="container d-flex flex-col ">
-    <div class="col-4">
-        <h1>NottiFuori</h1>
+@{
+ 
+}
+<div class="row justify-content-start align-items-center">
+    <div class="col">
+        <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#tabellaNottiFuori" aria-expanded="false" aria-controls="tabellaNottiFuori"><h1>NottiFuori</h1></button>
+        <div class="col-1 align-self-center ">
+            <i class="fa-solid fa-square fa-2x bg-dark"></i>
+        </div>
     </div>
-    <div class="col-1 align-self-center ">
-        <i class="fa-solid fa-square fa-2x bg-dark"></i>
+    <div class="col">
+        <ul class="navbar-nav flex-wrap ms-auto">
+            <li>
+                <a class="Nuovo btn btn-light ms-2" v-on:click='navigateToEdit(null, "NottiFuori", dataNew)' title="Inserisci un nuovo elemento">
+                    <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
+                </a>
+            </li>
+        </ul>
     </div>
 </div>
 
-
-
-<div class="text-center">
+<div id="tabellaNottiFuori" class="row text-center collapse">
     <table class="table table-hover table-striped">
         <thead>
             <tr>
                 <th>
-                    Tipo Viaggio
-                </th>
-                <th>
                     Data
                 </th>
+                <th>
+                    Tipo Viaggio
+                </th>                
                 <th>
                     Commessa
                 </th>
@@ -54,10 +51,10 @@
             <tr v-for="notteFuori in model.nottiFuori.nottiFuori " v-on:click='navigateToEdit(notteFuori.id, "NottiFuori")'>
                 
                 <td class="text-nowrap">
-                    {{notteFuori.tipoViaggio}}
+                    {{notteFuori.data.split('T')[0]}}
                 </td>
                 <td class="text-nowrap">
-                    {{notteFuori.data}}
+                    {{notteFuori.tipoViaggio}}
                 </td>
                 <td class="text-nowrap">
                     {{notteFuori.commessa}}

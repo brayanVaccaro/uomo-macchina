@@ -36,7 +36,7 @@ namespace Core.Services.Shared
     // La classe RendicontazioneDTO prende in riferimento parametri dal file Rendicontazioni.cs
     public class RendicontazioneDTO
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         public int OreTotali { get; set; }
 

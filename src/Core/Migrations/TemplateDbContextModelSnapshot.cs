@@ -47,7 +47,7 @@ namespace Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("035463c9-2fe9-4302-9831-33e2f91fe86b"),
+                            Id = new Guid("c58ee64d-759a-4027-be0e-70f10f3d6864"),
                             DataFine = new DateTime(2024, 1, 7, 23, 59, 0, 0, DateTimeKind.Unspecified),
                             DataInizio = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Vacanza",
@@ -55,7 +55,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c4f1d856-e2d9-4179-89c4-69a0766143bf"),
+                            Id = new Guid("ba60bf9e-e974-4bdb-bf62-37495c967447"),
                             DataFine = new DateTime(2024, 1, 14, 23, 59, 0, 0, DateTimeKind.Unspecified),
                             DataInizio = new DateTime(2024, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Week-end",
@@ -63,7 +63,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ea707300-a3ea-4727-b84b-2632a765226e"),
+                            Id = new Guid("3da511ad-41de-4c7d-bc12-c212c9078c3c"),
                             DataFine = new DateTime(2024, 1, 21, 23, 59, 0, 0, DateTimeKind.Unspecified),
                             DataInizio = new DateTime(2024, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Ferie",
@@ -71,7 +71,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ed542edf-f36a-44ab-87f6-f835adf7fe85"),
+                            Id = new Guid("cebda61f-07f6-4bd5-b373-48c99d694aa1"),
                             DataFine = new DateTime(2024, 1, 26, 15, 0, 0, 0, DateTimeKind.Unspecified),
                             DataInizio = new DateTime(2024, 1, 26, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Dettagli di Ferie",
@@ -79,7 +79,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1cff505e-0e61-466b-b909-2aa7b2c52a59"),
+                            Id = new Guid("f5d34b3c-6464-4cf9-9282-06b8f4955ee3"),
                             DataFine = new DateTime(2024, 2, 4, 23, 59, 0, 0, DateTimeKind.Unspecified),
                             DataInizio = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Ferie",
@@ -112,7 +112,7 @@ namespace Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4fa4b603-cb2d-4abd-905b-85287d772a0b"),
+                            Id = new Guid("e8aec9db-23f6-4ac6-835f-59cec3a26862"),
                             Commessa = "Commessa di notte fuori",
                             Data = new DateTime(2024, 1, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Dettagli di notte fuori",
@@ -120,7 +120,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c761763c-3c86-4e72-94bd-ad9939f8a88a"),
+                            Id = new Guid("e826590d-467c-4ce8-b5d2-2ad369796c9a"),
                             Commessa = "Riparazione",
                             Data = new DateTime(2024, 1, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Data la distanza tra l'azienda e cliente necessita di essere vicini per velocizzare la riparazione per il giorno dopo",
@@ -140,14 +140,14 @@ namespace Core.Migrations
                     b.Property<string>("Dettagli")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Durata")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("OraFine")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("OraInizio")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("OreTotali")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -156,57 +156,57 @@ namespace Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3349d448-afeb-4910-a8d9-9056c672d7a6"),
+                            Id = new Guid("f50602e4-3871-4239-b635-a5955ea26f75"),
                             Data = new DateTime(2024, 1, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Medica",
-                            Durata = 120,
                             OraFine = new DateTime(2024, 1, 15, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 15, 14, 0, 0, 0, DateTimeKind.Unspecified)
+                            OraInizio = new DateTime(2024, 1, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            OreTotali = 120
                         },
                         new
                         {
-                            Id = new Guid("1083cffd-f10c-4694-8791-1189127e761b"),
+                            Id = new Guid("fed7594f-3738-4cb5-bc0f-a459aa37e58b"),
                             Data = new DateTime(2024, 1, 26, 11, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Dettagli di permesso",
-                            Durata = 180,
                             OraFine = new DateTime(2024, 1, 26, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 26, 11, 0, 0, 0, DateTimeKind.Unspecified)
+                            OraInizio = new DateTime(2024, 1, 26, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            OreTotali = 180
                         },
                         new
                         {
-                            Id = new Guid("f15cbbfe-22be-4e93-b89d-1226428d4922"),
+                            Id = new Guid("c855aa2a-26a4-4d70-8e7a-4a766b486aba"),
                             Data = new DateTime(2024, 1, 29, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Familiare",
-                            Durata = 180,
                             OraFine = new DateTime(2024, 1, 29, 17, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 29, 14, 0, 0, 0, DateTimeKind.Unspecified)
+                            OraInizio = new DateTime(2024, 1, 29, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            OreTotali = 180
                         },
                         new
                         {
-                            Id = new Guid("120c6305-502e-4c00-a191-b04e056db371"),
+                            Id = new Guid("5fc914a8-e7d9-471d-bb50-99dbc3b69bab"),
                             Data = new DateTime(2024, 2, 5, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Malattia",
-                            Durata = 240,
                             OraFine = new DateTime(2024, 2, 5, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 2, 5, 14, 0, 0, 0, DateTimeKind.Unspecified)
+                            OraInizio = new DateTime(2024, 2, 5, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            OreTotali = 240
                         },
                         new
                         {
-                            Id = new Guid("4998f3e3-b706-404a-8cb8-f8651fd6a23b"),
+                            Id = new Guid("1b812db9-c22f-4959-ad71-95bbdfe13d6d"),
                             Data = new DateTime(2024, 2, 6, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Malattia",
-                            Durata = 180,
                             OraFine = new DateTime(2024, 2, 6, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 2, 6, 9, 0, 0, 0, DateTimeKind.Unspecified)
+                            OraInizio = new DateTime(2024, 2, 6, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            OreTotali = 180
                         },
                         new
                         {
-                            Id = new Guid("27f4e6d2-867a-4dd9-9272-5b5f4ef25211"),
+                            Id = new Guid("ad585349-659f-4193-964c-7fb41c9f7ffd"),
                             Data = new DateTime(2024, 2, 7, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Familiare",
-                            Durata = 180,
                             OraFine = new DateTime(2024, 2, 7, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 2, 7, 9, 0, 0, 0, DateTimeKind.Unspecified)
+                            OraInizio = new DateTime(2024, 2, 7, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            OreTotali = 180
                         });
                 });
 
@@ -244,7 +244,7 @@ namespace Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("62fda361-35df-48d1-a101-596e732b094b"),
+                            Id = new Guid("ee9be0b6-cf5f-4f0a-875c-81b160d296f4"),
                             Commessa = "Sistemazione",
                             Data = new DateTime(2024, 1, 8, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Sistemato un problema del cliente",
@@ -255,7 +255,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9b86d36d-1c39-455a-aad7-1f55b8719aab"),
+                            Id = new Guid("1991f4fc-4a08-482d-b2f4-fa46c67250e6"),
                             Commessa = "Sistemazione",
                             Data = new DateTime(2024, 1, 8, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Sistemato un problema del cliente",
@@ -266,7 +266,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f6f13114-21aa-4333-a646-44d578ed4116"),
+                            Id = new Guid("822ae6e2-5bbf-47b6-b165-6aa432dc5e41"),
                             Commessa = "Lavoro",
                             Data = new DateTime(2024, 1, 9, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Lavoro per un progetto",
@@ -277,7 +277,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c5ebe7dc-5629-41c6-803a-772d40ff67ad"),
+                            Id = new Guid("918c0549-4f33-42a7-9e43-bc01200a2296"),
                             Commessa = "Lavoro",
                             Data = new DateTime(2024, 1, 9, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Lavoro per un progetto",
@@ -288,7 +288,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("de13d3bd-ed34-4593-ba4d-15a2ef212416"),
+                            Id = new Guid("e6080929-6b69-4e8f-9385-306a63de6e91"),
                             Commessa = "Lavoro",
                             Data = new DateTime(2024, 1, 10, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Lavoro per un progetto di gruppo",
@@ -299,7 +299,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b58b2163-86bd-407b-b863-6b2e4c97c988"),
+                            Id = new Guid("99e58bad-c654-4c0d-b5a5-7703c69bf98b"),
                             Commessa = "Lavoro",
                             Data = new DateTime(2024, 1, 10, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Lavoro per un progetto di gruppo",
@@ -310,7 +310,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("034bfb43-d9b9-4904-b947-17aa19955886"),
+                            Id = new Guid("66e679b9-c84b-4621-aada-461bc5931786"),
                             Commessa = "progetto",
                             Data = new DateTime(2024, 1, 11, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Elaborazione del progetto di gruppo",
@@ -321,7 +321,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("68989d6b-ddcd-4ac2-b341-efcdcd535abf"),
+                            Id = new Guid("6edb5652-ebc2-4f26-b7d4-80dc23ba3b04"),
                             Commessa = "progetto",
                             Data = new DateTime(2024, 1, 11, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Elaborazione del progetto di gruppo",
@@ -332,7 +332,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9282f878-81f8-4734-b3a3-84da8719ac85"),
+                            Id = new Guid("ef07bbe1-d7a2-437a-a6a4-253e3714e394"),
                             Commessa = "Lavoro",
                             Data = new DateTime(2024, 1, 12, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Lavoro",
@@ -343,7 +343,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bf824391-ff81-4185-b101-d7d8571fcb6f"),
+                            Id = new Guid("65fa6ad2-9b89-47d8-bce6-dab654bec07a"),
                             Commessa = "Lavoro",
                             Data = new DateTime(2024, 1, 12, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Lavoro",
@@ -354,7 +354,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c774480a-f7a1-48e1-9e75-455207e89e16"),
+                            Id = new Guid("7c2446a2-db04-4ae0-a082-ee3fa21b2817"),
                             Commessa = "Progetto",
                             Data = new DateTime(2024, 1, 15, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Pianificazione del progetto",
@@ -365,7 +365,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d5842dab-7975-4d46-8495-df23279e79c9"),
+                            Id = new Guid("89be85f1-df28-4e6f-81a4-55d1ce1b4e74"),
                             Commessa = "Progetto",
                             Data = new DateTime(2024, 1, 15, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Pianificazione del progetto",
@@ -376,7 +376,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a5f2d0cf-5ef3-4cef-8e5f-56c29a69b9f0"),
+                            Id = new Guid("ba04406d-38f0-47c8-89c1-c538da1a7816"),
                             Commessa = "Lavoro",
                             Data = new DateTime(2024, 1, 17, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Lavoro",
@@ -387,7 +387,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6aff4535-b290-427a-9b40-3b36c034f4c3"),
+                            Id = new Guid("872004bc-fd9e-44e2-a3d5-5b3a9e89d926"),
                             Commessa = "Lavoro",
                             Data = new DateTime(2024, 1, 17, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Lavoro",
@@ -398,7 +398,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("247ff325-479f-4d81-a826-8124e6fbd155"),
+                            Id = new Guid("c22fded0-c7f9-4cb0-a5ee-6fe529843eff"),
                             Commessa = "Lavoro",
                             Data = new DateTime(2024, 1, 17, 22, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Lavoro",
@@ -409,7 +409,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6b5b46e6-a48a-43b2-b0be-7adfbe083385"),
+                            Id = new Guid("eaf62043-d309-4575-bab2-d434cde2d21b"),
                             Commessa = "Commessa di rendicontazione",
                             Data = new DateTime(2024, 1, 26, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Dettagli di Rendicontazioni",
@@ -420,7 +420,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("549945c2-1e36-4884-b281-3a8459cd08bd"),
+                            Id = new Guid("c97faa20-ba64-4a05-8736-650c786461f5"),
                             Commessa = "Commessa di rendicontazione",
                             Data = new DateTime(2024, 1, 26, 17, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Dettagli di Rendicontazioni",
@@ -431,7 +431,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cd3816b4-45c7-42c2-8864-d5238c6f1c50"),
+                            Id = new Guid("099c45c2-a0f3-440f-af72-c0db91721199"),
                             Commessa = "Commessa di rendicontazione",
                             Data = new DateTime(2024, 1, 26, 18, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Dettagli di Rendicontazioni",
@@ -442,7 +442,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fa0c62fd-3a81-4bb2-a931-2ef684cf5db4"),
+                            Id = new Guid("71a64413-52af-4008-bf9d-afed4288a177"),
                             Commessa = "Lavoro",
                             Data = new DateTime(2024, 1, 29, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Lavoro",
@@ -453,7 +453,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2043a196-e0e1-44cb-af46-ab6617fdbc2b"),
+                            Id = new Guid("44aabf16-1106-44d6-85ff-e2efe15c1a6c"),
                             Commessa = "Progetto",
                             Data = new DateTime(2024, 1, 29, 19, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Lavoro del progetto straordinario",
@@ -464,7 +464,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("707eceef-d9ec-4d2c-a082-946a6a848d0e"),
+                            Id = new Guid("154d54eb-06cd-42ed-a54b-0495b4b08859"),
                             Commessa = "Aggiustamento",
                             Data = new DateTime(2024, 2, 5, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Aggiustamento ad un problema del cliente",
@@ -475,7 +475,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0cf695cb-1452-4c0d-897f-3530da0a8c5d"),
+                            Id = new Guid("affa3b81-ffc3-4e68-b379-4e06d69678ec"),
                             Commessa = "Progetto",
                             Data = new DateTime(2024, 2, 6, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Termine del progetto",
@@ -486,7 +486,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e8313311-2ded-4821-a7d3-b24f54da70b5"),
+                            Id = new Guid("14debad8-ec53-4bcd-8be4-2c15f8d8d538"),
                             Commessa = "Lavoro",
                             Data = new DateTime(2024, 2, 7, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Lavoro",
@@ -525,7 +525,7 @@ namespace Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("32c6a286-b822-4e54-b6f2-4fd5e90e9b82"),
+                            Id = new Guid("e92a3649-ec84-4d1c-a0a2-c9053d2db8f5"),
                             CartaAziendale = false,
                             Commessa = "Commessa di rimborso",
                             Data = new DateTime(2024, 1, 16, 22, 0, 0, 0, DateTimeKind.Unspecified),
@@ -534,7 +534,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c177bef6-cfe0-442f-9d04-41c8f7f8a105"),
+                            Id = new Guid("b5a65c24-ab43-44bc-a296-244b525b5d32"),
                             CartaAziendale = false,
                             Commessa = "Commessa di rimborso",
                             Data = new DateTime(2024, 1, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -543,7 +543,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e4729c5c-df86-4983-98cc-1a0dd9555640"),
+                            Id = new Guid("46909b40-6e92-42e8-b120-d1657f9e9c40"),
                             CartaAziendale = true,
                             Commessa = "Riparazione",
                             Data = new DateTime(2024, 1, 28, 19, 0, 0, 0, DateTimeKind.Unspecified),
@@ -583,7 +583,7 @@ namespace Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ef4e9192-c547-4ec4-bd2b-c8ad238edb60"),
+                            Id = new Guid("98986b72-f25c-43b7-af3f-bb41244195e2"),
                             AutoAziendale = false,
                             Chilometri = 200,
                             Commessa = "Aggiornamento",
@@ -593,7 +593,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7657b97b-52e5-4d8b-b55b-a2c98ae25aad"),
+                            Id = new Guid("c04c737a-2032-4680-ae6f-7072fe060085"),
                             AutoAziendale = false,
                             Chilometri = 200,
                             Commessa = "Commessa di Trasferte",
@@ -603,7 +603,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9b6a3cec-bc36-4fd8-9201-cf17523a38a0"),
+                            Id = new Guid("8b72b6dd-3ed4-4f6e-bd6d-fc1d45da791f"),
                             AutoAziendale = true,
                             Chilometri = 350,
                             Commessa = "Riparazione",
@@ -656,7 +656,7 @@ namespace Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("fbc4d833-dedb-46e0-97ec-0c7f8762126f"),
+                            Id = new Guid("98ba4c76-a205-45d5-965d-1e214d785d84"),
                             AllDay = false,
                             Background = false,
                             Class = "libero",
@@ -669,7 +669,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("30149fb0-e5cb-488f-843a-1e14e8e11eb8"),
+                            Id = new Guid("6ac20d92-6050-46b9-b62a-f845c8690f5e"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
@@ -682,7 +682,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c022be25-4a21-47dc-9494-edacdb10bdad"),
+                            Id = new Guid("fdc86433-6a79-461c-951a-d8f80e0d0e17"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
@@ -695,7 +695,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("dc941a37-eb4b-4435-8485-4476652dd10e"),
+                            Id = new Guid("c292fb4a-2102-478f-b98d-2b695d597335"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
@@ -708,7 +708,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("765929b8-b37f-450b-a1b1-895ae26b9ed3"),
+                            Id = new Guid("0e26aa2f-9162-4947-a7ba-f4ee9b634a24"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
@@ -721,7 +721,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("96a49e7d-92fa-4221-b9bb-f23ccbe5b366"),
+                            Id = new Guid("a35c1a6b-e7dc-4183-baf0-9951d1503007"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
@@ -734,7 +734,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4788e4b1-01ba-4445-bbd3-6f4e9589c756"),
+                            Id = new Guid("1bada44d-bc5a-4c0a-babd-be4336abd201"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
@@ -747,7 +747,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("81b4d0d2-8cbb-4ba4-bb1a-ef3aa7b94b3e"),
+                            Id = new Guid("3904c044-b8d1-407a-b408-ef4205a1117f"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
@@ -760,7 +760,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5b11ac79-e032-45aa-80cb-969ada2fad71"),
+                            Id = new Guid("7c738465-495d-4770-97ce-0023e5da9aa2"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
@@ -773,7 +773,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1cffbb60-452c-40ad-94da-ff8564cfbe05"),
+                            Id = new Guid("a3b660d1-461a-4b25-af8e-73592d0da99f"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
@@ -786,7 +786,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1abbf3a3-62f4-472d-bdab-636c8ba06553"),
+                            Id = new Guid("5ff5678b-9c07-4775-a8c9-28f12249faa3"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
@@ -799,7 +799,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("50efddd8-e3c5-4c3c-bb0d-df2a9d3a1c6c"),
+                            Id = new Guid("f4df6b14-3208-4b4b-ab01-1f7d80c50494"),
                             AllDay = false,
                             Background = false,
                             Class = "libero",
@@ -812,7 +812,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("10f70e12-5ae5-47d3-ba20-e09f6824df33"),
+                            Id = new Guid("6fcba647-9774-45d1-b9ea-c8d33c3e346a"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
@@ -825,7 +825,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8113fea2-ed4e-459c-bbe3-48b4358a3dea"),
+                            Id = new Guid("7f400b10-c82c-42be-91ba-057f91c7250d"),
                             AllDay = false,
                             Background = false,
                             Class = "permesso",
@@ -838,7 +838,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3b0bea7e-24f5-42ea-8f33-3489140cb143"),
+                            Id = new Guid("2d4e87c0-47fe-45c3-8ebd-90818506738f"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
@@ -851,7 +851,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("714927af-4103-4b2b-9117-b6fac960f3db"),
+                            Id = new Guid("13327f06-fc7a-4b01-b997-73be8d27b751"),
                             AllDay = false,
                             Background = false,
                             Class = "trasferta",
@@ -864,7 +864,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("00a1f0d7-706e-463f-8223-8f8dca3abdee"),
+                            Id = new Guid("8a84e9ce-dfca-4911-af3d-24b3c5671eed"),
                             AllDay = false,
                             Background = false,
                             Class = "trasferta",
@@ -877,7 +877,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8b0471f6-dd91-4dde-96d7-faa8abdda0e5"),
+                            Id = new Guid("4142060c-cb96-4797-a528-d5ada3648a22"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
@@ -890,7 +890,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bf8eb095-b7c5-4e25-950f-4b03c4fcca89"),
+                            Id = new Guid("5bca2818-3f30-4c96-9b38-cdcdd6eef3c1"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
@@ -903,7 +903,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("592850bb-6cff-486d-ae89-d74b4e6902fa"),
+                            Id = new Guid("4453240c-198c-404d-bbb3-aa272115e2cc"),
                             AllDay = false,
                             Background = false,
                             Class = "straordinario",
@@ -916,7 +916,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5d4732ff-4530-4b98-93d3-e309f4cb9436"),
+                            Id = new Guid("8e06062f-8ecb-460a-98e6-7018cc4b0f68"),
                             AllDay = false,
                             Background = false,
                             Class = "libero",
@@ -929,7 +929,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3f2eed58-1a35-49d9-871c-343c680e692b"),
+                            Id = new Guid("055263b8-2133-4e5b-b740-eea0e23becff"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
@@ -942,7 +942,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ac99fd17-c655-409d-9721-dcff48fef6cc"),
+                            Id = new Guid("3737ad68-5f67-4aaa-89e4-adbd072e59af"),
                             AllDay = false,
                             Background = false,
                             Class = "permesso",
@@ -955,7 +955,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("10257d78-d560-4701-9e9d-9ac707e70839"),
+                            Id = new Guid("a596ffaa-0eae-4aee-b178-b0b20e57d38e"),
                             AllDay = false,
                             Background = false,
                             Class = "libero",
@@ -968,7 +968,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e191a1e6-a72a-4155-a66f-49f18558f076"),
+                            Id = new Guid("bc87e827-241d-47bf-a02e-5b386a990d33"),
                             AllDay = false,
                             Background = false,
                             Class = "trasferta",
@@ -981,7 +981,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b27b71af-c694-459e-a53d-1360383c9b5e"),
+                            Id = new Guid("6b12f417-224f-4964-b704-2f5014c59297"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
@@ -994,7 +994,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("231a1d13-e539-4902-ab86-c80080a072ac"),
+                            Id = new Guid("692d6168-5603-4ed7-9a10-8cd252d4750e"),
                             AllDay = false,
                             Background = false,
                             Class = "straordinario",
@@ -1007,7 +1007,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5becb32b-accd-473d-8be7-201c4823a6b5"),
+                            Id = new Guid("1f04628f-a7cd-4407-abe9-c5fb429f0e18"),
                             AllDay = false,
                             Background = false,
                             Class = "trasferta",
@@ -1020,7 +1020,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f830fc03-c805-46d1-b234-ecd0af5f6154"),
+                            Id = new Guid("a95c5aa3-71ee-44a2-ac97-f3961ecf1727"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
@@ -1033,7 +1033,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9173f3a6-56a5-4636-9305-4e5af3dd97c7"),
+                            Id = new Guid("52183a19-2f8c-4d62-8028-ae307fbe1665"),
                             AllDay = false,
                             Background = false,
                             Class = "permesso",
@@ -1046,7 +1046,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("956dfb30-829a-435a-bba1-03d7dd68de3d"),
+                            Id = new Guid("d14ea151-bb36-481c-989a-ed73700b0213"),
                             AllDay = false,
                             Background = false,
                             Class = "straordinario",
@@ -1059,7 +1059,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4870820b-2740-49ab-88cc-dddda258fd96"),
+                            Id = new Guid("91341ec9-f97a-44aa-812d-693eb05a9dbe"),
                             AllDay = true,
                             Background = true,
                             Class = "libero",
@@ -1072,7 +1072,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d978dab1-f896-4b3d-a562-0a77708b6259"),
+                            Id = new Guid("e919393d-40a1-4ce1-b9b4-e336fcc6284d"),
                             AllDay = true,
                             Background = true,
                             Class = "rendicontazione",
@@ -1085,7 +1085,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("332b3702-b23c-4d1c-b7c4-fee6b82a22b9"),
+                            Id = new Guid("1fd64cb4-a2d8-4b05-9652-33e2a35af577"),
                             AllDay = false,
                             Background = false,
                             Class = "permesso",
@@ -1098,7 +1098,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bec85dbc-38de-4e1d-8f18-7b6dc2bff6b8"),
+                            Id = new Guid("d8ff3076-cfb9-4d7b-a90e-c4ffcaf8fdf2"),
                             AllDay = false,
                             Background = false,
                             Class = "permesso",
@@ -1111,7 +1111,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("110996c4-e104-4b62-af8c-1bc94f2338f5"),
+                            Id = new Guid("df94b160-4e26-4eba-b039-ee2df5e851a9"),
                             AllDay = true,
                             Background = true,
                             Class = "rendicontazione",
@@ -1124,7 +1124,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c825a0c9-08b6-4feb-8355-85aa6e7cc870"),
+                            Id = new Guid("0bd563b3-d951-4437-8e5e-82f8858314a9"),
                             AllDay = false,
                             Background = false,
                             Class = "permesso",
@@ -1137,7 +1137,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d24db327-0080-4524-929a-d47fb13230c9"),
+                            Id = new Guid("506bcd84-c88d-41ef-8bed-efab58a1b93b"),
                             AllDay = true,
                             Background = true,
                             Class = "rendicontazione",

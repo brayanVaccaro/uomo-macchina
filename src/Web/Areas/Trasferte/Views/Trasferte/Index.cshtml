@@ -3,36 +3,31 @@
 @model UomoMacchina.Areas.Trasferte.Data.TrasferteViewModel
 
 @* Index di Trasferte *@
-
-
-<ul class="navbar-nav flex-wrap ms-auto">
-
-    <li>
-        <a class="Nuovo btn btn-light ms-2" href="@Url.Action(MVC.Trasferte.Trasferte.New())" title="Inserisci un nuovo elemento">
-            <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
-        </a>
-        
-    </li>
-</ul>
-
-
-<div class="container d-flex flex-col ">
-    <div class="col-4">
-        <h1>Trasferte</h1>
+@{
+ 
+}
+<div class="row justify-content-start align-items-center">
+    <div class="col">
+        <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#tabellaTrasferte" aria-expanded="false" aria-controls="tabellaTrasferte"><h1>Trasferte</h1></button>
+        <div class="col-1 align-self-center ">
+            <i class="fa-solid fa-square fa-2x " style="color: purple;"></i>
+        </div>
     </div>
-    <div class="col-1 align-self-center ">
-        <i class="fa-solid fa-square fa-2x " style="color: purple;" ></i>
+    <div class="col">
+        <ul class="navbar-nav flex-wrap ms-auto">
+            <li>
+                <a class="Nuovo btn btn-light ms-2" v-on:click='navigateToEdit(null, "Trasferte", dataNew)' title="Inserisci un nuovo elemento">
+                    <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
+                </a>
+            </li>
+        </ul>
     </div>
 </div>
 
-
-<div class="text-center">
+<div id="tabellaTrasferte" class="row text-center collapse">
     <table class="table table-hover table-striped">
         <thead>
             <tr>
-                <th>
-                    Chilometri (Km)
-                </th>
                 <th>
                     Data Inizio
                 </th>
@@ -40,10 +35,13 @@
                     Data Fine
                 </th>
                 <th>
-                    Commessa
+                    Chilometri (Km)
                 </th>
                 <th>
                     Auto Aziendale
+                </th>
+                <th>
+                    Commessa
                 </th>
                 <th>
                     Dettagli
@@ -57,20 +55,22 @@
                 </td>
             </tr>
             <tr v-for="trasferta in model.trasferte.trasferte" v-on:click='navigateToEdit(trasferta.id, "Trasferte")'>
+                
+                <td class="text-nowrap">
+                    {{trasferta.dataInizio.split('T')[0]}}
+                </td>
+                <td class="text-nowrap">
+                    {{trasferta.dataFine.split('T')[0]}}
+                </td>
                 <td class="text-nowrap">
                     {{trasferta.chilometri}}
                 </td>
                 <td class="text-nowrap">
-                    {{trasferta.dataInizio}}
-                </td>
-                <td class="text-nowrap">
-                    {{trasferta.dataFine}}
-                </td>
-                <td class="text-nowrap">
-                    {{trasferta.commessa}}
+                    {{trasferta.autoAziendale}}
                 </td>
                 <td class="text-nowrap">
                     {{trasferta.autoAziendale ? 'Si' : 'No'}}
+                    {{trasferta.commessa}}
                 </td>
                 <td class="text-nowrap">
                     {{trasferta.dettagli}}

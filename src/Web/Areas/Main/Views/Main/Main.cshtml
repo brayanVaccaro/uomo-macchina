@@ -1,52 +1,55 @@
 ﻿@inject IHtmlLocalizer<UomoMacchina.Areas.Main.Data.MainViewModel> ModelLocalizer
 @model UomoMacchina.Areas.Main.Data.MainViewModel
 
+
 @*
     1. FUNZIONA --> Inserire il campo Straordinario di tipo bool nella Rendicontazione
     2. FUNZIONA --> Al click sulla riga devo poter editare l'elemento cliccato
     3. Gestire la creazione di un elemento (aggiungerlo nella tabella specifica dell'elemento scelto) e del relativo evento (aggiungere l'evento alla tabella Eventi):
         Clicco un bottone, mi esce il modale (Edit.cshtml) per inserire i dati.
         La prima scelta nel modale sarà quella di selezionare cosa voglio aggiungere e in base a questa scelta mostrare o nascondere elementi del form
-
+    
     4. FUNZIONA (PER COMMESSA, PER DATA, PER DETTAGLI) --> Ricerca di un dato --> implementazione da zero
     5. Colori da cambiare
     6. Sidebar implementare il cambio del mese al click sulla freccia, migliorare il css. Al clik su una settimana ti deve portare nel vue-cal alla settimana cliccata
-
     7.pulizia del codice
-    8. modificare la section ereditata dal layout globale _Layout.cshtml
-    9. migliorare _SingleDay
-    10. implementare un modo per convertire da un elemento di un ViewModel ad un EventoDTO
+8. modificare la section ereditata dal layout globale _Layout.cshtml
+9. migliorare _SingleDay
+10. implementare un modo per convertire da un elemento di un ViewModel ad un EventoDTO
+    *@
+    @{
+// Lista vuota per memorizzare le informazioni delle proprietà che corrispondono al criterio
+var viewModelProperties = new List<string>();
+// Tutte le proprietà del modello
+var properties = Model.GetType().GetProperties();
+    foreach (var prop in properties)
+    {
+        // Il tipo della proprietà contiene "ViewModel"?
+        if (prop.PropertyType.ToString().Contains("ViewModel") && !prop.PropertyType.ToString().Contains("Main"))
+        {
+            // Ottieni il valore della proprietà
+            var value = prop.GetValue(Model);
+    
 
 
-*@
-
-@{
-    ViewData["Title"] = "Home";
-    var mainModel = @Html.Raw(Model.ToJson());
-    var feriaModel = @Html.Raw(Model.Ferie.ToJson());
-    var eventModel = Html.Raw(Model.Eventi.ToJson());
-    // Console.WriteLine(typeof eventModel);
+            //Aggiungo alla lista
+            viewModelProperties.Add($"{prop.Name}: {value?.ToString() ?? "null"}");
+        }
+    }
 }
 @section pageTitle {
-   @*  <nav class="navbar navbar-expand navbar-light flex-wrap onit-page-title">
-        <a class="navbar-brand">
-            @ViewData["Title"]
-        </a>
 
-    </nav> *@
 }
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-2">
             @await Html.PartialAsync("~/Views/Shared/_SideBar.cshtml", @Model.Anno)
-            @* <partial name="@MVC.Shared.Views._SideBar" model="Model" /> *@
+
         </div>
         @* Calendario Settimanale *@
         <div :class="customClass">
-            @* <h1 v-if="activeView == 'week'">ho scelto di visualizzare la setttimana </h1> *@
-            @* <h1 v-if="activeView == 'day'">ho scelto di visualizzare il giorno {{selectedDate}}</h1> *@
-            <vue-cal 
+            <vue-cal ref="vuecal"
                      v-model:active-view="activeView"
                      v-model:selected-date="selectedDate"
                      locale="it"
@@ -54,14 +57,63 @@
                      :disable-views="['years', 'year', 'month', '', '']"
                      :events="event"
                      :time-from="8 * 60"
-                     :time-to="24 * 60" />
+                     :time-to="24 * 60"
+                     :cell-click-hold="false"
+                     :drag-to-create-event="false" />
         </div>
+
 
         <div v-if="showSingleDay" class="col-8">
             <partial name="@MVC.Main.Main.Views._SingleDay" model="Model" />
         </div>
+
+        <div v-if="showEditForm" class="col-8">
+            <partial name="@MVC.Main.Main.Views.EditForm" />
+        </div>
     </div>
 </div>
+
+@section styles {
+    <link href="~/css/bundle-vue-cal.css" asp-append-version="true" rel="stylesheet" />
+    <link href="~/css/main.css" asp-append-version="true" rel="stylesheet" />
+    <link href="~/css/richieste.css" rel="stylesheet" />
+    <link href="~/css/sidebar.css" rel="stylesheet" />
+}
+
+@section scripts {
+    <script src="~/js/site.js" type="module" asp-append-version="true"></script>
+    
+    <script src="~/js/main.js" type="module" asp-append-version="true"></script>
+
+
+    <script type="text/javascript">
+        var mainModel = @Html.Raw(Model.ToJson());
+        var filteredProperties = @Html.Raw(Json.Serialize(viewModelProperties));
+        console.log(filteredProperties)
+        console.log(mainModel)
+    </script>
+
+}
+
+
+
+
+@*
+    1. Inserire il campo Straordinario di tipo bool nella Rendicontazione
+    2. Al clikc sulla riga devo poter editare l'elemento cliccato
+    3. Gestire la creazione di un elemento (aggiungerlo nella tabella specifica dell'elemento scelto) e del relativo evento (aggiungere l'evento alla tabella Eventi):
+        Clicco un bottone, mi esce il modale (Edit.cshtml) per inserire i dati.
+        La prima scelta nel modale sarà quella di selezionare cosa voglio aggiungere e in base a questa scelta mostrare o nascondere elementi del form
+
+    4. Ricerca di un dato --> implementazione da zero
+    5. Colori da cambiare
+    6. Sidebar implementare il cambio del mese al click sulla freccia, miglirare il css. Al clik su una settimana ti deve portare nel vue-cal alla settimana cliccata
+
+    7.pulizia del codice
+    8. modificare la section ereditata dal layout globale _Layout.cshtml
+    9. migliorare _SingleDay
+
+*@
 
 @*
 VISUALIZZAZIONE
@@ -83,26 +135,3 @@ al click su Modifica: si apre il form con i campi preimpostati sulla base della 
 
 al click su Elimina: si elimina ciò che si è scelto di eliminare
 *@
-
-@section styles {
-    <link href="~/css/bundle-vue-cal.css" asp-append-version="true" rel="stylesheet" />
-    <link href="~/css/main.css" asp-append-version="true" rel="stylesheet" />
-    <link href="~/css/richieste.css" rel="stylesheet" />
-    <link href="~/css/sidebar.css" rel="stylesheet" />
-
-    @* <link href="~/css/sidebar.css" rel="stylesheet" /> *@
-}
-
-@section scripts {
-    <script src="~/js/main.js" type="module" asp-append-version="true"></script>
-    <script src="~/js/site.js" type="module" asp-append-version="true"></script>
-    <script>
-        // var Model
-        var mainModel = @Html.Raw(Model.ToJson())
-        const eventModel = @Html.Raw(Model.Eventi.ToJson());
-
-        // var ferieEditURL = @Url.Action(MVC.Ferie.Ferie.Edit())
-
-        // var eventiGlobal = @Html.Raw(Model.Eventi.ToJson()); //salvo il model in una variabile che posso usare nel main.ts
-    </script>
-}

@@ -102,7 +102,7 @@ namespace Core.Infrastructure
         //            Data = DateTime.Now,
         //            OraInizio = DateTime.Now,
         //            OraFine = DateTime.Now,
-        //            Durata = 120,
+        //            OreTotali = 120,
         //            Dettagli = "Dettagli di permesso",
         //        }
         //        );
@@ -119,7 +119,7 @@ namespace Core.Infrastructure
         //            Id = Guid.NewGuid(),                    
         //            DataInizio = DateTime.Now,
         //            DataFine = DateTime.Now,
-        //            Durata = 60,
+        //            OreTotali = 60,
         //            Dettagli = "Dettagli di Ferie",
         //        }
         //        );

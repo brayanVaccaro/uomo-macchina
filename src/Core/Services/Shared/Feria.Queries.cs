@@ -32,7 +32,7 @@ namespace Core.Services.Shared
     // La classe FeriaDTO prende in riferimento parametri dal file Permessi.cs
     public class FeriaDTO
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         public DateTime DataInizio { get; set; }
 

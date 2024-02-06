@@ -3,45 +3,42 @@
 @model UomoMacchina.Areas.Rimborsi.Data.RimborsiViewModel
 
 @* Index di Rimborsi *@
-
-
-<ul class="navbar-nav flex-wrap ms-auto">
-
-    <li>
-        <a class="Nuovo btn btn-light ms-2" href="@Url.Action(MVC.Rimborsi.Rimborsi.New())" title="Inserisci un nuovo elemento">
-            <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
-        </a>
-       
-    </li>
-</ul> 
-
-
-<div class="container d-flex flex-col ">
-    <div class="col-4">
-        <h1>Rimborsi</h1>
+@{
+ 
+}
+<div class="row justify-content-start align-items-center">
+    <div class="col">
+        <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#tabellaRimborsi" aria-expanded="false" aria-controls="tabellaRimborsi"><h1>Rimborsi</h1></button>
+        <div class="col-1 align-self-center ">
+            <i class="fa-solid fa-square fa-2x " style="color: yellow;"></i>
+        </div>
     </div>
-    <div class="col-1 align-self-center ">
-        <i class="fa-solid fa-square fa-2x " style="color: yellow;"></i>
+    <div class="col">
+        <ul class="navbar-nav flex-wrap ms-auto">
+            <li>
+                <a class="Nuovo btn btn-light ms-2" v-on:click='navigateToEdit(null, "Rimborsi", dataNew)' title="Inserisci un nuovo elemento">
+                    <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
+                </a>
+            </li>
+        </ul>
     </div>
 </div>
 
-
-
-<div class="text-center">
+<div id="tabellaRimborsi" class="row text-center collapse">
     <table class="table table-hover table-striped">
         <thead>
             <tr>
                 <th>
-                    Importo (€)
-                </th>
-                <th>
                     Data
                 </th>
                 <th>
-                    Commessa
+                    Importo (€)
                 </th>
                 <th>
                     Carta Aziendale
+                </th>
+                <th>
+                    Commessa
                 </th>
                 <th>
                     Dettagli
@@ -57,10 +54,13 @@
             <tr v-for="rimborso in model.rimborsi.rimborsi" v-on:click='navigateToEdit(rimborso.id, "Rimborsi")'>
                 
                 <td class="text-nowrap">
+                    {{rimborso.data.split('T')[0]}}
+                </td>
+                <td class="text-nowrap">
                     {{rimborso.importo}}
                 </td>
                 <td class="text-nowrap">
-                    {{rimborso.data}}
+                    {{rimborso.cartaAziendale}}
                 </td>
                 <td class="text-nowrap">
                     {{rimborso.commessa}}

@@ -3,30 +3,28 @@
 @model UomoMacchina.Areas.Permessi.Data.PermessiViewModel
 
 @* Index di Permessi *@
-
-
-<ul class="navbar-nav flex-wrap ms-auto">
-
-    <li>
-        <a class="Nuovo btn btn-light ms-2" href="@Url.Action(MVC.Permessi.Permessi.New())" title="Inserisci un nuovo elemento">
-            <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
-        </a>
-        
-    </li>
-</ul>
-
-
-<div class="container d-flex flex-col ">
-    <div class="col-4">
-        <h1>Permessi</h1>
+@{
+ 
+}
+<div class="row justify-content-start align-items-center">
+    <div class="col">
+        <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#tabellaPermessi" aria-expanded="false" aria-controls="tabellaPermessi"><h1>Permessi</h1></button>
+        <div class="col-1 align-self-center ">
+            <i class="fa-solid fa-square fa-2x" style="color: orange;"></i>
+        </div>
     </div>
-    <div class="col-1 align-self-center ">
-        <i class="fa-solid fa-square fa-2x" style="color: orange;" ></i>
+    <div class="col">
+        <ul class="navbar-nav flex-wrap ms-auto">
+            <li>
+                <a class="Nuovo btn btn-light ms-2" v-on:click='navigateToEdit(null, "Permessi", dataNew)' title="Inserisci un nuovo elemento">
+                    <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
+                </a>
+            </li>
+        </ul>
     </div>
 </div>
 
-
-<div class="text-center">
+<div id="tabellaPermessi" class="row text-center collapse">
     <table class="table table-hover table-striped">
         <thead>
             <tr>
@@ -55,16 +53,16 @@
             </tr>
             <tr v-for="permesso in model.permessi.permessi" v-on:click='navigateToEdit(permesso.id, "Permessi")'>
                 <td class="text-nowrap">
-                    {{permesso.data}}
+                    {{permesso.data.split('T')[0]}}
                 </td>
                 <td class="text-nowrap">
-                    {{permesso.oraInizio}}
+                    {{permesso.oraInizio.split('T')[1]}}
                 </td>
                 <td class="text-nowrap">
-                    {{permesso.oraFine}}
+                    {{permesso.oraFine.split('T')[1]}}
                 </td>
                 <td class="text-nowrap">
-                    {{permesso.durata}}
+                    {{permesso.oreTotali}}
                 </td>
                 <td class="text-nowrap">
                     {{permesso.dettagli}}

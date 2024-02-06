@@ -35,13 +35,12 @@
                     {
                         <li class="nav-item dropdown col">
 
-                            @if (settimana.Giorni.Contains(today))
+                            @if (settimana.Giorni.Contains(today.Date))
                             {
                                 @* nome della settimana *@
                                 <a class="nav-link show" v-on:click="selezionaSettimana('@settimana.Giorni.FirstOrDefault().ToString("yyyy-MM-dd")')" role="button" data-bs-toggle="dropdown" aria-expanded="true">
                                     @settimana.Nome
                                 </a>
-
                                 @* ciclo per generare i giorni delle settimane *@
                                 <ul class="dropdown-menu row show" data-bs-popper="static">
                                     @foreach (var giorno in settimana.Giorni)

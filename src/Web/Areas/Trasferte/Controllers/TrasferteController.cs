@@ -56,7 +56,7 @@ namespace UomoMacchina.Areas.Trasferte.Controllers
 
         //secondo metodo che viene chiamato, dopo New
         [HttpGet]
-        public virtual async Task<IActionResult> Edit(Guid? id)
+        public virtual async Task<IActionResult> Edit(Guid? id, string data)
         {
             var model = new TrasfertaViewModel();
             if (id.HasValue)
@@ -65,19 +65,19 @@ namespace UomoMacchina.Areas.Trasferte.Controllers
                 {
                     Id = id.Value,
                 }));
-                //qua il controllo
-                if (returnToIndex)
-                {
-                    var indexModel = new TrasferteViewModel();
-                    returnToIndex = false;
-                    return RedirectToAction(Actions.Index(indexModel));
-                }
-                return View(model);
+                
+                return Ok(model);
 
             }
             else
             {
-                return View(model);
+                model.SetTrasferta(new TrasfertaDTO
+                {
+                    Id = null,
+                    DataInizio = DateTime.Parse(data),
+                    
+                });
+                return Ok(model);
             }
 
         }
@@ -85,7 +85,7 @@ namespace UomoMacchina.Areas.Trasferte.Controllers
 
         // Metodo che mi mostra il pop-up di conferma della compilazione richiesta
         [HttpPost]
-        public virtual async Task<IActionResult> Edit(TrasfertaViewModel model)
+        public virtual async Task<IActionResult> Edit([FromBody] TrasfertaViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace UomoMacchina.Areas.Trasferte.Controllers
 
                     Alerts.AddSuccess(this, "Trasferte effetuata con successo");
 
-                    returnToIndex = true;
+                    return RedirectToAction("Main", "Main", new { area = "Main" });
 
                 }
                 catch (Exception ex)
@@ -110,7 +110,7 @@ namespace UomoMacchina.Areas.Trasferte.Controllers
                 Alerts.AddError(this, "Errore nella compilazione trasferta");
             }
 
-            return RedirectToAction(Actions.Edit(model.Id));
+            return RedirectToAction(Actions.Edit(model.Id,""));
         }
 
 

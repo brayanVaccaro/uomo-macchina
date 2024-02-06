@@ -15,7 +15,7 @@
             <!-- Filtro Commessa -->
             <div class="d-flex">
                 <input type="text" class="" v-model="filterCommessa" />
-                <button class="btn btn-primary" type="button" v-on:click="setCommessa(filterCommessa, selectedDate)">
+                <button class="btn btn-primary" type="button" v-on:click="setCommessa(filterCommessa, dataNew)">
                     Cerca
                 </button>
 
@@ -32,7 +32,7 @@
             <!-- Filtro Dettagli -->
             <div class="d-flex">
                 <input type="text" class="" v-model="filterDettagli" />
-                <button class="btn btn-primary" type="button" v-on:click="setDettagli(filterDettagli, selectedDate)">
+                <button class="btn btn-primary" type="button" v-on:click="setDettagli(filterDettagli, dataNew)">
                     Cerca
                 </button>
                 
@@ -44,7 +44,7 @@
         <div class="col">
 
             <!-- Annulla la ricerca resettando la pagina -->
-            <button class="btn btn-link" type="button" title="Annulla tutti i parametri della ricerca" v-on:click="selezionaGiorno(selectedDate)">
+            <button class="btn btn-link" type="button" title="Annulla tutti i parametri della ricerca" v-on:click="selezionaGiorno(dataNew)">
                 Azzera ricerca
             </button>
 
@@ -65,23 +65,23 @@
 
 
 <div class="col-auto">
-    <div id="rendicontazioni" class="">
+    <div id="rendicontazioni" class="row">
         <partial name="@MVC.Rendicontazioni.Rendicontazioni.Views.Index" model="Model.Rendicontazioni" />
     </div>
-    <div id="ferie" class="">
+    <div id="ferie" class="row">
         <partial name="@MVC.Ferie.Ferie.Views.Index" model="@Model.Ferie" />
     </div>
-    <div id="permessi" class="">
+    <div id="permessi" class="row">
         <partial name="@MVC.Permessi.Permessi.Views.Index" model="Model.Permessi" />
     </div>
-    <div id="nottiFuori" class="">
+    <div id="nottiFuori" class="row">
         <partial name="@MVC.NottiFuori.NottiFuori.Views.Index" model="Model.NottiFuori" />
     </div>
-    <div id="trasferte" class="">
+    <div id="trasferte" class="row">
         <partial name="@MVC.Trasferte.Trasferte.Views.Index" model="Model.Trasferte" />
     </div>
 
-    <div id="rimborsi" class="">
+    <div id="rimborsi" class="row">
         <partial name="@MVC.Rimborsi.Rimborsi.Views.Index" model="Model.Rimborsi" />
     </div>
 </div>
