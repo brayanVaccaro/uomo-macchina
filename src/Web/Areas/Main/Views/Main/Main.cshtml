@@ -51,7 +51,7 @@
             <partial name="@MVC.Main.Main.Views._SingleDay" model="Model" />
         </div>
 
-        <div v-if="showEventCreationDialog" class="col-8">
+        <div v-if="showEditForm" class="col-8">
             <partial name="@MVC.Main.Main.Views.EditForm" />
         </div>
     </div>
@@ -66,8 +66,7 @@
 
 @section scripts {
     <script src="~/js/site.js" type="module" asp-append-version="true"></script>
-    <script type="module" src="~/js/EditForm.js"></script>
-
+    
     <script src="~/js/main.js" type="module" asp-append-version="true"></script>
 
 

@@ -36,6 +36,7 @@ const app = Vue.createApp({
                 'cartaAziendale': false
             },
             toModifykeys: null, //oggetto che contiene solo le chiavi dell'oggetto da modificare
+            toModifyName: "", //nome dell'oggetto da modificare
             //parametri 'interni'
             prova: "",
             dataNew: "",
@@ -56,7 +57,6 @@ const app = Vue.createApp({
             oraInizio: 0,
             oraFine: 0,
             ore: Array.from({ length: 24 }, (_, i) => i), // Array di 24 ore
-            dataEvento: null,
         };
     },
     mounted() {
@@ -140,26 +140,38 @@ const app = Vue.createApp({
             }
             else if (this.isDate(value)) {
                 //yyy-MM-dd
-                const date = new Date(value);
-                const year = date.getFullYear();
-                // getMonth() restituisce un valore da 0 (gennaio) a 11 (dicembre), quindi aggiungi 1 per ottenere il mese corretto
-                const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Aggiungi uno zero iniziale se necessario
-                const day = date.getDate().toString().padStart(2, '0'); // Aggiungi uno zero iniziale se necessario
-                const formattedDate = `${year}-${month}-${day}`;
-                this.toModify[key] = formattedDate;
-                //return formattedDate; // Restituisce la data formattata
+                this.toModify[key] = this.creaDateTime(value);
+                if (key == 'data' || key == 'dataInizio') {
+                    this.toModify[key] = this.dataNew;
+                }
                 return 'date';
             }
             else if (value === null || typeof value === 'string') {
-                return 'text';
+                return 'string';
             }
         },
         //metodo per comprendere se il valore può essere un valore valido di data
         isDate(value) {
             return !isNaN(Date.parse(value));
         },
+        inserisciOra() {
+            let dataEvento = this.dataNew; //mi arriva nel formato yyy-MM-dd
+            this.toModify['oraInizio'] = this.creaDateTime(dataEvento, this.oraInizio);
+            this.toModify['oraFine'] = this.creaDateTime(dataEvento, this.oraFine);
+        },
+        creaDateTime(value, hours = 0, minutes = 0) {
+            const date = new Date(value);
+            date.setHours(hours, minutes, 0, 0); // Imposta ore e minuti
+            // Formatta la data come 'yyyy-MM-ddTHH:mm:ss'
+            const formattedDate = date.toISOString().replace('Z', '');
+            // Formatta la data come 'yyyy-MM-dd HH:mm'
+            //const formattedDate = date.toISOString().slice(0, 10) + ' ' +
+            //date.toTimeString().slice(0, 5);
+            return formattedDate;
+        },
         //metodo che gestisce la logica per raggiungere il form (in creazione e in modifica)
         async navigateToEdit(id, nome, data) {
+            this.toModifyName = nome;
             const url = `/${nome}/${nome}/Edit?id=${id}&data=${data}`;
             await fetch(url, {
                 method: "GET",
@@ -174,6 +186,7 @@ const app = Vue.createApp({
                     this.inputToDisplay[key] = true;
                     this.inputType[key] = this.getInputType(this.toModify[key], key);
                 });
+                console.log("app =", app);
                 this.showSingleDay = false;
                 this.showEditForm = true;
             })
@@ -182,10 +195,43 @@ const app = Vue.createApp({
                 throw new Error(`Network response was not ok, error: ${error}`);
             });
         },
-        creaEvento() {
-            this.showSingleDay = false;
-            this.showEventCreationDialog = true;
+        async create() {
+            const toModifyCapitalized = this.transformKeysToCapitalize(this.toModify);
+            const url = `/${this.toModifyName}/${this.toModifyName}/Edit`;
+            await fetch(url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(toModifyCapitalized),
+            });
+            this.showEditForm = false;
+            this.showSingleDay = true;
+            this.resetInputToDisplay();
+            this.setDataByDate(this.dataNew);
         },
+        resetInputToDisplay() {
+            this.inputToDisplay = {
+                'data': false,
+                'dataInizio': false,
+                'dataFine': false,
+                'durata': false,
+                'oreTotali': false,
+                'oraInizio': false,
+                'oraFine': false,
+                'commessa': false,
+                'dettagli': false,
+                'tipoViaggio': false,
+                'chilometri': false,
+                'autoAziendale': false,
+                'importo': false,
+                'cartaAziendale': false
+            };
+        },
+        //creaEvento() {
+        //    this.showSingleDay = false;
+        //    this.showEventCreationDialog = true
+        //},
         //    this.$refs.vuecal.createEvent(
         //        {
         //            startDate: feria.DataInizio.ToString("d"),
@@ -202,32 +248,20 @@ const app = Vue.createApp({
         //        }
         //    )
         //},
-        onEventCreate(event, deleteEventFunction) {
-            this.selectedEvent = event;
-            this.showEventCreationDialog = true;
-            this.deleteEventFunction = deleteEventFunction;
-            return event;
-        },
-        cancelEventCreation() {
-            this.closeCreationDialog();
-            this.deleteEventFunction();
-        },
-        closeCreationDialog() {
-            this.showEventCreationDialog = false;
-            this.selectedEvent = {};
-        },
-        inserisciOra() {
-            this.toModify['oraInizio'] = this.creaDateTime(this.oraInizio);
-            this.toModify['oraFine'] = this.creaDateTime(this.oraFine);
-        },
-        //
-        creaDateTime(ora) {
-            this.dataEvento = new Date(this.dataNew);
-            let dateTime = this.dataEvento; // Crea una copia della data di base
-            dateTime.setHours(ora, 0, 0); // Imposta l'ora e azzera minuti e secondi
-            //console.log("dateTime = ", dateTime)
-            return dateTime;
-        },
+        //onEventCreate(event, deleteEventFunction) {
+        //    this.selectedEvent = event
+        //    this.showEventCreationDialog = true
+        //    this.deleteEventFunction = deleteEventFunction
+        //    return event
+        //},
+        //cancelEventCreation() {
+        //    this.closeCreationDialog()
+        //    this.deleteEventFunction()
+        //},
+        //closeCreationDialog() {
+        //    this.showEventCreationDialog = false
+        //    this.selectedEvent = {}
+        //},
         capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         },
@@ -238,17 +272,6 @@ const app = Vue.createApp({
                 capitalizedObject[capitalizedKey] = object[key];
             });
             return capitalizedObject;
-        },
-        async modify() {
-            const toModifyCapitalized = this.transformKeysToCapitalize(this.toModify);
-            const url = `/Rendicontazioni/Rendicontazioni/Edit`;
-            await fetch(url, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(toModifyCapitalized),
-            });
         },
     },
     computed: {

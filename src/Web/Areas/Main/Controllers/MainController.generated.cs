@@ -132,10 +132,12 @@ namespace UomoMacchina.Areas.Main
             public _ViewNamesClass ViewNames => s_ViewNames;
             public class _ViewNamesClass
             {
+                public readonly string EditForm = "EditForm";
                 public readonly string Main = "Main";
                 public readonly string _SingleDay = "_SingleDay";
             }
 
+            public readonly string EditForm = "~/Areas/Main/Views/Main/EditForm.cshtml";
             public readonly string Main = "~/Areas/Main/Views/Main/Main.cshtml";
             public readonly string _SingleDay = "~/Areas/Main/Views/Main/_SingleDay.cshtml";
         }

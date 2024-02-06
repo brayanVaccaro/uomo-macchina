@@ -1,0 +1,94 @@
+﻿<h1>EDIT FORM</h1>
+
+
+<h1>{{this.toModifyName}}</h1>
+<div>
+
+    <form>
+        @* DATA *@
+        <div v-if="inputToDisplay['data']">
+            <label for="data">Data:</label>
+            <input type="date" id="data" v-model="toModify['data']" name="data">
+        </div>
+        @* Data Inizio *@
+        <div v-if="inputToDisplay['dataInizio']">
+            <label for="dataInizio">Data Inizio:</label>
+            <input type="date" id="dataInizio" v-model="toModify['dataInizio']" name="dataInizio">
+        </div>
+        @* Data Fine *@
+        <div v-if="inputToDisplay['dataFine']">
+            <label for="dataFine">Data Fine:</label>
+            <input type="date" id="dataFine" v-model="toModify['dataFine']" name="dataFine">
+        </div>
+        @* Durata *@
+        <div v-if="inputToDisplay['durata']">
+            <label for="durata">Durata:</label>
+            <input type="number" id="durata" v-model="toModify['durata']" name="durata">
+        </div>
+        @* Ora Inizio *@
+        <div v-if="inputToDisplay['oraInizio']">
+            <label for="oraInizio">Ora Inizio:</label>
+            <select v-model="this.oraInizio">
+                <option v-for="ora in ore" >{{ora}}</option>
+            </select>
+            @* <input type="time" id="oraInizio"  name="oraInizio"> *@
+        </div>
+        @* Ora Fine *@
+        <div v-if="inputToDisplay['oraFine']">
+            <label for="oraFine">Ora Fine:</label>
+            <select v-model="this.oraFine">
+                <option v-for="ora in ore" >{{ora}}</option>
+            </select>
+            @* <input type="time" id="oraFine" v-model="this.oraFine" name="oraFine"> *@
+        </div>
+        @* Ore Totali *@
+        <div v-if="inputToDisplay['oreTotali']">
+            <label for="oreTotali">Ore Totali:</label>
+            <input type="number" id="oreTotali" v-model="toModify['oreTotali']" name="oreTotali">
+        </div>
+        @* Commessa *@
+        <div v-if="inputToDisplay['commessa']">
+            <label for="commessa">Commessa:</label>
+            <input type="text" id="commessa" v-model="toModify['commessa']" name="commessa">
+        </div>
+        @* Dettagli *@
+        <div v-if="inputToDisplay['dettagli']">
+            <label for="dettagli">Dettagli:</label>
+            <input type="text" id="dettagli" v-model="toModify['dettagli']" name="dettagli">
+        </div>
+        @* Tipo Viaggio *@
+        <div v-if="inputToDisplay['tipoViaggio']">
+            <label for="tipoViaggio">Tipo Viaggio:</label>
+            <input type="text" id="tipoViaggio" v-model="toModify['tipoViaggio']" name="tipoViaggio">
+        </div>
+        @* Chilometri *@
+        <div v-if="inputToDisplay['chilometri']">
+            <label for="chilometri">Chilometri:</label>
+            <input type="number" id="chilometri" v-model="toModify['chilometri']" name="chilometri">
+        </div>
+        @* Auto Aziendale *@
+        <div v-if="inputToDisplay['autoAziendale']">
+            <label for="autoAziendale">Auto Aziendale:</label>
+            <input type="checkbox" id="autoAziendale" v-model="toModify['autoAziendale']" name="autoAziendale">
+        </div>
+        @* Importo *@
+        <div v-if="inputToDisplay['importo']">
+            <label for="importo">Importo:</label>
+            <input type="number" id="importo" v-model="toModify['importo']" name="importo" step="1">
+        </div>
+        @* Carta Aziendale *@
+        <div v-if="inputToDisplay['cartaAziendale']">
+            <label for="cartaAziendale">Carta Aziendale:</label>
+            <input type="checkbox" id="cartaAziendale" v-model="toModify['cartaAziendale']" name="cartaAziendale">
+        </div>
+    </form>
+    @* <div v-for="(value, key) in toModify" :key="key">
+        <p>{{ key }}: {{ value }}</p>
+    </div> *@
+
+    <!-- Tasto Anulla-->
+    <a class="Annulla btn btn-warning" href="@Url.Action(MVC.Rendicontazioni.Rendicontazioni.Index())">Annulla</a>
+
+
+    <button class="Salva btn btn-primary" type="button" v-on:click="create()">Crea</button>
+</div>
