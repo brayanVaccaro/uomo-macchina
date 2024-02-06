@@ -26,16 +26,16 @@
         <thead>
             <tr>
                 <th>
-                    Importo (€)
-                </th>
-                <th>
                     Data
                 </th>
                 <th>
-                    Commessa
+                    Importo (€)
                 </th>
                 <th>
                     Carta Aziendale
+                </th>
+                <th>
+                    Commessa
                 </th>
                 <th>
                     Dettagli
@@ -51,16 +51,16 @@
             <tr v-for="rimborso in model.rimborsi.rimborsi" v-on:click='navigateToEdit(rimborso.id, "Rimborsi")'>
                 
                 <td class="text-nowrap">
+                    {{rimborso.data.split('T')[0]}}
+                </td>
+                <td class="text-nowrap">
                     {{rimborso.importo}}
                 </td>
                 <td class="text-nowrap">
-                    {{rimborso.data}}
+                    {{rimborso.cartaAziendale}}
                 </td>
                 <td class="text-nowrap">
                     {{rimborso.commessa}}
-                </td>
-                <td class="text-nowrap">
-                    {{rimborso.cartaAziendale}}
                 </td>
                 <td class="text-nowrap">
                     {{rimborso.dettagli}}

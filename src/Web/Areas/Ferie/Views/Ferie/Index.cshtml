@@ -32,7 +32,7 @@
                     Data Fine
                 </th>
                 <th>
-                    Durarata
+                    Durata
                 </th>
                 <th>
                     Dettagli
@@ -48,10 +48,10 @@
             <tr v-for="ferie in model.ferie.ferie" v-on:click='navigateToEdit(ferie.id, "Ferie")'>
                 
                 <td class="text-nowrap">
-                    {{ferie.dataInizio}}
+                    {{ferie.dataInizio.split('T')[0]}}
                 </td>
                 <td class="text-nowrap">
-                    {{ferie.dataFine}}
+                    {{ferie.dataFine.split('T')[0]}}
                 </td>
                 <td class="text-nowrap">
                     {{ferie.durata}}

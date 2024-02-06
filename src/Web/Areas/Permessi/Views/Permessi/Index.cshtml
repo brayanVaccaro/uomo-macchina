@@ -50,13 +50,13 @@
             </tr>
             <tr v-for="permesso in model.permessi.permessi" v-on:click='navigateToEdit(permesso.id, "Permessi")'>
                 <td class="text-nowrap">
-                    {{permesso.data}}
+                    {{permesso.data.split('T')[0]}}
                 </td>
                 <td class="text-nowrap">
-                    {{permesso.oraInizio}}
+                    {{permesso.oraInizio.split('T')[1]}}
                 </td>
                 <td class="text-nowrap">
-                    {{permesso.oraFine}}
+                    {{permesso.oraFine.split('T')[1]}}
                 </td>
                 <td class="text-nowrap">
                     {{permesso.durata}}

@@ -26,19 +26,19 @@
         <thead>
             <tr>
                 <th>
-                    Chilometri (Km)
-                </th>
-                <th>
                     Data Inizio
                 </th>
                 <th>
                     Data Fine
                 </th>
                 <th>
-                    Commessa
+                    Chilometri (Km)
                 </th>
                 <th>
                     Auto Aziendale
+                </th>
+                <th>
+                    Commessa
                 </th>
                 <th>
                     Dettagli
@@ -52,20 +52,21 @@
                 </td>
             </tr>
             <tr v-for="trasferta in model.trasferte.trasferte" v-on:click='navigateToEdit(trasferta.id, "Trasferte")'>
+                
+                <td class="text-nowrap">
+                    {{trasferta.dataInizio.split('T')[0]}}
+                </td>
+                <td class="text-nowrap">
+                    {{trasferta.dataFine.split('T')[0]}}
+                </td>
                 <td class="text-nowrap">
                     {{trasferta.chilometri}}
                 </td>
                 <td class="text-nowrap">
-                    {{trasferta.dataInizio}}
-                </td>
-                <td class="text-nowrap">
-                    {{trasferta.dataFine}}
+                    {{trasferta.autoAziendale}}
                 </td>
                 <td class="text-nowrap">
                     {{trasferta.commessa}}
-                </td>
-                <td class="text-nowrap">
-                    {{trasferta.autoAziendale}}
                 </td>
                 <td class="text-nowrap">
                     {{trasferta.dettagli}}

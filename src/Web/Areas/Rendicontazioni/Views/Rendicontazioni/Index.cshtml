@@ -26,10 +26,10 @@
         <thead>
             <tr>
                 <th>
-                    Ore Totali
+                    Data
                 </th>
                 <th>
-                    Data
+                    Ore Totali
                 </th>
                 <th>
                     Ora Inizio
@@ -55,12 +55,10 @@
             <tr v-for="rendicontazione in model.rendicontazioni.rendicontazioni" v-on:click='navigateToEdit(rendicontazione.id, "Rendicontazioni", rendicontazione.data)'>
 
                 <td class="text-nowrap">
-                    {{rendicontazione.oreTotali}}
+                    {{rendicontazione.data.split('T')[0]}}
                 </td>
                 <td class="text-nowrap">
-
-                    {{rendicontazione.data.split('T')[0]}}
-
+                    {{rendicontazione.oreTotali}}
                 </td>
                 <td class="text-nowrap">
                     {{rendicontazione.oraInizio.split('T')[1]}}

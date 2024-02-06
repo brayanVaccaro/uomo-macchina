@@ -27,11 +27,11 @@
         <thead>
             <tr>
                 <th>
-                    Tipo Viaggio
-                </th>
-                <th>
                     Data
                 </th>
+                <th>
+                    Tipo Viaggio
+                </th>                
                 <th>
                     Commessa
                 </th>
@@ -49,10 +49,10 @@
             <tr v-for="notteFuori in model.nottiFuori.nottiFuori " v-on:click='navigateToEdit(notteFuori.id, "NottiFuori")'>
                 
                 <td class="text-nowrap">
-                    {{notteFuori.tipoViaggio}}
+                    {{notteFuori.data.split('T')[0]}}
                 </td>
                 <td class="text-nowrap">
-                    {{notteFuori.data}}
+                    {{notteFuori.tipoViaggio}}
                 </td>
                 <td class="text-nowrap">
                     {{notteFuori.commessa}}
