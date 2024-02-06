@@ -151,32 +151,32 @@ namespace Core.Migrations
                 columns: new[] { "Id", "AllDay", "Background", "Class", "Content", "Deletable", "End", "Resizable", "Split", "Start", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("5756b08c-2a5c-4cb5-b3e6-43b0fc2efb98"), false, false, "rendicontazione", null, false, new DateTime(2024, 1, 29, 12, 0, 0, 0, DateTimeKind.Unspecified), false, "", new DateTime(2024, 1, 29, 8, 30, 0, 0, DateTimeKind.Unspecified), "Prova rendicontazione" },
-                    { new Guid("6467ba2c-4de7-4533-9207-0047150128a0"), false, false, "trasferta", null, false, new DateTime(2024, 1, 28, 12, 0, 0, 0, DateTimeKind.Unspecified), false, "", new DateTime(2024, 1, 27, 9, 0, 0, 0, DateTimeKind.Unspecified), "Prova trasferta" },
-                    { new Guid("8ebded23-b951-440c-a7bb-0fae54eaa740"), true, true, "libero", null, false, new DateTime(2024, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "", new DateTime(2024, 2, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), "Prova feria" },
-                    { new Guid("9bc6f3d5-9fa2-4e9b-9922-09540e41dda8"), false, false, "straordinario", null, false, new DateTime(2024, 1, 29, 22, 0, 0, 0, DateTimeKind.Unspecified), false, "", new DateTime(2024, 1, 29, 19, 0, 0, 0, DateTimeKind.Unspecified), "Prova straordinario" },
-                    { new Guid("edf34801-4ae1-48ca-9d01-651d15d63f40"), false, false, "permesso", null, false, new DateTime(2024, 1, 29, 17, 0, 0, 0, DateTimeKind.Unspecified), false, "", new DateTime(2024, 1, 29, 14, 0, 0, 0, DateTimeKind.Unspecified), "Prova permesso" }
+                    { new Guid("0b245e2d-c498-4791-aa53-68f3b6fa8385"), false, false, "trasferta", null, false, new DateTime(2024, 1, 28, 12, 0, 0, 0, DateTimeKind.Unspecified), false, "", new DateTime(2024, 1, 27, 9, 0, 0, 0, DateTimeKind.Unspecified), "Prova trasferta" },
+                    { new Guid("71e57f32-c4a9-4a31-96e3-542bec3454b8"), true, true, "libero", null, false, new DateTime(2024, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "", new DateTime(2024, 2, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), "Prova feria" },
+                    { new Guid("ade64e9f-9e64-4ff3-ad44-931c1732b958"), false, false, "rendicontazione", null, false, new DateTime(2024, 1, 29, 12, 0, 0, 0, DateTimeKind.Unspecified), false, "", new DateTime(2024, 1, 29, 8, 30, 0, 0, DateTimeKind.Unspecified), "Prova rendicontazione" },
+                    { new Guid("b88501c5-5425-43f2-864f-8b78960614d6"), false, false, "permesso", null, false, new DateTime(2024, 1, 29, 17, 0, 0, 0, DateTimeKind.Unspecified), false, "", new DateTime(2024, 1, 29, 14, 0, 0, 0, DateTimeKind.Unspecified), "Prova permesso" },
+                    { new Guid("f0df5649-43cf-46a8-a78f-2c285b317fc6"), false, false, "straordinario", null, false, new DateTime(2024, 1, 29, 22, 0, 0, 0, DateTimeKind.Unspecified), false, "", new DateTime(2024, 1, 29, 19, 0, 0, 0, DateTimeKind.Unspecified), "Prova straordinario" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Ferie",
                 columns: new[] { "Id", "DataFine", "DataInizio", "Dettagli", "Durata" },
-                values: new object[] { new Guid("dd415088-2d31-41c9-95d4-467eb7b168ed"), new DateTime(2024, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 2, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), "Dettagli di Ferie", 60 });
+                values: new object[] { new Guid("9faca2a8-9860-4d4a-8437-1e23da75a688"), new DateTime(2024, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 2, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), "Dettagli di Ferie", 60 });
 
             migrationBuilder.InsertData(
                 table: "Permessi",
                 columns: new[] { "Id", "Data", "Dettagli", "Durata", "OraFine", "OraInizio" },
-                values: new object[] { new Guid("4b422ac4-1b1e-4a9c-bb02-9e73fd70c3c3"), new DateTime(2024, 1, 29, 14, 0, 0, 0, DateTimeKind.Unspecified), "Dettagli di permesso", 180, new DateTime(2024, 1, 29, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 1, 29, 14, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { new Guid("861ad4a1-fa3a-4b53-b3be-513ee2899e98"), new DateTime(2024, 1, 29, 14, 0, 0, 0, DateTimeKind.Unspecified), "Dettagli di permesso", 180, new DateTime(2024, 1, 29, 17, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 1, 29, 14, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Rendicontazioni",
                 columns: new[] { "Id", "Commessa", "Data", "Dettagli", "OraFine", "OraInizio", "OreTotali" },
-                values: new object[] { new Guid("a5e23dcc-d26a-4c66-a5bc-a7529b89db14"), "Commessa di rendicontazione", new DateTime(2024, 1, 29, 8, 30, 0, 0, DateTimeKind.Unspecified), "Dettagli di Rendicontazioni", new DateTime(2024, 1, 29, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 1, 29, 8, 30, 0, 0, DateTimeKind.Unspecified), 8 });
+                values: new object[] { new Guid("48bb0cab-f465-4379-b51f-c4674b2cbc8e"), "Commessa di rendicontazione", new DateTime(2024, 1, 29, 8, 30, 0, 0, DateTimeKind.Unspecified), "Dettagli di Rendicontazioni", new DateTime(2024, 1, 29, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 1, 29, 8, 30, 0, 0, DateTimeKind.Unspecified), 8 });
 
             migrationBuilder.InsertData(
                 table: "Trasferte",
                 columns: new[] { "Id", "AutoAziendale", "Chilometri", "Commessa", "DataFine", "DataInizio", "Dettagli" },
-                values: new object[] { new Guid("2b7f6f04-88c3-4abb-9b81-390a75e6973d"), false, 200, "Commessa di Trasferte", new DateTime(2024, 1, 28, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 1, 27, 9, 0, 0, 0, DateTimeKind.Unspecified), "Dettagli di Trasferte" });
+                values: new object[] { new Guid("5e3a71eb-0b15-4d67-bd42-d7cd9e088b97"), false, 200, "Commessa di Trasferte", new DateTime(2024, 1, 28, 12, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 1, 27, 9, 0, 0, 0, DateTimeKind.Unspecified), "Dettagli di Trasferte" });
 
             migrationBuilder.InsertData(
                 table: "Users",

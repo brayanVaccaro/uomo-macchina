@@ -84,7 +84,7 @@ namespace UomoMacchina.Areas.NottiFuori.Controllers
 
         // Metodo che mi mostra il pop-up di conferma della compilazione richiesta
         [HttpPost]
-        public virtual async Task<IActionResult> Edit(NotteFuoriViewModel model)
+        public virtual async Task<IActionResult> Edit([FromBody] NotteFuoriViewModel model)
         {
             if (ModelState.IsValid)
             {

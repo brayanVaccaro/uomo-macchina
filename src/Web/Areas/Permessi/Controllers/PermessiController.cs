@@ -82,7 +82,7 @@ namespace UomoMacchina.Areas.Permessi
         
         // Metodo che mi mostra il pop-up di conferma della compilazione richiesta
         [HttpPost]
-        public virtual async Task<IActionResult> Edit(PermessoViewModel model)
+        public virtual async Task<IActionResult> Edit([FromBody] PermessoViewModel model)
         {
             if (ModelState.IsValid)
             {

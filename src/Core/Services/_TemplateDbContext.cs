@@ -156,7 +156,7 @@ namespace Core.Services
                     Data = new DateTime(2024, 1, 29, 14, 0, 0),
                     OraInizio = new DateTime(2024, 1, 29, 14, 0, 0),
                     OraFine = new DateTime(2024, 1, 29, 17, 0, 0),
-                    OreTotali = 180,
+                    Durata = 180,
                     Dettagli = "Dettagli di permesso",
                 });
             modelBuilder.Entity<Feria>().HasData(

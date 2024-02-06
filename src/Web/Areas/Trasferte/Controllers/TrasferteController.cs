@@ -85,7 +85,7 @@ namespace UomoMacchina.Areas.Trasferte.Controllers
 
         // Metodo che mi mostra il pop-up di conferma della compilazione richiesta
         [HttpPost]
-        public virtual async Task<IActionResult> Edit(TrasfertaViewModel model)
+        public virtual async Task<IActionResult> Edit([FromBody] TrasfertaViewModel model)
         {
             if (ModelState.IsValid)
             {

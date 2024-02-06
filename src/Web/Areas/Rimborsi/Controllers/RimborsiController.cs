@@ -84,7 +84,7 @@ namespace UomoMacchina.Areas.Rimborsi.Controllers
 
         // Metodo che mi mostra il pop-up di conferma della compilazione richiesta
         [HttpPost]
-        public virtual async Task<IActionResult> Edit(RimborsoViewModel model)
+        public virtual async Task<IActionResult> Edit([FromBody] RimborsoViewModel model)
         {
             if (ModelState.IsValid)
             {

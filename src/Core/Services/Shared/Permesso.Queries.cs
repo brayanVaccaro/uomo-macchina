@@ -70,7 +70,7 @@ namespace Core.Services.Shared
                     Data = x.Data,
                     OraInizio = x.OraInizio,
                     OraFine = x.OraFine,
-                    Durata = x.OreTotali,
+                    Durata = x.Durata,
                     Dettagli = x.Dettagli,
                 }).ToArrayAsync();
 
@@ -95,7 +95,7 @@ namespace Core.Services.Shared
                     Data = x.Data,
                     OraInizio = x.OraInizio,
                     OraFine = x.OraFine,
-                    Durata = x.OreTotali,
+                    Durata = x.Durata,
                     Dettagli = x.Dettagli,
                 }).ToArrayAsync();
 
@@ -121,7 +121,7 @@ namespace Core.Services.Shared
                     Data = x.Data,
                     OraInizio = x.OraInizio,
                     OraFine = x.OraFine,
-                    Durata = x.OreTotali,
+                    Durata = x.Durata,
                     Dettagli = x.Dettagli,
                 })
                 .FirstOrDefaultAsync();

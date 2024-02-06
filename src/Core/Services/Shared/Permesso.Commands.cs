@@ -42,7 +42,7 @@ namespace Core.Services.Shared
             permesso.Data = cmd.Data; 
             permesso.OraInizio = cmd.OraInizio;
             permesso.OraFine = cmd.OraFine;
-            permesso.OreTotali = cmd.Durata;
+            permesso.Durata = cmd.Durata;
             permesso.Dettagli = cmd.Dettagli;
             
             //Eventi vuole 
