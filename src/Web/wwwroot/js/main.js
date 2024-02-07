@@ -5,6 +5,7 @@ const app = Vue.createApp({
         return {
             //parametri che gestiscono l'oggetto da modificare e la visualizzazione dei campi nel form
             inputToDisplay: {
+                //'id': false,
                 'data': false,
                 'dataInizio': false,
                 'dataFine': false,
@@ -18,10 +19,12 @@ const app = Vue.createApp({
                 'chilometri': false,
                 'autoAziendale': false,
                 'importo': false,
-                'cartaAziendale': false
+                'cartaAziendale': false,
+                'straordinario': false
             },
             inputType: {},
             toModify: {
+                'id': false,
                 'data': false,
                 'dataInizio': false,
                 'dataFine': false,
@@ -35,7 +38,8 @@ const app = Vue.createApp({
                 'chilometri': false,
                 'autoAziendale': false,
                 'importo': false,
-                'cartaAziendale': false
+                'cartaAziendale': false,
+                'straordinario': false
             },
             toModifykeys: null, //oggetto che contiene solo le chiavi dell'oggetto da modificare
             toModifyName: "", //nome dell'oggetto da modificare
@@ -158,11 +162,28 @@ const app = Vue.createApp({
             this.selectedDate = idGiorno;
             this.dataNew = idGiorno;
             await this.setDataByDate(this.selectedDate);
-            this.mostraSettimana = false;
-            this.mostraGiorno = true;
+            //this.mostraSettimana = false;
+            //this.mostraGiorno = true;
             this.customClass = "col-2";
-            this.showSingleDay = true;
+            this.showSingleDay = true; //visualizzo le tabelle
             this.activeView = "day";
+        },
+        async annulla() {
+            this.showEditForm = false;
+            await this.setDataByDate(this.dataNew);
+            this.resetToDefault();
+            this.showSingleDay = true;
+        },
+        async elimina(id) {
+            let nome = this.toModifyName;
+            const url = `/${nome}/${nome}/Delete?id=${id}`;
+            await fetch(url, {
+                method: "POST"
+            });
+            this.showEditForm = false;
+            await this.setDataByDate(this.dataNew);
+            this.resetToDefault();
+            this.showSingleDay = true;
         },
         onEventClick(event, e) {
             this.selectedEvent = event;
@@ -270,6 +291,22 @@ const app = Vue.createApp({
             //resetto oraInizio e oraFine
             this.oraInizio = 0;
             this.oraFine = 0;
+            this.toModify = {
+                'data': false,
+                'dataInizio': false,
+                'dataFine': false,
+                'durata': false,
+                'oreTotali': false,
+                'oraInizio': false,
+                'oraFine': false,
+                'commessa': false,
+                'dettagli': false,
+                'tipoViaggio': false,
+                'chilometri': false,
+                'autoAziendale': false,
+                'importo': false,
+                'cartaAziendale': false
+            };
         },
         capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
@@ -281,8 +318,6 @@ const app = Vue.createApp({
                 capitalizedObject[capitalizedKey] = object[key];
             });
             return capitalizedObject;
-        },
-        async cambioMese(idMese) {
         },
     },
     computed: {
