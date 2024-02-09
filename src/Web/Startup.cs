@@ -156,7 +156,7 @@ namespace UomoMacchina
                 endpoints.MapAreaControllerRoute("Main", "Main", "Main/{controller=Main}/{action=Main}/{id?}");
                 endpoints.MapAreaControllerRoute("SingleDay", "Main", "Main/SingleDay/{controller=Main}/{action=SingleDay}");
                 endpoints.MapAreaControllerRoute("getData", "Main", "Main/{controller=Main}/{action=GetData}"); //endpoint per recuperare i dati
-                endpoints.MapControllerRoute("default", "{controller=Login}/{action=Login}");
+                endpoints.MapAreaControllerRoute("default", "Login", "{controller=Login}/{action=Login}");
             });
         }
     }

@@ -1,0 +1,202 @@
+﻿@model UomoMacchina.Areas.Login.Data.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+<h3>Rendicontazione</h3>
+<div class="row">
+    @* nostro *@
+    <div class="col wrapper">
+        <div class="rec-prism">
+            @* <div class="face face-top">
+            <div class="content">
+            <h2>Subscribe</h2>
+            <small>Enter your email so we can send you the latest updates!</small>
+            <form onsubmit="event.preventDefault()">
+            <div class="field-wrapper">
+            <input type="text" name="email" placeholder="email">
+            <label>e-mail</label>
+            </div>
+            <div class="field-wrapper">
+            <input type="submit" onclick="showThankYou()">
+            </div>
+            </form>
+            </div>
+            </div> *@
+            <div class="face face-front">
+                <div class="content">
+                    <h2>Sign in</h2>
+                    @* <form onsubmit="event.preventDefault()"> *@
+                    <form method="post" role="form" autocomplete="off">
+                        <input asp-for="ReturnUrl" type="hidden" />
+
+
+                        @* <label asp-for=Email class="onit-label-required "></label> *@
+                        <div class="field-wrapper">
+                            @* <input type="text" name="username" placeholder="username">
+                            <label>username</label> *@
+
+                            <div class="input-group onit-input-group-union ">
+                                <input asp-for="Email" class="form-control" type="text" />
+                                <label>Email</label>
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+
+                            @* <input type="text" name="email" placeholder="email">
+                            <label>e-mail</label> *@
+                        </div>
+
+
+                        @* <label asp-for=Password class="onit-label-required "></label> *@
+                        <div class="field-wrapper">
+                            <div class="input-group onit-input-group-union">
+                                <input asp-for="Password" class="form-control" type="password" />
+                                <label>Password</label>
+
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                        Show/Hide
+                                    </button>
+                                </div>
+                            </div>
+
+                            <span asp-validation-for="Password" class="text-danger"></span>
+
+                            @* <input type="password" name="password" placeholder="password" autocomplete="new-password">
+                            <label>password</label> *@
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check form-switch">
+                                <input asp-for="RememberMe" class="form-check-input" role="switch">
+                                <label asp-for="RememberMe" class="form-check-label">Rimani Connesso</label>
+                            </div>
+                        </div>
+                        <div class="field-wrapper">
+                            <input type="submit" onclick="showThankYou()">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="face face-bottom">
+                <div class="content">
+                    <div class="thank-you-msg">
+                        Thank you!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* sito *@
+    
+    <div class="col wrapper">
+        <div class="rec-prism">
+            <div class="face face-top">
+                <div class="content">
+                    
+                </div>
+            </div>
+            <div class="face face-front">
+                <div class="content">
+                    <h2>Sign in</h2>
+                    <form onsubmit="event.preventDefault()">
+                        <div class="field-wrapper">
+                            <input type="text" name="username" placeholder="username">
+                            <label>username</label>
+                        </div>
+                        <div class="field-wrapper">
+                            <input type="password" name="password" id="password" placeholder="password" autocomplete="new-password">
+                            <label for="password">password</label>
+                            <div class="icon-wrapper" onclick="togglePasswordVisibility()">
+                                <i class="fa fa-eye" id="togglePasswordIcon" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        @* <div class="field-wrapper">
+                            <input type="password" name="password" placeholder="password" autocomplete="new-password">
+                            <label>password</label>
+                            <i class="fa fa-eye" id="togglePassword" aria-hidden="true" onclick="togglePasswordVisibility()"></i>
+                        </div> *@
+                        <div class="field-wrapper">
+                            <input type="submit" onclick="showThankYou()">
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+            <div class="face face-back">
+                <div class="content">
+                   
+                </div>
+            </div>
+            <div class="face face-right">
+                <div class="content">
+                    
+                </div>
+            </div>
+            <div class="face face-left">
+                <div class="content">
+                    
+                </div>
+            </div>
+            <div class="face face-bottom">
+                <div class="content">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section styles {
+    <link href="~/css/login.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script>
+        
+        // Gestisce il movimento del prisma
+        let prism = document.querySelector(".rec-prism");
+
+        // function showSignup() {
+        //     prism.style.transform = "translateZ(-100px) rotateY( -90deg)";
+        // }
+        // function showLogin() {
+        //     prism.style.transform = "translateZ(-100px)";
+        // }
+        // function showForgotPassword() {
+        //     prism.style.transform = "translateZ(-100px) rotateY( -180deg)";
+        // }
+
+        // function showSubscribe() {
+        //     prism.style.transform = "translateZ(-100px) rotateX( -90deg)";
+        // }
+
+        // function showContactUs() {
+        //     prism.style.transform = "translateZ(-100px) rotateY( 90deg)";
+        // }
+
+        function showThankYou() {
+            prism.style.transform = "translateZ(-100px) rotateX( 90deg)";
+        }
+
+        // Rende visibile la password
+        function togglePasswordVisibility() {
+            var passwordField = document.getElementById("password");
+            var toggleIcon = document.getElementById("togglePasswordIcon");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleIcon.classList.remove("fa-eye");
+                toggleIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                toggleIcon.classList.remove("fa-eye-slash");
+                toggleIcon.classList.add("fa-eye");
+            }
+        }
+
+
+    </script>
+}

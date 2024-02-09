@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 using Core.Infrastructure;
 using Core.Services.Shared;
 using UomoMacchina.Infrastructure;
+using UomoMacchina.Areas.Login.Data;
 
-namespace UomoMacchina.Features.Login
+namespace UomoMacchina.Areas.Login
 {
+    [Area("Login")]
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     [Alerts]
     [ModelStateToTempData]
@@ -89,7 +91,7 @@ namespace UomoMacchina.Features.Login
                 }
             }
 
-            return RedirectToAction(MVC.Login.Login());
+            return RedirectToAction(MVC.Login.Login.Login());
         }
 
         [HttpPost]
@@ -98,7 +100,7 @@ namespace UomoMacchina.Features.Login
             HttpContext.SignOutAsync();
 
             Alerts.AddSuccess(this, "Utente scollegato correttamente");
-            return RedirectToAction(MVC.Login.Login());
+            return RedirectToAction(MVC.Login.Login.Login());
         }
     }
 }

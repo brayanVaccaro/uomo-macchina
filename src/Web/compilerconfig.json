@@ -14,5 +14,9 @@
   {
     "inputFile": "wwwroot/css/richieste.scss",
     "outputFile": "wwwroot/css/richieste.css"
+  },
+  {
+    "inputFile": "wwwroot/css/login.scss",
+    "outputFile": "wwwroot/css/login.css"
   }
 ]

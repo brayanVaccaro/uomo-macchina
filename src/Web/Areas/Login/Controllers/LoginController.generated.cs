@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Routing;
 using R4Mvc;
 
-namespace UomoMacchina.Features.Login
+namespace UomoMacchina.Areas.Login
 {
     public partial class LoginController
     {
@@ -84,9 +84,9 @@ namespace UomoMacchina.Features.Login
         }
 
         [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
-        public LoginController Actions => MVC.Login;
+        public LoginController Actions => MVC.Login.Login;
         [GeneratedCode("R4Mvc", "1.0")]
-        public readonly string Area = "";
+        public readonly string Area = "Login";
         [GeneratedCode("R4Mvc", "1.0")]
         public readonly string Name = "Login";
         [GeneratedCode("R4Mvc", "1.0")]
@@ -116,7 +116,10 @@ namespace UomoMacchina.Features.Login
             public _ViewNamesClass ViewNames => s_ViewNames;
             public class _ViewNamesClass
             {
+                public readonly string Login = "Login";
             }
+
+            public readonly string Login = "~/Areas/Login/Views/Login/Login.cshtml";
         }
 
         [GeneratedCode("R4Mvc", "1.0")]
@@ -126,7 +129,7 @@ namespace UomoMacchina.Features.Login
     }
 
     [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
-    public partial class R4MVC_LoginController : UomoMacchina.Features.Login.LoginController
+    public partial class R4MVC_LoginController : UomoMacchina.Areas.Login.LoginController
     {
         public R4MVC_LoginController(): base(Dummy.Instance)
         {
@@ -144,9 +147,9 @@ namespace UomoMacchina.Features.Login
         }
 
         [NonAction]
-        partial void LoginOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, UomoMacchina.Features.Login.LoginViewModel model);
+        partial void LoginOverride(R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult callInfo, UomoMacchina.Areas.Login.Data.LoginViewModel model);
         [NonAction]
-        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.ActionResult> Login(UomoMacchina.Features.Login.LoginViewModel model)
+        public override System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.ActionResult> Login(UomoMacchina.Areas.Login.Data.LoginViewModel model)
         {
             var callInfo = new R4Mvc_Microsoft_AspNetCore_Mvc_ActionResult(Area, Name, ActionNames.Login);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);

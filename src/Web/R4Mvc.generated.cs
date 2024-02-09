@@ -22,6 +22,8 @@ public static partial class MVC
     public static R4Mvc.ExampleAreaClass Example => s_Example;
     static readonly R4Mvc.FerieAreaClass s_Ferie = new R4Mvc.FerieAreaClass();
     public static R4Mvc.FerieAreaClass Ferie => s_Ferie;
+    static readonly R4Mvc.LoginAreaClass s_Login = new R4Mvc.LoginAreaClass();
+    public static R4Mvc.LoginAreaClass Login => s_Login;
     static readonly R4Mvc.MainAreaClass s_Main = new R4Mvc.MainAreaClass();
     public static R4Mvc.MainAreaClass Main => s_Main;
     static readonly R4Mvc.NottiFuoriAreaClass s_NottiFuori = new R4Mvc.NottiFuoriAreaClass();
@@ -36,7 +38,6 @@ public static partial class MVC
     public static R4Mvc.TrasferteAreaClass Trasferte => s_Trasferte;
     public static readonly UomoMacchina.Areas.AuthenticatedBaseController AuthenticatedBase = new UomoMacchina.Areas.R4MVC_AuthenticatedBaseController();
     public static readonly UomoMacchina.Features.Home.HomeController Home = new UomoMacchina.Features.Home.R4MVC_HomeController();
-    public static readonly UomoMacchina.Features.Login.LoginController Login = new UomoMacchina.Features.Login.R4MVC_LoginController();
     public static readonly R4Mvc.SharedController Shared = new R4Mvc.SharedController();
 }
 
@@ -96,6 +97,13 @@ namespace R4Mvc
     {
         public readonly string Name = "Ferie";
         public readonly UomoMacchina.Areas.Ferie.Controllers.FerieController Ferie = new UomoMacchina.Areas.Ferie.Controllers.R4MVC_FerieController();
+    }
+
+    [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]
+    public partial class LoginAreaClass
+    {
+        public readonly string Name = "Login";
+        public readonly UomoMacchina.Areas.Login.LoginController Login = new UomoMacchina.Areas.Login.R4MVC_LoginController();
     }
 
     [GeneratedCode("R4Mvc", "1.0"), DebuggerNonUserCode]

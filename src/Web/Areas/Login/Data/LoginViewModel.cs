@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UomoMacchina.Features.Login
+namespace UomoMacchina.Areas.Login.Data
 {
     public class LoginViewModel
     {
