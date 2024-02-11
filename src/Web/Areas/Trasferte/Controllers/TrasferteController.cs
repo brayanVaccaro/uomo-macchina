@@ -75,7 +75,7 @@ namespace UomoMacchina.Areas.Trasferte.Controllers
                 {
                     Id = null,
                     DataInizio = DateTime.Parse(data),
-                    
+                    DataFine = DateTime.Parse(data)
                 });
                 return Ok(model);
             }
