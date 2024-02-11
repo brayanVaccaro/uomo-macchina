@@ -206,13 +206,12 @@ namespace UomoMacchina.Areas.Main.Data
         {
             public string NomeMese { get; set; }
             public List<SettimanaViewModel> Settimane { get; set; }
+            public class SettimanaViewModel
+            {
+                public string Nome { get; set; }
+                public List<DateTime> Giorni { get; set; }
+            }
         }
     }
 
-    public class SettimanaViewModel
-    {
-        public string Nome { get; set; }
-        public List<DateTime> Giorni { get; set; }
-    }
-   
 }
