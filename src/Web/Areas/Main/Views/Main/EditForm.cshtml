@@ -128,6 +128,11 @@
             <div v-if="toModify['id']" class="d-flex w-75 justify-content-between">
                 <a class="Annulla btn btn-warning" v-on:click="annulla()">Annulla</a>
 
+                <!-- Button trigger modal -->
+                <button v-if="toModify['id']" type="button" class="btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    Elimina
+                </button>
+                
 
                 <button class="salva btn btn-primary" type="button" v-on:click="create()">Salva modifiche</button>
             </div>
@@ -140,6 +145,24 @@
         </div>
 
     </form>
+    <!-- Modale di conferma eliminazione -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Conferma Eliminazione</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Stai per eliminare una {{pluraleASingolare(toModifyName)}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                    <button  class="Elimina btn btn-danger" data-bs-dismiss="modal" v-on:click="elimina(this.toModify['id'])">Elimina</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
