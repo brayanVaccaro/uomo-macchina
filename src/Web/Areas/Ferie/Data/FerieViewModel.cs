@@ -74,12 +74,6 @@ namespace UomoMacchina.Areas.Ferie.Data
                     Dettagli = Dettagli,
                 };
             }
-           
-        }
-        public string ToJson()
-        {
-            return JsonSerializer.ToJsonCamelCase(this);
-        }
             internal AddOrUpdateEventCommand ToVueCalEvent(FeriaViewModel feria)
             {
                 return new AddOrUpdateEventCommand
@@ -100,6 +94,12 @@ namespace UomoMacchina.Areas.Ferie.Data
                     FeriaId = feria.Id,
                 };
             }
+
+        }
+        public string ToJson()
+        {
+            return JsonSerializer.ToJsonCamelCase(this);
+        }
 
 
         //metodo per impostare le Ferie

@@ -77,6 +77,7 @@ namespace UomoMacchina.Areas.Ferie.Controllers
                 {
                     Id = null,
                     DataInizio = DateTime.Parse(data),
+                    DataFine = DateTime.Parse(data).AddDays(1),
                 });
                 return Ok(model);
             }
