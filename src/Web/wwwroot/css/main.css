@@ -7,10 +7,37 @@
   display: none;
 }
 
+.vuecal__title-bar {
+  background-color: #42b983;
+}
+
+.vuecal__weekdays-headings {
+  background-color: rgba(66, 185, 131, 0.5);
+}
+
 .vuecal__event {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  color: black;
+}
+
+.custom-hide-time-cell .vuecal__time-column {
+  width: 0;
+}
+.custom-hide-time-cell .vuecal__time-cell-label {
+  display: none;
+}
+.custom-hide-time-cell .ciao {
+  color: blue;
+}
+
+#sidebar-menu {
+  background-color: #42b983;
+}
+
+#sidebar-items {
+  background-color: rgba(66, 185, 131, 0.5);
 }
 
 /*
@@ -70,4 +97,8 @@ colore nero = nottiFuori
 
 .libero {
   background: #808080;
+}
+
+.rimborso {
+  background: #ffff00;
 }

@@ -5,6 +5,7 @@ $bg-permesso: #ff8d00;//colore arancione
 $bg-trasferta: #9700ff;//colore viola
 $bg-straordinario: #2552ff;//colore blu
 $bg-libero: #808080;//colore grigio
+$bg-rimborso: #ffff00;
 
 
 //Colore + effetto per l'ora di pranzo
@@ -17,13 +18,43 @@ $bg-libero: #808080;//colore grigio
 .vuecal__menu {
     display: none
 }
+//colori degli elementi del calendario
+.vuecal__title-bar {
+    background-color: #42b983;
+}
+.vuecal__weekdays-headings {
+    background-color: rgba(66, 185, 131, 0.5)
+}
 
 //Eventi con gli elementi al centro
 .vuecal__event {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    color: black;
 }
+
+.custom-hide-time-cell {
+    .vuecal__time-column {
+        width: 0;
+    }
+    .vuecal__time-cell-label {
+        display: none
+    }
+
+    .ciao {
+        color: blue
+    }
+}
+
+#sidebar-menu {
+    background-color: #42b983;
+}
+
+#sidebar-items {
+    background-color: rgba(66, 185, 131, 0.5)
+}
+
 /*
     LEGGENDA COLORI
 colore verde = Rendicontazione
@@ -32,8 +63,53 @@ colore arancio = Permesso
 colore viola= Trasferta
 colore blu straordinario
 colore grigio = ferie, giorno feriale
+colore giallo = rimborsi
+colore nero = nottiFuori
 
 */
+
+#rendicontazioni {
+    div {
+        .fa-square {
+            color: $bg-rendicontazione;
+        }
+    }
+}
+#ferie {
+    div {
+        .fa-square {
+            color: $bg-libero;
+        }
+    }
+}
+#permessi {
+    div {
+        .fa-square {
+            color: $bg-permesso;
+        }
+    }
+}
+/*#nottiFuori {
+    div {
+        .fa-square {
+            color: $bg-notteFuori;
+        }
+    }
+}*/
+#trasferte {
+    div {
+        .fa-square {
+            color: $bg-trasferta;
+        }
+    }
+}
+#rimborsi {
+    div {
+        .fa-square {
+            color: $bg-rimborso;
+        }
+    }
+}
 
 .rendicontazione {
     background: $bg-rendicontazione;
@@ -56,4 +132,8 @@ colore grigio = ferie, giorno feriale
 
 .libero {
     background: $bg-libero;
+}
+
+.rimborso {
+    background: $bg-rimborso
 }
