@@ -166,6 +166,9 @@ public static partial class Links
         public static readonly string bundle_vue_cal_min_css = Url("bundle-vue-cal.min.css");
         public static readonly string bundle_vue_multiselect_css = Url("bundle-vue-multiselect.css");
         public static readonly string bundle_vue_multiselect_min_css = Url("bundle-vue-multiselect.min.css");
+        public static readonly string login_css = Url("login.css");
+        public static readonly string login_min_css = Url("login.min.css");
+        public static readonly string login_scss = Url("login.scss");
         public static readonly string main_css = Url("main.css");
         public static readonly string main_min_css = Url("main.min.css");
         public static readonly string main_scss = Url("main.scss");
