@@ -338,6 +338,23 @@ const app = Vue.createApp({
                     this.toModifykeys.forEach((key: string) => {
                         this.inputToDisplay[key] = true;
                     });
+                    if (this.toModify.data) {
+                        this.toModify.data = this.toModify.data.split('T')[0];
+                    }
+                    if (this.toModify.dataInizio) {
+                        this.toModify.dataInizio = this.toModify.dataInizio.split('T')[0]
+                    }
+                    if (this.toModify.dataFine) {
+                        this.toModify.dataFine = this.toModify.dataFine.split('T')[0]
+                    }
+                    if (this.toModify.oraInizio) {
+                        this.oraInizio = parseInt(this.toModify['oraInizio'].split('T')[1].split(':')[0], 10)
+                    }
+                    if (this.toModify.oraFine) {
+                        this.oraFine = parseInt(this.toModify['oraFine'].split('T')[1].split(':')[0], 10)
+                    }
+
+                    console.log("this.toModify =", this.toModify)
                     this.showSingleDay = false;
                     this.showEditForm = true
                 })
@@ -348,6 +365,22 @@ const app = Vue.createApp({
 
         },
         async create() {
+            if (this.toModify.oraInizio) {
+                if (this.toModify.data == undefined) {
+                    this.toModify.oraInizio = this.aggiornaOre(this.oraInizio, this.toModify.dataInizio)
+                }
+                else {
+                    this.toModify.oraInizio = this.aggiornaOre(this.oraInizio, this.toModify.data)
+                }
+            }
+            if (this.toModify.oraFine) {
+                if (this.toModify.data == undefined) {
+                    this.toModify.oraFine = this.aggiornaOre(this.oraFine, this.toModify.dataFine)
+                }
+                else {
+                    this.toModify.oraFine = this.aggiornaOre(this.oraFine, this.toModify.data)
+                }
+            }
 
             const url = `/${this.toModifyName}/${this.toModifyName}/Edit`
             await fetch(url, {
@@ -403,8 +436,15 @@ const app = Vue.createApp({
             }
         },
 
+        aggiornaOre(ora, dataInput) {
+            var data = new Date(dataInput)
 
+            var orario = parseInt(ora, 10) + 1
+            data.setHours(orario)
+            var dataFormattata = data.toISOString().replace('Z', "")
+            return dataFormattata
 
+        }
     },
 
     computed: {
