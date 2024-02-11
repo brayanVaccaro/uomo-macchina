@@ -65,6 +65,7 @@ const app = Vue.createApp({
             activeView: "week", //la vista attiva, fra day e week
             selectedDate: "",
             customClass: "col", //classe custom per ridurre la larghezza quando si seleziona activeView=day
+            custom: "", //classe per nascondere time-cell-labels in vue-cal
 
             selectedEvent: null,
             showEditForm: false,
@@ -90,8 +91,33 @@ const app = Vue.createApp({
         this.setEvents()
     },
     methods: {
-        //visualizzo sulla destra gli eventi per il giorno selezionato
 
+        pluraleASingolare(parola) {//mostra il nome giusto in crezione e modifica
+
+            switch (parola) {
+                case 'Rendicontazioni':
+                    parola = 'Rendicontazione'
+                    break;
+                case 'Ferie':
+                    parola = 'Feria'
+                    break;
+                case 'Permessi':
+                    parola = 'Permesso'
+                    break;
+                case 'Trasferte':
+                    parola = 'Trasferta'
+                    break;
+                case 'NottiFuori':
+                    parola = 'Notte Fuori'
+                    break;
+                case 'Rimborsi':
+                    parola = 'Rimborso'
+                    break;
+                default:
+                    return 'errore'
+            }
+            return parola;
+        },
 
         updateMonthName(monthIndex) { //aggiorna il mese
             var monthName = annoDati.Mesi[monthIndex].NomeMese;
@@ -279,6 +305,7 @@ const app = Vue.createApp({
             this.showSingleDay = false
 
             this.customClass = "col"
+            this.custom = ""
             this.activeView = "week";
 
         },
@@ -292,6 +319,7 @@ const app = Vue.createApp({
             //this.mostraSettimana = false;
             //this.mostraGiorno = true;
             this.customClass = "col-2"
+            this.custom = "custom-hide-time-cell"
             this.showSingleDay = true //visualizzo le tabelle
             this.activeView = "day";
         },
