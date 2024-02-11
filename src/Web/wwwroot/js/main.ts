@@ -1,11 +1,9 @@
 declare var Vue: any;
 declare var vuecal: any;
 declare var mainModel: any; //variabile globale che rappresenta il mainViewModel
-declare var ferieEditURL: any;
 declare var annoDati: any
 var currentMonthIndex = new Date().getMonth(); // 0-11 for Jan-Dec
 
-//accedo a @Model
 ////Vue 3
 const app = Vue.createApp({
 
@@ -30,56 +28,30 @@ const app = Vue.createApp({
                 'cartaAziendale': false,
                 'straordinario': false
             } as { [key: string]: boolean },
-            inputType: {} as { [key: string]: boolean },
-            toModify: {
-                'id': false,
-                'data': false,
-                'dataInizio': false,
-                'dataFine': false,
-                'durata': false,
-                'oreTotali': false,
-                'oraInizio': false,
-                'oraFine': false,
-                'commessa': false,
-                'dettagli': false,
-                'tipoViaggio': false,
-                'chilometri': false,
-                'autoAziendale': false,
-                'importo': false,
-                'cartaAziendale': false,
-                'straordinario': false
-            } as { [key: string]: boolean },
+            toModify: {} as { [key: string]: boolean },
             toModifykeys: null, //oggetto che contiene solo le chiavi dell'oggetto da modificare
             toModifyName: "",//nome dell'oggetto da modificare
 
             //parametri 'interni'
-            prova: "",
             dataNew: "",
             filterDate: "",
             filterCommessa: "",
             filterDettagli: "",
             model: mainModel, //oggetto model locale, da poter modificare
-            mostraSettimana: true,
-            mostraGiorno: false,
-            message: `Vue works!`,
+            
             activeView: "week", //la vista attiva, fra day e week
             selectedDate: "",
             customClass: "col", //classe custom per ridurre la larghezza quando si seleziona activeView=day
             custom: "", //classe per nascondere time-cell-labels in vue-cal
 
-            selectedEvent: null,
             showEditForm: false,
-
-            showEventCreationDialog: false, //eventuale per gestire creazione evento con vuecal
-
             showSingleDay: false,
             event: [], //eventi presi dal backend
 
-
             key: "",
             //variabili locali per scegliere orari nel menu a tendina dall'array ore
-            oraInizio: 0 as number,
-            oraFine: 0 as number,
+            oraInizio: 0,
+            oraFine: 0,
             ore: Array.from({ length: 24 }, (_, i) => i), // Array di 24 ore
 
         };
@@ -87,7 +59,6 @@ const app = Vue.createApp({
 
     mounted() {
         //setto gli eventi
-        //console.log("this.mainModel", this.mainModel)
         this.setEvents()
     },
     methods: {
@@ -202,6 +173,7 @@ const app = Vue.createApp({
             }
         },
 
+        /* Funzione del filtro setDataByDate */
         async setDataByDate(dataScelta) {
             const url = `/Main/Main/GetData?dataScelta=${encodeURIComponent(dataScelta)}`;
 
@@ -213,7 +185,8 @@ const app = Vue.createApp({
                 const data = await response.json();
 
                 this.model = data
-                //console.log("this.model.ferie..lenght", this.model.ferie.ferie.length)
+                this.setEvents()
+                console.log("this.model", this.model)
 
             }
             catch (error) {
@@ -224,7 +197,6 @@ const app = Vue.createApp({
 
 
         /* Funzione del filtro setCommessa */
-
         async setCommessa(commessaScelta, giornoSelezionato) {
             const url = `/Main/Main/GetAllByCommessa?commessaScelta=${encodeURIComponent(commessaScelta)}&giornoSelezionato=${encodeURIComponent(giornoSelezionato)}`;
 
@@ -271,6 +243,7 @@ const app = Vue.createApp({
 
         //metodo per settare gli eventi del backend nel calendario vue-cal
         setEvents() {
+            this.event = []
             this.model.eventi.eventi.forEach(x => {
                 //pusho gli eventi presi dal backend
                 this.event.push(
@@ -297,11 +270,9 @@ const app = Vue.createApp({
 
         //metodo per gestire cosa succede se si sceglie di visualizzare una settimana
         selezionaSettimana(idSettimana) {
-            this.selectedDate = idSettimana //--> VERIFICA
+            this.selectedDate = idSettimana
             console.log("ho cliccato sulla settimana")
 
-            this.mostraGiorno = false;
-            this.mostraSettimana = true;
             this.showSingleDay = false
 
             this.customClass = "col"
@@ -315,9 +286,7 @@ const app = Vue.createApp({
             this.selectedDate = idGiorno
             this.dataNew = idGiorno
             await this.setDataByDate(this.selectedDate)
-
-            //this.mostraSettimana = false;
-            //this.mostraGiorno = true;
+            this.setEvents()
             this.customClass = "col-2"
             this.custom = "custom-hide-time-cell"
             this.showSingleDay = true //visualizzo le tabelle
@@ -346,56 +315,10 @@ const app = Vue.createApp({
         },
 
         onEventClick(event, e) {
-            this.selectedEvent = event
-            console.log("this.selectedEvent", this.selectedEvent)
+            this.selezionaGiorno(event.startDate)
             e.stopPropagation()
         },
 
-        //metodo per comprendere il tipo di dato dal suo valore (string, number, boolean, date)
-        getInputType(value, key) {
-            if (typeof value === 'number') {
-                return 'number';
-            }
-            else if (typeof value === 'boolean') {
-                return 'boolean'
-            }
-            else if (this.isDate(value)) {
-                //yyy-MM-dd
-
-                this.toModify[key] = this.creaDateTime(value);
-                if (key == 'data' || key == 'dataInizio') {
-                    this.toModify[key] = this.dataNew
-                }
-                return 'date';
-            }
-            else if (value === null || typeof value === 'string') {
-                return 'string';
-            }
-        },
-
-        //metodo per comprendere se il valore può essere un valore valido di data
-        isDate(value) {
-            return !isNaN(Date.parse(value));
-        },
-
-        inserisciOra() {
-            let dataEvento = this.dataNew;//mi arriva nel formato yyy-MM-dd
-
-            this.toModify['oraInizio'] = this.creaDateTime(dataEvento, this.oraInizio)
-            this.toModify['oraFine'] = this.creaDateTime(dataEvento, this.oraFine)
-        },
-        creaDateTime(value, hours = 0, minutes = 0) {
-            const date = new Date(value);
-            date.setHours(hours, minutes, 0, 0); // Imposta ore e minuti
-
-            // Formatta la data come 'yyyy-MM-ddTHH:mm:ss'
-            const formattedDate = date.toISOString().replace('Z', '');
-            // Formatta la data come 'yyyy-MM-dd HH:mm'
-            //const formattedDate = date.toISOString().slice(0, 10) + ' ' +
-            //date.toTimeString().slice(0, 5);
-
-            return formattedDate;
-        },
         //metodo che gestisce la logica per raggiungere il form (in creazione e in modifica)
         async navigateToEdit(id, nome, data) {
 
@@ -414,9 +337,7 @@ const app = Vue.createApp({
 
                     this.toModifykeys.forEach((key: string) => {
                         this.inputToDisplay[key] = true;
-                        this.inputType[key] = this.getInputType(this.toModify[key], key)
                     });
-                    console.log("app =", app)
                     this.showSingleDay = false;
                     this.showEditForm = true
                 })
@@ -427,7 +348,6 @@ const app = Vue.createApp({
 
         },
         async create() {
-            const toModifyCapitalized = this.transformKeysToCapitalize(this.toModify);
 
             const url = `/${this.toModifyName}/${this.toModifyName}/Edit`
             await fetch(url, {
@@ -435,7 +355,7 @@ const app = Vue.createApp({
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(toModifyCapitalized),
+                body: JSON.stringify(this.toModify),
             })
             this.showEditForm = false
             this.showSingleDay = true;
@@ -460,6 +380,7 @@ const app = Vue.createApp({
                 'importo': false,
                 'cartaAziendale': false
             };
+
             //resetto oraInizio e oraFine
             this.oraInizio = 0;
             this.oraFine = 0;
@@ -483,19 +404,6 @@ const app = Vue.createApp({
         },
 
 
-        capitalizeFirstLetter(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        },
-
-        transformKeysToCapitalize(object) {
-            const capitalizedObject = {};
-            Object.keys(object).forEach(key => {
-                const capitalizedKey = this.capitalizeFirstLetter(key);
-                capitalizedObject[capitalizedKey] = object[key];
-            });
-            return capitalizedObject;
-        },
-
 
     },
 
@@ -504,7 +412,7 @@ const app = Vue.createApp({
         previousFirstDayOfWeek() {
             return new Date(new Date().setDate(new Date().getDate() - (new Date().getDay() + 6) % 7))
         },
-        //alla modifica di uno dei parametri oraInizio, oraFine calcolo oreTotali (nell'oggetto da modificare) --> vedere watch
+        //alla modifica di uno dei parametri oraInizio o oraFine calcolo oreTotali (nell'oggetto da modificare) --> vedere watch
         calcoloOreTotali() {
             if (this.toModify === null) return 0;
             if (this.oraInizio === 0 || this.oraFine === 0 || this.toModify["oreTotali"] == null) return 0;
@@ -569,7 +477,7 @@ const app = Vue.createApp({
         //al cambio del valore del metodo calcoloOreTotali chiamo inserisciOra
         calcoloOreTotali(newValue) {
             console.log("Le ore totali sono cambiate, nuovo valore: ", newValue);
-            this.inserisciOra(); // Invoca qui inserisciOra quando oreTotali cambia
+
         }
     },
     components: {
