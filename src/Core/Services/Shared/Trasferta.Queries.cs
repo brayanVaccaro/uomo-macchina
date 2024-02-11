@@ -39,6 +39,9 @@ namespace Core.Services.Shared
         public DateTime DataInizio { get; set; }
 
         public DateTime DataFine { get; set; }
+        public DateTime OraInizio { get; set; }
+
+        public DateTime OraFine { get; set; }
 
         public string Commessa { get; set; }
 
@@ -72,6 +75,8 @@ namespace Core.Services.Shared
                     Chilometri = x.Chilometri,
                     DataInizio = x.DataInizio,
                     DataFine = x.DataFine,
+                    OraInizio = x.OraInizio,
+                    OraFine = x.OraFine,
                     Commessa = x.Commessa,
                     AutoAziendale = x.AutoAziendale,
                     Dettagli = x.Dettagli,
@@ -101,6 +106,8 @@ namespace Core.Services.Shared
                     Chilometri = x.Chilometri,
                     DataInizio = x.DataInizio,
                     DataFine = x.DataFine,
+                    OraInizio = x.OraInizio,
+                    OraFine = x.OraFine,
                     Commessa = x.Commessa,
                     AutoAziendale = x.AutoAziendale,
                     Dettagli = x.Dettagli,
@@ -132,6 +139,8 @@ namespace Core.Services.Shared
                     Chilometri = x.Chilometri,
                     DataInizio = x.DataInizio,
                     DataFine = x.DataFine,
+                    OraInizio = x.OraInizio,
+                    OraFine = x.OraFine,
                     Commessa = x.Commessa,
                     AutoAziendale = x.AutoAziendale,
                     Dettagli = x.Dettagli,
@@ -160,9 +169,11 @@ namespace Core.Services.Shared
                     Chilometri = x.Chilometri,
                     DataInizio = x.DataInizio,
                     DataFine = x.DataFine,
+                    OraInizio = x.OraInizio,
+                    OraFine = x.OraFine,
                     Commessa = x.Commessa,
                     AutoAziendale = x.AutoAziendale,
-                    Dettagli = x.Dettagli,
+                    Dettagli = x.Dettagli
                 }).ToArrayAsync();
 
                 risultato.Count = await trasferte.CountAsync();
@@ -187,6 +198,8 @@ namespace Core.Services.Shared
                     Chilometri = x.Chilometri,
                     DataInizio = x.DataInizio,
                     DataFine = x.DataFine,
+                    OraInizio = x.OraInizio,
+                    OraFine = x.OraFine,
                     Commessa = x.Commessa,
                     AutoAziendale = x.AutoAziendale,
                     Dettagli = x.Dettagli,

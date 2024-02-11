@@ -19,6 +19,10 @@ namespace Core.Models
 
         public DateTime DataInizio { get; set; }
 
+        public DateTime OraInizio { get; set; }
+
+        public DateTime OraFine { get; set; }
+
         public DateTime DataFine { get; set; }
 
         public string Commessa { get; set; }
