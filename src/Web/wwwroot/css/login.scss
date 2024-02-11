@@ -79,13 +79,13 @@ body {
                 padding-right: 30px;
             }
 
-            i.fa-eye {
+            i.fa-eye, i.fa-eye-slash {
                 position: absolute;
                 top: 50%;
                 right: 5px;
                 transform: translateY(-50%);
                 cursor: pointer;
-                pointer-events: none; /* Assicura che l'icona non intercetti gli eventi di input */
+                /*pointer-events: none;*/ /* Assicura che l'icona non intercetti gli eventi di input */
             }
 
             input[type="text"], input[type="password"], input[type="submit"], textarea {

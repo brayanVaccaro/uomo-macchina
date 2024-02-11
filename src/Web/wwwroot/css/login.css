@@ -60,13 +60,13 @@ body {
 .face .content .field-wrapper input[type=password] {
   padding-right: 30px;
 }
-.face .content .field-wrapper i.fa-eye {
+.face .content .field-wrapper i.fa-eye, .face .content .field-wrapper i.fa-eye-slash {
   position: absolute;
   top: 50%;
   right: 5px;
   transform: translateY(-50%);
   cursor: pointer;
-  pointer-events: none; /* Assicura che l'icona non intercetti gli eventi di input */
+  /*pointer-events: none;*/ /* Assicura che l'icona non intercetti gli eventi di input */
 }
 .face .content .field-wrapper input[type=text], .face .content .field-wrapper input[type=password], .face .content .field-wrapper input[type=submit], .face .content .field-wrapper textarea {
   -webkit-appearance: none;
