@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Core.Services.Shared
     public class EventoQuery
     {
         public Guid IdCurrentUser { get; set; }
+        public Guid IdTipologia { get; set; } //permesso, rendicontazione, feria, trasferta
         public string Filter { get; set; }
     }
 
@@ -75,6 +77,24 @@ namespace Core.Services.Shared
             }
 
             return risultato;
+        }
+        public async Task<bool> DeleteEvento(Guid id)
+        {
+            VueCalEvent evento = new();
+            evento = await _dbContext.Eventi.Where(x => x.RendicontazioneId == id).FirstOrDefaultAsync();
+            //evento = null
+            evento ??= await _dbContext.Eventi.Where(x => x.FeriaId == id).FirstOrDefaultAsync();
+            evento ??= await _dbContext.Eventi.Where(x => x.PermessoId == id).FirstOrDefaultAsync();
+            evento ??= await _dbContext.Eventi.Where(x => x.TrasfertaId == id).FirstOrDefaultAsync();
+
+            if (evento == null)
+            {
+                return false;
+            }
+
+            _dbContext.Eventi.Remove(evento);
+            await _dbContext.SaveChangesAsync();
+            return true;
         }
     }
 

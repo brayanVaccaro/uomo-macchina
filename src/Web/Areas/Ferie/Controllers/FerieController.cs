@@ -149,6 +149,7 @@ namespace UomoMacchina.Areas.Ferie.Controllers
                 if (feria != null)
                 {
                     // Effettua l'eliminazione della Feria
+                    await _sharedService.DeleteEvento(id);
                     await _sharedService.DeleteFerie(id);
 
                     Alerts.AddSuccess(this, "Feria cancellata con successo");

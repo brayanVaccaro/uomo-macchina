@@ -150,6 +150,7 @@ namespace UomoMacchina.Areas.Trasferte.Controllers
                 if (trasferta != null)
                 {
                     // Effettua l'eliminazione della Trasferte
+                    await _sharedService.DeleteEvento(id);
                     await _sharedService.DeleteTrasferta(id);
 
                     Alerts.AddSuccess(this, "Trasferte cancellata con successo");

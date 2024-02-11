@@ -145,6 +145,7 @@ namespace UomoMacchina.Areas.Permessi
                 if (permesso != null)
                 {
                     // Effettua l'eliminazione della Permessi
+                    await _sharedService.DeleteEvento(id);
                     await _sharedService.DeletePermesso(id);
 
                     Alerts.AddSuccess(this, "Permessi cancellata con successo");

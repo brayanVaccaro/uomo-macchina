@@ -60,21 +60,5 @@ namespace Core.Services.Shared
             return vueCalEvent.Id;
         }
 
-        public async Task<bool> DeleteEvento(Guid id)
-        {
-            // l'evento da eliminare scelto sulla base dell'id di cmd
-            var evento = await _dbContext.Eventi
-                .Where(x => x.Id == id)
-                .FirstOrDefaultAsync();
-
-            if (evento == null)
-            {
-                return false;
-            }
-
-            _dbContext.Eventi.Remove(evento);
-            await _dbContext.SaveChangesAsync();
-            return true;
-        }
     }
 }
