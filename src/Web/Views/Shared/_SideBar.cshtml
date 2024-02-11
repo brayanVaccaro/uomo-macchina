@@ -4,36 +4,36 @@
     var nomeMeseAttuale = today.ToString("MMMM");
 }
 
-<nav class="navbar d-flex flex-column justify-content-center bg-body-tertiary">
+<nav class="navbar nav d-flex flex-column justify-content-center">
     @foreach (var mese in Model.Mesi)
     {
 
         <!--Gli altri mesi non visualizzati-->
         @if (mese.NomeMese == nomeMeseAttuale)
         {
-            <div class="mesi d-flex flex-row justify-content-end">
+            <div id="sidebar-menu" class="mesi d-flex w-75 justify-content-between">
 
-                <div class="col" v-on:click="cambioMese() ">
+                <button class="vuecal__arrow vuecal__arrow--prev m-0 p-0" id="prevMonth" v-on:click="prevMonth()">
                     <i class="fa-solid fa-caret-left fa-2x"></i>
 
-                </div>
-                <div class="col">
-                    <h3 class="m-0">@mese.NomeMese</h3>
+                </button>
+                <div class="">
+                    <h3 class="m-0" id="monthDisplay">@mese.NomeMese</h3>
 
                 </div>
-                <div class="col" v-on:click="cambioMese() ">
+                <button class="vuecal__arrow vuecal__arrow--next m-0 p-0" id="nextMonth" v-on:click="nextMonth()">
                     <i class="fa-solid fa-caret-right fa-2x"></i>
-                </div>
+                </button>
 
             </div>
 
 
-            <div class="row">
-                <ul class="navbar-nav d-flex flex-column col">
+            <div id="sidebar-items" class="row w-75">
+                <ul class="navbar-nav d-flex flex-column col p-0 text-center" id="settimaneContainer">
 
                     @foreach (var settimana in mese.Settimane)
                     {
-                        <li class="nav-item dropdown col">
+                        <li class="nav-item dropdown col weekDisplay">
 
                             @if (settimana.Giorni.Contains(today.Date))
                             {
@@ -45,7 +45,7 @@
                                 <ul class="dropdown-menu row show" data-bs-popper="static">
                                     @foreach (var giorno in settimana.Giorni)
                                     {
-                                        <li class="dropdown-item" v-on:click.stop="selezionaGiorno('@giorno.ToString("yyyy-MM-dd")')">
+                                        <li class="dropdown-item dayDisplay" v-on:click.stop="selezionaGiorno('@giorno.ToString("yyyy-MM-dd")')">
                                             <a>@giorno.ToString("dddd dd")</a>
                                         </li>
                                     }
@@ -74,7 +74,7 @@
                 </ul>
             </div>
         }
-                
+
     }
 </nav>
 

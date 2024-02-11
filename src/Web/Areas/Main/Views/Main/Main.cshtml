@@ -92,6 +92,7 @@ var properties = Model.GetType().GetProperties();
         var filteredProperties = @Html.Raw(Json.Serialize(viewModelProperties));
         console.log(filteredProperties)
         console.log(mainModel)
+        var annoDati = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Anno));
     </script>
 
 }
