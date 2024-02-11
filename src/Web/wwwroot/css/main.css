@@ -7,10 +7,37 @@
   display: none;
 }
 
+.vuecal__title-bar {
+  background-color: #42b983;
+}
+
+.vuecal__weekdays-headings {
+  background-color: rgba(66, 185, 131, 0.5);
+}
+
 .vuecal__event {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  color: black;
+}
+
+.custom-hide-time-cell .vuecal__time-column {
+  width: 0;
+}
+.custom-hide-time-cell .vuecal__time-cell-label {
+  display: none;
+}
+.custom-hide-time-cell .ciao {
+  color: blue;
+}
+
+#sidebar-menu {
+  background-color: #42b983;
+}
+
+#sidebar-items {
+  background-color: rgba(66, 185, 131, 0.5);
 }
 
 /*
@@ -21,8 +48,37 @@ colore arancio = Permesso
 colore viola= Trasferta
 colore blu straordinario
 colore grigio = ferie, giorno feriale
+colore giallo = rimborsi
+colore nero = nottiFuori
 
 */
+#rendicontazioni div .fa-square {
+  color: #00ff00;
+}
+
+#ferie div .fa-square {
+  color: #808080;
+}
+
+#permessi div .fa-square {
+  color: #ff8d00;
+}
+
+/*#nottiFuori {
+    div {
+        .fa-square {
+            color: $bg-notteFuori;
+        }
+    }
+}*/
+#trasferte div .fa-square {
+  color: #9700ff;
+}
+
+#rimborsi div .fa-square {
+  color: #ffff00;
+}
+
 .rendicontazione {
   background: #00ff00;
 }
@@ -41,4 +97,8 @@ colore grigio = ferie, giorno feriale
 
 .libero {
   background: #808080;
+}
+
+.rimborso {
+  background: #ffff00;
 }

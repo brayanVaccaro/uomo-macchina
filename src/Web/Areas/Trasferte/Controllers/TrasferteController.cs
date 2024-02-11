@@ -92,7 +92,8 @@ namespace UomoMacchina.Areas.Trasferte.Controllers
                 try
                 {
                     model.Id = await _sharedService.Handle(model.ToAddOrUpdateTrasfertaCommand());
-
+                    var evento = model.ToVueCalEvent(model);
+                    await _sharedService.Handle(evento);
                     Alerts.AddSuccess(this, "Trasferte effetuata con successo");
 
                     return RedirectToAction("Main", "Main", new { area = "Main" });
@@ -150,6 +151,7 @@ namespace UomoMacchina.Areas.Trasferte.Controllers
                 if (trasferta != null)
                 {
                     // Effettua l'eliminazione della Trasferte
+                    await _sharedService.DeleteEvento(id);
                     await _sharedService.DeleteTrasferta(id);
 
                     Alerts.AddSuccess(this, "Trasferte cancellata con successo");

@@ -41,6 +41,8 @@ namespace UomoMacchina.Areas.Trasferte.Data
                 Chilometri = trasfertaDTO.Chilometri;
                 DataInizio = trasfertaDTO.DataInizio;
                 DataFine = trasfertaDTO.DataFine;
+                OraInizio = trasfertaDTO.OraInizio;
+                OraFine = trasfertaDTO.OraFine;
                 Commessa = trasfertaDTO.Commessa;
                 Class = trasfertaDTO.Class;
                 AutoAziendale = trasfertaDTO.AutoAziendale;
@@ -53,6 +55,9 @@ namespace UomoMacchina.Areas.Trasferte.Data
             public DateTime DataInizio { get; set; }
 
             public DateTime DataFine { get; set; }
+            public DateTime OraInizio { get; set; }
+
+            public DateTime OraFine { get; set; }
 
             public string Commessa { get; set; }
 
@@ -72,6 +77,8 @@ namespace UomoMacchina.Areas.Trasferte.Data
                     Chilometri = trasfertaDTO.Chilometri;
                     DataInizio = trasfertaDTO.DataInizio;
                     DataFine = trasfertaDTO.DataFine;
+                    OraInizio = trasfertaDTO.OraInizio;
+                    OraFine = trasfertaDTO.OraFine;
                     Commessa = trasfertaDTO.Commessa;
                     AutoAziendale = trasfertaDTO.AutoAziendale;
                     Dettagli = trasfertaDTO.Dettagli;
@@ -86,9 +93,32 @@ namespace UomoMacchina.Areas.Trasferte.Data
                     Chilometri = Chilometri,
                     DataInizio = DataInizio,
                     DataFine = DataFine,
+                    OraInizio = OraInizio,
+                    OraFine = OraFine,
                     Commessa = Commessa,
                     AutoAziendale = AutoAziendale,
                     Dettagli = Dettagli,
+                };
+            }
+
+            internal AddOrUpdateEventCommand ToVueCalEvent(TrasfertaViewModel trasferta)
+            {
+                return new AddOrUpdateEventCommand
+                {
+                    Id = null,
+                    StartDate = trasferta.DataInizio.ToString("d"),
+                    StartTime = trasferta.OraInizio.ToString("HH:mm"),
+                    EndDate = trasferta.DataFine.ToString("d"),
+                    EndTime = trasferta.OraFine.ToString("HH:mm"),
+                    Title = trasferta.Commessa,
+                    Content = trasferta.Dettagli,
+                    CssClass = "trasferta",
+                    Background = false,
+                    Split = "",
+                    AllDay = false,
+                    Deletable = true,
+                    Resizable = false,
+                    TrasfertaId = trasferta.Id,
                 };
             }
 
@@ -108,7 +138,7 @@ namespace UomoMacchina.Areas.Trasferte.Data
         }
 
         // Metodo per utilizzare il filtro di TrasfertaQuery sul file Trasferte.Queries.cs 
-        
+
 
 
         //public override IActionResult GetRoute()

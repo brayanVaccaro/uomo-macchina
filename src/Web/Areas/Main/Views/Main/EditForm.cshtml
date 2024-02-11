@@ -1,12 +1,7 @@
-﻿<h1>EDIT FORM</h1>
-
-
-<h1>{{this.toModifyName}}</h1>
+﻿<h1>{{pluraleASingolare(toModifyName)}}</h1>
 <div>
 
     <form class="was-validated">
-
-
         @* Data *@
         <div v-if="inputToDisplay['data']" class="col-md-4 position-relative">
             <label class="form-label" for="data">Data:</label>
@@ -14,7 +9,6 @@
             <span validation-for="data" class="invalid-feedback">Non hai ancora inserito la data</span>
             <span validation-for="data" class="valid-feedback">Data inserita</span>
         </div>
-
 
         @* Data Inizio *@
         <div v-if="inputToDisplay['dataInizio']" class="col-md-4 position-relative">
@@ -24,15 +18,13 @@
             <span validation-for="dataInizio" class="valid-feedback">Data di inizio inserita</span>
         </div>
 
-
         @* Data Fine *@
         <div v-if="inputToDisplay['dataFine']" class="col-md-4 position-relative">
             <label class="form-label" for="dataFine">Data Fine:</label>
-            <input class="form-control" type="date" id="dataFine" v-model="toModify['dataFine']" name="dataFine" required>
+            <input class="form-control" type="date" id="dataFine" v-model="toModify['dataFine']" name="dataFine" :min="toModify['dataInizio']" required>
             <span validation-for="dataFine" class="invalid-feedback">Non hai ancora inserito la data fine</span>
             <span validation-for="dataFine" class="valid-feedback">Data di fine inserita</span>
         </div>
-
 
         @* Durata *@
         <div v-if="inputToDisplay['durata']" class="col-md-4 position-relative">
@@ -42,71 +34,28 @@
             <span validation-for="durata" class="valid-feedback">Durata inserita</span>
         </div>
 
-        <div v-if="!toModify['id']">
-            @* sono in creazione *@
+        @* Ora Inizio *@
+        <div v-if="inputToDisplay['oraInizio']" class="col-md-4 position-relative">
+            <label class="form-label" for="oraInizio">Ora Inizio:</label>
+            <select class="form-control" v-model="this.oraInizio" required>
+                <option v-for="ora in ore">{{ora}}</option>
+                <span validation-for="oraInizio" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
+            </select>
+            <span validation-for="oraInizio" class="valid-feedback">Ora di inizio inserita</span>
+            @* <input type="time" id="oraInizio"  name="oraInizio"> *@
+        </div>
 
+        @* Ora Fine *@
 
-            @* Ora Inizio *@
-            <div v-if="inputToDisplay['oraInizio']" class="col-md-4 position-relative">
-                <label class="form-label" for="oraInizio">Ora Inizio:</label>
-                <select class="form-control" v-model="this.oraInizio" required>
-                    <option v-for="ora in ore">{{ora}}</option>
-                    <span validation-for="oraInizio" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
-                </select>
-                <span validation-for="oraInizio" class="valid-feedback">Ora di inizio inserita</span>
-                @* <input type="time" id="oraInizio"  name="oraInizio"> *@
-            </div>
-
-            @* Ora Fine *@
-
-            <div v-if="inputToDisplay['oraFine']" class="col-md-4 position-relative">
-                <label class="form-label" for="oraFine">Ora Fine:</label>
-                <select class="form-control" v-model="this.oraFine" required>
-                    <option v-for="ora in ore">{{ora}}</option>
-                    <span validation-for="oraFine" class="invalid-feedback">Non hai ancora inserito l'ora di fine</span>
-                </select>
-                @* <input class="form-control" type="time" id="oraFine" v-model="toModify['oraFine']" name="oraFine" required> *@
-                <span validation-for="oraFine" class="valid-feedback">Ora di fine inserita</span>
-            </div>
-
-
-            @* <div class="col-md-4 position-relative">
+        <div v-if="inputToDisplay['oraFine']" class="col-md-4 position-relative">
             <label class="form-label" for="oraFine">Ora Fine:</label>
             <select class="form-control" v-model="this.oraFine" required>
-            <option v-for="ora in ore">{{ora}}</option>
-            <span validation-for="oraFine" class="invalid-feedback">Non hai ancora inserito l'ora di fine</span>
-            </select>
-            <span validation-for="oraFine" class="valid-feedback">Ora di fine inserita</span><*@
-            @* <input type="time" id="oraFine" v-model="this.oraFine" name="oraFine"> *@
-            @* </div> *@
-        </div>
-        <div v-else>
-            @* sono in modifica *@
-
-
-            @* Ora Inizio *@
-            <div v-if="inputToDisplay['oraInizio']" class="col-md-4 position-relative">
-                <label class="form-label" for="oraInizio">Ora Inizio:</label>
-                @*                 <select v-model="this.oraInizio">
                 <option v-for="ora in ore">{{ora}}</option>
-                </select> *@
-                <input class="form-control" type="time" id="oraInizio" v-model="toModify['oraInizio'].split('T')[1]" name="oraInizio" required>
-                <span validation-for="oraInizio" class="invalid-feedback">Non hai ancora inserito l'ora di inizio</span>
-                <span validation-for="oraInizio" class="valid-feedback">Ora di inizio inserita</span>
-            </div>
-
-            @* Ora Fine *@
-            <div v-if="inputToDisplay['oraFine']" class="col-md-4 position-relative">
-                <label class="form-label" for="oraFine">Ora Fine:</label>
-                @*                 <select v-model="this.oraFine">
-                <option v-for="ora in ore">{{ora}}</option>
-                </select> *@
-                <input class="form-control" type="time" id="oraFine" v-model="toModify['oraFine'].split('T')[1]" name="oraFine" required>
                 <span validation-for="oraFine" class="invalid-feedback">Non hai ancora inserito l'ora di fine</span>
-                <span validation-for="oraFine" class="valid-feedback">Ora di fine inserita</span>
-            </div>
+            </select>
+            @* <input class="form-control" type="time" id="oraFine" v-model="toModify['oraFine']" name="oraFine" required> *@
+            <span validation-for="oraFine" class="valid-feedback">Ora di fine inserita</span>
         </div>
-
 
         @* Ore Totali *@
         <div v-if="inputToDisplay['oreTotali']" class="col-md-4 position-relative">
@@ -116,13 +65,11 @@
             <span validation-for="oreTotali" class="valid-feedback">Ore totali inserita</span>
         </div>
 
-
         @* Straordinario *@
         <div v-if="inputToDisplay['straordinario']" class="col-md-6 position-relative">
             <label class="form-check-label" for="straordinario">Straordinario:</label>
             <input class="form-check-input" type="checkbox" id="straordinario" v-model="toModify['straordinario']" name="straordinario">
         </div>
-
 
         @* Tipo Viaggio *@
         <div v-if="inputToDisplay['tipoViaggio']" class="col-md-6 position-relative">
@@ -132,7 +79,6 @@
             <span validation-for="tipoViaggio" class="valid-feedback">Tipo di viaggio inserita</span>
         </div>
 
-
         @* Chilometri *@
         <div v-if="inputToDisplay['chilometri']" class="col-md-4 position-relative">
             <label class="form-label" for="chilometri">Chilometri:</label>
@@ -141,13 +87,11 @@
             <span validation-for="chilometri" class="valid-feedback"> Chilometri inserita</span>
         </div>
 
-
         @* Auto Aziendale *@
         <div v-if="inputToDisplay['autoAziendale']" class="col-md-6 position-relative">
             <label class="form-check-label" for="autoAziendale">Auto Aziendale:</label>
             <input class="form-check-input" type="checkbox" id="autoAziendale" v-model="toModify['autoAziendale']" name="autoAziendale" required>
         </div>
-
 
         @* Importo *@
         <div v-if="inputToDisplay['importo']" class="col-md-4 position-relative">
@@ -157,13 +101,11 @@
             <span validation-for="importo" class="valid-feedback">Importo inserito</span>
         </div>
 
-
         @* Carta Aziendale *@
         <div v-if="inputToDisplay['cartaAziendale']" class="col-md-6 position-relative">
             <label class="form-check-label" for="cartaAziendale">Carta Aziendale:</label>
             <input class="form-check-input" type="checkbox" id="cartaAziendale" v-model="toModify['cartaAziendale']" name="cartaAziendale" required>
         </div>
-
 
         @* Commessa *@
         <div v-if="inputToDisplay['commessa']" class="col-md-6 position-relative">
@@ -173,7 +115,6 @@
             <span validation-for="commessa" class="valid-feedback">Commessa inserita</span>
         </div>
 
-
         @* Dettagli *@
         <div v-if="inputToDisplay['dettagli']" class="col-md-8 position-relative">
             <label class="form-label" for="dettagli">Dettagli:</label>
@@ -182,13 +123,16 @@
             <span validation-for="dettagli" class="valid-feedback">Dettagli inserita</span>
         </div>
 
-
         @* Sezione dei tasti*@
         <div class=" d-flex justify-content-start">
             <div v-if="toModify['id']" class="d-flex w-75 justify-content-between">
                 <a class="Annulla btn btn-warning" v-on:click="annulla()">Annulla</a>
 
-                <a v-if="toModify['id']" class="Elimina btn btn-danger" v-on:click="elimina(this.toModify['id'])">Elimina</a>
+                <!-- Button trigger modal -->
+                <button v-if="toModify['id']" type="button" class="btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    Elimina
+                </button>
+                
 
                 <button class="salva btn btn-primary" type="button" v-on:click="create()">Salva modifiche</button>
             </div>
@@ -198,71 +142,30 @@
 
                 <button class="Salva btn btn-primary" type="button" v-on:click="create()">Invia</button>
             </div>
-            @*<div class="col">
-            </div> *@
-
-            @* <div class="col-4 justify-content-around">
-            </div> *@
-            <!-- Se l'ID non è nullo, significa che si tratta di una modifica -->
-            <!-- In questo caso, mostra i pulsanti Annulla, Elimina e Invia -->
-            @* <div v-else class="col-4">
-            </div> *@
-            <!-- Se l'ID è nullo, significa che si tratta di un nuovo record -->
-            <!-- In questo caso, mostra solo i pulsanti Annulla e Invia -->
-            @*         <button class="Invia btn btn-primary " type="button" onclick="click()">Invia</button>*@
-
         </div>
 
     </form>
-
-
-    @* <div v-for="(value, key) in toModify" :key="key">
-    <p>{{ key }}: {{ value }}</p>
-    </div> *@
-
-
+    <!-- Modale di conferma eliminazione -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Conferma Eliminazione</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Stai per eliminare una {{pluraleASingolare(toModifyName)}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                    <button  class="Elimina btn btn-danger" data-bs-dismiss="modal" v-on:click="elimina(this.toModify['id'])">Elimina</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 @section styles {
     <link href="~/css/richieste.css" rel="stylesheet" />
 }
-
-
-@*         <button class="Elimina btn btn-danger" type="button" v-on:click="elimina()">Elimina</button>
- *@
-
-@* Fare l'if per i pulsanti quando sono in creazione o in modifica *@
-@* <div v-if="inputToDisplay['id']">
-
-    </div> *@
-@* if(id !== null) *@
-
-<!-- Tasto Anulla-->
-@* <a class="Annulla btn btn-warning" href="@Url.Action(MVC.Rendicontazioni.Rendicontazioni.Index())">Annulla</a>
-
-
-    <button class="Salva btn btn-primary" type="button" v-on:click="create()">Crea</button> *@
-
-
-@*
-@section scripts{
-    <script type="module">
-
-        Vue.createApp({
-            data() {
-                return {
-                    // Altre variabili...
-                    isEditing: false, // Impostato su true quando siamo in modalità modifica
-                    // Altre variabili...
-                };
-            },
-            methods: {
-                updateTipoRichiesta() {
-                    // Codice per disabilitare la validazione dei campi
-                    $("form :input[required]").prop("required", false);
-                }
-            }
-        }).mount('#pageId')
-    </script>
-} *@

@@ -6,22 +6,13 @@
 @{
  
 }
-<div class="row justify-content-start align-items-center">
-    <div class="col">
-        <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#tabellaNottiFuori" aria-expanded="false" aria-controls="tabellaNottiFuori"><h1>NottiFuori</h1></button>
-        <div class="col-1 align-self-center ">
-            <i class="fa-solid fa-square fa-2x bg-dark"></i>
-        </div>
-    </div>
-    <div class="col">
-        <ul class="navbar-nav flex-wrap ms-auto">
-            <li>
-                <a class="Nuovo btn btn-light ms-2" v-on:click='navigateToEdit(null, "NottiFuori", dataNew)' title="Inserisci un nuovo elemento">
-                    <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
-                </a>
-            </li>
-        </ul>
-    </div>
+<div class="row align-items-center">
+
+    <i class=" col-auto fa fa-square fa-2x "></i>
+    <h1 class="col-6" data-bs-toggle="collapse" data-bs-target="#tabellaNottiFuori" aria-expanded="true" aria-controls="tabellaNottiFuori">Notti Fuori</h1>
+    <a class="col-2 btn btn-light" v-on:click='navigateToEdit(null, "NottiFuori", dataNew)' title="Inserisci un nuovo elemento">
+        <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
+    </a>
 </div>
 
 <div id="tabellaNottiFuori" class="row text-center collapse">
@@ -56,10 +47,10 @@
                 <td class="text-nowrap">
                     {{notteFuori.tipoViaggio}}
                 </td>
-                <td class="text-nowrap">
+                <td class="text-wrap">
                     {{notteFuori.commessa}}
                 </td>
-                <td class="text-nowrap">
+                <td class="text-wrap">
                     {{notteFuori.dettagli}}
                 </td>
             </tr>

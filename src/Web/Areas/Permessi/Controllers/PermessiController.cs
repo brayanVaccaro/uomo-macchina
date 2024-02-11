@@ -89,7 +89,8 @@ namespace UomoMacchina.Areas.Permessi
                 try
                 {
                     model.Id = await _sharedService.Handle(model.ToAddOrUpdatePermessoCommand());
-                    
+                    var evento = model.ToVueCalEvent(model);//salvo nella tabella degli eventi
+                    await _sharedService.Handle(evento);
                     Alerts.AddSuccess(this, "Permessi effetuata con successo");
 
                     }
@@ -145,6 +146,7 @@ namespace UomoMacchina.Areas.Permessi
                 if (permesso != null)
                 {
                     // Effettua l'eliminazione della Permessi
+                    await _sharedService.DeleteEvento(id);
                     await _sharedService.DeletePermesso(id);
 
                     Alerts.AddSuccess(this, "Permessi cancellata con successo");

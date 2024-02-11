@@ -6,27 +6,16 @@
 @{
 
 }
-<ul class="navbar-nav flex-wrap ms-auto">
-    <div class="row justify-content-start align-items-center">
-        <div class="col">
-            <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#tabellaRendicontazioni" aria-expanded="true" aria-controls="tabellaRendicontazioni">
-                <h1>Rendicontazioni</h1><div class="col-1 align-self-center ">
-                    <i class="fa-solid fa-square fa-2x " style="color: green;"></i>
-                </div>
-            </button>
-        </div>
-        <div class="col">
-            <ul class="navbar-nav flex-wrap ms-auto">
-                <li>
-                    <a class="Nuovo btn btn-light ms-2" v-on:click='navigateToEdit(null, "Rendicontazioni", dataNew)' title="Inserisci un nuovo elemento">
-                        <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</ul>
+@* <div class=""> *@
 
+<div class="row align-items-center">
+
+    <i class=" col-auto fa fa-square fa-2x "></i>
+    <h1 class="col-6" data-bs-toggle="collapse" data-bs-target="#tabellaRendicontazioni" aria-expanded="true" aria-controls="tabellaRendicontazioni">Rendicontazioni</h1>
+    <a class="col-2 btn btn-light" v-on:click='navigateToEdit(null, "Rendicontazioni", dataNew)' title="Inserisci un nuovo elemento">
+        <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
+    </a>
+</div>
 
 <div id="tabellaRendicontazioni" class="row text-center collapse show">
     <table class="table table-hover table-striped">
@@ -57,7 +46,7 @@
         </thead>
         <tbody>
             <tr v-if="model.rendicontazioni.rendicontazioni.length == 0">
-                <td scope="row" colspan="5">
+                <td scope="row" colspan="7">
                     Nessun elemento trovato
                 </td>
             </tr>
@@ -79,17 +68,17 @@
                 <td class="text-nowrap">
                     {{rendicontazione.straordinario ? 'Si' : 'No'}}
                 </td>
-                <td class="text-nowrap">
+                <td class="text-wrap">
                     {{rendicontazione.commessa}}
                 </td>
-                <td class="">
+                <td class="text-wrap">
                     {{rendicontazione.dettagli}}
                 </td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="5">
+                <td colspan="7">
                     <nav class="navbar navbar-expand justify-content-md-center">
                         <ul class="navbar-nav flex-wrap"><partial name="@MVC.Shared.Views._PagingPartial" model="Model" /></ul>
                     </nav>
@@ -101,35 +90,4 @@
 
 @section styles {
     <link href="~/css/richieste.css" rel="stylesheet" />
-}
-
-@section scripts {
-
-    <script type="module">
-
-        Vue.createApp({
-            data() {
-                return {
-                    message: 'Vue Funziona!',
-                    permesso: false,
-                    feria: false
-                }
-            },
-            methods: {
-                formatDate(dateString) {
-                    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-                    return new Date(dateString).toLocaleDateString(undefined, options);
-                },
-                formatTime(timeString) {
-                    return new Date(`1970-01-01T${timeString}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                },
-                navigateToEdit(id, type) {
-                    // Implementazione della tua funzione navigateToEdit
-                }
-            }
-        }).mount('#pageId')
-    </script>
-
-
-
 }

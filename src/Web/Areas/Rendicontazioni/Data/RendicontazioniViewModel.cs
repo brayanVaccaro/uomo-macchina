@@ -91,6 +91,26 @@ namespace UomoMacchina.Areas.Rendicontazioni.Data
                     Dettagli = Dettagli,
                 };
             }
+            internal AddOrUpdateEventCommand ToVueCalEvent(RendicontazioneViewModel rendicontazione)
+            {
+                return new AddOrUpdateEventCommand
+                {
+                    Id = null,
+                    StartDate = rendicontazione.Data.ToString("d"),
+                    StartTime = rendicontazione.OraInizio.ToString("HH:mm"),
+                    EndDate = rendicontazione.Data.ToString("d"),
+                    EndTime = rendicontazione.OraFine.ToString("HH:mm"),
+                    Title = rendicontazione.Dettagli,
+                    Content = rendicontazione.Dettagli,
+                    CssClass = "rendicontazione",
+                    Background = false,
+                    Split = "",
+                    AllDay = false,
+                    Deletable = true,
+                    Resizable = false,
+                    RendicontazioneId = rendicontazione.Id,
+                };
+            }
 
             public string ToJson()
             {

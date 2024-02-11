@@ -77,6 +77,7 @@ namespace UomoMacchina.Areas.Ferie.Controllers
                 {
                     Id = null,
                     DataInizio = DateTime.Parse(data),
+                    DataFine = DateTime.Parse(data).AddDays(1),
                 });
                 return Ok(model);
             }
@@ -92,7 +93,8 @@ namespace UomoMacchina.Areas.Ferie.Controllers
                 try
                 {
                     model.Id = await _sharedService.Handle(model.ToAddOrUpdateFeriaCommand());
-
+                    var evento = model.ToVueCalEvent(model);//salvo nella tabella degli eventi
+                    await _sharedService.Handle(evento);
                     Alerts.AddSuccess(this, "Ferie effetuata con successo");
 
                     return RedirectToAction("Main", "Main", new { area = "Main" });
@@ -149,6 +151,7 @@ namespace UomoMacchina.Areas.Ferie.Controllers
                 if (feria != null)
                 {
                     // Effettua l'eliminazione della Feria
+                    await _sharedService.DeleteEvento(id);
                     await _sharedService.DeleteFerie(id);
 
                     Alerts.AddSuccess(this, "Feria cancellata con successo");

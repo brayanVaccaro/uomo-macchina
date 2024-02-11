@@ -8,7 +8,7 @@
     3. Gestire la creazione di un elemento (aggiungerlo nella tabella specifica dell'elemento scelto) e del relativo evento (aggiungere l'evento alla tabella Eventi):
         Clicco un bottone, mi esce il modale (Edit.cshtml) per inserire i dati.
         La prima scelta nel modale sarà quella di selezionare cosa voglio aggiungere e in base a questa scelta mostrare o nascondere elementi del form
-    
+
     4. FUNZIONA (PER COMMESSA, PER DATA, PER DETTAGLI) --> Ricerca di un dato --> implementazione da zero
     5. Colori da cambiare
     6. Sidebar implementare il cambio del mese al click sulla freccia, migliorare il css. Al clik su una settimana ti deve portare nel vue-cal alla settimana cliccata
@@ -17,11 +17,11 @@
 9. migliorare _SingleDay
 10. implementare un modo per convertire da un elemento di un ViewModel ad un EventoDTO
     *@
-    @{
-// Lista vuota per memorizzare le informazioni delle proprietà che corrispondono al criterio
-var viewModelProperties = new List<string>();
-// Tutte le proprietà del modello
-var properties = Model.GetType().GetProperties();
+@{
+    // Lista vuota per memorizzare le informazioni delle proprietà che corrispondono al criterio
+    var viewModelProperties = new List<string>();
+    // Tutte le proprietà del modello
+    var properties = Model.GetType().GetProperties();
     foreach (var prop in properties)
     {
         // Il tipo della proprietà contiene "ViewModel"?
@@ -29,7 +29,7 @@ var properties = Model.GetType().GetProperties();
         {
             // Ottieni il valore della proprietà
             var value = prop.GetValue(Model);
-    
+
 
 
             //Aggiungo alla lista
@@ -49,7 +49,8 @@ var properties = Model.GetType().GetProperties();
         </div>
         @* Calendario Settimanale *@
         <div :class="customClass">
-            <vue-cal ref="vuecal"
+            <vue-cal :class="custom"
+                     ref="vuecal"
                      v-model:active-view="activeView"
                      v-model:selected-date="selectedDate"
                      locale="it"
@@ -61,7 +62,7 @@ var properties = Model.GetType().GetProperties();
                      :cell-click-hold="false"
                      :drag-to-create-event="false" />
         </div>
-
+        
 
         <div v-if="showSingleDay" class="col-8">
             <partial name="@MVC.Main.Main.Views._SingleDay" model="Model" />
@@ -82,15 +83,14 @@ var properties = Model.GetType().GetProperties();
 
 @section scripts {
     <script src="~/js/site.js" type="module" asp-append-version="true"></script>
-    
+
     <script src="~/js/main.js" type="module" asp-append-version="true"></script>
 
 
     <script type="text/javascript">
         var mainModel = @Html.Raw(Model.ToJson());
         var filteredProperties = @Html.Raw(Json.Serialize(viewModelProperties));
-        console.log(filteredProperties)
-        console.log(mainModel)
+        var annoDati = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Anno));
     </script>
 
 }

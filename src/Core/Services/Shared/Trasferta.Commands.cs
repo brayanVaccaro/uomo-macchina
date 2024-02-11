@@ -18,6 +18,10 @@ namespace Core.Services.Shared
 
         public DateTime DataFine { get; set; }
 
+        public DateTime OraInizio { get; set; }
+
+        public DateTime OraFine { get; set; }
+
         public string Commessa { get; set; }
 
         public bool AutoAziendale { get; set; }
@@ -45,6 +49,8 @@ namespace Core.Services.Shared
 
             trasferta.DataInizio = cmd.DataInizio;
             trasferta.DataFine = cmd.DataFine;
+            trasferta.OraInizio = cmd.OraInizio;
+            trasferta.OraFine = cmd.OraFine;
             trasferta.Chilometri = cmd.Chilometri;
             trasferta.Commessa = cmd.Commessa;
             trasferta.AutoAziendale = cmd.AutoAziendale;

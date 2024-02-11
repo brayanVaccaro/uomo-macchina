@@ -1,9 +1,9 @@
 declare var Vue: any;
 declare var vuecal: any;
 declare var mainModel: any; //variabile globale che rappresenta il mainViewModel
-declare var ferieEditURL: any;
+declare var annoDati: any
+var currentMonthIndex = new Date().getMonth(); // 0-11 for Jan-Dec
 
-//accedo a @Model
 ////Vue 3
 const app = Vue.createApp({
 
@@ -28,55 +28,30 @@ const app = Vue.createApp({
                 'cartaAziendale': false,
                 'straordinario': false
             } as { [key: string]: boolean },
-            inputType: {} as { [key: string]: boolean },
-            toModify: {
-                'id': false,
-                'data': false,
-                'dataInizio': false,
-                'dataFine': false,
-                'durata': false,
-                'oreTotali': false,
-                'oraInizio': false,
-                'oraFine': false,
-                'commessa': false,
-                'dettagli': false,
-                'tipoViaggio': false,
-                'chilometri': false,
-                'autoAziendale': false,
-                'importo': false,
-                'cartaAziendale': false,
-                'straordinario': false
-            } as { [key: string]: boolean },
+            toModify: {} as { [key: string]: boolean },
             toModifykeys: null, //oggetto che contiene solo le chiavi dell'oggetto da modificare
             toModifyName: "",//nome dell'oggetto da modificare
 
             //parametri 'interni'
-            prova: "",
             dataNew: "",
             filterDate: "",
             filterCommessa: "",
             filterDettagli: "",
             model: mainModel, //oggetto model locale, da poter modificare
-            mostraSettimana: true,
-            mostraGiorno: false,
-            message: `Vue works!`,
+            
             activeView: "week", //la vista attiva, fra day e week
             selectedDate: "",
             customClass: "col", //classe custom per ridurre la larghezza quando si seleziona activeView=day
+            custom: "", //classe per nascondere time-cell-labels in vue-cal
 
-            selectedEvent: null,
             showEditForm: false,
-
-            showEventCreationDialog: false, //eventuale per gestire creazione evento con vuecal
-
             showSingleDay: false,
             event: [], //eventi presi dal backend
 
-
             key: "",
             //variabili locali per scegliere orari nel menu a tendina dall'array ore
-            oraInizio: 0 as number,
-            oraFine: 0 as number,
+            oraInizio: 0,
+            oraFine: 0,
             ore: Array.from({ length: 24 }, (_, i) => i), // Array di 24 ore
 
         };
@@ -84,15 +59,121 @@ const app = Vue.createApp({
 
     mounted() {
         //setto gli eventi
-        //console.log("this.mainModel", this.mainModel)
         this.setEvents()
     },
     methods: {
-        //visualizzo sulla destra gli eventi per il giorno selezionato
 
+        pluraleASingolare(parola) {//mostra il nome giusto in crezione e modifica
+
+            switch (parola) {
+                case 'Rendicontazioni':
+                    parola = 'Rendicontazione'
+                    break;
+                case 'Ferie':
+                    parola = 'Feria'
+                    break;
+                case 'Permessi':
+                    parola = 'Permesso'
+                    break;
+                case 'Trasferte':
+                    parola = 'Trasferta'
+                    break;
+                case 'NottiFuori':
+                    parola = 'Notte Fuori'
+                    break;
+                case 'Rimborsi':
+                    parola = 'Rimborso'
+                    break;
+                default:
+                    return 'errore'
+            }
+            return parola;
+        },
+
+        updateMonthName(monthIndex) { //aggiorna il mese
+            var monthName = annoDati.Mesi[monthIndex].NomeMese;
+            document.getElementById('monthDisplay').innerText = monthName;
+        },
+
+        updateWeeksAndDays(monthIndex) {//aggiorna le settimane e i giorni
+            var settimaneContainer = document.getElementById('settimaneContainer');
+            settimaneContainer.innerHTML = ''; // Pulisce le settimane esistenti
+
+            annoDati.Mesi[monthIndex].Settimane.forEach(function (settimana) {
+                var weekElement = document.createElement('li'); // Creo un nuovo elemento di lista per la settimana
+                weekElement.className = 'nav-item dropdown col'; // Imposto le classi necessarie
+
+                var weekLink = document.createElement('a');
+                weekLink.className = 'nav-link weekDisplay';
+                weekLink.setAttribute('role', 'button');
+                weekLink.setAttribute('data-bs-toggle', 'dropdown');
+                weekLink.setAttribute('aria-expanded', 'false');
+                weekLink.setAttribute('data-giorno', settimana.Giorni[0].split('T')[0]); // Salvo il primo giorno della settimana
+                weekLink.innerText = settimana.Nome; // Imposto il nome della settimana
+
+                weekElement.appendChild(weekLink);
+
+                var daysList = document.createElement('ul');
+                daysList.className = 'dropdown-menu row'; // Imposta le classi necessarie
+
+                settimana.Giorni.forEach(function (giorno) {
+                    var dayItem = document.createElement('li');
+                    dayItem.className = 'dropdown-item dayDisplay'; // Imposta le classi necessarie
+                    dayItem.setAttribute('data-giorno', giorno.split('T')[0])
+
+                    var dayLink = document.createElement('a');
+                    var giornoDate = new Date(giorno);
+                    dayLink.innerText = giornoDate.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric' }); // Formatta e imposta il giorno
+                    dayItem.appendChild(dayLink);
+
+                    daysList.appendChild(dayItem); // Aggiunge il giorno alla lista dei giorni
+                });
+
+                weekElement.appendChild(daysList); // Aggiunge la lista dei giorni all'elemento della settimana
+                settimaneContainer.appendChild(weekElement); // Aggiunge l'elemento della settimana al container delle settimane
+            });
+            this.aggiungiEventListeners()
+        },
+
+        aggiungiEventListeners() {// aggiunge event listener alle settimane e ai giorni
+            const settimaneEl = document.querySelectorAll('.weekDisplay'); // Seleziona tutti i link delle settimane
+            settimaneEl.forEach(el => {
+                var settimanaEl = el as HTMLElement
+                settimanaEl.addEventListener('click', () => {
+                    const primoGiorno = el.getAttribute("data-giorno")
+                    this.selezionaSettimana(primoGiorno)
+                });
+            });
+
+            const giorniEl = document.querySelectorAll('.dayDisplay'); // Seleziona tutti gli elementi dei giorni
+            giorniEl.forEach(el => {
+                var giornoEl = el as HTMLElement
+                giornoEl.addEventListener('click', () => {
+                    const giorno = el.getAttribute("data-giorno")
+                    this.selezionaGiorno(giorno)
+                });
+            });
+        },
+
+        prevMonth() {//click sulla freccia sinistra
+            console.log("ho cliccato prevMonth")
+            if (currentMonthIndex > 0) {
+                currentMonthIndex--;
+                this.updateMonthName(currentMonthIndex);
+                this.updateWeeksAndDays(currentMonthIndex);
+            }
+        },
+
+        nextMonth() {//click sulla freccia destra
+            console.log("ho cliccato nextMonth")
+            if (currentMonthIndex < annoDati.Mesi.length - 1) {
+                currentMonthIndex++;
+                this.updateMonthName(currentMonthIndex);
+                this.updateWeeksAndDays(currentMonthIndex);
+            }
+        },
 
         /* Funzione del filtro setDataByDate */
-
         async setDataByDate(dataScelta) {
             const url = `/Main/Main/GetData?dataScelta=${encodeURIComponent(dataScelta)}`;
 
@@ -104,7 +185,8 @@ const app = Vue.createApp({
                 const data = await response.json();
 
                 this.model = data
-                //console.log("this.model.ferie..lenght", this.model.ferie.ferie.length)
+                this.setEvents()
+                console.log("this.model", this.model)
 
             }
             catch (error) {
@@ -115,7 +197,6 @@ const app = Vue.createApp({
 
 
         /* Funzione del filtro setCommessa */
-
         async setCommessa(commessaScelta, giornoSelezionato) {
             const url = `/Main/Main/GetAllByCommessa?commessaScelta=${encodeURIComponent(commessaScelta)}&giornoSelezionato=${encodeURIComponent(giornoSelezionato)}`;
 
@@ -162,6 +243,7 @@ const app = Vue.createApp({
 
         //metodo per settare gli eventi del backend nel calendario vue-cal
         setEvents() {
+            this.event = []
             this.model.eventi.eventi.forEach(x => {
                 //pusho gli eventi presi dal backend
                 this.event.push(
@@ -188,14 +270,13 @@ const app = Vue.createApp({
 
         //metodo per gestire cosa succede se si sceglie di visualizzare una settimana
         selezionaSettimana(idSettimana) {
-            this.selectedDate = idSettimana //--> VERIFICA
+            this.selectedDate = idSettimana
             console.log("ho cliccato sulla settimana")
 
-            this.mostraGiorno = false;
-            this.mostraSettimana = true;
             this.showSingleDay = false
 
             this.customClass = "col"
+            this.custom = ""
             this.activeView = "week";
 
         },
@@ -205,10 +286,9 @@ const app = Vue.createApp({
             this.selectedDate = idGiorno
             this.dataNew = idGiorno
             await this.setDataByDate(this.selectedDate)
-
-            //this.mostraSettimana = false;
-            //this.mostraGiorno = true;
+            this.setEvents()
             this.customClass = "col-2"
+            this.custom = "custom-hide-time-cell"
             this.showSingleDay = true //visualizzo le tabelle
             this.activeView = "day";
         },
@@ -235,56 +315,10 @@ const app = Vue.createApp({
         },
 
         onEventClick(event, e) {
-            this.selectedEvent = event
-            console.log("this.selectedEvent", this.selectedEvent)
+            this.selezionaGiorno(event.startDate)
             e.stopPropagation()
         },
 
-        //metodo per comprendere il tipo di dato dal suo valore (string, number, boolean, date)
-        getInputType(value, key) {
-            if (typeof value === 'number') {
-                return 'number';
-            }
-            else if (typeof value === 'boolean') {
-                return 'boolean'
-            }
-            else if (this.isDate(value)) {
-                //yyy-MM-dd
-
-                this.toModify[key] = this.creaDateTime(value);
-                if (key == 'data' || key == 'dataInizio') {
-                    this.toModify[key] = this.dataNew
-                }
-                return 'date';
-            }
-            else if (value === null || typeof value === 'string') {
-                return 'string';
-            }
-        },
-
-        //metodo per comprendere se il valore può essere un valore valido di data
-        isDate(value) {
-            return !isNaN(Date.parse(value));
-        },
-
-        inserisciOra() {
-            let dataEvento = this.dataNew;//mi arriva nel formato yyy-MM-dd
-
-            this.toModify['oraInizio'] = this.creaDateTime(dataEvento, this.oraInizio)
-            this.toModify['oraFine'] = this.creaDateTime(dataEvento, this.oraFine)
-        },
-        creaDateTime(value, hours = 0, minutes = 0) {
-            const date = new Date(value);
-            date.setHours(hours, minutes, 0, 0); // Imposta ore e minuti
-
-            // Formatta la data come 'yyyy-MM-ddTHH:mm:ss'
-            const formattedDate = date.toISOString().replace('Z', '');
-            // Formatta la data come 'yyyy-MM-dd HH:mm'
-            //const formattedDate = date.toISOString().slice(0, 10) + ' ' +
-            //date.toTimeString().slice(0, 5);
-
-            return formattedDate;
-        },
         //metodo che gestisce la logica per raggiungere il form (in creazione e in modifica)
         async navigateToEdit(id, nome, data) {
 
@@ -303,9 +337,24 @@ const app = Vue.createApp({
 
                     this.toModifykeys.forEach((key: string) => {
                         this.inputToDisplay[key] = true;
-                        this.inputType[key] = this.getInputType(this.toModify[key], key)
                     });
-                    console.log("app =", app)
+                    if (this.toModify.data) {
+                        this.toModify.data = this.toModify.data.split('T')[0];
+                    }
+                    if (this.toModify.dataInizio) {
+                        this.toModify.dataInizio = this.toModify.dataInizio.split('T')[0]
+                    }
+                    if (this.toModify.dataFine) {
+                        this.toModify.dataFine = this.toModify.dataFine.split('T')[0]
+                    }
+                    if (this.toModify.oraInizio) {
+                        this.oraInizio = parseInt(this.toModify['oraInizio'].split('T')[1].split(':')[0], 10)
+                    }
+                    if (this.toModify.oraFine) {
+                        this.oraFine = parseInt(this.toModify['oraFine'].split('T')[1].split(':')[0], 10)
+                    }
+
+                    console.log("this.toModify =", this.toModify)
                     this.showSingleDay = false;
                     this.showEditForm = true
                 })
@@ -316,7 +365,22 @@ const app = Vue.createApp({
 
         },
         async create() {
-            const toModifyCapitalized = this.transformKeysToCapitalize(this.toModify);
+            if (this.toModify.oraInizio) {
+                if (this.toModify.data == undefined) {
+                    this.toModify.oraInizio = this.aggiornaOre(this.oraInizio, this.toModify.dataInizio)
+                }
+                else {
+                    this.toModify.oraInizio = this.aggiornaOre(this.oraInizio, this.toModify.data)
+                }
+            }
+            if (this.toModify.oraFine) {
+                if (this.toModify.data == undefined) {
+                    this.toModify.oraFine = this.aggiornaOre(this.oraFine, this.toModify.dataFine)
+                }
+                else {
+                    this.toModify.oraFine = this.aggiornaOre(this.oraFine, this.toModify.data)
+                }
+            }
 
             const url = `/${this.toModifyName}/${this.toModifyName}/Edit`
             await fetch(url, {
@@ -324,7 +388,7 @@ const app = Vue.createApp({
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(toModifyCapitalized),
+                body: JSON.stringify(this.toModify),
             })
             this.showEditForm = false
             this.showSingleDay = true;
@@ -349,6 +413,7 @@ const app = Vue.createApp({
                 'importo': false,
                 'cartaAziendale': false
             };
+
             //resetto oraInizio e oraFine
             this.oraInizio = 0;
             this.oraFine = 0;
@@ -371,21 +436,15 @@ const app = Vue.createApp({
             }
         },
 
+        aggiornaOre(ora, dataInput) {
+            var data = new Date(dataInput)
 
-        capitalizeFirstLetter(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        },
+            var orario = parseInt(ora, 10) + 1
+            data.setHours(orario)
+            var dataFormattata = data.toISOString().replace('Z', "")
+            return dataFormattata
 
-        transformKeysToCapitalize(object) {
-            const capitalizedObject = {};
-            Object.keys(object).forEach(key => {
-                const capitalizedKey = this.capitalizeFirstLetter(key);
-                capitalizedObject[capitalizedKey] = object[key];
-            });
-            return capitalizedObject;
-        },
-
-
+        }
     },
 
     computed: {
@@ -393,7 +452,7 @@ const app = Vue.createApp({
         previousFirstDayOfWeek() {
             return new Date(new Date().setDate(new Date().getDate() - (new Date().getDay() + 6) % 7))
         },
-        //alla modifica di uno dei parametri oraInizio, oraFine calcolo oreTotali (nell'oggetto da modificare) --> vedere watch
+        //alla modifica di uno dei parametri oraInizio o oraFine calcolo oreTotali (nell'oggetto da modificare) --> vedere watch
         calcoloOreTotali() {
             if (this.toModify === null) return 0;
             if (this.oraInizio === 0 || this.oraFine === 0 || this.toModify["oreTotali"] == null) return 0;
@@ -458,7 +517,7 @@ const app = Vue.createApp({
         //al cambio del valore del metodo calcoloOreTotali chiamo inserisciOra
         calcoloOreTotali(newValue) {
             console.log("Le ore totali sono cambiate, nuovo valore: ", newValue);
-            this.inserisciOra(); // Invoca qui inserisciOra quando oreTotali cambia
+
         }
     },
     components: {

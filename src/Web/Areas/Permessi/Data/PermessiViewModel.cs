@@ -70,6 +70,26 @@ namespace UomoMacchina.Areas.Permessi.Data
                     Dettagli = Dettagli,
                 };
             }
+            internal AddOrUpdateEventCommand ToVueCalEvent(PermessoViewModel permesso)
+            {
+                return new AddOrUpdateEventCommand
+                {
+                    Id = null,
+                    StartDate = permesso.Data.ToString("d"),
+                    StartTime = permesso.OraInizio.ToString("HH:mm"),
+                    EndDate = permesso.Data.ToString("d"),
+                    EndTime = permesso.OraFine.ToString("HH:mm"),
+                    Title = permesso.OreTotali.ToString(),
+                    Content = permesso.Dettagli,
+                    CssClass = "permesso",
+                    Background = false,
+                    Split = "",
+                    AllDay = false,
+                    Deletable = true,
+                    Resizable = false,
+                    PermessoId = permesso.Id,
+                };
+            }
             public string ToJson()
             {
                 return JsonSerializer.ToJsonCamelCase(this);

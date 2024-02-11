@@ -6,22 +6,13 @@
 @{
  
 }
-<div class="row justify-content-start align-items-center">
-    <div class="col">
-        <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#tabellaRimborsi" aria-expanded="false" aria-controls="tabellaRimborsi"><h1>Rimborsi</h1></button>
-        <div class="col-1 align-self-center ">
-            <i class="fa-solid fa-square fa-2x " style="color: yellow;"></i>
-        </div>
-    </div>
-    <div class="col">
-        <ul class="navbar-nav flex-wrap ms-auto">
-            <li>
-                <a class="Nuovo btn btn-light ms-2" v-on:click='navigateToEdit(null, "Rimborsi", dataNew)' title="Inserisci un nuovo elemento">
-                    <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
-                </a>
-            </li>
-        </ul>
-    </div>
+<div class="row align-items-center">
+
+    <i class=" col-auto fa fa-square fa-2x "></i>
+    <h1 class="col-6" data-bs-toggle="collapse" data-bs-target="#tabellaRimborsi" aria-expanded="true" aria-controls="tabellaRimborsi">Rimborsi</h1>
+    <a class="col-2 btn btn-light" v-on:click='navigateToEdit(null, "Rimborsi", dataNew)' title="Inserisci un nuovo elemento">
+        <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
+    </a>
 </div>
 
 <div id="tabellaRimborsi" class="row text-center collapse">
@@ -60,15 +51,12 @@
                     {{rimborso.importo}}
                 </td>
                 <td class="text-nowrap">
-                    {{rimborso.cartaAziendale}}
-                </td>
-                <td class="text-nowrap">
-                    {{rimborso.commessa}}
-                </td>
-                <td class="text-nowrap">
                     {{rimborso.cartaAziendale ? 'Si' : 'No'}}
                 </td>
-                <td class="text-nowrap">
+                <td class="text-wrap">
+                    {{rimborso.commessa}}
+                </td>
+                <td class="text-wrap">
                     {{rimborso.dettagli}}
                 </td>
             </tr>

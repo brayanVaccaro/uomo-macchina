@@ -11,7 +11,7 @@ namespace Core.Services.Shared
 {
     public class AddOrUpdateEventCommand
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public string StartDate { get; set; }  //da usare in locale
         public string EndDate { get; set; } //da usare in locale
         public string StartTime { get; set; } //da usare in locale
@@ -24,6 +24,10 @@ namespace Core.Services.Shared
         public bool? AllDay { get; set; }
         public bool? Deletable { get; set; }
         public bool? Resizable { get; set; }
+        public Guid? RendicontazioneId { get; set; }
+        public Guid? FeriaId { get; set; }
+        public Guid? PermessoId { get; set; }
+        public Guid? TrasfertaId { get; set; }
 
     }
 
@@ -31,50 +35,51 @@ namespace Core.Services.Shared
     {
         public async Task<Guid> Handle(AddOrUpdateEventCommand cmd)
         {
-            var vueCalEvent = await _dbContext.Eventi
-                .Where(x => x.Id == cmd.Id)
-                .FirstOrDefaultAsync();
+            VueCalEvent vueCalEvent = new();
+            switch (cmd)
+            {
+                case { RendicontazioneId: Guid id }:
+                    vueCalEvent = await _dbContext.Eventi.Where(x => x.RendicontazioneId == cmd.RendicontazioneId).FirstOrDefaultAsync();
+                    break;
+                case { FeriaId: Guid id }:
+                    vueCalEvent = await _dbContext.Eventi.Where(x => x.FeriaId == cmd.FeriaId).FirstOrDefaultAsync();
+                    break;
+                case { PermessoId: Guid id }:
+                    vueCalEvent = await _dbContext.Eventi.Where(x => x.PermessoId == cmd.PermessoId).FirstOrDefaultAsync();
+                    break;
+                case { TrasfertaId: Guid id }:
+                    vueCalEvent = await _dbContext.Eventi.Where(x => x.TrasfertaId == cmd.TrasfertaId).FirstOrDefaultAsync();
+                    break;
+            }
 
             if (vueCalEvent == null)
             {
                 vueCalEvent = new VueCalEvent
                 {
-                    Id = cmd.Id
+                    Start = DateTime.Parse(cmd.StartDate + " " + cmd.StartTime),
                 };
+                _dbContext.Eventi.Add(vueCalEvent);
             };
-            _dbContext.Eventi.Add(vueCalEvent);
 
-            vueCalEvent.AllDay = cmd.AllDay;
-            vueCalEvent.Background = cmd.Background;
-            vueCalEvent.Class = cmd.CssClass;
+            vueCalEvent.Start = DateTime.Parse(cmd.StartDate + " " + cmd.StartTime);
+            vueCalEvent.End = DateTime.Parse(cmd.EndDate + " " + cmd.EndTime);
+            vueCalEvent.Title = cmd.Title;
             vueCalEvent.Content = cmd.Content;
+            vueCalEvent.Class = cmd.CssClass;
+            vueCalEvent.Background = cmd.Background;
+            vueCalEvent.Split = cmd.Split;
+            vueCalEvent.AllDay = cmd.AllDay;
             vueCalEvent.Deletable = cmd.Deletable;
             vueCalEvent.Resizable = cmd.Resizable;
-            vueCalEvent.End = DateTime.Parse(cmd.EndDate + cmd.EndTime, CultureInfo.CurrentCulture);
-            vueCalEvent.Title = cmd.Title;
-            vueCalEvent.Split = cmd.Split;
-            vueCalEvent.Start = DateTime.Parse(cmd.StartDate + cmd.StartTime, CultureInfo.CurrentCulture);
+            vueCalEvent.RendicontazioneId = cmd.RendicontazioneId;
+            vueCalEvent.FeriaId = cmd.FeriaId;
+            vueCalEvent.PermessoId = cmd.PermessoId;
+            vueCalEvent.TrasfertaId = cmd.TrasfertaId;
 
             await _dbContext.SaveChangesAsync();
 
             return vueCalEvent.Id;
         }
 
-        public async Task<bool> DeleteEvento(Guid id)
-        {
-            // l'evento da eliminare scelto sulla base dell'id di cmd
-            var evento = await _dbContext.Eventi
-                .Where(x => x.Id == id)
-                .FirstOrDefaultAsync();
-
-            if (evento == null)
-            {
-                return false;
-            }
-
-            _dbContext.Eventi.Remove(evento);
-            await _dbContext.SaveChangesAsync();
-            return true;
-        }
     }
 }
