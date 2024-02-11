@@ -47,43 +47,11 @@ namespace Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c58ee64d-759a-4027-be0e-70f10f3d6864"),
-                            DataFine = new DateTime(2024, 1, 7, 23, 59, 0, 0, DateTimeKind.Unspecified),
-                            DataInizio = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("1b75d75e-b75a-41d4-bbad-d2b2622b8dd3"),
+                            DataFine = new DateTime(2024, 1, 19, 23, 59, 0, 0, DateTimeKind.Unspecified),
+                            DataInizio = new DateTime(2024, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Vacanza",
-                            Durata = 7
-                        },
-                        new
-                        {
-                            Id = new Guid("ba60bf9e-e974-4bdb-bf62-37495c967447"),
-                            DataFine = new DateTime(2024, 1, 14, 23, 59, 0, 0, DateTimeKind.Unspecified),
-                            DataInizio = new DateTime(2024, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Week-end",
-                            Durata = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("3da511ad-41de-4c7d-bc12-c212c9078c3c"),
-                            DataFine = new DateTime(2024, 1, 21, 23, 59, 0, 0, DateTimeKind.Unspecified),
-                            DataInizio = new DateTime(2024, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Ferie",
-                            Durata = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("cebda61f-07f6-4bd5-b373-48c99d694aa1"),
-                            DataFine = new DateTime(2024, 1, 26, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataInizio = new DateTime(2024, 1, 26, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Dettagli di Ferie",
-                            Durata = 60
-                        },
-                        new
-                        {
-                            Id = new Guid("f5d34b3c-6464-4cf9-9282-06b8f4955ee3"),
-                            DataFine = new DateTime(2024, 2, 4, 23, 59, 0, 0, DateTimeKind.Unspecified),
-                            DataInizio = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Ferie",
-                            Durata = 4
+                            Durata = 3
                         });
                 });
 
@@ -108,24 +76,6 @@ namespace Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("NottiFuori");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("e8aec9db-23f6-4ac6-835f-59cec3a26862"),
-                            Commessa = "Commessa di notte fuori",
-                            Data = new DateTime(2024, 1, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Dettagli di notte fuori",
-                            TipoViaggio = "Lavoro"
-                        },
-                        new
-                        {
-                            Id = new Guid("e826590d-467c-4ce8-b5d2-2ad369796c9a"),
-                            Commessa = "Riparazione",
-                            Data = new DateTime(2024, 1, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Data la distanza tra l'azienda e cliente necessita di essere vicini per velocizzare la riparazione per il giorno dopo",
-                            TipoViaggio = "Lavoro"
-                        });
                 });
 
             modelBuilder.Entity("Core.Models.Permesso", b =>
@@ -156,57 +106,12 @@ namespace Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f50602e4-3871-4239-b635-a5955ea26f75"),
+                            Id = new Guid("eea1f511-111c-41a6-9905-c3b06b88c952"),
                             Data = new DateTime(2024, 1, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Medica",
+                            Dettagli = "Personali",
                             OraFine = new DateTime(2024, 1, 15, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             OraInizio = new DateTime(2024, 1, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             OreTotali = 120
-                        },
-                        new
-                        {
-                            Id = new Guid("fed7594f-3738-4cb5-bc0f-a459aa37e58b"),
-                            Data = new DateTime(2024, 1, 26, 11, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Dettagli di permesso",
-                            OraFine = new DateTime(2024, 1, 26, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 26, 11, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 180
-                        },
-                        new
-                        {
-                            Id = new Guid("c855aa2a-26a4-4d70-8e7a-4a766b486aba"),
-                            Data = new DateTime(2024, 1, 29, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Familiare",
-                            OraFine = new DateTime(2024, 1, 29, 17, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 29, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 180
-                        },
-                        new
-                        {
-                            Id = new Guid("5fc914a8-e7d9-471d-bb50-99dbc3b69bab"),
-                            Data = new DateTime(2024, 2, 5, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Malattia",
-                            OraFine = new DateTime(2024, 2, 5, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 2, 5, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 240
-                        },
-                        new
-                        {
-                            Id = new Guid("1b812db9-c22f-4959-ad71-95bbdfe13d6d"),
-                            Data = new DateTime(2024, 2, 6, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Malattia",
-                            OraFine = new DateTime(2024, 2, 6, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 2, 6, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 180
-                        },
-                        new
-                        {
-                            Id = new Guid("ad585349-659f-4193-964c-7fb41c9f7ffd"),
-                            Data = new DateTime(2024, 2, 7, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Familiare",
-                            OraFine = new DateTime(2024, 2, 7, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 2, 7, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 180
                         });
                 });
 
@@ -244,7 +149,7 @@ namespace Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ee9be0b6-cf5f-4f0a-875c-81b160d296f4"),
+                            Id = new Guid("5ce24d8d-38d4-4efe-b53e-2f82c236bb35"),
                             Commessa = "Sistemazione",
                             Data = new DateTime(2024, 1, 8, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Sistemato un problema del cliente",
@@ -255,7 +160,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1991f4fc-4a08-482d-b2f4-fa46c67250e6"),
+                            Id = new Guid("b3ca179a-d061-4fb9-a3db-fc9a5154b61b"),
                             Commessa = "Sistemazione",
                             Data = new DateTime(2024, 1, 8, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Sistemato un problema del cliente",
@@ -266,7 +171,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("822ae6e2-5bbf-47b6-b165-6aa432dc5e41"),
+                            Id = new Guid("dad29b8d-9c34-4721-81f2-e289c3c82633"),
                             Commessa = "Lavoro",
                             Data = new DateTime(2024, 1, 9, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Lavoro per un progetto",
@@ -277,221 +182,12 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("918c0549-4f33-42a7-9e43-bc01200a2296"),
+                            Id = new Guid("5ffb43c1-9bd0-4752-951b-508f2293b7a6"),
                             Commessa = "Lavoro",
                             Data = new DateTime(2024, 1, 9, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Dettagli = "Lavoro per un progetto",
                             OraFine = new DateTime(2024, 1, 9, 18, 0, 0, 0, DateTimeKind.Unspecified),
                             OraInizio = new DateTime(2024, 1, 9, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 4,
-                            Straordinario = false
-                        },
-                        new
-                        {
-                            Id = new Guid("e6080929-6b69-4e8f-9385-306a63de6e91"),
-                            Commessa = "Lavoro",
-                            Data = new DateTime(2024, 1, 10, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Lavoro per un progetto di gruppo",
-                            OraFine = new DateTime(2024, 1, 10, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 10, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 4,
-                            Straordinario = false
-                        },
-                        new
-                        {
-                            Id = new Guid("99e58bad-c654-4c0d-b5a5-7703c69bf98b"),
-                            Commessa = "Lavoro",
-                            Data = new DateTime(2024, 1, 10, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Lavoro per un progetto di gruppo",
-                            OraFine = new DateTime(2024, 1, 10, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 10, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 4,
-                            Straordinario = false
-                        },
-                        new
-                        {
-                            Id = new Guid("66e679b9-c84b-4621-aada-461bc5931786"),
-                            Commessa = "progetto",
-                            Data = new DateTime(2024, 1, 11, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Elaborazione del progetto di gruppo",
-                            OraFine = new DateTime(2024, 1, 11, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 11, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 4,
-                            Straordinario = false
-                        },
-                        new
-                        {
-                            Id = new Guid("6edb5652-ebc2-4f26-b7d4-80dc23ba3b04"),
-                            Commessa = "progetto",
-                            Data = new DateTime(2024, 1, 11, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Elaborazione del progetto di gruppo",
-                            OraFine = new DateTime(2024, 1, 11, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 11, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 4,
-                            Straordinario = false
-                        },
-                        new
-                        {
-                            Id = new Guid("ef07bbe1-d7a2-437a-a6a4-253e3714e394"),
-                            Commessa = "Lavoro",
-                            Data = new DateTime(2024, 1, 12, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Lavoro",
-                            OraFine = new DateTime(2024, 1, 12, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 12, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 4,
-                            Straordinario = false
-                        },
-                        new
-                        {
-                            Id = new Guid("65fa6ad2-9b89-47d8-bce6-dab654bec07a"),
-                            Commessa = "Lavoro",
-                            Data = new DateTime(2024, 1, 12, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Lavoro",
-                            OraFine = new DateTime(2024, 1, 12, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 12, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 4,
-                            Straordinario = false
-                        },
-                        new
-                        {
-                            Id = new Guid("7c2446a2-db04-4ae0-a082-ee3fa21b2817"),
-                            Commessa = "Progetto",
-                            Data = new DateTime(2024, 1, 15, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Pianificazione del progetto",
-                            OraFine = new DateTime(2024, 1, 15, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 15, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 4,
-                            Straordinario = false
-                        },
-                        new
-                        {
-                            Id = new Guid("89be85f1-df28-4e6f-81a4-55d1ce1b4e74"),
-                            Commessa = "Progetto",
-                            Data = new DateTime(2024, 1, 15, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Pianificazione del progetto",
-                            OraFine = new DateTime(2024, 1, 15, 19, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 15, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 3,
-                            Straordinario = false
-                        },
-                        new
-                        {
-                            Id = new Guid("ba04406d-38f0-47c8-89c1-c538da1a7816"),
-                            Commessa = "Lavoro",
-                            Data = new DateTime(2024, 1, 17, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Lavoro",
-                            OraFine = new DateTime(2024, 1, 17, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 17, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 4,
-                            Straordinario = true
-                        },
-                        new
-                        {
-                            Id = new Guid("872004bc-fd9e-44e2-a3d5-5b3a9e89d926"),
-                            Commessa = "Lavoro",
-                            Data = new DateTime(2024, 1, 17, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Lavoro",
-                            OraFine = new DateTime(2024, 1, 17, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 17, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 4,
-                            Straordinario = true
-                        },
-                        new
-                        {
-                            Id = new Guid("c22fded0-c7f9-4cb0-a5ee-6fe529843eff"),
-                            Commessa = "Lavoro",
-                            Data = new DateTime(2024, 1, 17, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Lavoro",
-                            OraFine = new DateTime(2024, 1, 17, 23, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 17, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 1,
-                            Straordinario = true
-                        },
-                        new
-                        {
-                            Id = new Guid("eaf62043-d309-4575-bab2-d434cde2d21b"),
-                            Commessa = "Commessa di rendicontazione",
-                            Data = new DateTime(2024, 1, 26, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Dettagli di Rendicontazioni",
-                            OraFine = new DateTime(2024, 1, 26, 11, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 26, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 2,
-                            Straordinario = false
-                        },
-                        new
-                        {
-                            Id = new Guid("c97faa20-ba64-4a05-8736-650c786461f5"),
-                            Commessa = "Commessa di rendicontazione",
-                            Data = new DateTime(2024, 1, 26, 17, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Dettagli di Rendicontazioni",
-                            OraFine = new DateTime(2024, 1, 26, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 26, 17, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 1,
-                            Straordinario = false
-                        },
-                        new
-                        {
-                            Id = new Guid("099c45c2-a0f3-440f-af72-c0db91721199"),
-                            Commessa = "Commessa di rendicontazione",
-                            Data = new DateTime(2024, 1, 26, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Dettagli di Rendicontazioni",
-                            OraFine = new DateTime(2024, 1, 26, 20, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 26, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 2,
-                            Straordinario = true
-                        },
-                        new
-                        {
-                            Id = new Guid("71a64413-52af-4008-bf9d-afed4288a177"),
-                            Commessa = "Lavoro",
-                            Data = new DateTime(2024, 1, 29, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Lavoro",
-                            OraFine = new DateTime(2024, 1, 29, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 29, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 3,
-                            Straordinario = true
-                        },
-                        new
-                        {
-                            Id = new Guid("44aabf16-1106-44d6-85ff-e2efe15c1a6c"),
-                            Commessa = "Progetto",
-                            Data = new DateTime(2024, 1, 29, 19, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Lavoro del progetto straordinario",
-                            OraFine = new DateTime(2024, 1, 29, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 1, 29, 19, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 3,
-                            Straordinario = true
-                        },
-                        new
-                        {
-                            Id = new Guid("154d54eb-06cd-42ed-a54b-0495b4b08859"),
-                            Commessa = "Aggiustamento",
-                            Data = new DateTime(2024, 2, 5, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Aggiustamento ad un problema del cliente",
-                            OraFine = new DateTime(2024, 2, 5, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 2, 5, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 4,
-                            Straordinario = false
-                        },
-                        new
-                        {
-                            Id = new Guid("affa3b81-ffc3-4e68-b379-4e06d69678ec"),
-                            Commessa = "Progetto",
-                            Data = new DateTime(2024, 2, 6, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Termine del progetto",
-                            OraFine = new DateTime(2024, 2, 6, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 2, 6, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            OreTotali = 4,
-                            Straordinario = false
-                        },
-                        new
-                        {
-                            Id = new Guid("14debad8-ec53-4bcd-8be4-2c15f8d8d538"),
-                            Commessa = "Lavoro",
-                            Data = new DateTime(2024, 2, 7, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Lavoro",
-                            OraFine = new DateTime(2024, 2, 7, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            OraInizio = new DateTime(2024, 2, 7, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             OreTotali = 4,
                             Straordinario = false
                         });
@@ -521,35 +217,6 @@ namespace Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Rimborsi");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("e92a3649-ec84-4d1c-a0a2-c9053d2db8f5"),
-                            CartaAziendale = false,
-                            Commessa = "Commessa di rimborso",
-                            Data = new DateTime(2024, 1, 16, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Rimborso per il viaggio",
-                            Importo = 100
-                        },
-                        new
-                        {
-                            Id = new Guid("b5a65c24-ab43-44bc-a296-244b525b5d32"),
-                            CartaAziendale = false,
-                            Commessa = "Commessa di rimborso",
-                            Data = new DateTime(2024, 1, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Dettagli di rimborso",
-                            Importo = 100
-                        },
-                        new
-                        {
-                            Id = new Guid("46909b40-6e92-42e8-b120-d1657f9e9c40"),
-                            CartaAziendale = true,
-                            Commessa = "Riparazione",
-                            Data = new DateTime(2024, 1, 28, 19, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Rimborso per il viaggio",
-                            Importo = 120
-                        });
                 });
 
             modelBuilder.Entity("Core.Models.Trasferta", b =>
@@ -576,6 +243,12 @@ namespace Core.Migrations
                     b.Property<string>("Dettagli")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("OraFine")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OraInizio")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("Trasferte");
@@ -583,33 +256,15 @@ namespace Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("98986b72-f25c-43b7-af3f-bb41244195e2"),
+                            Id = new Guid("c08e3de1-e26b-4f01-81f0-fbca477186e3"),
                             AutoAziendale = false,
                             Chilometri = 200,
                             Commessa = "Aggiornamento",
                             DataFine = new DateTime(2024, 1, 16, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataInizio = new DateTime(2024, 1, 16, 6, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Aggiornamento del sistema richiesto al cliente"
-                        },
-                        new
-                        {
-                            Id = new Guid("c04c737a-2032-4680-ae6f-7072fe060085"),
-                            AutoAziendale = false,
-                            Chilometri = 200,
-                            Commessa = "Commessa di Trasferte",
-                            DataFine = new DateTime(2024, 1, 26, 17, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataInizio = new DateTime(2024, 1, 26, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Dettagli di Trasferte"
-                        },
-                        new
-                        {
-                            Id = new Guid("8b72b6dd-3ed4-4f6e-bd6d-fc1d45da791f"),
-                            AutoAziendale = true,
-                            Chilometri = 350,
-                            Commessa = "Riparazione",
-                            DataFine = new DateTime(2024, 1, 28, 19, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataInizio = new DateTime(2024, 1, 27, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dettagli = "Riparazione ad un guasto ad un macchinario del cliente"
+                            DataInizio = new DateTime(2024, 1, 16, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            Dettagli = "Migliorie al sistema richiesto dal cliente",
+                            OraFine = new DateTime(2024, 1, 16, 22, 0, 0, 0, DateTimeKind.Unspecified),
+                            OraInizio = new DateTime(2024, 1, 16, 14, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -637,6 +292,15 @@ namespace Core.Migrations
                     b.Property<DateTime>("End")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("FeriaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("PermessoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("RendicontazioneId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool?>("Resizable")
                         .HasColumnType("bit");
 
@@ -649,32 +313,31 @@ namespace Core.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("TrasfertaId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("FeriaId");
+
+                    b.HasIndex("PermessoId");
+
+                    b.HasIndex("RendicontazioneId");
+
+                    b.HasIndex("TrasfertaId");
 
                     b.ToTable("Eventi");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("98ba4c76-a205-45d5-965d-1e214d785d84"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "libero",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 7, 23, 59, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Vacanze"
-                        },
-                        new
-                        {
-                            Id = new Guid("6ac20d92-6050-46b9-b62a-f845c8690f5e"),
+                            Id = new Guid("dd00d06c-dd44-49a0-b2c2-3e6150f808b7"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
                             Deletable = false,
                             End = new DateTime(2024, 1, 8, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            RendicontazioneId = new Guid("5ce24d8d-38d4-4efe-b53e-2f82c236bb35"),
                             Resizable = false,
                             Split = "",
                             Start = new DateTime(2024, 1, 8, 9, 0, 0, 0, DateTimeKind.Unspecified),
@@ -682,12 +345,13 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fdc86433-6a79-461c-951a-d8f80e0d0e17"),
+                            Id = new Guid("69cc76c3-2e50-4905-8b65-5c7b035108f1"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
                             Deletable = false,
                             End = new DateTime(2024, 1, 8, 18, 0, 0, 0, DateTimeKind.Unspecified),
+                            RendicontazioneId = new Guid("b3ca179a-d061-4fb9-a3db-fc9a5154b61b"),
                             Resizable = false,
                             Split = "",
                             Start = new DateTime(2024, 1, 8, 14, 0, 0, 0, DateTimeKind.Unspecified),
@@ -695,12 +359,13 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c292fb4a-2102-478f-b98d-2b695d597335"),
+                            Id = new Guid("ed4e60ed-10c0-4ce4-a169-7914104349cf"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
                             Deletable = false,
                             End = new DateTime(2024, 1, 9, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            RendicontazioneId = new Guid("dad29b8d-9c34-4721-81f2-e289c3c82633"),
                             Resizable = false,
                             Split = "",
                             Start = new DateTime(2024, 1, 9, 9, 0, 0, 0, DateTimeKind.Unspecified),
@@ -708,12 +373,13 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0e26aa2f-9162-4947-a7ba-f4ee9b634a24"),
+                            Id = new Guid("c9490559-bf12-4d93-878f-f3226b2143e0"),
                             AllDay = false,
                             Background = false,
                             Class = "rendicontazione",
                             Deletable = false,
                             End = new DateTime(2024, 1, 9, 18, 0, 0, 0, DateTimeKind.Unspecified),
+                            RendicontazioneId = new Guid("5ffb43c1-9bd0-4752-951b-508f2293b7a6"),
                             Resizable = false,
                             Split = "",
                             Start = new DateTime(2024, 1, 9, 14, 0, 0, 0, DateTimeKind.Unspecified),
@@ -721,150 +387,7 @@ namespace Core.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a35c1a6b-e7dc-4183-baf0-9951d1503007"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "rendicontazione",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 10, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 10, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Rendicontazione"
-                        },
-                        new
-                        {
-                            Id = new Guid("1bada44d-bc5a-4c0a-babd-be4336abd201"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "rendicontazione",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 10, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 10, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Rendicontazione"
-                        },
-                        new
-                        {
-                            Id = new Guid("3904c044-b8d1-407a-b408-ef4205a1117f"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "rendicontazione",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 11, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 11, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Rendicontazione"
-                        },
-                        new
-                        {
-                            Id = new Guid("7c738465-495d-4770-97ce-0023e5da9aa2"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "rendicontazione",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 11, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 11, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Rendicontazione"
-                        },
-                        new
-                        {
-                            Id = new Guid("a3b660d1-461a-4b25-af8e-73592d0da99f"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "rendicontazione",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 12, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 12, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Rendicontazione"
-                        },
-                        new
-                        {
-                            Id = new Guid("5ff5678b-9c07-4775-a8c9-28f12249faa3"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "rendicontazione",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 12, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 12, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Rendicontazione"
-                        },
-                        new
-                        {
-                            Id = new Guid("f4df6b14-3208-4b4b-ab01-1f7d80c50494"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "libero",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 14, 23, 59, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Week-end"
-                        },
-                        new
-                        {
-                            Id = new Guid("6fcba647-9774-45d1-b9ea-c8d33c3e346a"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "rendicontazione",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 15, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 15, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Rendicontazione"
-                        },
-                        new
-                        {
-                            Id = new Guid("7f400b10-c82c-42be-91ba-057f91c7250d"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "permesso",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 15, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Permesso"
-                        },
-                        new
-                        {
-                            Id = new Guid("2d4e87c0-47fe-45c3-8ebd-90818506738f"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "rendicontazione",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 15, 19, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 15, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Rendicontazione"
-                        },
-                        new
-                        {
-                            Id = new Guid("13327f06-fc7a-4b01-b997-73be8d27b751"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "trasferta",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 16, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 16, 6, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Trasferta"
-                        },
-                        new
-                        {
-                            Id = new Guid("8a84e9ce-dfca-4911-af3d-24b3c5671eed"),
+                            Id = new Guid("ec5ea470-d727-41d2-9759-cf4a89c7020b"),
                             AllDay = false,
                             Background = false,
                             Class = "trasferta",
@@ -873,280 +396,36 @@ namespace Core.Migrations
                             Resizable = false,
                             Split = "",
                             Start = new DateTime(2024, 1, 16, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Trasferta"
+                            Title = "Trasferta",
+                            TrasfertaId = new Guid("c08e3de1-e26b-4f01-81f0-fbca477186e3")
                         },
                         new
                         {
-                            Id = new Guid("4142060c-cb96-4797-a528-d5ada3648a22"),
+                            Id = new Guid("949ff5fa-94a3-46ca-9003-83dcd3fceb46"),
                             AllDay = false,
                             Background = false,
-                            Class = "rendicontazione",
+                            Class = "permesso",
                             Deletable = false,
-                            End = new DateTime(2024, 1, 17, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            End = new DateTime(2024, 1, 15, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            PermessoId = new Guid("eea1f511-111c-41a6-9905-c3b06b88c952"),
                             Resizable = false,
                             Split = "",
-                            Start = new DateTime(2024, 1, 17, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Rendicontazione"
+                            Start = new DateTime(2024, 1, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Permesso"
                         },
                         new
                         {
-                            Id = new Guid("5bca2818-3f30-4c96-9b38-cdcdd6eef3c1"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "rendicontazione",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 17, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 17, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Rendicontazione"
-                        },
-                        new
-                        {
-                            Id = new Guid("4453240c-198c-404d-bbb3-aa272115e2cc"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "straordinario",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 17, 23, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 17, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Straordinario"
-                        },
-                        new
-                        {
-                            Id = new Guid("8e06062f-8ecb-460a-98e6-7018cc4b0f68"),
-                            AllDay = false,
+                            Id = new Guid("0bcda651-a068-4bda-9e1b-b8704fbe765e"),
+                            AllDay = true,
                             Background = false,
                             Class = "libero",
                             Deletable = false,
-                            End = new DateTime(2024, 1, 21, 23, 59, 0, 0, DateTimeKind.Unspecified),
+                            End = new DateTime(2024, 1, 19, 23, 59, 0, 0, DateTimeKind.Unspecified),
+                            FeriaId = new Guid("1b75d75e-b75a-41d4-bbad-d2b2622b8dd3"),
                             Resizable = false,
                             Split = "",
-                            Start = new DateTime(2024, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Ferie"
-                        },
-                        new
-                        {
-                            Id = new Guid("055263b8-2133-4e5b-b740-eea0e23becff"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "rendicontazione",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 26, 11, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 26, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Rendicontazione"
-                        },
-                        new
-                        {
-                            Id = new Guid("3737ad68-5f67-4aaa-89e4-adbd072e59af"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "permesso",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 26, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 26, 11, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Permesso"
-                        },
-                        new
-                        {
-                            Id = new Guid("a596ffaa-0eae-4aee-b178-b0b20e57d38e"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "libero",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 26, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 26, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Ferie"
-                        },
-                        new
-                        {
-                            Id = new Guid("bc87e827-241d-47bf-a02e-5b386a990d33"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "trasferta",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 26, 17, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 26, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Trasferta"
-                        },
-                        new
-                        {
-                            Id = new Guid("6b12f417-224f-4964-b704-2f5014c59297"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "rendicontazione",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 26, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 26, 17, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Rendicontazione"
-                        },
-                        new
-                        {
-                            Id = new Guid("692d6168-5603-4ed7-9a10-8cd252d4750e"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "straordinario",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 26, 20, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 26, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Straordinario"
-                        },
-                        new
-                        {
-                            Id = new Guid("1f04628f-a7cd-4407-abe9-c5fb429f0e18"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "trasferta",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 28, 19, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 27, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Trasferta"
-                        },
-                        new
-                        {
-                            Id = new Guid("a95c5aa3-71ee-44a2-ac97-f3961ecf1727"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "rendicontazione",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 29, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 29, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Rendicontazione"
-                        },
-                        new
-                        {
-                            Id = new Guid("52183a19-2f8c-4d62-8028-ae307fbe1665"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "permesso",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 29, 17, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 29, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Permesso"
-                        },
-                        new
-                        {
-                            Id = new Guid("d14ea151-bb36-481c-989a-ed73700b0213"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "straordinario",
-                            Deletable = false,
-                            End = new DateTime(2024, 1, 29, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 1, 29, 19, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Straordinario"
-                        },
-                        new
-                        {
-                            Id = new Guid("91341ec9-f97a-44aa-812d-693eb05a9dbe"),
-                            AllDay = true,
-                            Background = true,
-                            Class = "libero",
-                            Deletable = false,
-                            End = new DateTime(2024, 2, 4, 23, 59, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Feria"
-                        },
-                        new
-                        {
-                            Id = new Guid("e919393d-40a1-4ce1-b9b4-e336fcc6284d"),
-                            AllDay = true,
-                            Background = true,
-                            Class = "rendicontazione",
-                            Deletable = false,
-                            End = new DateTime(2024, 2, 5, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 2, 5, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Rendicontazione"
-                        },
-                        new
-                        {
-                            Id = new Guid("1fd64cb4-a2d8-4b05-9652-33e2a35af577"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "permesso",
-                            Deletable = false,
-                            End = new DateTime(2024, 2, 5, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 2, 5, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Permesso"
-                        },
-                        new
-                        {
-                            Id = new Guid("d8ff3076-cfb9-4d7b-a90e-c4ffcaf8fdf2"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "permesso",
-                            Deletable = false,
-                            End = new DateTime(2024, 2, 6, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 2, 6, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Permesso"
-                        },
-                        new
-                        {
-                            Id = new Guid("df94b160-4e26-4eba-b039-ee2df5e851a9"),
-                            AllDay = true,
-                            Background = true,
-                            Class = "rendicontazione",
-                            Deletable = false,
-                            End = new DateTime(2024, 2, 6, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 2, 6, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Rendicontazione"
-                        },
-                        new
-                        {
-                            Id = new Guid("0bd563b3-d951-4437-8e5e-82f8858314a9"),
-                            AllDay = false,
-                            Background = false,
-                            Class = "permesso",
-                            Deletable = false,
-                            End = new DateTime(2024, 2, 7, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 2, 7, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Permesso"
-                        },
-                        new
-                        {
-                            Id = new Guid("506bcd84-c88d-41ef-8bed-efab58a1b93b"),
-                            AllDay = true,
-                            Background = true,
-                            Class = "rendicontazione",
-                            Deletable = false,
-                            End = new DateTime(2024, 2, 7, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            Resizable = false,
-                            Split = "",
-                            Start = new DateTime(2024, 2, 7, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Rendicontazione"
+                            Start = new DateTime(2024, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Vacanze"
                         });
                 });
 
@@ -1203,6 +482,33 @@ namespace Core.Migrations
                             NickName = "Nickname3",
                             Password = "Uy6qvZV0iA2/drm4zACDLCCm7BE9aCKZVQ16bg80XiU="
                         });
+                });
+
+            modelBuilder.Entity("Core.Models.VueCalEvent", b =>
+                {
+                    b.HasOne("Core.Models.Feria", "Feria")
+                        .WithMany()
+                        .HasForeignKey("FeriaId");
+
+                    b.HasOne("Core.Models.Permesso", "Permesso")
+                        .WithMany()
+                        .HasForeignKey("PermessoId");
+
+                    b.HasOne("Core.Models.Rendicontazione", "Rendicontazione")
+                        .WithMany()
+                        .HasForeignKey("RendicontazioneId");
+
+                    b.HasOne("Core.Models.Trasferta", "Trasferta")
+                        .WithMany()
+                        .HasForeignKey("TrasfertaId");
+
+                    b.Navigation("Feria");
+
+                    b.Navigation("Permesso");
+
+                    b.Navigation("Rendicontazione");
+
+                    b.Navigation("Trasferta");
                 });
 #pragma warning restore 612, 618
         }
