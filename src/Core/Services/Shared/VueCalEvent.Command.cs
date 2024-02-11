@@ -56,21 +56,25 @@ namespace Core.Services.Shared
             {
                 vueCalEvent = new VueCalEvent
                 {
-                    Id = cmd.Id
+                    Start = DateTime.Parse(cmd.StartDate + " " + cmd.StartTime),
                 };
+                _dbContext.Eventi.Add(vueCalEvent);
             };
-            _dbContext.Eventi.Add(vueCalEvent);
 
-            vueCalEvent.AllDay = cmd.AllDay;
-            vueCalEvent.Background = cmd.Background;
-            vueCalEvent.Class = cmd.CssClass;
+            vueCalEvent.Start = DateTime.Parse(cmd.StartDate + " " + cmd.StartTime);
+            vueCalEvent.End = DateTime.Parse(cmd.EndDate + " " + cmd.EndTime);
+            vueCalEvent.Title = cmd.Title;
             vueCalEvent.Content = cmd.Content;
+            vueCalEvent.Class = cmd.CssClass;
+            vueCalEvent.Background = cmd.Background;
+            vueCalEvent.Split = cmd.Split;
+            vueCalEvent.AllDay = cmd.AllDay;
             vueCalEvent.Deletable = cmd.Deletable;
             vueCalEvent.Resizable = cmd.Resizable;
-            vueCalEvent.End = DateTime.Parse(cmd.EndDate + cmd.EndTime, CultureInfo.CurrentCulture);
-            vueCalEvent.Title = cmd.Title;
-            vueCalEvent.Split = cmd.Split;
-            vueCalEvent.Start = DateTime.Parse(cmd.StartDate + cmd.StartTime, CultureInfo.CurrentCulture);
+            vueCalEvent.RendicontazioneId = cmd.RendicontazioneId;
+            vueCalEvent.FeriaId = cmd.FeriaId;
+            vueCalEvent.PermessoId = cmd.PermessoId;
+            vueCalEvent.TrasfertaId = cmd.TrasfertaId;
 
             await _dbContext.SaveChangesAsync();
 

@@ -17,6 +17,7 @@ using static UomoMacchina.Areas.Ferie.Data.FerieViewModel;
 using NuGet.Protocol;
 using UomoMacchina.Areas.Ferie.Data;
 using static UomoMacchina.Areas.Main.Data.AnnoViewModel;
+using static UomoMacchina.Areas.Main.Data.AnnoViewModel.MeseViewModel;
 
 namespace UomoMacchina.Areas.Main
 {
@@ -176,8 +177,10 @@ namespace UomoMacchina.Areas.Main
 
         private static AnnoViewModel CalcolaAnno(DateTime data)
         {
-            var annoModel = new AnnoViewModel();
-            annoModel.Mesi = new List<MeseViewModel>();
+            var annoModel = new AnnoViewModel
+            {
+                Mesi = new List<MeseViewModel>()
+            };
 
             var cultura = CultureInfo.CurrentCulture;
 
