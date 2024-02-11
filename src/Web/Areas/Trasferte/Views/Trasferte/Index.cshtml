@@ -6,22 +6,13 @@
 @{
  
 }
-<div class="row justify-content-start align-items-center">
-    <div class="col">
-        <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#tabellaTrasferte" aria-expanded="false" aria-controls="tabellaTrasferte"><h1>Trasferte</h1></button>
-        <div class="col-1 align-self-center ">
-            <i class="fa-solid fa-square fa-2x " style="color: purple;"></i>
-        </div>
-    </div>
-    <div class="col">
-        <ul class="navbar-nav flex-wrap ms-auto">
-            <li>
-                <a class="Nuovo btn btn-light ms-2" v-on:click='navigateToEdit(null, "Trasferte", dataNew)' title="Inserisci un nuovo elemento">
-                    <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
-                </a>
-            </li>
-        </ul>
-    </div>
+<div class="row align-items-center">
+
+    <i class=" col-auto fa fa-square fa-2x "></i>
+    <h1 class="col-6" data-bs-toggle="collapse" data-bs-target="#tabellaTrasferte" aria-expanded="true" aria-controls="tabellaTrasferte">Trasferte</h1>
+    <a class="col-2 btn btn-light" v-on:click='navigateToEdit(null, "Trasferte", dataNew)' title="Inserisci un nuovo elemento">
+        <i class="fa-solid fa-plus"></i>&nbsp;Nuovo
+    </a>
 </div>
 
 <div id="tabellaTrasferte" class="row text-center collapse">
@@ -33,6 +24,12 @@
                 </th>
                 <th>
                     Data Fine
+                </th>
+                <th>
+                    Ora Inizio
+                </th>
+                <th>
+                    Ora Fine
                 </th>
                 <th>
                     Chilometri (Km)
@@ -50,7 +47,7 @@
         </thead>
         <tbody>
             <tr v-if="model.trasferte.trasferte.length == 0">
-                <td scope="row" colspan="5">
+                <td scope="row" colspan="6">
                     Nessun elemento trovato
                 </td>
             </tr>
@@ -63,23 +60,28 @@
                     {{trasferta.dataFine.split('T')[0]}}
                 </td>
                 <td class="text-nowrap">
+                    {{trasferta.oraInizio.split('T')[1]}}
+                </td>
+                <td class="text-nowrap">
+                    {{trasferta.oraFine.split('T')[1]}}
+                </td>
+                <td class="text-nowrap">
                     {{trasferta.chilometri}}
                 </td>
                 <td class="text-nowrap">
-                    {{trasferta.autoAziendale}}
-                </td>
-                <td class="text-nowrap">
                     {{trasferta.autoAziendale ? 'Si' : 'No'}}
+                </td>
+                <td class="text-wrap">
                     {{trasferta.commessa}}
                 </td>
-                <td class="text-nowrap">
+                <td class="text-wrap">
                     {{trasferta.dettagli}}
                 </td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="5">
+                <td colspan="6">
                     <nav class="navbar navbar-expand justify-content-md-center">
                         <ul class="navbar-nav flex-wrap"><partial name="@MVC.Shared.Views._PagingPartial" model="Model" /></ul>
                     </nav>
