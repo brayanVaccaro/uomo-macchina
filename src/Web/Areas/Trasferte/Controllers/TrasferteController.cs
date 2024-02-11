@@ -92,7 +92,8 @@ namespace UomoMacchina.Areas.Trasferte.Controllers
                 try
                 {
                     model.Id = await _sharedService.Handle(model.ToAddOrUpdateTrasfertaCommand());
-
+                    var evento = model.ToVueCalEvent(model);
+                    await _sharedService.Handle(evento);
                     Alerts.AddSuccess(this, "Trasferte effetuata con successo");
 
                     return RedirectToAction("Main", "Main", new { area = "Main" });

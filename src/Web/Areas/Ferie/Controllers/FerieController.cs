@@ -92,7 +92,8 @@ namespace UomoMacchina.Areas.Ferie.Controllers
                 try
                 {
                     model.Id = await _sharedService.Handle(model.ToAddOrUpdateFeriaCommand());
-
+                    var evento = model.ToVueCalEvent(model);//salvo nella tabella degli eventi
+                    await _sharedService.Handle(evento);
                     Alerts.AddSuccess(this, "Ferie effetuata con successo");
 
                     return RedirectToAction("Main", "Main", new { area = "Main" });

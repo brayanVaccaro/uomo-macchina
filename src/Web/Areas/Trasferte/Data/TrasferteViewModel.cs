@@ -92,6 +92,27 @@ namespace UomoMacchina.Areas.Trasferte.Data
                 };
             }
 
+            internal AddOrUpdateEventCommand ToVueCalEvent(TrasfertaViewModel trasferta)
+            {
+                return new AddOrUpdateEventCommand
+                {
+                    Id = null,
+                    StartDate = trasferta.DataInizio.ToString("d"),
+                    StartTime = trasferta.OraInizio.ToString("HH:mm"),
+                    EndDate = trasferta.DataFine.ToString("d"),
+                    EndTime = trasferta.OraFine.ToString("HH:mm"),
+                    Title = trasferta.Commessa,
+                    Content = trasferta.Dettagli,
+                    CssClass = "trasferta",
+                    Background = false,
+                    Split = "",
+                    AllDay = false,
+                    Deletable = true,
+                    Resizable = false,
+                    TrasfertaId = trasferta.Id,
+                };
+            }
+
             public string ToJson()
             {
                 return JsonSerializer.ToJsonCamelCase(this);

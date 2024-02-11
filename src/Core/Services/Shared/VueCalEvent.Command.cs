@@ -11,7 +11,7 @@ namespace Core.Services.Shared
 {
     public class AddOrUpdateEventCommand
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public string StartDate { get; set; }  //da usare in locale
         public string EndDate { get; set; } //da usare in locale
         public string StartTime { get; set; } //da usare in locale
@@ -24,6 +24,10 @@ namespace Core.Services.Shared
         public bool? AllDay { get; set; }
         public bool? Deletable { get; set; }
         public bool? Resizable { get; set; }
+        public Guid? RendicontazioneId { get; set; }
+        public Guid? FeriaId { get; set; }
+        public Guid? PermessoId { get; set; }
+        public Guid? TrasfertaId { get; set; }
 
     }
 
@@ -31,9 +35,22 @@ namespace Core.Services.Shared
     {
         public async Task<Guid> Handle(AddOrUpdateEventCommand cmd)
         {
-            var vueCalEvent = await _dbContext.Eventi
-                .Where(x => x.Id == cmd.Id)
-                .FirstOrDefaultAsync();
+            VueCalEvent vueCalEvent = new();
+            switch (cmd)
+            {
+                case { RendicontazioneId: Guid id }:
+                    vueCalEvent = await _dbContext.Eventi.Where(x => x.RendicontazioneId == cmd.RendicontazioneId).FirstOrDefaultAsync();
+                    break;
+                case { FeriaId: Guid id }:
+                    vueCalEvent = await _dbContext.Eventi.Where(x => x.FeriaId == cmd.FeriaId).FirstOrDefaultAsync();
+                    break;
+                case { PermessoId: Guid id }:
+                    vueCalEvent = await _dbContext.Eventi.Where(x => x.PermessoId == cmd.PermessoId).FirstOrDefaultAsync();
+                    break;
+                case { TrasfertaId: Guid id }:
+                    vueCalEvent = await _dbContext.Eventi.Where(x => x.TrasfertaId == cmd.TrasfertaId).FirstOrDefaultAsync();
+                    break;
+            }
 
             if (vueCalEvent == null)
             {

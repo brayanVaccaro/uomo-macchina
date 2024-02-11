@@ -89,7 +89,8 @@ namespace UomoMacchina.Areas.Permessi
                 try
                 {
                     model.Id = await _sharedService.Handle(model.ToAddOrUpdatePermessoCommand());
-                    
+                    var evento = model.ToVueCalEvent(model);//salvo nella tabella degli eventi
+                    await _sharedService.Handle(evento);
                     Alerts.AddSuccess(this, "Permessi effetuata con successo");
 
                     }

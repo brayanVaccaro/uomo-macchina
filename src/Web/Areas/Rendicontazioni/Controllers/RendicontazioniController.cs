@@ -103,7 +103,8 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
                 try
                 {
                     model.Id = await _sharedService.Handle(model.ToAddOrUpdateRendicontazioneCommand());
-
+                    var evento = model.ToVueCalEvent(model);//salvo nella tabella degli eventi
+                    await _sharedService.Handle(evento);
                     Alerts.AddSuccess(this, "Rendicontazioni effetuata con successo");
 
                     return RedirectToAction("Main", "Main", new { area = "Main" });
@@ -157,7 +158,7 @@ namespace UomoMacchina.Areas.Rendicontazioni.Controllers
             try
             {
                 var rendicontazione = await _sharedService.GetRendicontazioneById(new RendicontazioneQuery { Id = id });
-
+                
                 if (rendicontazione != null)
                 {
                     // Effettua l'eliminazione della Rendicontazioni

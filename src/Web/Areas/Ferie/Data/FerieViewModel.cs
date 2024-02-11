@@ -80,6 +80,26 @@ namespace UomoMacchina.Areas.Ferie.Data
         {
             return JsonSerializer.ToJsonCamelCase(this);
         }
+            internal AddOrUpdateEventCommand ToVueCalEvent(FeriaViewModel feria)
+            {
+                return new AddOrUpdateEventCommand
+                {
+                    Id = null,
+                    StartDate = feria.DataInizio.ToString("d"),
+                    StartTime = "",
+                    EndDate = feria.DataFine.ToString("d"),
+                    EndTime = "",
+                    Title = feria.Durata.ToString(),
+                    Content = feria.Dettagli,
+                    CssClass = "libero",
+                    Background = false,
+                    Split = "",
+                    AllDay = true,
+                    Deletable = true,
+                    Resizable = false,
+                    FeriaId = feria.Id,
+                };
+            }
 
 
         //metodo per impostare le Ferie
