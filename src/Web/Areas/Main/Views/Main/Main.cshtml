@@ -49,7 +49,8 @@ var properties = Model.GetType().GetProperties();
         </div>
         @* Calendario Settimanale *@
         <div :class="customClass">
-            <vue-cal ref="vuecal"
+            <vue-cal :class="custom"
+                     ref="vuecal"
                      v-model:active-view="activeView"
                      v-model:selected-date="selectedDate"
                      locale="it"
