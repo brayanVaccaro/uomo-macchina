@@ -15,9 +15,9 @@
         <!--Gli altri mesi non visualizzati-->
         @if (mese.NomeMese == nomeMeseAttuale)
         {
-            <div id="sidebar-menu" class="mesi d-flex w-75 justify-content-between">
+            <div id="sidebar-menu" class="mesi d-flex w-100 justify-content-between">
 
-                <button class="vuecal__arrow vuecal__arrow--prev m-0 p-0" id="prevMonth" v-on:click="prevMonth()">
+                <button class="arrow m-0 p-0" id="prevMonth" v-on:click="prevMonth()">
                     <i class="fa-solid fa-caret-left fa-2x"></i>
 
                 </button>
@@ -25,14 +25,14 @@
                     <h3 class="m-0" id="monthDisplay">@mese.NomeMese</h3>
 
                 </div>
-                <button class="vuecal__arrow vuecal__arrow--next m-0 p-0" id="nextMonth" v-on:click="nextMonth()">
+                <button class="arrow m-0 p-0" id="nextMonth" v-on:click="nextMonth()">
                     <i class="fa-solid fa-caret-right fa-2x"></i>
                 </button>
 
             </div>
 
 
-            <div id="sidebar-items" class="row w-75">
+            <div id="sidebar-items" class="row w-100">
                 <ul class="navbar-nav d-flex flex-column col p-0 text-center" id="settimaneContainer">
 
                     @foreach (var settimana in mese.Settimane)
@@ -46,11 +46,11 @@
                                     @settimana.Nome
                                 </a>
                                 @* ciclo per generare i giorni delle settimane *@
-                                <ul class="dropdown-menu row show" data-bs-popper="static">
+                                <ul class="dropdown-menu row show " data-bs-popper="static">
                                     @foreach (var giorno in settimana.Giorni)
                                     {
-                                        <li class="dropdown-item dayDisplay" v-on:click.stop="selezionaGiorno('@giorno.ToString("yyyy-MM-dd")')">
-                                            <a>@giorno.ToString("dddd dd")</a>
+                                        <li class="dropdown-item dayDisplay " v-on:click.stop="selezionaGiorno('@giorno.ToString("yyyy-MM-dd")')">
+                                            <a class="nav-link p-0 m-0">@giorno.ToString("dddd dd")</a>
                                         </li>
                                     }
                                 </ul>
@@ -61,12 +61,13 @@
                                     @settimana.Nome
                                 </a>
 
-                                <ul class="dropdown-menu row">
+                                <ul class="dropdown-menu row ">
                                     @foreach (var giorno in settimana.Giorni)
                                     {
-                                        <li class="dropdown-item" v-on:click.stop="selezionaGiorno('@giorno.ToString("yyyy-MM-dd")')">
+                                        <li class="dropdown-item " v-on:click.stop="selezionaGiorno('@giorno.ToString("yyyy-MM-dd")')">
 
-                                            <a>@giorno.ToString("dddd dd")</a>
+                                            <a class="nav-link p-0 m-0">@giorno.ToString("dddd dd")</a>
+                                            @* <p>@giorno.ToString("dddd dd")</p> *@
                                             <!-- Aggiungi ulteriori elementi dell'interfaccia utente per ogni giorno qui -->
 
                                         </li>
