@@ -217,6 +217,8 @@ const app = Vue.createApp({
                     startTime: x.starTime,
                 });
             });
+            this.inserisciPranzo();
+            console.log("this.eventi in setEventi", this.event);
         },
         //metodo per gestire cosa succede se si sceglie di visualizzare una settimana
         selezionaSettimana(idSettimana) {
@@ -373,12 +375,43 @@ const app = Vue.createApp({
             data.setHours(orario);
             var dataFormattata = data.toISOString().replace('Z', "");
             return dataFormattata;
+        },
+        inserisciPranzo() {
+            // Inserisco l'evento lunch in tutte i giorni della settimana corrente
+            for (let i = 0; i < 5; i++) {
+                const day = this.previousFirstDayOfWeek.addDays(i).format();
+                this.event.push({
+                    start: `${day} 13:00`,
+                    end: `${day} 14:00`,
+                    title: 'LUNCH',
+                    class: 'lunch',
+                    background: true,
+                    deletable: false,
+                    resizable: false,
+                });
+            }
+            // Inserisco in sabato e domenica il giorno feriale
+            for (let i = 5; i <= 6; i++) {
+                const day = this.previousFirstDayOfWeek.addDays(i).format();
+                console.log("day vale =", day);
+                this.event.push({
+                    start: `${day} 13:00`,
+                    end: `${day} 14:00`,
+                    title: 'giorno feriale',
+                    class: 'libero',
+                    allDay: true,
+                    background: true,
+                    deletable: false,
+                    resizable: false,
+                });
+            }
+            console.log("this.event", this.event);
         }
     },
     computed: {
         // Get the Monday of the real time current week.
         previousFirstDayOfWeek() {
-            return new Date(new Date().setDate(new Date().getDate() - (new Date().getDay() + 6) % 7));
+            return new Date(new Date().setDate(new Date().getDate() - new Date().getDay()));
         },
         //alla modifica di uno dei parametri oraInizio o oraFine calcolo oreTotali (nell'oggetto da modificare) --> vedere watch
         calcoloOreTotali() {
@@ -398,34 +431,8 @@ const app = Vue.createApp({
         },
     },
     created() {
-        // Inserisco l'evento lunch in tutte i giorni della settimana corrente
-        for (let i = 0; i < 5; i++) {
-            const day = this.previousFirstDayOfWeek.addDays(i).format();
-            this.event.push({
-                start: `${day} 13:00`,
-                end: `${day} 14:00`,
-                title: 'LUNCH',
-                class: 'lunch',
-                background: true,
-                deletable: false,
-                resizable: false,
-            });
-        }
-        // Inserisco in sabato e domenica il giorno feriale
-        for (let i = 5; i <= 6; i++) {
-            const day = this.previousFirstDayOfWeek.addDays(i).format();
-            //console.log("day vale =", day)
-            this.event.push({
-                start: `${day} 13:00`,
-                end: `${day} 14:00`,
-                title: 'giorno feriale',
-                class: 'libero',
-                allDay: true,
-                background: true,
-                deletable: false,
-                resizable: false,
-            });
-        }
+        console.log("created");
+        this.inserisciPranzo();
     },
     watch: {
         //al cambio del valore del metodo calcoloOreTotali chiamo inserisciOra

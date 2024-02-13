@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\main.variables.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\main.variables.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BuildWebCompiler2022" Version="1.14.10" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.14" />
@@ -49,6 +57,10 @@
 
   <ItemGroup>
     <Folder Include="Areas\Main\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\main.variables.scss" />
   </ItemGroup>
 
 </Project>
