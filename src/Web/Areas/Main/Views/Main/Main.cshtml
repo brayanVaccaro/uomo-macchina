@@ -1,8 +1,8 @@
 ﻿@inject IHtmlLocalizer<UomoMacchina.Areas.Main.Data.MainViewModel> ModelLocalizer
 @model UomoMacchina.Areas.Main.Data.MainViewModel
 
-
-@*
+@* <meta name="viewport" content="width=device-width, initial-scale=1" />
+ *@@*
     1. FUNZIONA --> Inserire il campo Straordinario di tipo bool nella Rendicontazione
     2. FUNZIONA --> Al click sulla riga devo poter editare l'elemento cliccato
     3. Gestire la creazione di un elemento (aggiungerlo nella tabella specifica dell'elemento scelto) e del relativo evento (aggiungere l'evento alla tabella Eventi):
@@ -17,6 +17,37 @@
 9. migliorare _SingleDay
 10. implementare un modo per convertire da un elemento di un ViewModel ad un EventoDTO
     *@
+
+@* /*VISUALIZZAZIONE DA LAPTOP*/
+@media (max-width: 1200px) {
+
+
+}
+
+
+/*VISUALIZZAZIONE DA TABLET*/
+@media (max-width: 980px) {
+
+
+}
+
+
+
+/*VISUALIZZAZIONE DA MOBILE ORIZZONTALE*/
+@media (max-width: 767px) {
+
+
+}
+
+
+
+
+/*VISUALIZZAZIONE DA MOBILE VERTICALE*/
+@media (max-width: 480px) {
+
+
+} *@
+
 @{
     // Lista vuota per memorizzare le informazioni delle proprietà che corrispondono al criterio
     var viewModelProperties = new List<string>();
@@ -41,9 +72,14 @@
 
 }
 
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
 <div class="container-fluid">
     <div class="row">
-        <div class="col-2">
+        <div class="col-12 col-md-2 col-lg-2">
+            @* col-2*@
             @await Html.PartialAsync("~/Views/Shared/_SideBar.cshtml", @Model.Anno)
 
         </div>
@@ -64,11 +100,12 @@
         </div>
         
 
-        <div v-if="showSingleDay" class="col-8">
+        <div v-if="showSingleDay" class="col-12 col-md-8 col-lg-8"> @* col-8 *@
             <partial name="@MVC.Main.Main.Views._SingleDay" model="Model" />
         </div>
 
-        <div v-if="showEditForm" class="col-8">
+        <div v-if="showEditForm" class="col-12 col-md-8 col-lg-8">
+            @* col-8 *@
             <partial name="@MVC.Main.Main.Views.EditForm" />
         </div>
     </div>
